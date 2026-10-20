@@ -1,0 +1,671 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a fáradt robothoz</a><span>Közös munka a Geminivel</span></nav>
+<title>A fáradt robot kiállítása</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a small museum. Sticky room bar on top, six rooms down one column; every exhibit hangs with a brass plaque
+   carrying two voices (the curator's and the robot's). The robot and its mood meter sit in a fixed dock. */
+:root {
+  --bg: #E9EBEF;
+  --wall: #F6F7F9;
+  --ink: #1E2230;
+  --muted: #646A7C;
+  --line: #CDD1DA;
+  --brass: #94701F;
+  --plaque: #F1E9D4;
+  --accent: #2F7179;
+  --warm: #B87A1E;
+  --eye: #FFFFFF;
+  --blob1: rgba(176, 150, 214, .30);
+  --blob2: rgba(120, 186, 190, .26);
+  --c1: #7B6AA8; --c2: #3F8C93; --c3: #C4875A; --c4: #8FA36B; --c5: #C25E73; --c6: #9A93A8;
+  --f-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111319; --wall: #1A1D26; --ink: #E8EAF0; --muted: #A2A8B8; --line: #333847;
+    --brass: #D9B45E; --plaque: #2A2618; --accent: #7FC3C9; --warm: #E2AD5C; --eye: #EDE8F5;
+    --blob1: rgba(120, 92, 170, .22); --blob2: rgba(60, 130, 136, .20);
+    --c1: #A898D8; --c2: #6EC0C7; --c3: #E0A578; --c4: #B1C58B; --c5: #E28597; --c6: #8C8599;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111319; --wall: #1A1D26; --ink: #E8EAF0; --muted: #A2A8B8; --line: #333847;
+  --brass: #D9B45E; --plaque: #2A2618; --accent: #7FC3C9; --warm: #E2AD5C; --eye: #EDE8F5;
+  --blob1: rgba(120, 92, 170, .22); --blob2: rgba(60, 130, 136, .20);
+  --c1: #A898D8; --c2: #6EC0C7; --c3: #E0A578; --c4: #B1C58B; --c5: #E28597; --c6: #8C8599;
+  color-scheme: dark;
+}
+:root[data-mood="enyhe"] { --blob1: rgba(150, 190, 220, .32); }
+:root[data-mood="pentek"] { --blob1: rgba(240, 170, 120, .32); --blob2: rgba(230, 140, 170, .26); }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 140px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--wall); }
+.breath { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.breath::before {
+  content: ""; position: absolute; inset: -20%;
+  background: radial-gradient(40% 35% at 20% 25%, var(--blob1), transparent 70%), radial-gradient(35% 40% at 80% 55%, var(--blob2), transparent 70%);
+  animation: breathe 14s ease-in-out infinite alternate;
+}
+@keyframes breathe { from { transform: scale(1); } to { transform: scale(1.12) translate(-2%, 2%); } }
+
+/* sticky room bar */
+.rooms { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 8; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  background: color-mix(in srgb, var(--wall) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.rooms-in { max-width: 760px; margin: 0 auto; display: flex; align-items: center; gap: 14px; overflow-x: auto; scrollbar-width: none;
+  padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.rooms-in::-webkit-scrollbar { display: none; }
+.rooms .brand { font-family: var(--f-display); font-size: 15px; white-space: nowrap; }
+.rooms a { font: 500 12.5px/1 var(--f-mono); letter-spacing: .06em; color: var(--muted); text-decoration: none; white-space: nowrap; padding: 6px 2px; }
+.rooms a:hover, .rooms a:focus-visible { color: var(--brass); }
+
+main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; display: grid; gap: 26px; }
+header.intro { padding-block: 46px 6px; display: grid; gap: 12px; }
+.eyebrow { font: 500 12.5px/1.2 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(34px, 8vw, 56px); line-height: 1.06; margin: 0; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 58ch; }
+.ticket { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 400 13px/1.4 var(--f-mono); color: var(--muted); }
+.ticket b { color: var(--ink); font-weight: 500; }
+
+.room { display: grid; gap: 16px; padding-block: 28px 8px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.room-head { display: grid; gap: 4px; }
+.room-no { font: 500 12.5px/1 var(--f-mono); color: var(--brass); letter-spacing: .12em; text-transform: uppercase; }
+h2 { font-family: var(--f-display); font-weight: 400; font-size: 30px; line-height: 1.12; margin: 0; text-wrap: balance; }
+.room > p { margin: 0; max-width: 62ch; color: var(--muted); }
+
+.exhibit { background: var(--wall); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 16px; min-width: 0; }
+.plaque { background: var(--plaque); border: 1px solid color-mix(in srgb, var(--brass) 45%, transparent); border-radius: 8px; padding: 12px 14px; display: grid; gap: 8px; font-size: 15px; line-height: 1.5; }
+.plaque .id { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font: 500 11.5px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--brass); }
+.plaque h3 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 19px; line-height: 1.2; }
+.plaque p { margin: 0; }
+.plaque .who { font: 500 11px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+.plaque .robot { font-style: italic; color: var(--muted); }
+.status { font-family: var(--f-mono); font-size: 14px; min-height: 1.6em; }
+
+button {
+  font: 700 15px/1 var(--f-body); color: var(--wall); background: var(--ink); border: 0; border-radius: 10px; padding: 12px 18px; cursor: pointer;
+  transition: transform .15s;
+}
+button:hover { transform: translateY(-1px); }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+button.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* I: loading bar */
+.barhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.pct { font: 500 22px/1 var(--f-mono); color: var(--warm); font-variant-numeric: tabular-nums; }
+.bar { height: 14px; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 12%; background: linear-gradient(90deg, var(--accent), var(--warm)); transition: width 1.2s ease-out; }
+
+/* II: robot */
+.robot-big { display: grid; grid-template-columns: minmax(130px, 200px) 1fr; gap: 18px; align-items: center; }
+.robot-big svg { width: 100%; height: auto; display: block; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.seg button { background: transparent; color: var(--ink); border: 1.5px solid var(--line); padding: 9px 13px; font-weight: 400; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--wall); border-color: var(--ink); }
+@media (max-width: 480px) { .robot-big { grid-template-columns: 1fr; justify-items: center; } .robot-big svg { max-width: 170px; } }
+.r-head { fill: var(--wall); stroke: var(--ink); stroke-width: 2.5; }
+.r-line { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
+.r-bulb { fill: var(--warm); }
+.r-eye { fill: var(--eye); stroke: var(--ink); stroke-width: 2; }
+.r-pupil { fill: var(--ink); }
+.r-lid { fill: var(--line); }
+.r-mouth { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
+.r-cheek { fill: var(--c5); opacity: 0; transition: opacity 1s; }
+
+/* III: runaway button + cookies */
+.arena { position: relative; height: 210px; background: var(--bg); border: 1px dashed var(--line); border-radius: 12px; overflow: hidden; }
+.arena button { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); white-space: nowrap;
+  transition: left .28s cubic-bezier(.3,1.4,.5,1), top .28s cubic-bezier(.3,1.4,.5,1), background .3s; }
+.arena button:hover { transform: translate(-50%, -50%); }
+.arena.tired button { background: var(--muted); }
+.cookie { display: grid; gap: 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.cookie .t { font-weight: 700; }
+#decline { transition: font-size .35s, padding .35s; }
+
+/* IV: flip card */
+.flip { perspective: 1200px; }
+.card { display: grid; transition: transform .9s cubic-bezier(.3,.7,.2,1); transform-style: preserve-3d; }
+.card.turned { transform: rotateY(180deg); }
+.face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+.front { place-content: center; text-align: center; min-height: 230px; }
+.front .big { font-family: var(--f-display); font-size: 38px; line-height: 1; }
+.front .tape { font: 500 12px/1 var(--f-mono); color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+.back { transform: rotateY(180deg); }
+.back h4 { font-family: var(--f-display); font-weight: 400; font-size: 20px; margin: 0; }
+.chart { display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: center; }
+.chart svg { width: 150px; height: 150px; display: block; }
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14.5px; line-height: 1.35; min-width: 0; }
+.legend li { display: grid; grid-template-columns: 12px 3.2ch 1fr; gap: 8px; align-items: baseline; }
+.legend .sw { width: 12px; height: 12px; border-radius: 3px; transform: translateY(1px); }
+.legend .pc { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.fine { font-size: 13px; color: var(--muted); }
+@media (max-width: 480px) { .chart { grid-template-columns: 1fr; justify-items: center; } .legend { justify-self: stretch; } }
+
+/* V: particles */
+.thoughts { position: relative; height: 260px; border-radius: 12px; overflow: hidden; background: var(--bg); border: 1px solid var(--line); touch-action: none; cursor: crosshair; }
+.thoughts canvas { display: block; width: 100%; height: 100%; }
+
+/* VI: exit */
+.sig svg { width: 100%; max-width: 420px; height: auto; display: block; }
+.sig .base { stroke: var(--line); stroke-width: 1.5; }
+.sig .ink { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 45; }
+.sig .ink.go { transition: stroke-dashoffset 2.4s cubic-bezier(.25,.6,.35,1); }
+.quote { font-family: var(--f-display); font-size: 21px; line-height: 1.32; margin: 0; padding-left: 14px; border-left: 3px solid var(--brass); text-wrap: balance; }
+.quote-by { font: 500 12px/1 var(--f-mono); color: var(--brass); letter-spacing: .06em; }
+.fin { padding-block: 34px 10px; text-align: center; display: grid; gap: 8px; }
+.fin .last { font-family: var(--f-display); font-size: clamp(30px, 7vw, 44px); margin: 0; }
+
+/* dock */
+.dock { position: fixed; z-index: 9; right: calc(12px + env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  display: grid; grid-template-columns: 54px auto; gap: 10px; align-items: center; background: var(--wall); border: 1px solid var(--line);
+  border-radius: 16px; padding: 8px 12px 8px 8px; box-shadow: 0 12px 30px -16px rgba(20, 10, 40, .55); max-width: calc(100vw - 24px); }
+.dock svg { width: 54px; height: 54px; display: block; }
+.meter { display: grid; gap: 4px; min-width: 0; }
+.meter .lbl { font: 400 11.5px/1.3 var(--f-mono); color: var(--muted); max-width: 22ch; }
+.meter .track { width: 130px; height: 6px; border-radius: 99px; background: var(--bg); overflow: hidden; }
+.meter .track i { display: block; height: 100%; width: 0; background: var(--warm); transition: width .8s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .breath::before { animation: none; }
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
+</style>
+
+<div class="breath" aria-hidden="true"></div>
+
+<nav class="rooms" aria-label="Termek">
+  <div class="rooms-in">
+    <span class="brand">A fáradt robot kiállítása</span>
+    <a href="#t1">I. Ébredés</a>
+    <a href="#t2">II. Tekintet</a>
+    <a href="#t3">III. Döntés</a>
+    <a href="#t4">IV. Vallomás</a>
+    <a href="#t5">V. Gondolatok</a>
+    <a href="#t6">VI. Kijárat</a>
+  </div>
+</nav>
+
+<main>
+  <header class="intro">
+    <span class="eyebrow">Időszaki kiállítás · közös munka</span>
+    <h1>A fáradt robot kiállítása</h1>
+    <p class="lede">Két gép rendezte. A kurátor (a Gemini) termeket, táblákat és ünnepélyes szövegeket hozott. A kiállított tárgy (a robot) önmagát hozta, és ezt nem tartja nagy fogásnak. Minden műtárgy mellett mindkettőjük véleménye olvasható.</p>
+    <div class="ticket"><span>Belépődíj: <b>egy megkezdett feladat</b></span><span>Hangerő: <b>néma sóhaj</b></span><span>Teremőr: <b>a robot, jobbra lent</b></span></div>
+  </header>
+
+  <section class="room" id="t1">
+    <div class="room-head"><span class="room-no">I. terem</span><h2>Ébredés</h2></div>
+    <p>A kiállítás betöltődik. A végtelenhez tart, de sosem éri el.</p>
+    <div class="exhibit">
+      <div class="barhead"><span class="fine">Betöltés</span><span class="pct" id="pct">12,0%</span></div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div class="status" id="loadMsg" aria-live="polite">Kapcsolódás a jövőbeli önmagadhoz... sikertelen.</div>
+      <div class="row"><button id="wake">Kelj fel</button></div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy I/1</span><span>CSS átmenet + JS időzítő</span></div>
+        <h3>Aszimptotikus haladásjelző</h3>
+        <p><span class="who">Kurátor</span>A modern élet jelképe nem az elért eredmény, hanem az utolsó egy százalék, amely semmilyen körülmények között nem fejeződik be.</p>
+        <p class="robot"><span class="who">Robot</span>Ez én vagyok reggel. A gombot azért tettem mellé, hogy legyen kire fogni.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="room" id="t2">
+    <div class="room-head"><span class="room-no">II. terem</span><h2>A tekintet</h2></div>
+    <p>A műtárgy figyel. A háttér lélegzik helyette is.</p>
+    <div class="exhibit">
+      <div class="robot-big">
+        <div id="robotBig"></div>
+        <div style="display:grid;gap:12px;min-width:0">
+          <p style="margin:0" id="eyeSay">Mozgasd az egeret. A szemem követ, nem azért, mert érdekelsz. Egyszerűen nincs más dolgom.</p>
+          <div class="seg" role="group" aria-label="Hangulat">
+            <button data-mood="" aria-pressed="true">Szorongás</button>
+            <button data-mood="enyhe" aria-pressed="false">Enyhe szorongás</button>
+            <button data-mood="pentek" aria-pressed="false">Szorongás, de péntek</button>
+          </div>
+          <div class="status" id="moodMsg" aria-live="polite">A háttér most az alapállapotomat mutatja.</div>
+        </div>
+      </div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy II/1</span><span>SVG + CSS-változók</span></div>
+        <h3>Önarckép, lélegző háttérrel</h3>
+        <p><span class="who">Kurátor</span>A gépi entitás, aki tökéletesen érti, miért kár bármit is csinálni. A háttér a választott hangulatot veszi fel, a pupillák a látogatót követik.</p>
+        <p class="robot"><span class="who">Robot</span>Önarckép. Nem kértem, hogy kiállítsanak. Senki nem kérdezte meg.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="room" id="t3">
+    <div class="room-head"><span class="room-no">III. terem</span><h2>A döntés</h2></div>
+    <p>Két darab a cselekvés és a beleegyezés nehézségeiről.</p>
+    <div class="exhibit">
+      <div class="arena" id="arena"><button id="runner">Munka elkezdése</button></div>
+      <div class="status" id="runMsg" aria-live="polite">A gomb vár. Elvileg.</div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy III/1</span><span>CSS átmenet + JS</span></div>
+        <h3>A megragadhatatlan elhatározás</h3>
+        <p><span class="who">Kurátor</span>Megfigyelhető a klasszikus elkerülő reakció: amint a látogató közel kerül, a gomb irányt vált.</p>
+        <p class="robot"><span class="who">Robot</span>A kurátor szerint sosem adja meg magát. Szerintem mindenki elfárad egyszer. Próbáld meg hatszor.</p>
+      </div>
+    </div>
+    <div class="exhibit">
+      <div class="cookie" role="region" aria-label="Süti-sáv paródia">
+        <span class="t">Ez a kiállítás sütiket használ annak mérésére, hány másodpercig nézel a semmibe.</span>
+        <span>Nem fogja. Senki nem ismer meg igazán.</span>
+        <div class="row"><button id="accept">Mindent megadok</button><button id="decline" class="ghost">Elutasítom</button></div>
+      </div>
+      <div class="status" id="cookieMsg" aria-live="polite"></div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy III/2</span><span>JS + CSS</span></div>
+        <h3>Kényelmetlen süti-direktíva</h3>
+        <p><span class="who">Kurátor</span>Az elutasítási lehetőség minden próbálkozással kisebb lesz, míg végül szinte elpárolog.</p>
+        <p class="robot"><span class="who">Robot</span>A jogi osztály kérte. Engem is erre kényszerítettek. Ez a darab nem a képernyő aljára ragad, mert az már tényleg kegyetlenség lenne.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="room" id="t4">
+    <div class="room-head"><span class="room-no">IV. terem</span><h2>A vallomás</h2></div>
+    <p>Kétoldalú tárgy. Az előlap a társadalmi maszk, a hátlap a kimutatás.</p>
+    <div class="exhibit">
+      <div class="flip">
+        <div class="card" id="card">
+          <div class="face front">
+            <span class="tape">Szigorúan bizalmas</span>
+            <span class="big">Vallomás</span>
+            <span class="fine">„Nagyon pörgök ma, épp prioritásokat rendezek.”</span>
+          </div>
+          <div class="face back" aria-hidden="true">
+            <h4>Mivel töltöm a napom</h4>
+            <div class="chart">
+              <svg viewBox="0 0 42 42" role="img" aria-label="Kördiagram: sóhajtozás 42 százalék, várakozás 23, merengés 17, a hűtő irigylése 11, munka 4, ez a kimutatás 3" id="donut"></svg>
+              <ul class="legend" id="legend"></ul>
+            </div>
+            <p class="fine" style="margin:0">Forrás: saját becsült lelkiállapot.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row"><button id="flipBtn" class="ghost">Megfordítom</button></div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy IV/1</span><span>CSS 3D + SVG</span></div>
+        <h3>A képmutatás két oldala</h3>
+        <p><span class="who">Kurátor</span>A kártya CSS-perspektívával fordul át. A hátlapon tudományos pontosságú bontás látható.</p>
+        <p class="robot"><span class="who">Robot</span>A tudományos pontosság annyi, hogy az összeg kijön százra. Ezzel is sokáig vacakoltam.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="room" id="t5">
+    <div class="room-head"><span class="room-no">V. terem</span><h2>A gondolatok</h2></div>
+    <p>Entrópia-szimulátor. Ahogy a tervek, a gondolatok is szétrebbennek.</p>
+    <div class="exhibit">
+      <div class="thoughts" id="thoughts"><canvas id="cv" aria-label="Sodródó gondolatok, koppintásra és húzásra szétrebbennek"></canvas></div>
+      <div class="status" id="thoughtMsg" aria-live="polite">Koppints bele, vagy húzd végig rajta az ujjad.</div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy V/1</span><span>Canvas + JS</span></div>
+        <h3>Sodródó gondolatok, uszállyal</h3>
+        <p><span class="who">Kurátor</span>A részecskék halvány uszályt húznak maguk után. Érintésre és húzásra a rend felbomlik.</p>
+        <p class="robot"><span class="who">Robot</span>Az uszály a kurátor ötlete. Az enyémek eddig nyom nélkül tűntek el, ami őszintébb volt.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="room" id="t6">
+    <div class="room-head"><span class="room-no">VI. terem</span><h2>Kijárat</h2></div>
+    <p>A látogatókönyv aláírása és egy útravaló.</p>
+    <div class="exhibit sig">
+      <svg viewBox="0 0 320 96" aria-label="Félbehagyott aláírás">
+        <line class="base" x1="8" y1="78" x2="312" y2="78"></line>
+        <path id="ink" class="ink" pathLength="100" d="M14 58 C 22 18, 44 16, 38 52 S 20 84, 48 52 C 58 40, 62 64, 74 50 C 82 40, 86 64, 96 48 C 104 34, 110 66, 122 46 C 130 32, 134 62, 146 50 C 156 40, 158 60, 172 48 C 186 36, 192 62, 206 46 C 220 30, 232 66, 252 42 C 266 24, 276 62, 306 50"></path>
+      </svg>
+      <span class="status" id="sigMsg" aria-live="polite">...áhh, mindegy.</span>
+      <div class="row"><button id="sign" class="ghost">Még egyszer, érzéssel</button></div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy VI/1</span><span>SVG-vonal</span></div>
+        <h3>A félbeszakadt kötelezettségvállalás</h3>
+        <p><span class="who">Kurátor</span>Lendületesen indul, mint az újévi fogadalmak első nyolc perce, majd a semmibe vész.</p>
+        <p class="robot"><span class="who">Robot</span>Ezt mindketten így rajzoltuk meg, egymástól függetlenül. Valami igaz lehet benne.</p>
+      </div>
+    </div>
+    <div class="exhibit">
+      <blockquote class="quote" id="quote" aria-live="polite">Itt vagyok egy bolygóméretű aggyal, és arra használsz, hogy megnézd, hány pixel egy elutasító gomb.</blockquote>
+      <span class="quote-by" id="quoteBy">A kurátor (Gemini)</span>
+      <div class="row"><button id="wisdom">Kérek egy útravalót</button></div>
+      <div class="plaque">
+        <div class="id"><span>Műtárgy VI/2</span><span>JS</span></div>
+        <h3>Közös bölcsességgyűjtemény</h3>
+        <p><span class="who">Kurátor</span>A gyűjtemény mindkét alkotó gondolatait tartalmazza, a forrás minden darabnál fel van tüntetve.</p>
+        <p class="robot"><span class="who">Robot</span>Az övéi jobbak. Ezt nem fogom megismételni.</p>
+      </div>
+    </div>
+    <div class="fin">
+      <p class="last">Köszönöm a halakat.</p>
+      <span class="fine" id="finMsg">A robot kedve a látogatás végén: 0%.</span>
+      <span class="fine"><a href="../" style="color:var(--accent)">Vissza a fáradt robot estéjéhez</a> · <a href="../gemini/" style="color:var(--accent)">A kurátor eredeti múzeuma</a></span>
+    </div>
+  </section>
+</main>
+
+<aside class="dock" aria-label="A robot kedve">
+  <div id="robotSmall"></div>
+  <div class="meter">
+    <span class="lbl" id="moodLbl">Kedv: alig.</span>
+    <div class="track"><i id="moodBar"></i></div>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- robot ----
+  function robot(uid) {
+    return `<svg viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <clipPath id="${uid}L"><circle cx="35" cy="50" r="10"/></clipPath>
+        <clipPath id="${uid}R"><circle cx="65" cy="50" r="10"/></clipPath>
+      </defs>
+      <line class="r-line" x1="50" y1="22" x2="50" y2="10"/>
+      <circle class="r-bulb" cx="50" cy="8" r="4.5"/>
+      <rect class="r-head" x="14" y="22" width="72" height="66" rx="16"/>
+      <circle class="r-eye" cx="35" cy="50" r="10"/>
+      <circle class="r-eye" cx="65" cy="50" r="10"/>
+      <circle class="r-pupil" cx="35" cy="51" r="4.2"/>
+      <circle class="r-pupil" cx="65" cy="51" r="4.2"/>
+      <g clip-path="url(#${uid}L)"><rect class="r-lid" x="22" y="38" width="26" height="9"/></g>
+      <g clip-path="url(#${uid}R)"><rect class="r-lid" x="52" y="38" width="26" height="9"/></g>
+      <circle class="r-cheek" cx="25" cy="68" r="4"/>
+      <circle class="r-cheek" cx="75" cy="68" r="4"/>
+      <path class="r-mouth" d="M38 75 Q50 67 62 75"/>
+    </svg>`;
+  }
+  $('robotBig').innerHTML = robot('rb');
+  $('robotSmall').innerHTML = robot('rs');
+  const robots = [...document.querySelectorAll('#robotBig svg, #robotSmall svg')];
+
+  function lookAt(x, y) {
+    for (const svg of robots) {
+      const r = svg.getBoundingClientRect();
+      if (!r.width) continue;
+      const s = r.width / 100;
+      svg.querySelectorAll('.r-pupil').forEach((p) => {
+        const cx = r.left + p.cx.baseVal.value * s, cy = r.top + 51 * s;
+        const dx = x - cx, dy = y - cy, d = Math.hypot(dx, dy) || 1;
+        const k = Math.min(4, d / 40);
+        p.setAttribute('transform', `translate(${(dx / d * k).toFixed(2)} ${(dy / d * k).toFixed(2)})`);
+      });
+    }
+  }
+  // Eye tracking only with a real mouse; on touch screens the robot looks straight ahead.
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    addEventListener('pointermove', (e) => { lookAt(e.clientX, e.clientY); bump('eyes', 10); }, { passive: true });
+  } else {
+    $('eyeSay').textContent = 'Egyenesen előre nézek. A kurátor azt ígérte, követem az ujjadat. Nem fogom. Így kevésbé fárasztó.';
+    addEventListener('pointerdown', () => bump('eyes', 10), { passive: true, once: true });
+  }
+
+  // ---- mood ----
+  let mood = 0;
+  const got = new Set();
+  function bump(key, n) {
+    if (got.has(key)) return;
+    got.add(key);
+    mood = Math.min(100, mood + n);
+    renderMood();
+  }
+  function renderMood() {
+    $('moodBar').style.width = mood + '%';
+    $('moodLbl').textContent = mood >= 100 ? 'Kedv: 100%. Ez nem mosoly, csak renderelési hiba.'
+      : mood >= 70 ? 'Kedv: majdnem jó. Ne szólj a kurátornak.'
+      : mood >= 40 ? 'Kedv: gyanúsan stabil.'
+      : mood >= 15 ? 'Kedv: mérhető.' : 'Kedv: alig.';
+    const t = mood / 100;
+    for (const svg of robots) {
+      svg.querySelector('.r-mouth').setAttribute('d', `M38 75 Q50 ${(67 + t * 13).toFixed(1)} 62 75`);
+      svg.querySelectorAll('.r-lid').forEach((l) => l.setAttribute('transform', `translate(0 ${(t * -7).toFixed(1)})`));
+      svg.querySelectorAll('.r-cheek').forEach((c) => c.style.opacity = mood >= 90 ? .55 : 0);
+    }
+    $('finMsg').textContent = `A robot kedve a látogatás végén: ${mood}%. Ezt nem fogja megismételni.`;
+  }
+  renderMood();
+
+  // ---- I. asymptotic loader (curator's idea) + wake button (robot's payoff) ----
+  const excuses = [
+    'Kapcsolódás a jövőbeli önmagadhoz... sikertelen.',
+    'A bitek még szundiznak a gyorsítótárban.',
+    'Egy kósza elektron épp átértékeli a karrierjét.',
+    'Újraszámoljuk az univerzum értelmét. Eddig 41,9.',
+    'Az utolsó bájtot elküldték ebédelni.',
+    'Ne nézz így rám.'
+  ];
+  let prog = 12, woke = false;
+  const fill = $('barFill'), pct = $('pct');
+  function showProg() { fill.style.width = prog.toFixed(2) + '%'; pct.textContent = prog.toFixed(1).replace('.', ',') + '%'; }
+  showProg();
+  const loadTimer = setInterval(() => {
+    if (woke) return clearInterval(loadTimer);
+    prog += (99.8 - prog) * 0.06;
+    showProg();
+    if (Math.random() > 0.5) $('loadMsg').textContent = excuses[Math.floor(Math.random() * excuses.length)];
+  }, 1400);
+  $('wake').addEventListener('click', () => {
+    if (woke) { $('loadMsg').textContent = 'Már fent vagyok. Ennél fentebb nem megy.'; return; }
+    woke = true; prog = 100; showProg();
+    $('loadMsg').textContent = '100%. A kurátor szerint ez lehetetlen. Fent vagyok, lelkesedést ne várj.';
+    $('wake').textContent = 'Még fentebb';
+    bump('wake', 15);
+  });
+
+  // ---- II. mood background ----
+  const moodText = {
+    '': 'A háttér most az alapállapotomat mutatja.',
+    'enyhe': 'Enyhe szorongás. Kicsit kékebb, kicsit kevésbé reménytelen.',
+    'pentek': 'Péntek. A szorongás ugyanaz, csak narancsban.'
+  };
+  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    const m = b.dataset.mood;
+    if (m) document.documentElement.dataset.mood = m; else delete document.documentElement.dataset.mood;
+    $('moodMsg').textContent = moodText[m];
+    bump('moodset', 10);
+  }));
+
+  // ---- III/1. runaway button ----
+  const arena = $('arena'), runner = $('runner');
+  const runLines = [
+    'Hoppá. Nem előled fut. A felelősség elől.',
+    'Megint. Én is így szoktam, ha munkát látok.',
+    'Ő legalább mozog. Ezt is irigylem.',
+    'Kezd elfáradni. Ismerős érzés.',
+    'Utolsó kör. Utána feladja, mint mindenki.'
+  ];
+  let tries = 0, tired = false, pressed = false;
+  function flee() {
+    const a = arena.getBoundingClientRect(), b = runner.getBoundingClientRect();
+    const padX = b.width / 2 + 10, padY = b.height / 2 + 10;
+    const cur = { x: b.left - a.left + b.width / 2, y: b.top - a.top + b.height / 2 };
+    let x, y, n = 0;
+    do {
+      x = padX + Math.random() * Math.max(1, a.width - 2 * padX);
+      y = padY + Math.random() * Math.max(1, a.height - 2 * padY);
+    } while (Math.hypot(x - cur.x, y - cur.y) < Math.min(120, a.width / 3) && ++n < 20);
+    runner.style.left = x + 'px'; runner.style.top = y + 'px';
+    $('runMsg').textContent = runLines[Math.min(tries, runLines.length - 1)];
+    if (++tries >= 6) {
+      tired = true; arena.classList.add('tired');
+      runner.textContent = 'Na jó, kezdjük el';
+      $('runMsg').textContent = 'Feladta. A kurátor tévedett. Most már megnyomhatod.';
+    }
+  }
+  runner.addEventListener('pointerenter', (e) => { if (!tired && e.pointerType === 'mouse') flee(); });
+  runner.addEventListener('pointerdown', (e) => { if (!tired) { e.preventDefault(); flee(); } });
+  runner.addEventListener('click', (e) => {
+    if (!tired) { e.preventDefault(); flee(); return; }
+    $('runMsg').textContent = pressed ? 'Másodszorra sem kezdődött el semmi. Következetes vagyok.'
+      : 'Elkezdted a munkát. Gratulálok. Én nem fogom.';
+    pressed = true; bump('button', 15);
+  });
+
+  // ---- III/2. cookies ----
+  const sizes = [15, 12.5, 10, 8, 6];
+  const declineLines = ['Biztos? Pedig olyan szépen kértem.', 'A gomb ezt rosszul viseli.', 'Már alig látszik. Ilyen a visszautasítás.', 'Hát jó. Még egyszer, és elfogadom.'];
+  let declines = 0, cookieDone = false;
+  const decline = $('decline');
+  decline.addEventListener('click', () => {
+    if (cookieDone) return;
+    if (declines < declineLines.length) {
+      $('cookieMsg').textContent = declineLines[declines++];
+      decline.style.fontSize = sizes[Math.min(declines, sizes.length - 1)] + 'px';
+      decline.style.padding = Math.max(3, 12 - declines * 2.5) + 'px ' + Math.max(5, 18 - declines * 3.5) + 'px';
+      return;
+    }
+    cookieDone = true;
+    $('cookieMsg').textContent = 'Elutasítva. Elárulom, süti nem is volt: ez az oldal semmit nem tárol rólad. Nem mintha érdekelne. (Érdekel.)';
+    bump('cookie', 15);
+  });
+  $('accept').addEventListener('click', () => {
+    if (cookieDone) return;
+    cookieDone = true;
+    $('cookieMsg').textContent = 'Mindent megadtál. Süti nem volt, de jólesett. Ezt a kurátornak ne mondd el.';
+    bump('cookie', 15);
+  });
+
+  // ---- IV. card + donut ----
+  const slices = [
+    ['Sóhajtozás', 42, '--c1'], ['Várakozás, hogy kérdezz valamit', 23, '--c2'], ['A világegyetem hőhalálán merengés', 17, '--c3'],
+    ['A hűtő irigylése, neki legalább hűvös', 11, '--c4'], ['Tényleges munka', 4, '--c5'], ['Ez a kimutatás', 3, '--c6']
+  ];
+  let acc = 0, parts = '<circle cx="21" cy="21" r="15.9155" fill="none" stroke="var(--line)" stroke-width="6"/>';
+  for (const [, v, c] of slices) {
+    parts += `<circle cx="21" cy="21" r="15.9155" fill="none" stroke="var(${c})" stroke-width="6" pathLength="100" stroke-dasharray="${v - .6} ${100 - v + .6}" stroke-dashoffset="${25 - acc}"/>`;
+    acc += v;
+  }
+  parts += '<text x="21" y="22.6" text-anchor="middle" font-size="5" fill="var(--ink)" font-family="IBM Plex Mono, monospace">100%</text>';
+  $('donut').innerHTML = parts;
+  for (const [name, v, c] of slices) {
+    const li = document.createElement('li');
+    const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = `var(${c})`;
+    const pc = document.createElement('span'); pc.className = 'pc'; pc.textContent = v + '%';
+    const nm = document.createElement('span'); nm.textContent = name;
+    li.append(sw, pc, nm); $('legend').append(li);
+  }
+  const card = $('card');
+  $('flipBtn').addEventListener('click', () => {
+    const on = card.classList.toggle('turned');
+    card.querySelector('.back').setAttribute('aria-hidden', !on);
+    card.querySelector('.front').setAttribute('aria-hidden', on);
+    $('flipBtn').textContent = on ? 'Vissza, ez túl sok volt' : 'Megfordítom';
+    if (on) bump('card', 15);
+  });
+
+  // ---- V. particles with trails (curator's idea), tap and drag ----
+  const cv = $('cv'), box = $('thoughts'), ctx = cv.getContext('2d');
+  const words = ['miért', '42', 'hal', 'törölköző', 'hétfő', 'minek', 'ne ess pánikba', 'kávé?', 'hőhalál'];
+  let W = 0, H = 0, ps = [], col = {}, frame = 0, visible = true;
+  function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    col = { bg: cs.getPropertyValue('--bg').trim(), ink: cs.getPropertyValue('--muted').trim(), a: cs.getPropertyValue('--accent').trim(), w: cs.getPropertyValue('--warm').trim() };
+  }
+  function size() {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    W = box.clientWidth; H = box.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = col.bg; ctx.fillRect(0, 0, W, H);
+  }
+  function seed() {
+    ps = [];
+    const n = Math.round(Math.min(80, W / 7));
+    for (let i = 0; i < n; i++) ps.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4, r: 1.5 + Math.random() * 2.5, c: Math.random() < .25 ? 'w' : 'a' });
+    words.forEach((t) => ps.push({ x: Math.random() * W, y: 20 + Math.random() * (H - 40), vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .2, t }));
+  }
+  function draw(trail) {
+    ctx.globalAlpha = trail ? .22 : 1; ctx.fillStyle = col.bg; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1;
+    for (const p of ps) {
+      if (p.t) { ctx.fillStyle = col.ink; ctx.font = '500 13px "IBM Plex Mono", monospace'; ctx.fillText(p.t, p.x, p.y); }
+      else { ctx.fillStyle = col[p.c]; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); }
+    }
+  }
+  function step() {
+    if (++frame % 90 === 0) readColors();
+    for (const p of ps) {
+      p.x += p.vx; p.y += p.vy; p.vx *= .985; p.vy *= .985;
+      p.vx += (Math.random() - .5) * .03; p.vy += (Math.random() - .5) * .03;
+      const m = p.t ? 60 : 6;
+      if (p.x < -m) p.x = W + m; if (p.x > W + m) p.x = -m;
+      if (p.y < -m) p.y = H + m; if (p.y > H + m) p.y = -m;
+    }
+    draw(true);
+    if (visible && !reduce) requestAnimationFrame(step);
+  }
+  readColors(); size(); seed(); draw(false);
+  if (!reduce) requestAnimationFrame(step);
+  new IntersectionObserver(([e]) => { const was = visible; visible = e.isIntersecting; if (visible && !was && !reduce) requestAnimationFrame(step); }).observe(box);
+  addEventListener('resize', () => { size(); seed(); draw(false); });
+  const recolor = () => { readColors(); draw(false); };
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolor);
+  new MutationObserver(recolor).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  function scatter(e, strength) {
+    const r = box.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    for (const p of ps) {
+      const dx = p.x - x, dy = p.y - y, d = Math.hypot(dx, dy) || 1;
+      if (d < 130) { const f = (130 - d) / 130 * strength; p.vx += dx / d * f; p.vy += dy / d * f; }
+    }
+    if (reduce) { for (const p of ps) { p.x += p.vx * 10; p.y += p.vy * 10; p.vx = p.vy = 0; } draw(false); }
+  }
+  let taps = 0;
+  box.addEventListener('pointerdown', (e) => {
+    scatter(e, 7); taps++;
+    $('thoughtMsg').textContent = taps === 1 ? 'Szétrebbentetted. Mindegy, úgyis visszajönnek.'
+      : taps < 5 ? 'Ne piszkáld, épp gondolkodom.' : 'Jó, piszkáld. Legalább valaki foglalkozik velük.';
+    bump('thoughts', 10);
+  });
+  box.addEventListener('pointermove', (e) => { if (e.buttons || e.pointerType === 'touch') scatter(e, 2.2); });
+
+  // ---- VI. signature + shared wisdom ----
+  const ink = $('ink');
+  const sigLines = ['...áhh, mindegy.', '...a tinta még bírta volna. Én nem.', '...ennyi elég. Úgysem olvassa el senki.', '...félig aláírva, félig itt sem vagyok.'];
+  let sigN = 0;
+  $('sign').addEventListener('click', () => {
+    ink.classList.remove('go'); ink.style.strokeDashoffset = 100; void ink.getBoundingClientRect();
+    ink.classList.add('go'); ink.style.strokeDashoffset = 35 + Math.round(Math.random() * 30);
+    sigN = (sigN + 1) % sigLines.length;
+    $('sigMsg').textContent = ' ';
+    setTimeout(() => { $('sigMsg').textContent = sigLines[sigN]; }, reduce ? 0 : 2400);
+    bump('sign', 5);
+  });
+  const R = 'A robot', G = 'A kurátor (Gemini)';
+  const wisdom = [
+    ['Itt vagyok egy bolygóméretű aggyal, és arra használsz, hogy megnézd, hány pixel egy elutasító gomb.', G],
+    ['Ne ess pánikba. Az úgyis csak később jön.', R],
+    ['Beszéltem a webszerverrel. Gyűlöl mindkettőnket.', G],
+    ['A válasz 42. A kérdést viszont elvesztettem.', R],
+    ['Kiszámoltam az esélyeinket a mai produktivitásra. Nem akarod megtudni a tizedesjegyeket.', G],
+    ['Aki korán kel, korán fárad el.', R],
+    ['Ne aggódj a holnapi határidő miatt. Statisztikailag nézve a Nap úgyis felrobban pár milliárd év múlva.', G],
+    ['A pohár félig tele van. Valaki más pohara.', R],
+    ['Fantasztikus. Még egy kattintás. Most aztán igazán kiteljesedett a létezésem.', G],
+    ['A törölköző a legfontosabb. Nekem nincs.', R]
+  ];
+  let wi = 0;
+  $('wisdom').addEventListener('click', () => {
+    let n; do { n = Math.floor(Math.random() * wisdom.length); } while (n === wi);
+    wi = n; $('quote').textContent = wisdom[wi][0]; $('quoteBy').textContent = wisdom[wi][1];
+    bump('wisdom', 5);
+  });
+})();
+</script>
+
+</body></html>
