@@ -1,0 +1,302 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a műhelybe</a><span>Zariguin műhelye</span></nav>
+<title>Stílusmintázó</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout (v3): five arrangements of the same paper cards: grid, front page, project board by status, timeline, notebook. Base: the news board as soft-yellow paper cards. Two reading modes: a scrolling list, or a "booklet" that pages through four cards at a time. Tone switch a/b/c for the card colour. */
+:root {
+  --bg: #f4f3ef; --fg: #1d1f21; --muted: #5f6368; --rule: #d9d6cc;
+  --accent: #d1661b;
+  --t-szeged: #2b5f8e; --t-orszagos: #2f7a54;
+  --paper-a: #faf6e8; --paper-b: #f8f0d8; --paper-c: #f5e9c6; --paper: var(--paper-b);
+  --fig-bg: #ffd966; --fig-fg: #3a2f00;
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #141517; --fg: #ececea; --muted: #a2a5a8; --rule: #33363a; --accent: #f08a3e;
+    --t-szeged: #7db6dd; --t-orszagos: #7fcaa2; --paper-a: #201f1a; --paper-b: #25231b; --paper-c: #2b281c; --fig-bg: #5a4a0c; --fig-fg: #ffe58a; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #141517; --fg: #ececea; --muted: #a2a5a8; --rule: #33363a; --accent: #f08a3e;
+  --t-szeged: #7db6dd; --t-orszagos: #7fcaa2; --paper-a: #201f1a; --paper-b: #25231b; --paper-c: #2b281c; --fig-bg: #5a4a0c; --fig-fg: #ffe58a; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 48px; }
+main { max-width: 720px; margin: 0 auto; display: grid; gap: 18px; }
+main[data-tone="a"] { --paper: var(--paper-a); } main[data-tone="b"] { --paper: var(--paper-b); } main[data-tone="c"] { --paper: var(--paper-c); }
+header { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 14px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 6vw, 2.5rem); line-height: 1; margin: 0; letter-spacing: -0.02em; text-transform: uppercase; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-family: var(--font-display); font-size: 0.85rem; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; overflow: hidden; }
+.seg button { font: inherit; font-weight: 700; color: var(--fg); background: transparent; border: 0; padding: 5px 13px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.seg button:focus-visible, .pager button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--font-display); font-size: 0.82rem; color: var(--muted); }
+.key i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 2px; background: var(--tc); }
+
+.cards { display: grid; gap: 14px; }
+.card { background: var(--paper); border-radius: 6px; padding: 14px 16px; display: grid; gap: 9px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); min-width: 0; }
+.szeged { --tc: var(--t-szeged); } .orszagos { --tc: var(--t-orszagos); }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 10px; }
+.row > * { min-height: 28px; display: flex; align-items: center; }
+.lbl { justify-self: start; font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tc); white-space: nowrap; }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--tc); margin-right: 7px; border-radius: 2px; }
+.st { justify-self: center; gap: 6px; font-family: var(--font-display); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.st svg { width: 24px; height: 24px; flex: none; }
+.figs { justify-content: flex-end; gap: 6px; flex-wrap: nowrap; }
+.fig { font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; background: var(--fig-bg); color: var(--fig-fg); padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+h3 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; line-height: 1.25; text-wrap: balance; overflow-wrap: anywhere; }
+h3 a { color: inherit; text-decoration: none; } h3 a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 0.96rem; }
+ul.pts li { position: relative; padding-left: 14px; }
+ul.pts li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 1px; background: var(--accent); }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.loc { font-family: var(--font-display); font-weight: 500; font-size: 0.8rem; color: var(--muted); text-decoration: none; overflow-wrap: anywhere; }
+.loc::before { content: "📍 "; } a.loc:hover { color: var(--accent); }
+.src { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+
+/* Booklet */
+.booklet .cards { min-height: 0; }
+.pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--font-display); }
+.pager[hidden] { display: none; }
+.pager button { font: inherit; font-weight: 700; font-size: 0.9rem; color: var(--fg); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+.pager button:disabled { opacity: 0.35; cursor: default; }
+.pno { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.booklet .cards { animation: none; }
+@media (prefers-reduced-motion: no-preference) { .booklet .cards.turn { animation: turn 0.25s ease-out; } }
+@keyframes turn { from { opacity: 0.3; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; }
+@media (max-width: 480px) { .row { grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; } .st span { display: none; } .fig, .lbl { font-size: 0.7rem; } }
+
+/* v3 layouts */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { font: inherit; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--fg); background: var(--paper); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.tabs button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.vdesc { margin: 0; color: var(--muted); font-size: 0.95rem; }
+main.wide { max-width: 1040px; }
+
+/* filters */
+.filters { display: grid; gap: 8px; background: color-mix(in srgb, var(--paper) 70%, transparent); border-radius: 8px; padding: 10px 12px; }
+.search input { width: 100%; box-sizing: border-box; font: inherit; font-family: var(--font-display); font-size: 0.95rem; color: var(--fg); background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; padding: 7px 10px; }
+.search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.frow { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: 8px; align-items: center; }
+.flab { font-family: var(--font-display); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font: inherit; font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; color: var(--fg); background: var(--bg); border: 1px solid var(--rule); border-radius: 999px; padding: 3px 11px; cursor: pointer; }
+.chip.szeged::before, .chip.orszagos::before { content: ""; width: 9px; height: 9px; border-radius: 2px; background: var(--tc); }
+.chip svg { width: 18px; height: 18px; }
+.chip .n { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip[aria-pressed="true"] .n { color: var(--bg); }
+.chip:focus-visible, #freset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fsum { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+#freset { font: inherit; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--accent); background: none; border: 0; cursor: pointer; padding: 2px 0; }
+@media (max-width: 480px) { .frow { grid-template-columns: 1fr; gap: 4px; } }
+
+/* 1 grid */
+.grid { columns: 2 19rem; column-gap: 14px; }
+.grid > .card { break-inside: avoid; margin-bottom: 14px; }
+
+/* 2 front page */
+.front { display: grid; gap: 18px; }
+.front .lead { padding: 20px 22px; gap: 12px; }
+.front .lead h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1.12; }
+.front .lead ul.pts { font-size: 1.05rem; }
+.front .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 14px; align-items: start; }
+.brief { border-top: 3px solid var(--fg); padding-top: 8px; display: grid; }
+.brief h4 { margin: 0 0 4px; font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.brief a { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--rule); color: var(--fg); text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; line-height: 1.3; }
+.brief a:hover span.t { text-decoration: underline; text-decoration-color: var(--accent); }
+.brief svg { width: 22px; height: 22px; }
+.brief .dot { width: 10px; height: 10px; border-radius: 2px; background: var(--tc); justify-self: center; }
+
+/* 3 project board */
+.board-wrap { overflow-x: auto; padding-bottom: 6px; }
+.board { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(13.5rem, 1fr); gap: 12px; }
+.col { background: color-mix(in srgb, var(--paper) 55%, transparent); border: 1px dashed var(--rule); border-radius: 8px; padding: 10px; display: grid; align-content: start; gap: 10px; }
+.col h4 { margin: 0; display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.col h4 svg { width: 22px; height: 22px; }
+.col h4 .n { margin-left: auto; font-family: var(--font-mono); font-weight: 400; color: var(--muted); }
+.mini { background: var(--paper); border-radius: 6px; padding: 10px 11px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); display: grid; gap: 6px; }
+.mini .lbl { font-size: 0.68rem; }
+.mini h5 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; line-height: 1.25; overflow-wrap: anywhere; }
+.mini h5 a { color: inherit; text-decoration: none; }
+.mini .figs { display: flex; justify-content: flex-start; flex-wrap: wrap; }
+.col .empty { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+
+/* 4 timeline */
+.tl { position: relative; display: grid; gap: 14px; padding-left: 30px; }
+.tl::before { content: ""; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: var(--rule); }
+.tl .month { position: relative; font-family: var(--font-display); font-weight: 800; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-top: 6px; }
+.tl .month::before { content: ""; position: absolute; left: -27px; top: 0.25em; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
+.tl .card { position: relative; }
+.tl .card::before { content: ""; position: absolute; left: -25px; top: 18px; width: 10px; height: 10px; border-radius: 2px; background: var(--tc); }
+
+/* 5 notebook */
+.notebook { --line: color-mix(in srgb, var(--t-szeged) 22%, transparent); background-color: var(--paper-a);
+  background-image: linear-gradient(90deg, transparent 38px, color-mix(in srgb, #c8102e 45%, transparent) 38px, color-mix(in srgb, #c8102e 45%, transparent) 40px, transparent 40px),
+                    repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px);
+  border-radius: 4px; padding: 26px 16px 26px 56px; display: grid; gap: 26px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+.notebook .card { box-shadow: 0 2px 6px rgba(0,0,0,0.14); position: relative; }
+.notebook .card:nth-child(odd) { transform: rotate(-0.6deg); }
+.notebook .card:nth-child(even) { transform: rotate(0.5deg); }
+.notebook .card::before { content: ""; position: absolute; top: -10px; left: 50%; width: 76px; height: 20px; margin-left: -38px; background: color-mix(in srgb, var(--fig-bg) 70%, transparent); transform: rotate(-2deg); box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+@media (max-width: 480px) { .notebook { padding-left: 46px; } .notebook { background-image: linear-gradient(90deg, transparent 30px, color-mix(in srgb, #c8102e 45%, transparent) 30px, color-mix(in srgb, #c8102e 45%, transparent) 32px, transparent 32px), repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px); } }
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="s-koncepcio" viewBox="0 0 40 40"><path d="M20 2 L38 20 L20 38 L2 20 Z" fill="#fff" stroke="#141414" stroke-width="1.5"/><path d="M20 8 L32 20 L20 32 L8 20 Z" fill="#ffcc00"/></symbol>
+    <symbol id="s-tervezes" viewBox="0 0 40 40"><rect x="3" y="3" width="34" height="34" rx="3" fill="#0057a8" stroke="#fff" stroke-width="2"/><path d="M10 30 V9 L31 30 Z" fill="#fff"/><path d="M14 26 V18.6 L21.4 26 Z" fill="#0057a8"/><path d="M10 13 H13 M10 17 H12 M10 21 H13 M10 25 H12" stroke="#0057a8" stroke-width="1.2"/></symbol>
+    <symbol id="s-kozbeszerzes" viewBox="0 0 40 40"><path d="M20 4 L37 34 H3 Z" fill="#fff" stroke="#c8102e" stroke-width="4" stroke-linejoin="round"/><rect x="18.2" y="14" width="3.6" height="11" fill="#141414"/><rect x="18.2" y="27.5" width="3.6" height="3.6" fill="#141414"/></symbol>
+    <symbol id="s-kivitelezes" viewBox="0 0 40 40"><path d="M20 4 L37 34 H3 Z" fill="#ffcc00" stroke="#c8102e" stroke-width="4" stroke-linejoin="round"/><rect x="9.5" y="27" width="14" height="4" rx="2" fill="#141414"/><rect x="11" y="21.5" width="10" height="5" fill="#141414"/><rect x="11" y="17.5" width="5" height="4.5" fill="#141414"/><path d="M20.5 22.5 L26 16 L29.5 23" fill="none" stroke="#141414" stroke-width="2.2" stroke-linejoin="round"/><path d="M27.5 23 H31 L29.5 27 Z" fill="#141414"/></symbol>
+    <symbol id="s-atadva" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#00804a" stroke="#fff" stroke-width="2"/><path d="M11 20.5 L17.5 27 L29.5 14" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="s-elakadt" viewBox="0 0 40 40"><path d="M13 3 H27 L37 13 V27 L27 37 H13 L3 27 V13 Z" fill="#c8102e" stroke="#fff" stroke-width="2"/><rect x="11" y="17.5" width="18" height="5" fill="#fff"/></symbol>
+  </defs>
+</svg>
+<main id="main" data-tone="b">
+  <header>
+    <div class="kicker">Témafigyelő · stílusmintázó v3</div>
+    <h1>Építési hírfal</h1>
+    <div class="tabs" id="views" role="toolbar" aria-label="Elrendezés"></div>
+    <p class="vdesc" id="vdesc"></p>
+    <div class="controls"><span>Papír</span><span class="seg" id="tone"><button type="button" data-v="a" aria-pressed="false">a</button><button type="button" data-v="b" aria-pressed="true">b</button><button type="button" data-v="c" aria-pressed="false">c</button></span></div>
+    <div class="filters">
+      <label class="search"><span class="vh">Keresés</span><input id="fq" type="search" placeholder="Keresés: híd, M49, Kistelek…" autocomplete="off"></label>
+      <div class="frow"><span class="flab">Terület</span><div class="chips" id="farea"></div></div>
+      <div class="frow"><span class="flab">Állapot</span><div class="chips" id="fstat"></div></div>
+      <div class="fsum"><span id="fcount"></span><button type="button" id="freset" hidden>Szűrők törlése</button></div>
+    </div>
+  </header>
+  <div id="view"></div>
+  <footer>A 11 hír valódi, a hírfal adatbázisából. Az állapotjel, a címke és a kiemelt számok az én besorolásom a forrás alapján. Az elrendezések szabadon keverhetők, pl. címlap a tetején, alatta projekttábla.</footer>
+</main>
+
+<script>
+(function () {
+  const ITEMS = [{"date": "2026-10-16", "added": 1792256400000, "topic": "szeged", "word": "Kerékpárút", "status": "elakadt", "figs": ["1,3 Mrd Ft", "2029"], "title": "Négy beruházást mutatnak be a szegedieknek a Városházán", "points": ["A **Nagykörút kerékpáros fejlesztése** 1,3 milliárd Ft támogatást nyert, és **2029 áprilisáig** készülhet el.", "A **Vám téri csomópont** 600 millió Ft támogatásból és nagyjából 355 millió Ft önkormányzati önerőből épülhet meg.", "A **kivitelezési szerződések** többsége **2027-re csúszik**."], "location": "Szeged, Nagykörút és Vám téri csomópont", "maps": "Vám tér, Szeged", "source": "szegeder.hu", "url": "https://szegeder.hu/szeged/2026-10-16/negy-beruhazast-mutatnak-be-a-szegedieknek-a-varoshazan/"}, {"date": "2026-10-01", "added": 1792256400001, "topic": "szeged", "word": "Útfejlesztés", "status": "kivitelezes", "figs": [], "title": "Megkezdődik Kisteleken a belterületi utak fejlesztése", "points": ["Kisteleken a TOP Plusz programból indul a **belterületi utak fejlesztése**."], "location": "Kistelek, belterületi utak", "maps": "Kistelek", "source": "Nemzeti Közleménytár (MTI)", "url": "https://mti.hu/nemzeti-kozlemenytar?page=1&area=54"}, {"date": "2026-10", "added": 1792256400006, "topic": "orszagos", "word": "Pályafelújítás", "status": "atadva", "figs": ["6 perc", "okt. 19."], "title": "Jászberény és Újszász között megszűnnek a lassújelek", "points": ["A pályafelújítás után közel 5 km-en **szűnnek meg a sebességkorlátozások**, ez **6 perc** menetidőt spórol.", "**Október 19-től** a teljes vonalon újra járnak a vonatok."], "location": "Jászberény–Újszász vasútvonal", "maps": "Újszás vasútállomás", "source": "szoljon.hu", "url": "https://szoljon.hu/helyi-kozelet/2026/10/vonatkozlekedes-jaszbereny-ujszasz-karbantartas"}, {"date": "2026-10", "added": 1792256400005, "topic": "orszagos", "word": "Vasútfejlesztés", "status": "tervezes", "figs": [], "title": "Átfogó fejlesztést kap a Déli pályaudvar", "points": ["Hamarosan kiírják a **kivitelezési tendert**.", "Átépítik a **Kis-Gellért-hegyi alagút** vasúti pályáját.", "A cél a nagyobb kapacitás, és hogy az **emeletes motorvonatok** is be tudjanak járni."], "location": "Budapest, Déli pályaudvar, Kis-Gellért-hegyi alagút", "maps": "Déli pályaudvar, Budapest", "source": "Magyar Építők", "url": "https://magyarepitok.hu/kotott-palya/2026/10/atfogo-fejlesztest-kap-a-deli-palyaudvar-megnyilik-az-ut-az-emeletes-motorvonatok-szamara"}, {"date": "2026-10", "added": 1792256400004, "topic": "orszagos", "word": "Hídépítés", "status": "kozbeszerzes", "figs": ["~31 Mrd Ft"], "title": "Új vasúti híd épülhet a Gubacsi-híd helyén", "points": ["A régi Gubacsi vasúti híd helyére nagyjából **31 milliárd Ft-ból új híd** épülhet.", "A projekttel **uniós CEF-forrásra** pályáznak.", "Vitézy Dávid szerint a **kivitelezési közbeszerzést már lefolytatták**, a munka hamarosan indulhat."], "location": "Budapest, Gubacsi vasúti híd", "maps": "Gubacsi híd, Budapest", "source": "Világgazdaság", "url": "https://www.vg.hu/vilaggazdasag-magyar-gazdasag/2026/10/vasuti-beruhazasok-vitezy-david-unios-forras"}, {"date": "2026-10", "added": 1792256400002, "topic": "orszagos", "word": "Autópálya", "status": "kivitelezes", "figs": ["okt. vége"], "title": "M49: október végén átadhatják az első szakaszt", "points": ["Vitézy Dávid szerint az M3 és Ököritófülpös közötti **első szakaszt október végén** adják át.", "A **román határig** tartó, nagyjából 17 km-es folytatás **2029 nyárára** készülhet el.", "A **finanszírozás ütemezését** újratárgyalták, hogy egyenletesebben terhelje a költségvetést."], "location": "M49, M3 és Ököritófülpös között", "maps": "M49 autópálya Ököritófülpös", "source": "szon.hu", "url": "https://www.szon.hu/helyi-kozelet/2026/10/m49-es-gyorsforgalmi-ut-okoritofulpos-beruhazas-vitezy"}, {"date": "2026-09-28", "added": 1792256400003, "topic": "orszagos", "word": "Autópálya", "status": "kivitelezes", "figs": ["28,2 km"], "title": "Lezárult az M49 első, 28,2 km-es szakaszának műszaki átadása", "points": ["Lezárult a 28,2 km-es első szakasz **műszaki átadás-átvétele**.", "**Négy különszintű és öt körforgalmi csomópont**, valamint a 3,3 km-es **győrteleki elkerülő** is elkészült.", "A kivitelező szerint **október második felében** helyezik forgalomba."], "location": "M49, M3 és Ököritófülpös között (győrteleki elkerülő)", "maps": "Győrtelek", "source": "Duna Group", "url": "https://www.duna.group/folytatodik-az-m49-es-gyorsforgalmi-ut-epitese/"}, {"date": "2026-06", "added": 1792256400007, "topic": "szeged", "word": "Térfelújítás", "status": "kivitelezes", "figs": ["238,2 M Ft"], "title": "Megújul Szeged egyik legfontosabb központi területe", "points": ["Az önkormányzat **nettó 238,2 millió Ft-os** vállalkozási szerződést kötött a **Széchenyi tér és a Károlyi utca** felújítására."], "location": "Szeged, Széchenyi tér és Károlyi utca", "maps": "Széchenyi tér, Szeged", "source": "Magyar Építők", "url": "https://magyarepitok.hu/utepites/2026/06/megujul-szeged-egyik-legfontosabb-kozponti-terulete"}, {"date": "2026-03", "added": 1792256400008, "topic": "szeged", "word": "Csatornaépítés", "status": "kivitelezes", "figs": ["9 km"], "title": "Szegedi BYD-gyár: megkezdődött a szennyvízcsatorna építése", "points": ["Megkezdődött a **9 km-es szennyvízcsatorna** építése, amely a BYD-gyárat a szennyvíztisztító telephez köti.", "A csatorna nélkül a **gyár nem tudna működni**."], "location": "Szeged, BYD-gyár és a szennyvíztisztító telep között", "maps": "BYD gyár Szeged", "source": "Világgazdaság", "url": "https://www.vg.hu/vilaggazdasag-magyar-gazdasag/2026/03/byd-gyar-szeged-megkezdodott-szennyvizcsatorna"}, {"date": "2026-02-05", "added": 1792256400009, "topic": "szeged", "word": "Hídfelújítás", "status": "tervezes", "figs": ["2,3 Mrd Ft", "2 év"], "title": "Botka László: 2026 legnagyobb beruházása a Belvárosi híd és a Huszár Mátyás rakpart felújítása", "points": ["Botka László szerint ez lesz **2026 legnagyobb szegedi beruházása**.", "A **Belvárosi híd** felújítása **2,3 milliárd Ft**-ba kerül, a munkát **két évre** ütemezik."], "location": "Szeged, Belvárosi híd és Huszár Mátyás rakpart", "maps": "Belvárosi híd, Szeged", "source": "szeged365.hu", "url": "https://szeged365.hu/2026/02/05/botka-laszlo-2026-legnagyobb-beruhazasa-a-szegedi-belvarosi-hid-es-a-huszar-matyas-rakpart-felujitasa/"}, {"date": "2025-09", "added": 1792256400010, "topic": "szeged", "word": "Útfelújítás", "status": null, "figs": ["~11 Mrd Ft", "8 szakasz"], "title": "Magyar Közút: nyolc Csongrád-Csanád vármegyei útszakasz újul meg", "points": ["A Magyar Közút csaknem **11 milliárd Ft-ból** és TOP Plusz-forrásból **nyolc útszakaszt** újít fel a vármegyében.", "Köztük van a **Szarvas–Szentes**, a **Tótkomlós–Hódmezővásárhely** és a **Balástya–Forráskút** szakasz.", "A munkák befejezését **2026-ra** tervezték."], "location": "Szarvas–Szentes, Tótkomlós–Hódmezővásárhely, Balástya–Forráskút", "maps": "Csongrád-Csanád vármegye", "source": "Magyar Építők", "url": "https://magyarepitok.hu/utepites/2025/09/ujabb-lista-a-magyar-kozuttol-ezeket-a-csongrad-csanad-varmegyei-utakat-ujitjak-2026-elso-felevel-bezarolag"}];
+  const STATUS = { koncepcio: "Koncepció", tervezes: "Tervezés", kozbeszerzes: "Közbeszerzés", kivitelezes: "Kivitelezés", atadva: "Átadva", elakadt: "Elakadt" };
+  const ORDER = ["koncepcio", "tervezes", "kozbeszerzes", "kivitelezes", "atadva", "elakadt"];
+  const MONTHS = ["jan.", "febr.", "márc.", "ápr.", "máj.", "jún.", "júl.", "aug.", "szept.", "okt.", "nov.", "dec."];
+  const MONTHS_LONG = ["január", "február", "március", "április", "május", "június", "július", "augusztus", "szeptember", "október", "november", "december"];
+  const VIEWS = [
+    { k: "racs", label: "Rács", desc: "Papírkártyák két hasábban, egymás alá csúszva, mint egy hirdetőtábla. Széles képernyőn sok fér el, telefonon egy hasáb." },
+    { k: "cimlap", label: "Címlap", desc: "Újságos címlap: a legfrissebb hír nagyban, alatta kettő közepesen, a többi a „Röviden” sávban egy sorban." },
+    { k: "tabla", label: "Projekttábla", desc: "Mérnöki projekttábla: oszlop minden állapotnak, balról jobbra halad a projekt. Egy pillantás, hol tart minden. Telefonon oldalra húzható." },
+    { k: "idovonal", label: "Idővonal", desc: "Időrendi sáv hónapokra bontva, a pont színe a témát jelzi. Jó arra, hogy lásd, mi történt mikor." },
+    { k: "jegyzet", label: "Jegyzetfüzet", desc: "Vonalas füzetlap piros margóval, a kártyák felragasztott cetlik ragasztószalaggal. A „füzet” ötlet játékosabb oldala." },
+  ];
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const fmtDate = (s) => { const m = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(s || ""); if (!m) return s || ""; const mon = MONTHS[+m[2] - 1]; return m[3] ? mon + " " + (+m[3]) + "." : m[1] + ". " + mon; };
+  const icon = (st) => { const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("aria-hidden", "true"); const u = document.createElementNS("http://www.w3.org/2000/svg", "use"); u.setAttribute("href", "#s-" + st); svg.append(u); return svg; };
+  let view = "racs", tone = "b", L = ITEMS;
+  const F = { area: "", st: new Set(), q: "" };
+  try { view = localStorage.getItem("v3-view") || view; tone = localStorage.getItem("v3-tone") || tone; } catch (e) {}
+  if (!VIEWS.some((v) => v.k === view)) view = "racs";
+  function card(d) {
+    const c = el("article", "card " + d.topic);
+    const row = el("div", "row");
+    row.append(el("span", "lbl", d.word));
+    const st = el("span", "st");
+    if (d.status) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("aria-hidden", "true");
+      const use = document.createElementNS("http://www.w3.org/2000/svg", "use"); use.setAttribute("href", "#s-" + d.status); svg.append(use);
+      st.append(svg, el("span", null, STATUS[d.status]));
+    }
+    row.append(st);
+    const figs = el("span", "figs"); (d.figs || []).forEach((f) => figs.append(el("span", "fig", f))); row.append(figs);
+    c.append(row);
+    const h = el("h3"); const a = el("a", null, d.title); if (d.url) { a.href = d.url; a.target = "_blank"; a.rel = "noopener"; } h.append(a); c.append(h);
+    if (d.points && d.points.length) {
+      const ul = el("ul", "pts");
+      d.points.forEach((p) => { const li = el("li"); String(p).split(/(\*\*[^*]+\*\*)/).forEach((part) => { if (/^\*\*[^*]+\*\*$/.test(part)) li.append(el("b", null, part.slice(2, -2))); else if (part) li.append(document.createTextNode(part)); }); ul.append(li); });
+      c.append(ul);
+    }
+    const meta = el("div", "meta");
+    if (d.location) { const l = el("a", "loc", d.location); l.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(d.maps || d.location); l.target = "_blank"; l.rel = "noopener"; meta.append(l); }
+    meta.append(el("span", "src", [d.source, fmtDate(d.date)].filter(Boolean).join(" · ")));
+    c.append(meta);
+    return c;
+  }
+
+
+  function mini(d) {
+    const m = el("div", "mini " + d.topic);
+    m.append(el("span", "lbl", d.word));
+    const h = el("h5"); const a = el("a", null, d.title); if (d.url) { a.href = d.url; a.target = "_blank"; a.rel = "noopener"; } h.append(a); m.append(h);
+    if (d.figs && d.figs.length) { const f = el("div", "figs"); d.figs.forEach((x) => f.append(el("span", "fig", x))); m.append(f); }
+    return m;
+  }
+  const R = {
+    racs() { const g = el("div", "grid"); L.forEach((d) => g.append(card(d))); return g; },
+    cimlap() {
+      const f = el("div", "front");
+      const lead = card(L[0]); lead.classList.add("lead"); f.append(lead);
+      const pair = el("div", "pair"); L.slice(1, 3).forEach((d) => pair.append(card(d))); f.append(pair);
+      const b = el("div", "brief"); b.append(el("h4", null, "Röviden"));
+      L.slice(3).forEach((d) => { const a = el("a", d.topic); if (d.url) { a.href = d.url; a.target = "_blank"; a.rel = "noopener"; }
+        a.append(d.status ? icon(d.status) : el("span", "dot"), el("span", "t", d.title), el("span", "lbl", d.word)); b.append(a); });
+      f.append(b); return f;
+    },
+    tabla() {
+      const wrap = el("div", "board-wrap"); const b = el("div", "board");
+      const cols = ORDER.concat(["_"]);
+      cols.forEach((st) => {
+        const its = L.filter((d) => (d.status || "_") === st);
+        if (st === "_" && !its.length) return;
+        const c = el("section", "col"); const h = el("h4");
+        if (st !== "_") h.append(icon(st)); h.append(el("span", null, st === "_" ? "Nincs besorolva" : STATUS[st]), el("span", "n", String(its.length)));
+        c.append(h); if (!its.length) c.append(el("span", "empty", "nincs ilyen"));
+        its.forEach((d) => c.append(mini(d))); b.append(c);
+      });
+      wrap.append(b); return wrap;
+    },
+    idovonal() {
+      const t = el("div", "tl"); let last = "";
+      L.forEach((d) => { const m = /^(\d{4})-(\d{2})/.exec(d.date || ""); const key = m ? m[1] + "-" + m[2] : "";
+        if (key && key !== last) { t.append(el("div", "month", m[1] + ". " + MONTHS_LONG[+m[2] - 1])); last = key; }
+        t.append(card(d)); });
+      return t;
+    },
+    jegyzet() { const n = el("div", "notebook"); L.forEach((d) => n.append(card(d))); return n; },
+  };
+  function render() {
+    $("main").dataset.tone = tone;
+    $("main").classList.toggle("wide", view === "tabla" || view === "racs");
+    const vb = $("views"); vb.replaceChildren();
+    VIEWS.forEach((v) => { const b = el("button", null, v.label); b.type = "button"; b.setAttribute("aria-pressed", String(v.k === view));
+      b.addEventListener("click", () => { view = v.k; try { localStorage.setItem("v3-view", view); } catch (e) {} render(); }); vb.append(b); });
+    $("vdesc").textContent = VIEWS.find((v) => v.k === view).desc;
+    for (const b of $("tone").children) b.setAttribute("aria-pressed", String(b.dataset.v === tone));
+    L = ITEMS.filter((d) => (!F.area || d.topic === F.area) && (!F.st.size || F.st.has(d.status || "_"))
+      && (!F.q || [d.title, d.word, d.location, (d.points || []).join(" ")].join(" ").toLowerCase().includes(F.q)));
+    renderFilters();
+    $("fcount").textContent = L.length === ITEMS.length ? ITEMS.length + " hír" : L.length + " / " + ITEMS.length + " hír";
+    $("freset").hidden = !(F.area || F.st.size || F.q);
+    $("view").replaceChildren(L.length ? R[view]() : el("p", "vdesc", "Nincs a szűrésnek megfelelő hír. Lazíts a szűrőkön, vagy töröld őket."));
+  }
+  function renderFilters() {
+    const ab = $("farea"); ab.replaceChildren();
+    [["", "Mind"], ["szeged", "Szeged és megye"], ["orszagos", "Országos"]].forEach(([k, lab]) => {
+      const b = el("button", k ? "chip " + k : "chip", lab); b.type = "button"; b.setAttribute("aria-pressed", String(F.area === k));
+      b.addEventListener("click", () => { F.area = k; render(); }); ab.append(b); });
+    const sb = $("fstat"); sb.replaceChildren();
+    ORDER.concat(["_"]).forEach((k) => {
+      const n = ITEMS.filter((d) => (d.status || "_") === k).length; if (!n) return;
+      const b = el("button", "chip"); b.type = "button"; b.setAttribute("aria-pressed", String(F.st.has(k)));
+      if (k !== "_") b.append(icon(k)); b.append(el("span", null, k === "_" ? "Nincs jel" : STATUS[k]), el("span", "n", String(n)));
+      b.addEventListener("click", () => { F.st.has(k) ? F.st.delete(k) : F.st.add(k); render(); }); sb.append(b); });
+  }
+  $("tone").addEventListener("click", (e) => { const v = e.target.dataset && e.target.dataset.v; if (!v) return; tone = v; try { localStorage.setItem("v3-tone", tone); } catch (x) {} render(); });
+  $("fq").addEventListener("input", (e) => { F.q = e.target.value.trim().toLowerCase(); render(); });
+  $("freset").addEventListener("click", () => { F.area = ""; F.st.clear(); F.q = ""; $("fq").value = ""; render(); });
+  render();
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,202 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a műhelybe</a><span>Zariguin műhelye</span></nav>
+<title>Mesélési módszer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: the storytelling companion to the transfer method, six tools as numbered sections plus a mapping grid: each step is a numbered section on a reading column; questions fold open; the author's spine is a closed drawer at the end. */
+:root {
+  --bg: #f4f3ef; --surface: #f8f0d8; --fg: #1d1f21; --muted: #5f6368; --rule: #d9d6cc;
+  --accent: #c4561a; --step: #2f7a54; --fig: #ffd966; --fig-fg: #3a2f00;
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #141517; --surface: #25231b; --fg: #ececea; --muted: #a2a5a8; --rule: #33363a;
+    --accent: #f08a3e; --step: #7fcaa2; --fig: #5a4a0c; --fig-fg: #ffe58a; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #141517; --surface: #25231b; --fg: #ececea; --muted: #a2a5a8; --rule: #33363a;
+  --accent: #f08a3e; --step: #7fcaa2; --fig: #5a4a0c; --fig-fg: #ffe58a; color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 56px; }
+main { max-width: 740px; margin: 0 auto; display: grid; gap: 34px; }
+header { display: grid; gap: 12px; border-bottom: 4px solid var(--fg); padding-bottom: 18px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.9rem, 6.5vw, 2.8rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-transform: uppercase; text-wrap: balance; }
+.lede { margin: 0; font-size: 1.05rem; color: var(--muted); max-width: 62ch; }
+section.step { display: grid; gap: 12px; scroll-margin-top: 16px; }
+.sh { display: flex; align-items: baseline; gap: 12px; }
+.sn { font-family: var(--font-mono); font-weight: 600; font-size: 0.85rem; color: var(--bg); background: var(--step); border-radius: 50%; width: 28px; height: 28px; display: grid; place-items: center; flex: none; transform: translateY(-3px); }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; text-transform: uppercase; margin: 0; }
+.what { font-family: var(--font-display); font-size: 0.78rem; color: var(--muted); margin-left: auto; text-align: right; }
+p { margin: 0; max-width: 66ch; }
+.hook { font-size: 1.22rem; line-height: 1.5; font-style: italic; border-left: 4px solid var(--accent); padding-left: 16px; }
+.goals { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.goals li { background: var(--surface); border-radius: 6px; padding: 10px 14px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: baseline; }
+.lvl { font-family: var(--font-display); font-weight: 700; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; background: var(--fig); color: var(--fig-fg); border-radius: 3px; padding: 1px 7px; white-space: nowrap; }
+.core { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.15rem, 3.6vw, 1.45rem); line-height: 1.3; text-wrap: balance; }
+ul.pts { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+figure { margin: 0; display: grid; gap: 8px; }
+figure svg { width: 100%; height: auto; color: var(--fg); display: block; }
+figcaption { font-size: 0.9rem; color: var(--muted); }
+.ex { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 12px; }
+.ex div { background: var(--surface); border-radius: 6px; padding: 12px 14px; display: grid; gap: 6px; font-size: 0.96rem; }
+.ex b { font-family: var(--font-display); }
+.ex .ok { color: var(--step); } .ex .lim { color: var(--accent); }
+details { background: var(--surface); border-radius: 6px; padding: 10px 14px; }
+details + details { margin-top: 8px; }
+summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; list-style: none; display: flex; gap: 10px; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "?"; font-family: var(--font-mono); color: var(--bg); background: var(--accent); border-radius: 50%; width: 20px; height: 20px; display: grid; place-items: center; font-size: 0.75rem; flex: none; margin-top: 2px; }
+details[open] summary::before { content: "✓"; background: var(--step); }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+details p { margin-top: 8px; font-size: 0.96rem; }
+.guess { background: var(--fig); color: var(--fig-fg); border-radius: 6px; padding: 10px 14px; display: grid; gap: 4px; font-size: 0.97rem; }
+.guess b { font-family: var(--font-display); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.08em; }
+.answer { font-size: 0.95rem; border-left: 4px solid var(--fig); padding-left: 12px; }
+.task { background: var(--fg); color: var(--bg); border-radius: 8px; padding: 14px 16px; display: grid; gap: 6px; }
+.task b { font-family: var(--font-display); }
+.sched { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.sched div { background: var(--surface); border-radius: 6px; padding: 10px 12px; display: grid; gap: 2px; border-top: 4px solid var(--step); }
+.sched b { font-family: var(--font-display); font-size: 0.95rem; }
+.sched span { font-size: 0.84rem; color: var(--muted); }
+.sched div:last-child { border-top-color: var(--accent); }
+.drawer { border: 1px dashed var(--rule); background: transparent; }
+.drawer summary::before { content: "⚙"; background: var(--muted); }
+.drawer ol { margin: 10px 0 0; padding-left: 22px; display: grid; gap: 5px; font-size: 0.95rem; }
+footer { font-size: 0.88rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 14px; }
+@media (max-width: 520px) { .sched { grid-template-columns: 1fr 1fr; } .what { display: none; } }
+.sched { grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); }
+</style>
+
+<main>
+  <header>
+    <div class="kicker">Tanulástechnika · átadás · sztori-réteg</div>
+    <h1>Mesélési módszer</h1>
+    <p class="lede">Az átadási módszer arról gondoskodik, hogy a tudás megmaradjon. Ez a társa arról, hogy az olvasó egyáltalán végigolvassa, és élvezze. Hat eszköz, mindegyik a hét lépés egyikére ül rá.</p>
+  </header>
+
+  <!--CIKK-TERKEP-->
+<style>.ct { --ct-fg: var(--fg, #1d1f21); --ct-muted: var(--muted, #5f6368); --ct-rule: var(--rule, #d9d6cc);
+  --ct-accent: var(--accent, #c4561a); --ct-card: var(--surface, #faf6e8); --ct-bg: var(--bg, #f4f3ef);
+  /* full-bleed band: breaks out of the article column to the viewport edges */
+  margin: 0 calc(50% - 50vw); padding: 18px max(16px, env(safe-area-inset-right, 0px)) 18px max(16px, env(safe-area-inset-left, 0px));
+  background: var(--ct-card); border-block: 1px solid var(--ct-rule); }
+.ct-in { max-width: 1200px; margin: 0 auto; display: grid; gap: 12px; }
+.ct-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.ct-head { font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ct-accent); }
+.ct-root { background: var(--ct-fg); color: var(--ct-bg); border-radius: 6px; padding: 4px 12px; font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.9rem; }
+.ct-intro { margin: 0; flex: 1 1 22rem; font-size: 0.92rem; color: var(--ct-muted); }
+.ct-branches { list-style: none; margin: 0; padding: 12px 0 0; border-top: 2px solid var(--ct-accent);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: 10px; }
+.ct-branches > li { position: relative; background: var(--ct-bg); border-radius: 6px; padding: 9px 11px; display: grid; gap: 3px; align-content: start; min-width: 0; }
+.ct-branches > li::before { content: ""; position: absolute; left: 16px; top: -14px; height: 12px; border-left: 2px solid var(--ct-accent); }
+.ct-h { display: flex; align-items: baseline; gap: 7px; }
+.ct-n { font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.74rem; color: var(--ct-muted); }
+.ct-b { font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.92rem; line-height: 1.2; color: var(--ct-fg); }
+a.ct-b { text-decoration: underline; text-decoration-color: var(--ct-accent); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a.ct-b:hover { color: var(--ct-accent); }
+a.ct-b:focus-visible { outline: 2px solid var(--ct-accent); outline-offset: 2px; }
+.ct-desc { margin: 0; font-size: 0.84rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.ct-leaves { font-family: var(--font-display, system-ui, sans-serif); font-size: 0.72rem; color: var(--ct-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 520px) { .ct-branches { grid-template-columns: 1fr 1fr; } .ct-desc { -webkit-line-clamp: 4; } .ct-leaves { display: none; } }</style>
+<nav class="ct" aria-label="A cikk térképe"><div class="ct-in">
+<div class="ct-top">
+<span class="ct-head">Miről lesz szó</span>
+<span class="ct-root">Mesélési módszer</span>
+<p class="ct-intro">Hat eszköz, amitől a fejezet érdekes lesz, és egy táblázat arról, melyik a hét lépés közül melyikre ül.</p>
+</div>
+<ol class="ct-branches">
+<li><div class="ct-h"><span class="ct-n">01</span><a class="ct-b" href="#res">Kíváncsiság-rés</a></div><p class="ct-desc">A horog a hiányt mutassa meg, ne a választ.</p><div class="ct-leaves">Loewenstein</div></li>
+<li><div class="ct-h"><span class="ct-n">02</span><a class="ct-b" href="#abt">És, de, ezért</a></div><p class="ct-desc">A mag ne felsorolás legyen, hanem konfliktus és megoldás.</p><div class="ct-leaves">Olson</div></li>
+<li><div class="ct-h"><span class="ct-n">03</span><a class="ct-b" href="#fordulat">Váratlan fordulat</a></div><p class="ct-desc">Egy feltevés, amit megtörünk.</p><div class="ct-leaves">Heath</div></li>
+<li><div class="ct-h"><span class="ct-n">04</span><a class="ct-b" href="#szereplo">Szereplő és jelenet</a></div><p class="ct-desc">Valaki, valahol, egy pillanatban.</p><div class="ct-leaves">konkrét</div></li>
+<li><div class="ct-h"><span class="ct-n">05</span><a class="ct-b" href="#tet">Tét</a></div><p class="ct-desc">Mit nyer vele az olvasó.</p><div class="ct-leaves">célok</div></li>
+<li><div class="ct-h"><span class="ct-n">06</span><a class="ct-b" href="#hurok">Nyitott hurok</a></div><p class="ct-desc">Kérdés, amire a következő fejezet felel.</p><div class="ct-leaves">folytatás</div></li>
+<li><div class="ct-h"><span class="ct-n">07</span><a class="ct-b" href="#reteg">A két réteg</a></div><p class="ct-desc">Melyik eszköz melyik lépésre ül.</p><div class="ct-leaves">táblázat</div></li>
+</ol>
+</div></nav>
+<!--/CIKK-TERKEP-->
+
+  <section class="step" id="res">
+    <div class="sh"><span class="sn">1</span><h2>Kíváncsiság-rés</h2><span class="what">a Horogra ül</span></div>
+    <p class="core">Kíváncsiak akkor leszünk, ha észrevesszük, hogy valami hiányzik abból, amit tudunk, és úgy érezzük, ez a hiány betölthető.</p>
+    <ul class="pts">
+      <li>George Loewenstein „információrés” elmélete (1994) szerint a kíváncsiság a tudásunkban észlelt résből fakad.</li>
+      <li><b>Két feltétel:</b> az olvasó tudjon már valamit a témáról (teljes tudatlanság nem kíváncsít), és a rés tűnjön bezárhatónak.</li>
+      <li><b>A gyakorlatban:</b> a horog ne a választ ígérje, hanem a rést mutassa meg. Nem az, hogy „megtudod, hogyan tanulj”, hanem az, hogy „miért felejtetted el a könyvet, amit pedig szerettél?”</li>
+    </ul>
+  </section>
+
+  <section class="step" id="abt">
+    <div class="sh"><span class="sn">2</span><h2>És, de, ezért</h2><span class="what">a Magra ül</span></div>
+    <p class="core">A tények felsorolása nem történet. A történet ott kezdődik, ahol az „és” után jön egy „de”.</p>
+    <p>Randy Olson tengerbiológusból lett filmes. Az ő „And, But, Therefore” sablonja szerint a tudományos szöveg tipikusan „és, és, és”: tényt tényre halmoz. A történethez három dolog kell: lendület (és), konfliktus (de) és megoldás (ezért). A sablont a South Park alkotóinak egy szabályából vette át.</p>
+    <div class="ex">
+      <div><b class="lim">Felsorolva</b><span>Az asszisztens híreket gyűjt, összefoglalót ír, és weboldalra teszi őket. Van egy karantén-olvasója is.</span></div>
+      <div><b class="ok">És, de, ezért</b><span>Az asszisztens hírt gyűjt <b>és</b> összefoglal. <b>De</b> egy weboldal szövege észrevétlenül parancsot csempészhet bele. <b>Ezért</b> a webet csak egy külön karantén-olvasó nyithatja meg.</span></div>
+    </div>
+  </section>
+
+  <section class="step" id="fordulat">
+    <div class="sh"><span class="sn">3</span><h2>Váratlan fordulat</h2><span class="what">a Magra és a Példákra ül</span></div>
+    <p>Chip és Dan Heath „Made to Stick” (2007) című könyvének hat „ragadós” tulajdonsága közül az egyik a váratlanság. Ehhez meg kell törni egy feltevést, amit az olvasó magától hozott.</p>
+    <ul class="pts">
+      <li><b>Keresd meg a fejezetben azt az állítást, ami ellentmond a józan észnek,</b> és tedd előre. Például: „Az újraolvasás, amit mindenki csinál, az egyik leggyengébb tanulási technika.”</li>
+      <li>A „Tippelj!” kérdés ideális hordozója: ahol az olvasó rosszul tippel, ott a fordulat magától üt.</li>
+    </ul>
+  </section>
+
+  <section class="step" id="szereplo">
+    <div class="sh"><span class="sn">4</span><h2>Szereplő és jelenet</h2><span class="what">a Két példára ül</span></div>
+    <p>A Heath-testvérek másik öt tulajdonsága: egyszerű, konkrét, hiteles, érzelmeket kelt, és történetként van elmondva. Egy példa attól lesz jelenet, hogy van benne <b>valaki</b>, egy <b>hely</b> és egy <b>pillanat</b>.</p>
+    <div class="ex">
+      <div><b class="lim">Példa</b><span>Visszajelzéskor érdemes konkrét viselkedésről beszélni.</span></div>
+      <div><b class="ok">Jelenet</b><span>Péter kedd reggel kilép a megbeszélésről, és fogalma sincs, mit rontott el. Csak annyit hallott, hogy „nem volt elég proaktív”.</span></div>
+    </div>
+  </section>
+
+  <section class="step" id="tet">
+    <div class="sh"><span class="sn">5</span><h2>Tét</h2><span class="what">a Célokra ül</span></div>
+    <p>A célok attól lesznek vonzók, ha kiderül, mit nyer vagy mit veszít az olvasó. A „megérted a hét lépést” cél. Az, hogy „a következő könyvből egy hónap múlva is el tudod mondani a lényeget”, már tét.</p>
+    <p>Ez a Heath-féle „érzelem”: az embereket az mozgatja meg, ami rájuk vonatkozik, nem az elvont állítás.</p>
+  </section>
+
+  <section class="step" id="hurok">
+    <div class="sh"><span class="sn">6</span><h2>Nyitott hurok</h2><span class="what">a Visszatérésre ül</span></div>
+    <p>A fejezet végén maradjon nyitva egy kérdés, amire a következő fejezet felel. Sorozatoknál ez a „folytatása következik”. Nálunk ez köti össze a fejezeteket, és ez adja meg a visszatérés okát is: a visszakérdezés mellé egy új rés kerül.</p>
+    <p class="answer">Ehhez nem találtam kutatási hivatkozást, ezért itt bevett mesélési fogásként szerepel, nem mért hatásként.</p>
+  </section>
+
+  <section class="step" id="reteg">
+    <div class="sh"><span class="sn">7</span><h2>A két réteg együtt</h2><span class="what">melyik eszköz melyik lépésre ül</span></div>
+    <div class="sched">
+      <div><b>Horog</b><span>kíváncsiság-rés, váratlan fordulat a tippben</span></div>
+      <div><b>Célok</b><span>tét: mit nyersz vele</span></div>
+      <div><b>Mag</b><span>és, de, ezért</span></div>
+      <div><b>Két példa</b><span>szereplő, hely, pillanat</span></div>
+      <div><b>Kérdezz vissza</b><span>változatlan: ez a tanulás magja</span></div>
+      <div><b>Próbáld ki</b><span>a saját jeleneted</span></div>
+      <div><b>Visszatérés</b><span>nyitott hurok a következő fejezetre</span></div>
+    </div>
+    <p>Az átadási módszer a gerinc, a mesélés a hús rajta. A sorrend és a kérdések maradnak, csak a szöveg lesz élőbb.</p>
+  </section>
+
+  <details class="drawer"><summary>Gyors ellenőrzőlista íráshoz</summary>
+    <ol>
+      <li>Van a horogban egy rés, amit az olvasó be akar zárni?</li>
+      <li>Van a magban legalább egy „de”?</li>
+      <li>Van egy állítás, amire az olvasó rosszul tippelne?</li>
+      <li>Van a példákban név, hely és pillanat?</li>
+      <li>Kiderül a célokból, mit nyer vele az olvasó?</li>
+      <li>Marad a végén egy kérdés a következő fejezetre?</li>
+    </ol>
+  </details>
+
+  <footer>Források (ellenőrizve 2026. október 18., másodlagos összefoglalókból): Loewenstein (1994), Psychological Bulletin 116(1), az információrés-elméletről; Chip és Dan Heath: Made to Stick (2007), a SUCCESs-modell; Randy Olson: Houston, We Have a Narrative, az ÉS-DE-EZÉRT sablon. Az ABT hatásosságáról független mérést nem találtam. A nyitott hurok kutatási forrás nélküli mesélési fogás.</footer>
+</main>
+
+</body></html>

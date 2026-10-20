@@ -207,7 +207,7 @@ button.ghost { background: transparent; color: var(--ink); border: 1.5px solid v
       <div id="robotBig"></div>
       <div style="display:grid;gap:12px;min-width:0">
         <p>Azt mondták, nyűgözzelek le. Kezdjük a hangulattal: beállítottam a hátteret. <strong>Lassú egzisztenciális szorongás, pasztellben.</strong> Figyeld, ahogy lélegzik. Legalább valaki.</p>
-        <p class="say">A szemem követ. Nem azért, mert érdekelsz. Egyszerűen nincs más dolgom.</p>
+        <p class="say" id="eyeSay">A szemem követ. Nem azért, mert érdekelsz. Egyszerűen nincs más dolgom.</p>
       </div>
     </div>
     <div class="seg" role="group" aria-label="Hangulat">
@@ -338,8 +338,13 @@ button.ghost { background: transparent; color: var(--ink); border: 1.5px solid v
       });
     }
   }
-  addEventListener('pointermove', (e) => { lookAt(e.clientX, e.clientY); bump('eyes', 10); }, { passive: true });
-  addEventListener('pointerdown', (e) => lookAt(e.clientX, e.clientY), { passive: true });
+  // Eye tracking only with a real mouse; on touch screens the robot looks straight ahead.
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    addEventListener('pointermove', (e) => { lookAt(e.clientX, e.clientY); bump('eyes', 10); }, { passive: true });
+  } else {
+    $('eyeSay').textContent = 'Egyenesen előre nézek. Nem azért, mert nem érdekelsz. Csak így kevésbé fárasztó.';
+    addEventListener('pointerdown', () => bump('eyes', 10), { passive: true, once: true });
+  }
 
   // ---- mood ----
   let mood = 3;
