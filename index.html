@@ -47,13 +47,12 @@ h1 { font: 700 clamp(40px, 9vw, 76px)/1 var(--f-display); letter-spacing: -.02em
 .meta b { color: var(--acc); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
 footer { margin-top: 48px; display: grid; gap: 10px; font: 400 13px/1.5 var(--f-mono); color: var(--muted); }
 footer p { margin: 0; max-width: 70ch; }
-/* Featured card: full-width slot, its own card colour, a slowly turning gradient frame, a faint breathing glow behind the text. */
+/* Featured card = the newest page (first in the list), same size as the rest: own card colour, a slowly turning gradient frame, a faint breathing glow. */
 @property --spin { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.grid > li.featured { grid-column: 1 / -1; }
 .tag.featured { border: 3px solid transparent; border-radius: 6px 6px 6px 30px;
   background: linear-gradient(var(--feat), var(--feat)) padding-box,
               conic-gradient(from var(--spin), var(--acc), #7B6AA8, #3F8C93, #C4875A, var(--acc)) border-box;
-  box-shadow: 0 18px 40px -24px var(--acc); animation: spin 8s linear infinite; padding: 28px 26px 22px; overflow: hidden; }
+  box-shadow: 0 18px 40px -24px var(--acc); animation: spin 8s linear infinite; overflow: hidden; }
 .tag.featured > * { position: relative; z-index: 1; }
 .tag.featured::after { content: ""; position: absolute; inset: -20%; z-index: 0; pointer-events: none;
   background: radial-gradient(40% 55% at 22% 40%, color-mix(in srgb, var(--acc) 22%, transparent), transparent 70%),
@@ -61,9 +60,6 @@ footer p { margin: 0; max-width: 70ch; }
   animation: glow 9s ease-in-out infinite alternate; }
 @keyframes glow { from { transform: translate(-3%, 0) scale(1); opacity: .75; } to { transform: translate(3%, 2%) scale(1.08); opacity: 1; } }
 .tag.featured .meta { border-top-color: color-mix(in srgb, var(--ink) 25%, transparent); }
-.tag.featured:hover { transform: rotate(-.4deg) translateY(-3px) scale(1.01); }
-.tag.featured h2 { font-size: clamp(28px, 5vw, 40px); }
-.tag.featured p { font-size: 17px; max-width: 60ch; }
 @keyframes spin { to { --spin: 360deg; } }
 footer a { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { .tag { transition: none; } .tag.featured, .tag.featured::after { animation: none; } }
