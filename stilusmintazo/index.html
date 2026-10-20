@@ -283,6 +283,7 @@ main.wide { max-width: 1040px; }
     <div class="mrow"><span class="flab">Anyag</span><div class="tabs" id="mats" role="toolbar" aria-label="Anyag"></div><p class="vdesc" id="mdesc"></p></div>
     <div class="mrow"><span class="flab">Elrendezés</span><div class="tabs" id="views" role="toolbar" aria-label="Elrendezés"></div>
     <p class="vdesc" id="vdesc"></p></div>
+    <div class="controls" id="modewrap"><span>Mód</span><span class="seg" id="mode"><button type="button" data-v="" aria-pressed="true">Rendszer</button><button type="button" data-v="light" aria-pressed="false">Világos</button><button type="button" data-v="dark" aria-pressed="false">Sötét</button></span></div>
     <div class="controls" id="tonewrap"><span>Papírszín</span><span class="seg" id="tone"><button type="button" data-v="a" aria-pressed="false">a</button><button type="button" data-v="b" aria-pressed="true">b</button><button type="button" data-v="c" aria-pressed="false">c</button></span></div>
     <div class="filters">
       <label class="search"><span class="vh">Keresés</span><input id="fq" type="search" placeholder="Keresés: híd, M49, Kistelek…" autocomplete="off"></label>
@@ -394,8 +395,13 @@ main.wide { max-width: 1040px; }
     { k: "jatekos", label: "Játékos", desc: "Vastag körvonal, kemény árnyék, élénk színek. Kicsit képregény, kicsit matrica." },
     { k: "hivatalos", label: "Hivatalos", desc: "Közlöny-hangulat: keretes, számozott hirdetmények, klasszikus talpas betű." },
   ];
-  let mat = "papir";
-  try { mat = localStorage.getItem("v4-mat") || mat; } catch (e) {}
+  let mat = "papir", mode = "";
+  // Light/dark: "" follows the device (or the claude.ai viewer's own choice), otherwise forced.
+  const hostTheme = document.documentElement.dataset.theme || "";
+  try { mat = localStorage.getItem("v4-mat") || mat; mode = localStorage.getItem("v4-mode") || ""; } catch (e) {}
+  if (mode !== "light" && mode !== "dark") mode = "";
+  $("mode").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; mode = b.dataset.v;
+    try { localStorage.setItem("v4-mode", mode); } catch (x) {} render(); });
   { const h = (location.hash || "").slice(1).split("-");
     if (MATS.some((m) => m.k === h[0])) mat = h[0];
     if (h[1] && VIEWS.some((v) => v.k === h[1])) view = h[1]; }
@@ -407,6 +413,11 @@ main.wide { max-width: 1040px; }
       b.addEventListener("click", () => { mat = m.k; try { localStorage.setItem("v4-mat", mat); } catch (e) {} render(); }); mb.append(b); });
     $("mdesc").textContent = MATS.find((m) => m.k === mat).desc;
     $("tonewrap").hidden = mat !== "papir";
+    $("modewrap").hidden = mat === "tervlap" || mat === "ejszakai";  // single-look materials ignore light/dark
+    if (mode) document.documentElement.dataset.theme = mode;
+    else if (hostTheme) document.documentElement.dataset.theme = hostTheme;
+    else delete document.documentElement.dataset.theme;
+    for (const b of $("mode").children) b.setAttribute("aria-pressed", String(b.dataset.v === mode));
     try { history.replaceState(null, "", "#" + mat + "-" + view); } catch (e) {}
   }
   function render() {
