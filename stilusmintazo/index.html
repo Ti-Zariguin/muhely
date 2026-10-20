@@ -3,7 +3,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&family=Bodoni+Moda:ital,wght@0,500;0,700;1,700&family=Instrument+Sans:wght@400;600&family=Chakra+Petch:wght@500;700&family=Baloo+2:wght@500;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 /* Layout (v3): five arrangements of the same paper cards: grid, front page, project board by status, timeline, notebook. Base: the news board as soft-yellow paper cards. Two reading modes: a scrolling list, or a "booklet" that pages through four cards at a time. Tone switch a/b/c for the card colour. */
 :root {
@@ -147,6 +147,124 @@ main.wide { max-width: 1040px; }
 .notebook .card:nth-child(even) { transform: rotate(0.5deg); }
 .notebook .card::before { content: ""; position: absolute; top: -10px; left: 50%; width: 76px; height: 20px; margin-left: -38px; background: color-mix(in srgb, var(--fig-bg) 70%, transparent); transform: rotate(-2deg); box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
 @media (max-width: 480px) { .notebook { padding-left: 46px; } .notebook { background-image: linear-gradient(90deg, transparent 30px, color-mix(in srgb, #c8102e 45%, transparent) 30px, color-mix(in srgb, #c8102e 45%, transparent) 32px, transparent 32px), repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px); } }
+
+/* v4: material layer. Each material redefines the tokens on :root[data-mat]; light block, then dark
+   (inside the media query and under [data-theme=dark]). Tervlap and Éjszakai are deliberately single-look. */
+:root { --shadow: rgba(0,0,0,.18); --mp: var(--paper-b); }
+:root[data-mat]:not([data-mat="papir"]) main { --paper: var(--mp); }
+:root[data-mat]:not([data-mat="papir"]) .notebook { background-color: transparent; box-shadow: none;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 31px, var(--rule) 31px 32px); }
+.mrow { display: grid; gap: 6px; }
+
+/* Folyóirat */
+:root[data-mat="folyoirat"] { --bg: #FAF9F6; --fg: #141414; --muted: #66625C; --rule: #D8D4CC; --accent: #B3122E;
+  --t-szeged: #1E4E8C; --t-orszagos: #2E6B3F; --mp: transparent; --fig-bg: transparent; --fig-fg: #B3122E;
+  --font-display: "Bodoni Moda", Didot, Georgia, serif; --font-body: "Source Serif 4", Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root[data-mat="folyoirat"]:not([data-theme="light"]) { --bg: #121212; --fg: #EFECE6; --muted: #A49F96;
+  --rule: #3A3733; --accent: #FF6B7F; --t-szeged: #8DB6EA; --t-orszagos: #8ACB9C; --fig-fg: #FF6B7F; } }
+:root[data-mat="folyoirat"][data-theme="dark"] { --bg: #121212; --fg: #EFECE6; --muted: #A49F96;
+  --rule: #3A3733; --accent: #FF6B7F; --t-szeged: #8DB6EA; --t-orszagos: #8ACB9C; --fig-fg: #FF6B7F; }
+:root[data-mat="folyoirat"] h1 { text-transform: none; font-weight: 700; font-style: italic; font-size: clamp(2.4rem, 9vw, 4rem); letter-spacing: -0.01em; }
+:root[data-mat="folyoirat"] header { border-bottom: 4px double var(--fg); }
+:root[data-mat="folyoirat"] .card { border-radius: 0; box-shadow: none; border-top: 1px solid var(--fg); padding: 14px 0 6px; }
+:root[data-mat="folyoirat"] h3 { font-size: 1.45rem; line-height: 1.15; }
+:root[data-mat="folyoirat"] .front .lead h3 { font-size: clamp(1.9rem, 6vw, 2.8rem); font-style: italic; }
+:root[data-mat="folyoirat"] .fig { font-size: 1.05rem; font-style: italic; padding: 0 2px; }
+:root[data-mat="folyoirat"] .lbl::before { display: none; }
+:root[data-mat="folyoirat"] .grid { column-rule: 1px solid var(--rule); column-gap: 28px; }
+:root[data-mat="folyoirat"] .mini { box-shadow: none; border-radius: 0; border-top: 1px solid var(--fg); }
+
+/* Tervlap (single look: blueprint) */
+:root[data-mat="tervlap"] { --bg: #0F3A63; --fg: #EAF2FB; --muted: #A7C0DA; --rule: rgba(234,242,251,.32); --accent: #FFD24A;
+  --t-szeged: #9FD0FF; --t-orszagos: #A8F0C6; --mp: rgba(9,40,72,.72); --fig-bg: transparent; --fig-fg: #FFD24A;
+  --font-display: "IBM Plex Mono", ui-monospace, Menlo, monospace; color-scheme: dark; }
+:root[data-mat="tervlap"] body { background-image:
+  linear-gradient(rgba(234,242,251,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(234,242,251,.10) 1px, transparent 1px),
+  linear-gradient(rgba(234,242,251,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(234,242,251,.05) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; }
+:root[data-mat="tervlap"] header { border-bottom: 2px solid var(--fg); }
+:root[data-mat="tervlap"] h1 { font-weight: 600; letter-spacing: 0.04em; }
+:root[data-mat="tervlap"] .card { position: relative; border: 1.5px solid var(--fg); border-radius: 0; box-shadow: none; }
+:root[data-mat="tervlap"] .card::after { content: ""; position: absolute; inset: -6px; border: 1px dashed var(--rule); pointer-events: none; }
+:root[data-mat="tervlap"] h3 { font-family: "Archivo", "Segoe UI", sans-serif; text-transform: uppercase; letter-spacing: 0.02em; font-size: 1rem; }
+:root[data-mat="tervlap"] .fig { border: 1px solid var(--accent); border-radius: 0; }
+:root[data-mat="tervlap"] .mini { border: 1px solid var(--fg); border-radius: 0; box-shadow: none; }
+:root[data-mat="tervlap"] .col { background: transparent; border-color: var(--rule); }
+
+/* Letisztult */
+:root[data-mat="letisztult"] { --bg: #FFFFFF; --fg: #15171A; --muted: #6A7076; --rule: #E4E6E9; --accent: #15171A;
+  --t-szeged: #2D5BD0; --t-orszagos: #1E7A52; --mp: transparent; --fig-bg: transparent; --fig-fg: #15171A;
+  --font-display: "Instrument Sans", system-ui, sans-serif; --font-body: "Instrument Sans", system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) { :root[data-mat="letisztult"]:not([data-theme="light"]) { --bg: #0F1113; --fg: #ECEDEE; --muted: #9AA0A6;
+  --rule: #26292D; --accent: #ECEDEE; --t-szeged: #8EA9F2; --t-orszagos: #7FCFA5; --fig-fg: #ECEDEE; } }
+:root[data-mat="letisztult"][data-theme="dark"] { --bg: #0F1113; --fg: #ECEDEE; --muted: #9AA0A6;
+  --rule: #26292D; --accent: #ECEDEE; --t-szeged: #8EA9F2; --t-orszagos: #7FCFA5; --fig-fg: #ECEDEE; }
+:root[data-mat="letisztult"] h1 { text-transform: none; font-weight: 600; letter-spacing: -0.03em; }
+:root[data-mat="letisztult"] header { border-bottom: 1px solid var(--rule); }
+:root[data-mat="letisztult"] .card { border-radius: 0; box-shadow: none; border-bottom: 1px solid var(--rule); padding: 20px 0; }
+:root[data-mat="letisztult"] .notebook .card { transform: none; }
+:root[data-mat="letisztult"] .fig { font-family: "IBM Plex Mono", monospace; font-weight: 600; padding: 0; border-radius: 0; border-bottom: 2px solid var(--tc); }
+:root[data-mat="letisztult"] .lbl::before { width: 6px; height: 6px; border-radius: 50%; }
+:root[data-mat="letisztult"] ul.pts li::before { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); }
+:root[data-mat="letisztult"] .mini { box-shadow: none; border: 1px solid var(--rule); }
+
+/* Éjszakai (single look: dark instrument panel) */
+:root[data-mat="ejszakai"] { --bg: #0A0C11; --fg: #E4E8F0; --muted: #8891A3; --rule: #232A3A; --accent: #FFB547;
+  --t-szeged: #6CC4FF; --t-orszagos: #7CF0B0; --mp: #11151F; --fig-bg: rgba(255,181,71,.12); --fig-fg: #FFC36B;
+  --font-display: "Chakra Petch", "Segoe UI", sans-serif; --font-body: "Instrument Sans", system-ui, sans-serif; color-scheme: dark; }
+:root[data-mat="ejszakai"] body { background-image: radial-gradient(80% 40% at 50% -5%, rgba(108,196,255,.12), transparent 70%); background-attachment: fixed; }
+:root[data-mat="ejszakai"] header { border-bottom: 1px solid var(--rule); }
+:root[data-mat="ejszakai"] h1 { letter-spacing: 0.06em; }
+:root[data-mat="ejszakai"] .card { border: 1px solid var(--rule); border-radius: 10px; transition: box-shadow .2s, border-color .2s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 10px 30px -18px rgba(0,0,0,.9); }
+:root[data-mat="ejszakai"] .card:hover { border-color: color-mix(in srgb, var(--tc) 60%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--tc) 35%, transparent), 0 0 24px -6px color-mix(in srgb, var(--tc) 55%, transparent); }
+:root[data-mat="ejszakai"] .fig { border: 1px solid rgba(255,181,71,.35); text-shadow: 0 0 8px rgba(255,181,71,.45); }
+:root[data-mat="ejszakai"] .lbl { text-shadow: 0 0 10px color-mix(in srgb, var(--tc) 60%, transparent); }
+:root[data-mat="ejszakai"] .mini { border: 1px solid var(--rule); box-shadow: none; }
+
+/* Játékos */
+:root[data-mat="jatekos"] { --bg: #DDEEFF; --fg: #1B1940; --muted: #4D4A7A; --rule: #1B1940; --accent: #E83E78;
+  --t-szeged: #2D6BFF; --t-orszagos: #00875A; --mp: #FFFFFF; --fig-bg: #FFE14D; --fig-fg: #1B1940; --shadow: #1B1940;
+  --font-display: "Baloo 2", "Segoe UI", sans-serif; --font-body: "Baloo 2", "Segoe UI", sans-serif; }
+@media (prefers-color-scheme: dark) { :root[data-mat="jatekos"]:not([data-theme="light"]) { --bg: #17163A; --fg: #F4F2FF; --muted: #B9B5E6;
+  --rule: #F4F2FF; --accent: #FF77A3; --t-szeged: #8FB1FF; --t-orszagos: #4FE0A6; --mp: #25235A; --fig-bg: #FFD84D; --fig-fg: #17163A; --shadow: #000; } }
+:root[data-mat="jatekos"][data-theme="dark"] { --bg: #17163A; --fg: #F4F2FF; --muted: #B9B5E6;
+  --rule: #F4F2FF; --accent: #FF77A3; --t-szeged: #8FB1FF; --t-orszagos: #4FE0A6; --mp: #25235A; --fig-bg: #FFD84D; --fig-fg: #17163A; --shadow: #000; }
+:root[data-mat="jatekos"] h1 { text-transform: none; font-weight: 800; font-size: clamp(2.2rem, 8vw, 3.4rem); text-shadow: 3px 3px 0 var(--accent); }
+:root[data-mat="jatekos"] header { border-bottom: 3px solid var(--fg); }
+:root[data-mat="jatekos"] .card { border: 2.5px solid var(--fg); border-radius: 16px; box-shadow: 5px 5px 0 var(--shadow); transition: transform .15s, box-shadow .15s; }
+:root[data-mat="jatekos"] .card:hover { transform: translate(-2px, -2px) rotate(-0.4deg); box-shadow: 7px 7px 0 var(--shadow); }
+:root[data-mat="jatekos"] .fig { border: 2px solid var(--fig-fg); border-radius: 999px; }
+:root[data-mat="jatekos"] .lbl { background: var(--tc); color: var(--bg); padding: 2px 10px; border-radius: 999px; }
+:root[data-mat="jatekos"] .lbl::before { display: none; }
+:root[data-mat="jatekos"] h3 { font-weight: 800; font-size: 1.2rem; }
+:root[data-mat="jatekos"] ul.pts li::before { width: 8px; height: 8px; border-radius: 50%; }
+:root[data-mat="jatekos"] .mini { border: 2px solid var(--fg); border-radius: 12px; box-shadow: 3px 3px 0 var(--shadow); }
+
+/* Hivatalos */
+:root[data-mat="hivatalos"] { --bg: #ECECE8; --fg: #121212; --muted: #555555; --rule: #121212; --accent: #1D3E78;
+  --t-szeged: #1D3E78; --t-orszagos: #1F5A36; --mp: #FFFFFF; --fig-bg: transparent; --fig-fg: #121212;
+  --font-display: "Libre Baskerville", Georgia, serif; --font-body: "Libre Baskerville", Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root[data-mat="hivatalos"]:not([data-theme="light"]) { --bg: #141414; --fg: #E9E7E1; --muted: #A9A6A0;
+  --rule: #E9E7E1; --accent: #9DB8EC; --t-szeged: #9DB8EC; --t-orszagos: #9CD3AE; --mp: #1D1D1D; --fig-fg: #E9E7E1; } }
+:root[data-mat="hivatalos"][data-theme="dark"] { --bg: #141414; --fg: #E9E7E1; --muted: #A9A6A0;
+  --rule: #E9E7E1; --accent: #9DB8EC; --t-szeged: #9DB8EC; --t-orszagos: #9CD3AE; --mp: #1D1D1D; --fig-fg: #E9E7E1; }
+:root[data-mat="hivatalos"] header { border-top: 4px double var(--fg); border-bottom: 1px solid var(--fg); padding-top: 12px; }
+:root[data-mat="hivatalos"] h1 { font-weight: 700; font-size: clamp(1.5rem, 5vw, 2.1rem); letter-spacing: 0.08em; }
+:root[data-mat="hivatalos"] #view { counter-reset: hird; }
+:root[data-mat="hivatalos"] .card { counter-increment: hird; border: 1px solid var(--fg); border-radius: 0; box-shadow: none; font-size: 0.95rem; }
+:root[data-mat="hivatalos"] .card h3::before { content: counter(hird) ". hirdetmény"; display: block; margin-bottom: 4px;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+:root[data-mat="hivatalos"] h3 { font-size: 1.05rem; line-height: 1.35; }
+:root[data-mat="hivatalos"] .fig { border: 1px solid var(--fg); border-radius: 0; }
+:root[data-mat="hivatalos"] .lbl { color: var(--accent); }
+:root[data-mat="hivatalos"] .lbl::before { display: none; }
+:root[data-mat="hivatalos"] ul.pts li { padding-left: 16px; }
+:root[data-mat="hivatalos"] ul.pts li::before { content: "§"; width: auto; height: auto; top: 0; background: none; font-size: 0.85em; color: var(--muted); }
+:root[data-mat="hivatalos"] .mini { border: 1px solid var(--fg); border-radius: 0; box-shadow: none; }
+
+@media (prefers-reduced-motion: reduce) { :root[data-mat] .card { transition: none; } :root[data-mat="jatekos"] .card:hover { transform: none; } }
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -160,11 +278,12 @@ main.wide { max-width: 1040px; }
 </svg>
 <main id="main" data-tone="b">
   <header>
-    <div class="kicker">Témafigyelő · stílusmintázó v3</div>
+    <div class="kicker">Témafigyelő · stílusmintázó v4</div>
     <h1>Építési hírfal</h1>
-    <div class="tabs" id="views" role="toolbar" aria-label="Elrendezés"></div>
-    <p class="vdesc" id="vdesc"></p>
-    <div class="controls"><span>Papír</span><span class="seg" id="tone"><button type="button" data-v="a" aria-pressed="false">a</button><button type="button" data-v="b" aria-pressed="true">b</button><button type="button" data-v="c" aria-pressed="false">c</button></span></div>
+    <div class="mrow"><span class="flab">Anyag</span><div class="tabs" id="mats" role="toolbar" aria-label="Anyag"></div><p class="vdesc" id="mdesc"></p></div>
+    <div class="mrow"><span class="flab">Elrendezés</span><div class="tabs" id="views" role="toolbar" aria-label="Elrendezés"></div>
+    <p class="vdesc" id="vdesc"></p></div>
+    <div class="controls" id="tonewrap"><span>Papírszín</span><span class="seg" id="tone"><button type="button" data-v="a" aria-pressed="false">a</button><button type="button" data-v="b" aria-pressed="true">b</button><button type="button" data-v="c" aria-pressed="false">c</button></span></div>
     <div class="filters">
       <label class="search"><span class="vh">Keresés</span><input id="fq" type="search" placeholder="Keresés: híd, M49, Kistelek…" autocomplete="off"></label>
       <div class="frow"><span class="flab">Terület</span><div class="chips" id="farea"></div></div>
@@ -173,7 +292,7 @@ main.wide { max-width: 1040px; }
     </div>
   </header>
   <div id="view"></div>
-  <footer>A 11 hír valódi, a hírfal adatbázisából. Az állapotjel, a címke és a kiemelt számok az én besorolásom a forrás alapján. Az elrendezések szabadon keverhetők, pl. címlap a tetején, alatta projekttábla.</footer>
+  <footer>A 11 hír valódi, a hírfal adatbázisából. Az állapotjel, a címke és a kiemelt számok az én besorolásom a forrás alapján. Az anyag és az elrendezés szabadon keverhető, a választás a címben is megjelenik, így linkkel továbbküldhető.</footer>
 </main>
 
 <script>
@@ -265,7 +384,33 @@ main.wide { max-width: 1040px; }
     },
     jegyzet() { const n = el("div", "notebook"); L.forEach((d) => n.append(card(d))); return n; },
   };
+
+  const MATS = [
+    { k: "papir", label: "Papír", desc: "Lágy papírkártyák enyhe árnyékkal. Ez az eredeti, a papírszín alul állítható." },
+    { k: "folyoirat", label: "Folyóirat", desc: "Magazin: nagy, kontrasztos talpas címek, hasábvonalak, a számok dőlt kiemelésként." },
+    { k: "tervlap", label: "Tervlap", desc: "Kék tervrajz: rácsháló, vonalas keretek, gépírásos feliratok. Mindig sötét, ez a lényege." },
+    { k: "letisztult", label: "Letisztult", desc: "Semmi díszítés. Tipográfia, térköz és vékony elválasztó vonalak." },
+    { k: "ejszakai", label: "Éjszakai", desc: "Sötét műszerfal: halvány derengés, borostyán kiemelések, a kártya rávitelre felizzik. Mindig sötét." },
+    { k: "jatekos", label: "Játékos", desc: "Vastag körvonal, kemény árnyék, élénk színek. Kicsit képregény, kicsit matrica." },
+    { k: "hivatalos", label: "Hivatalos", desc: "Közlöny-hangulat: keretes, számozott hirdetmények, klasszikus talpas betű." },
+  ];
+  let mat = "papir";
+  try { mat = localStorage.getItem("v4-mat") || mat; } catch (e) {}
+  { const h = (location.hash || "").slice(1).split("-");
+    if (MATS.some((m) => m.k === h[0])) mat = h[0];
+    if (h[1] && VIEWS.some((v) => v.k === h[1])) view = h[1]; }
+  if (!MATS.some((m) => m.k === mat)) mat = "papir";
+  function renderMats() {
+    document.documentElement.dataset.mat = mat;
+    const mb = $("mats"); mb.replaceChildren();
+    MATS.forEach((m) => { const b = el("button", null, m.label); b.type = "button"; b.setAttribute("aria-pressed", String(m.k === mat));
+      b.addEventListener("click", () => { mat = m.k; try { localStorage.setItem("v4-mat", mat); } catch (e) {} render(); }); mb.append(b); });
+    $("mdesc").textContent = MATS.find((m) => m.k === mat).desc;
+    $("tonewrap").hidden = mat !== "papir";
+    try { history.replaceState(null, "", "#" + mat + "-" + view); } catch (e) {}
+  }
   function render() {
+    renderMats();
     $("main").dataset.tone = tone;
     $("main").classList.toggle("wide", view === "tabla" || view === "racs");
     const vb = $("views"); vb.replaceChildren();
