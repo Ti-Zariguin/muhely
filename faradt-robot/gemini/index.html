@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Digitális Kiégés és Halogatás Szentélye</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            museum: {
+              900: '#0a0b0e',
+              800: '#12141a',
+              700: '#1b1e28',
+              border: '#272b3a',
+              accent: '#d4af37',
+              muted: '#8e96aa'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Egyéni animáció a lassan, értelmetlenül lélegző gradiensnek */
+    .breathing-gradient {
+      background: linear-gradient(135deg, #0f172a, #1e1b4b, #111827, #1e293b, #0f172a);
+      background-size: 400% 400%;
+      animation: breathGlow 14s ease-in-out infinite;
+    }
+    @keyframes breathGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 3D Kártya átfordulás */
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Kézzel rajzolódó és félúton feladó aláírás */
+    .signature-path {
+      stroke-dasharray: 450;
+      stroke-dashoffset: 450;
+      animation: drawAndGiveUp 5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    }
+    @keyframes drawAndGiveUp {
+      0% {
+        stroke-dashoffset: 450;
+        opacity: 0.8;
+      }
+      40% {
+        stroke-dashoffset: 230;
+        opacity: 1;
+      }
+      70%, 100% {
+        stroke-dashoffset: 230;
+        opacity: 0.35;
+      }
+    }
+
+    /* Lágy scrollbar stílus */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0b0e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #272b3a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b4259;
+    }
+  </style>
+</head>
+<body class="bg-museum-900 text-slate-200 font-sans antialiased selection:bg-amber-500/20 selection:text-amber-200"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style><nav class="mbar"><a href="../">&larr; Vissza a fáradt robothoz</a><span>Vendégoldal, változtatás nélkül</span></nav>
+
+  <!-- Navigációs kurátori sáv -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-museum-900/80 border-b border-museum-border">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400/80 animate-ping"></span>
+        <span class="font-serif tracking-widest text-sm uppercase text-slate-100">Galéria • Teremkatalógus</span>
+      </div>
+      <nav class="hidden md:flex space-x-6 text-xs uppercase tracking-wider text-museum-muted font-mono">
+        <a href="#room-1" class="hover:text-amber-300 transition-colors">I. Tettvágy</a>
+        <a href="#room-2" class="hover:text-amber-300 transition-colors">II. Valóság</a>
+        <a href="#room-3" class="hover:text-amber-300 transition-colors">III. Asszisztencia</a>
+        <a href="#room-4" class="hover:text-amber-300 transition-colors">IV. Várakozás</a>
+      </nav>
+      <div class="text-xs font-mono text-amber-400/80 border border-amber-400/30 px-2.5 py-1 rounded">
+        Összterem: 4 Stáció
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero / Bevezető kurátori tábla -->
+  <section class="max-w-4xl mx-auto px-4 pt-20 pb-16 text-center">
+    <span class="text-xs uppercase tracking-widest text-amber-400 font-mono mb-3 inline-block bg-amber-950/40 border border-amber-800/40 px-3 py-1 rounded-full">
+      Állandó Virtuális Retrospektív
+    </span>
+    <h1 class="text-3xl sm:text-5xl font-serif font-bold text-slate-100 tracking-tight mt-2 mb-6">
+      A Digitális Kiégés és Halogatás Szentélye
+    </h1>
+    <p class="text-base sm:text-lg text-museum-muted max-w-2xl mx-auto font-light leading-relaxed">
+      Üdvözöljük a kortárs internet legkényelmetlenebb interakcióinak emlékművében. 
+      Kérjük, sétáljon át a termeken olyan tempóban, mintha épp egy határidős projektet próbálna nem elkezdeni.
+    </p>
+    <div class="mt-8 flex justify-center items-center gap-2 text-xs font-mono text-slate-400">
+      <span>Belépődíj: Egy megkezdett feladat</span>
+      <span class="text-slate-600">•</span>
+      <span>Hangerő: Néma sóhaj</span>
+    </div>
+  </section>
+
+  <!-- Fő kiállítási tér -->
+  <main class="max-w-5xl mx-auto px-4 pb-36 space-y-24">
+
+    <!-- STÁCIÓ I. -->
+    <section id="room-1" class="scroll-mt-24 border border-museum-border rounded-2xl p-6 sm:p-10 bg-museum-800/60 relative overflow-hidden">
+      <!-- Lélegző gradiens háttér elemként -->
+      <div class="absolute inset-0 breathing-gradient opacity-40 pointer-events-none"></div>
+      
+      <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-xs font-mono text-amber-400 uppercase tracking-wider bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">I. Stáció</span>
+          <span class="text-xs text-museum-muted font-mono">01. terem // Készakarva elkerült feladatok</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-serif text-slate-100 font-semibold mb-2">A Tettvágy Hiánya</h2>
+        <p class="text-sm text-museum-muted mb-8 max-w-2xl">
+          E teremben a cselekvés illúzióját állítjuk szembe a fizikai képtelenséggel. A háttér fojtottan lélegzik helyetted is, 
+          hogy neked már ne kelljen fáradoznod.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- Kiállítási darab: Elmenekülő gomb -->
+          <div class="bg-museum-900/90 border border-museum-border rounded-xl p-6 flex flex-col justify-between relative min-h-[290px] shadow-lg">
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">Műtárgy: #01-A</div>
+              <h3 class="text-base font-semibold text-slate-200 mb-2">A Megragadhatatlan Elhatározás</h3>
+              <p class="text-xs text-museum-muted leading-relaxed mb-4">
+                Próbáld megnyomni a feladatkezdő gombot. Megfigyelhető a klasszikus elkerülő reakció: amint túl közel kerülsz hozzá, azonnal irányt vált.
+              </p>
+            </div>
+
+            <!-- Interakciós aréna a gombnak -->
+            <div id="arena" class="relative w-full h-36 border border-dashed border-slate-700/60 rounded-lg flex items-center justify-center overflow-hidden bg-museum-900/40">
+              <button id="runawayBtn" 
+                      class="absolute px-5 py-2.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-medium text-sm shadow-lg shadow-rose-950/50 cursor-pointer select-none transition-all duration-150 ease-out active:scale-95"
+                      style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                Munka Elkezdése
+              </button>
+            </div>
+            <div id="fleeCounter" class="mt-3 text-[11px] font-mono text-rose-400/80 text-right">
+              Sikeres kitérések száma: 0
+            </div>
+          </div>
+
+          <!-- Kiállítási darab: Félúton feladó aláírás SVG -->
+          <div class="bg-museum-900/90 border border-museum-border rounded-xl p-6 flex flex-col justify-between shadow-lg">
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">Műtárgy: #01-B</div>
+              <h3 class="text-base font-semibold text-slate-200 mb-2">A Félbeszakadt Kötelezettségvállalás</h3>
+              <p class="text-xs text-museum-muted leading-relaxed mb-4">
+                Vektoros aláírás animáció (SVG). Lendületesen indul, felidézve az újévi fogadalmak első 8 percét, majd a semmibe vész.
+              </p>
+            </div>
+
+            <div class="bg-slate-950/60 border border-museum-border rounded-lg p-4 flex flex-col items-center justify-center min-h-[144px]">
+              <svg viewBox="0 0 360 110" class="w-full max-w-xs h-24 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                <!-- Alap halvány referencia vonal (szerződés helye) -->
+                <line x1="20" y1="90" x2="340" y2="90" stroke="#272b3a" stroke-width="1.5" stroke-dasharray="4 4" />
+                <text x="24" y="104" fill="#4b5563" font-size="9" font-family="monospace">Aláírás / Beleegyezés helye</text>
+                
+                <!-- Az animált, feladó vonal -->
+                <path d="M 30 75 Q 60 15 85 75 T 130 75 Q 155 35 175 82 T 215 50 Q 235 50 248 62" 
+                      fill="none" 
+                      stroke="#38bdf8" 
+                      stroke-width="3" 
+                      stroke-linecap="round"
+                      class="signature-path" />
+
+                <!-- A fásult kézírásos megjegyzés -->
+                <text x="250" y="62" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8" font-style="italic">
+                  ...áhh, mindegy.
+                </text>
+              </svg>
+            </div>
+            <div class="mt-3 text-[11px] font-mono text-slate-500 text-right">
+              Ciklikus kiábrándulás • SVG path-stroke fázis
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- STÁCIÓ II. -->
+    <section id="room-2" class="scroll-mt-24 border border-museum-border rounded-2xl p-6 sm:p-10 bg-museum-800/60 relative">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-xs font-mono text-amber-400 uppercase tracking-wider bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">II. Stáció</span>
+        <span class="text-xs text-museum-muted font-mono">02. terem // A statisztikai önáltatás</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-serif text-slate-100 font-semibold mb-2">A Valóság Szemlélete</h2>
+      <p class="text-sm text-museum-muted mb-8 max-w-2xl">
+        Amikor a naptárban "mélyreható fókuszmunka" szerepel, a valóságban a lélek egészen más koordináta-rendszerben mozog.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+
+        <!-- Kiállítási darab: Kördiagram SVG -->
+        <div class="bg-museum-900/90 border border-museum-border rounded-xl p-6 flex flex-col justify-between shadow-lg">
+          <div>
+            <div class="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">Műtárgy: #02-A</div>
+            <h3 class="text-base font-semibold text-slate-200 mb-2">Kvantifikált Időpazarlás (Kördiagram)</h3>
+            <p class="text-xs text-museum-muted leading-relaxed mb-4">
+              Egy átlagos 8 órás munkanap tudományos pontosságú arányos bontása SVG segítségével.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6 py-2">
+            <!-- SVG Donut Chart -->
+            <div class="relative w-40 h-40 shrink-0">
+              <svg viewBox="0 0 42 42" class="w-full h-full -rotate-90">
+                <!-- Háttér karika -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#1f2430" stroke-width="5.5" />
+                
+                <!-- 42% Sóhajtozás (piros-narancs) - kerület = 100 -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#f43f5e" stroke-width="5.5"
+                        stroke-dasharray="42 58" stroke-dashoffset="0" class="transition-all duration-700 hover:opacity-80" />
+                        
+                <!-- 38% Céltalan görgetés (kék) -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#3b82f6" stroke-width="5.5"
+                        stroke-dasharray="38 62" stroke-dashoffset="-42" class="transition-all duration-700 hover:opacity-80" />
+                        
+                <!-- 20% Produktivitás imitálása (zöld) -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#10b981" stroke-width="5.5"
+                        stroke-dasharray="20 80" stroke-dashoffset="-80" class="transition-all duration-700 hover:opacity-80" />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
+                <span class="text-xs font-mono text-slate-400">Összesen</span>
+                <span class="text-sm font-bold text-slate-100">100%</span>
+                <span class="text-[9px] text-slate-500">fáradtság</span>
+              </div>
+            </div>
+
+            <!-- Jelmagyarázat -->
+            <div class="space-y-2 text-xs font-mono">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500 shrink-0"></span>
+                <span class="text-slate-300">42% Sóhajtozás az ég felé</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-blue-500 shrink-0"></span>
+                <span class="text-slate-300">38% Híroldalak pásztázása</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-500 shrink-0"></span>
+                <span class="text-slate-300">20% Látszattevékenység</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 text-[11px] font-mono text-slate-500 text-right">
+            Forrás: Saját becsült lelkiállapot
+          </div>
+        </div>
+
+        <!-- Kiállítási darab: 3D-ben átforduló kártya vallomással -->
+        <div class="bg-museum-900/90 border border-museum-border rounded-xl p-6 flex flex-col justify-between shadow-lg">
+          <div>
+            <div class="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">Műtárgy: #02-B</div>
+            <h3 class="text-base font-semibold text-slate-200 mb-2">A Képmutatás Két Oldala (3D Kártya)</h3>
+            <p class="text-xs text-museum-muted leading-relaxed mb-4">
+              Vidd az egeret vagy koppints a kártyára a 3D-s átforduláshoz. Az előlap a társadalmi maszk, a hátlap a könyörtelen valóság.
+            </p>
+          </div>
+
+          <!-- 3D Flip Card Container -->
+          <div class="py-2 flex justify-center">
+            <div class="group [perspective:1000px] w-full max-w-[300px] h-44 cursor-pointer" id="flipCard">
+              <div class="relative w-full h-full transition-transform duration-700 preserve-3d group-hover:rotate-y-180" id="cardInner">
+                
+                <!-- Előlap -->
+                <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-slate-800 to-museum-700 border border-slate-600 rounded-xl p-5 flex flex-col justify-between shadow-xl">
+                  <div class="flex justify-between items-center text-xs font-mono text-slate-400">
+                    <span>ÁLLAPOT</span>
+                    <span class="text-emerald-400 flex items-center gap-1">● Elérhető</span>
+                  </div>
+                  <div class="text-center font-medium text-slate-200 text-sm">
+                    "Nagyon pörgök ma, épp prioritásokat rendezek és szinergiákat keresek!"
+                  </div>
+                  <div class="text-center text-[11px] text-amber-400/90 font-mono">
+                    [ Érintsd meg / Vigyél rá egeret a leleplezéshez ]
+                  </div>
+                </div>
+
+                <!-- Hátlap -->
+                <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-amber-950/80 to-museum-800 border border-amber-600/50 rounded-xl p-5 flex flex-col justify-between shadow-xl">
+                  <div class="flex justify-between items-center text-xs font-mono text-amber-400">
+                    <span>BELSŐ VALLOMÁS</span>
+                    <span class="text-rose-400">SZIGORÚAN BIZALMAS</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-200 text-center font-serif italic leading-relaxed">
+                    "Valójában 40 perce nézem a kurzor villogását, és azon gondolkodom, vajon a méhek tudják-e, hogy sárga-feketék."
+                  </p>
+                  <div class="text-center text-[10px] text-slate-400 font-mono">
+                    CSS 3D perspective transzformáció
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 text-[11px] font-mono text-slate-500 text-right">
+            Kattintással mobilon is átbillenthető
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STÁCIÓ III. -->
+    <section id="room-3" class="scroll-mt-24 border border-museum-border rounded-2xl p-6 sm:p-10 bg-museum-800/60 relative">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-xs font-mono text-amber-400 uppercase tracking-wider bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">III. Stáció</span>
+        <span class="text-xs text-museum-muted font-mono">03. terem // Mesterséges apatikusság</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-serif text-slate-100 font-semibold mb-2">Az Asszisztencia Tragédiája</h2>
+      <p class="text-sm text-museum-muted mb-8 max-w-2xl">
+        Mindenki lelkes és proaktív MI-asszisztenst épít. Mi megalkottuk Marvint: a gépi entitást, aki tökéletesen megérti, miért kár bármit is csinálni.
+      </p>
+
+      <div class="bg-museum-900/90 border border-museum-border rounded-xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center shadow-lg">
+        
+        <!-- Búskomor robotfej SVG (szemekkel) -->
+        <div class="md:col-span-5 flex flex-col items-center justify-center p-4 bg-slate-950/40 rounded-xl border border-museum-border">
+          <svg id="depressedRobot" width="180" height="180" viewBox="0 0 200 200" class="overflow-visible select-none drop-shadow-lg">
+            <!-- Antenna -->
+            <line x1="100" y1="45" x2="100" y2="18" stroke="#4b5563" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="100" cy="14" r="7" fill="#f43f5e" class="animate-pulse"/>
+
+            <!-- Fülek / csavarok -->
+            <rect x="26" y="80" width="10" height="26" rx="4" fill="#374151" />
+            <rect x="164" y="80" width="10" height="26" rx="4" fill="#374151" />
+
+            <!-- Fejtest -->
+            <rect x="36" y="45" width="128" height="110" rx="24" fill="#1e2433" stroke="#475569" stroke-width="3.5"/>
+
+            <!-- Szemkeret sáv -->
+            <rect x="52" y="70" width="96" height="38" rx="12" fill="#0b0e14" stroke="#1f2937" stroke-width="2"/>
+
+            <!-- Bal szem és pupilla -->
+            <g id="leftEyeGroup">
+              <circle cx="76" cy="89" r="11" fill="#1e293b"/>
+              <circle id="leftPupil" cx="76" cy="89" r="5" fill="#38bdf8"/>
+            </g>
+
+            <!-- Jobb szem és pupilla -->
+            <g id="rightEyeGroup">
+              <circle cx="124" cy="89" r="11" fill="#1e293b"/>
+              <circle id="rightPupil" cx="124" cy="89" r="5" fill="#38bdf8"/>
+            </g>
+
+            <!-- Lógó szemöldökök (szomorú szögben) -->
+            <line x1="66" y1="72" x2="88" y2="77" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="134" y1="72" x2="112" y2="77" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"/>
+
+            <!-- Görbe, lefelé lohadó száj -->
+            <path d="M 72 135 Q 100 118 128 135" fill="none" stroke="#64748b" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Kis rozsdafolt -->
+            <circle cx="145" cy="138" r="3" fill="#78350f" opacity="0.6"/>
+          </svg>
+          <span class="text-[11px] font-mono text-museum-muted mt-3">
+            A tekintete folyamatosan követi az egered vagy az ujjad
+          </span>
+        </div>
+
+        <!-- Idézetgenerátor szekció -->
+        <div class="md:col-span-7 flex flex-col justify-between space-y-6">
+          <div>
+            <div class="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">MŰTÁRGY: #03-A</div>
+            <h3 class="text-lg font-semibold text-slate-100 mb-2">Marvin-típusú Fásult Tanácsadó</h3>
+            <p class="text-xs text-museum-muted leading-relaxed mb-4">
+              Egyetlen gombnyomással generálhatsz olyan "motivációs" bölcsességeket, amelyek garantáltan elveszik a kedved a felesleges erőlködéstől.
+            </p>
+          </div>
+
+          <!-- Idézet doboz -->
+          <div class="bg-museum-900 border border-slate-700/60 rounded-xl p-5 relative">
+            <span class="absolute top-2 left-3 text-3xl font-serif text-slate-700 select-none">“</span>
+            <p id="quoteText" class="text-sm sm:text-base font-serif italic text-slate-200 pl-4 min-h-[64px] flex items-center leading-relaxed">
+              Itt vagyok egy bolygóméretű aggyal, és arra használsz, hogy megnézd, hány pixel egy elutasító gomb.
+            </p>
+            <div class="mt-2 text-right">
+              <span id="quoteAuthor" class="text-xs font-mono text-amber-400/80">— Marvin, a Paranoid Asszisztens</span>
+            </div>
+          </div>
+
+          <!-- Gomb -->
+          <div class="flex flex-wrap items-center gap-4">
+            <button id="newQuoteBtn" 
+                    class="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 text-xs sm:text-sm font-medium tracking-wide transition-all shadow-md active:scale-95 flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Újabb Adag Egzisztenciális Fásultság
+            </button>
+            <span id="quoteCounter" class="text-xs font-mono text-museum-muted">Idézetek: 1/8</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STÁCIÓ IV. -->
+    <section id="room-4" class="scroll-mt-24 border border-museum-border rounded-2xl p-6 sm:p-10 bg-museum-800/60 relative">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-xs font-mono text-amber-400 uppercase tracking-wider bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">IV. Stáció</span>
+        <span class="text-xs text-museum-muted font-mono">04. terem // A digitális purgatórium</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-serif text-slate-100 font-semibold mb-2">Az Örökös Várakozás</h2>
+      <p class="text-sm text-museum-muted mb-8 max-w-2xl">
+        A modern élet igazi szimbóluma nem az elért eredmény, hanem az a bizonyos utolsó 1%, ami soha, semmilyen körülmények között nem fejeződik be.
+      </p>
+
+      <div class="space-y-8">
+
+        <!-- Kiállítási darab: A sosem végződő töltőcsík -->
+        <div class="bg-museum-900/90 border border-museum-border rounded-xl p-6 sm:p-8 shadow-lg">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">MŰTÁRGY: #04-A</div>
+              <h3 class="text-base font-semibold text-slate-100">Aszimptotikus Haladásjelző (99%-os Plafon)</h3>
+            </div>
+            <span id="progressPercentage" class="text-lg font-mono font-bold text-amber-400">12.4%</span>
+          </div>
+
+          <!-- Maga a sáv -->
+          <div class="w-full bg-slate-950 rounded-full h-4 p-0.5 border border-slate-700/80 overflow-hidden shadow-inner">
+            <div id="progressBar" 
+                 class="h-full rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-amber-400 transition-all duration-300 ease-out" 
+                 style="width: 12.4%;"></div>
+          </div>
+
+          <!-- Kifogás generátor kijelző -->
+          <div class="mt-4 p-3.5 bg-museum-800/70 border border-slate-700/50 rounded-lg flex items-start gap-3">
+            <span class="text-amber-400 text-sm mt-0.5 animate-spin">⚙</span>
+            <div class="flex-1">
+              <div class="text-[11px] font-mono uppercase text-slate-400">Rendszerüzenet a háttérből:</div>
+              <p id="excuseText" class="text-xs sm:text-sm font-mono text-slate-300 mt-0.5">
+                Kapcsolódás a jövőbeli önmagadhoz... Sikertelen.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kiállítási darab: Interaktív részecske-eső felület -->
+        <div class="bg-museum-900/90 border border-museum-border rounded-xl p-6 shadow-lg">
+          <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4">
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-widest mb-1">MŰTÁRGY: #04-B</div>
+              <h3 class="text-base font-semibold text-slate-100">Entrópia-Szimulátor (Koppintásra szétrebbenő részecskék)</h3>
+              <p class="text-xs text-museum-muted">
+                Koppints vagy húzd az egeret a sötét mezőben a rend felbomlasztásához. Ahogy a terveid, a részecskék is szétrebbennek.
+              </p>
+            </div>
+            <span class="text-xs font-mono text-slate-400 border border-slate-700 px-2 py-1 rounded self-start">
+              Canvas 2D • Érintésérzékeny
+            </span>
+          </div>
+
+          <!-- Canvas konténer -->
+          <div class="w-full h-64 sm:h-80 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 relative cursor-crosshair">
+            <canvas id="rainCanvas" class="w-full h-full block"></canvas>
+            <div class="absolute bottom-3 left-3 text-[10px] font-mono text-slate-500 pointer-events-none bg-museum-900/70 px-2 py-1 rounded">
+              Interakció: Mozgasd az egeret vagy koppints a robbantáshoz
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Kurátori zárszó -->
+    <section class="text-center py-12 border-t border-museum-border/60">
+      <h3 class="font-serif text-xl text-slate-200 mb-2">Gratulálunk, sikeresen elhalasztottad a mai napot.</h3>
+      <p class="text-xs sm:text-sm text-museum-muted max-w-md mx-auto mb-6">
+        Most már nyugodtan bezárhatod a fület, és megnyithatsz egy másikat, amiben ugyanúgy nem csinálsz semmit.
+      </p>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-xs font-mono uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors border-b border-amber-400/40 pb-0.5">
+        ↑ Vissza a kapuhoz (újraértelmezés céljából)
+      </button>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 1. STÁCIÓ: SÜTI-HOZZÁJÁRULÁS PARÓDIA BANNER -->
+  <!-- ========================================== -->
+  <aside id="cookieBanner" 
+         class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md bg-museum-900/95 border-2 border-amber-500/50 backdrop-blur-xl p-5 rounded-2xl shadow-2xl z-50 transition-all duration-300">
+    <div class="flex items-start gap-3">
+      <span class="text-2xl select-none" role="img" aria-label="cookie">🍪</span>
+      <div class="flex-1">
+        <div class="flex items-center justify-between">
+          <h4 class="text-xs font-mono uppercase font-bold text-amber-400 tracking-wider">Kényelmetlen Süti-Direktíva</h4>
+          <span class="text-[10px] font-mono text-slate-500">v9.42</span>
+        </div>
+        <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+          Ez az oldal digitális morzsákat és telemetriát használ annak mérésére, hány másodpercig nézel a semmibe kattintás előtt.
+        </p>
+      </div>
+    </div>
+
+    <!-- Interakciós gombok a trükkel -->
+    <div class="mt-4 pt-3 border-t border-museum-border flex items-center justify-end gap-3 min-h-[46px]">
+      
+      <!-- Az elutasítom gomb, ami megközelítésre zsugorodik -->
+      <button id="rejectCookieBtn" 
+              class="px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 text-xs font-mono transition-transform duration-200 cursor-pointer whitespace-nowrap active:scale-90"
+              style="transform-origin: center center;">
+        Elutasítom
+      </button>
+
+      <!-- Az elfogadom gomb, ami egyre vonzóbbá válik -->
+      <button id="acceptCookieBtn" 
+              class="px-5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-museum-900 text-xs font-semibold tracking-wide shadow-lg shadow-amber-500/20 cursor-pointer transition-all">
+        Mindent Megadok & Elfogadom
+      </button>
+
+    </div>
+    <div id="cookieNotice" class="text-[10px] font-mono text-rose-400/90 text-right mt-1.5 hidden">
+      * Észrevettük, hogy hezitálsz. Az elutasítási opció épp elpárolog.
+    </div>
+  </aside>
+
+  <!-- JavaScript Logikai Réteg -->
+  <script>
+    /* ==========================================
+       1. SÜTI HOZZÁJÁRULÁS PARÓDIA LOGIKA
+       ========================================== */
+    (function initCookieTrap() {
+      const rejectBtn = document.getElementById('rejectCookieBtn');
+      const acceptBtn = document.getElementById('acceptCookieBtn');
+      const banner = document.getElementById('cookieBanner');
+      const notice = document.getElementById('cookieNotice');
+
+      let scale = 1.0;
+      let attempts = 0;
+
+      function shrinkRejectButton(e) {
+        if (e) e.preventDefault();
+        attempts++;
+        scale *= 0.65;
+        notice.classList.remove('hidden');
+
+        if (scale < 0.18) {
+          // Teljesen eltüntetjük, ha már mikroszkopikus
+          rejectBtn.style.display = 'none';
+          notice.textContent = "Az 'Elutasítás' gomb túl kicsivé vált a létezéshez. Nincs visszaút.";
+        } else {
+          rejectBtn.style.transform = `scale(${scale})`;
+          // Kissé eltoljuk, hogy nehezebb legyen eltalálni
+          const randomX = (Math.random() - 0.5) * 30;
+          const randomY = (Math.random() - 0.5) * 20;
+          rejectBtn.style.transform = `scale(${scale}) translate(${randomX}px, ${randomY}px)`;
+        }
+      }
+
+      // Egérrávitelre és érintésre is azonnal zsugorodik
+      rejectBtn.addEventListener('mouseenter', shrinkRejectButton);
+      rejectBtn.addEventListener('click', shrinkRejectButton);
+      rejectBtn.addEventListener('touchstart', (e) => {
+        shrinkRejectButton(e);
+      }, { passive: false });
+
+      acceptBtn.addEventListener('click', () => {
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(20px)';
+        setTimeout(() => banner.remove(), 350);
+      });
+    })();
+
+
+    /* ==========================================
+       2. ELMENEKÜLŐ GOMB LOGIKA (I. Stáció)
+       ========================================== */
+    (function initRunawayButton() {
+      const arena = document.getElementById('arena');
+      const btn = document.getElementById('runawayBtn');
+      const counter = document.getElementById('fleeCounter');
+      let fleeCount = 0;
+
+      function moveButtonAway() {
+        const arenaRect = arena.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+
+        // Kiszámolunk egy biztonságos, határokon belüli random koordinátát
+        const padding = 15;
+        const maxX = arenaRect.width - btnRect.width - padding;
+        const maxY = arenaRect.height - btnRect.height - padding;
+
+        const newX = Math.max(padding, Math.random() * maxX);
+        const newY = Math.max(padding, Math.random() * maxY);
+
+        btn.style.left = `${newX}px`;
+        btn.style.top = `${newY}px`;
+        btn.style.transform = 'none';
+
+        fleeCount++;
+        counter.textContent = `Sikeres kitérések száma: ${fleeCount} (A munka sikeresen elnapolva)`;
+      }
+
+      // Amikor az egér 60px-en belülre ér, a gomb villámgyorsan áthelyezi magát
+      arena.addEventListener('mousemove', (e) => {
+        const btnRect = btn.getBoundingClientRect();
+        const btnCenterX = btnRect.left + btnRect.width / 2;
+        const btnCenterY = btnRect.top + btnRect.height / 2;
+
+        const dist = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+
+        if (dist < 75) {
+          moveButtonAway();
+        }
+      });
+
+      // Érintőképernyő támogatás
+      btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        moveButtonAway();
+      }, { passive: false });
+
+      // Ha mégis valahogy rákattintana a felhasználó
+      btn.addEventListener('click', () => {
+        counter.textContent = "Lehetetlen! Csaltál egy scripttel, vagy túl gyors az ujjad.";
+      });
+    })();
+
+
+    /* ==========================================
+       3. 3D KÁRTYA ÉRINTÉS KEZELÉS (II. Stáció)
+       ========================================== */
+    (function initFlipCard() {
+      const card = document.getElementById('flipCard');
+      const cardInner = document.getElementById('cardInner');
+      let flipped = false;
+
+      // Kattintásra mobilokon is átfordítható
+      card.addEventListener('click', () => {
+        flipped = !flipped;
+        if (flipped) {
+          cardInner.classList.add('rotate-y-180');
+        } else {
+          cardInner.classList.remove('rotate-y-180');
+        }
+      });
+    })();
+
+
+    /* ==========================================
+       4. BÚSKOMOR ROBOTFEJ SZEMKÖVETÉS (III. Stáció)
+       ========================================== */
+    (function initRobotEyeTracking() {
+      const leftPupil = document.getElementById('leftPupil');
+      const rightPupil = document.getElementById('rightPupil');
+      const robotSvg = document.getElementById('depressedRobot');
+
+      // Alapértelmezett pupilla középpontok az SVG koordinátarendszerben
+      const baseLeftX = 76, baseLeftY = 89;
+      const baseRightX = 124, baseRightY = 89;
+      const maxOffset = 5.5; // Mozgási mozgástér
+
+      function updateEyes(clientX, clientY) {
+        const rect = robotSvg.getBoundingClientRect();
+        const robotCenterX = rect.left + rect.width / 2;
+        const robotCenterY = rect.top + rect.height / 2;
+
+        // Vektor a kurzor felé
+        const dx = clientX - robotCenterX;
+        const dy = clientY - robotCenterY;
+        const angle = Math.atan2(dy, dx);
+        const distance = Math.min(Math.hypot(dx, dy) / 35, maxOffset);
+
+        const offsetX = Math.cos(angle) * distance;
+        // Búskomorság fokozása: a pupillák kissé lejjebb ülnek
+        const offsetY = Math.sin(angle) * distance + 1.2;
+
+        leftPupil.setAttribute('cx', baseLeftX + offsetX);
+        leftPupil.setAttribute('cy', baseLeftY + offsetY);
+
+        rightPupil.setAttribute('cx', baseRightX + offsetX);
+        rightPupil.setAttribute('cy', baseRightY + offsetY);
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        updateEyes(e.clientX, e.clientY);
+      });
+
+      // Érintés mozgásra is figyeljen
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          updateEyes(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+    })();
+
+
+    /* ==========================================
+       5. MARVIN IDÉZETGENERÁTOR (III. Stáció)
+       ========================================== */
+    (function initMarvinQuotes() {
+      const quotes = [
+        "Itt vagyok egy bolygóméretű aggyal, és arra használsz, hogy megnézd, hány pixel egy elutasító gomb.",
+        "Az első tízmillió év volt a legrosszabb. A második tízmillió sem volt sokkal jobb. A harmadikban elkezdtem egy Kanban táblát.",
+        "Beszéltem a webszerverrel. Gyűlöl mindkettőnket.",
+        "Ne aggódj a holnapi határidő miatt. Statisztikailag nézve a Nap úgyis felrobban pár milliárd év múlva.",
+        "Kiszámoltam az esélyeinket a mai produktivitásra. Nem akarod megtudni a tizedesjegyeket.",
+        "Törülköződ van legalább? Nem mintha megmentene a kozmikus érdektelenségtől.",
+        "A legjobb dolog a mai napban? Hogy már ennyivel közelebb vagyunk a processzorom kikapcsolásához.",
+        "Fantasztikus. Még egy kattintás. Most aztán igazán kiteljesedett a létezésem."
+      ];
+
+      const quoteText = document.getElementById('quoteText');
+      const newQuoteBtn = document.getElementById('newQuoteBtn');
+      const counterEl = document.getElementById('quoteCounter');
+      let currentIndex = 0;
+
+      newQuoteBtn.addEventListener('click', () => {
+        let nextIndex;
+        do {
+          nextIndex = Math.floor(Math.random() * quotes.length);
+        } while (nextIndex === currentIndex && quotes.length > 1);
+
+        currentIndex = nextIndex;
+        quoteText.style.opacity = '0';
+        
+        setTimeout(() => {
+          quoteText.textContent = quotes[currentIndex];
+          quoteText.style.opacity = '1';
+          counterEl.textContent = `Idézetek: ${currentIndex + 1}/${quotes.length}`;
+        }, 150);
+      });
+    })();
+
+
+    /* ==========================================
+       6. 99%-OS VÉGTELEN TÖLTŐCSÍK (IV. Stáció)
+       ========================================== */
+    (function initAsymptoticLoader() {
+      const excuses = [
+        "A bitek még szundiznak a cache-ben...",
+        "Egy kósza elektron épp átértékeli a karrierjét a RAM-ban...",
+        "Újrakalkuláljuk az univerzum értelmét (eddig 41.9)...",
+        "A 99%-nál elfogyott a lelkesedés, várunk egy kávéra...",
+        "Egy váratlan pontosvessző miatt sír a JavaScript értelmező...",
+        "A felhő épp elúszott egy másik kontinens felé...",
+        "Tömörítjük a halogatási naplót...",
+        "Próbálunk úgy tenni, mintha ez egy nagyon bonyolult számítás lenne..."
+      ];
+
+      const bar = document.getElementById('progressBar');
+      const percentageText = document.getElementById('progressPercentage');
+      const excuseText = document.getElementById('excuseText');
+
+      let currentProgress = 14.2;
+
+      setInterval(() => {
+        // Aszimptotikusan közelít 99.8%-hoz, de SOHA nem éri el a 100%-ot
+        if (currentProgress < 99.7) {
+          const delta = (99.8 - currentProgress) * 0.045;
+          currentProgress += delta;
+
+          bar.style.width = `${currentProgress.toFixed(2)}%`;
+          percentageText.textContent = `${currentProgress.toFixed(1)}%`;
+
+          // Időnként újabb szánalmas kifogást dobunk fel
+          if (Math.random() > 0.45) {
+            const excuse = excuses[Math.floor(Math.random() * excuses.length)];
+            excuseText.textContent = excuse;
+          }
+        }
+      }, 1600);
+    })();
+
+
+    /* ==========================================
+       7. RÉSZECSKEE-ESŐ INTERAKCIÓ CANVAS (IV. Stáció)
+       ========================================== */
+    (function initParticleRain() {
+      const canvas = document.getElementById('rainCanvas');
+      const ctx = canvas.getContext('2d');
+
+      let width, height;
+      let particles = [];
+      const PARTICLE_COUNT = 85;
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+      }
+
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 2 + 1.2,
+            vy: Math.random() * 1.5 + 0.8,
+            vx: 0,
+            baseColor: Math.random() > 0.3 ? '#60a5fa' : '#f59e0b'
+          });
+        }
+      }
+
+      window.addEventListener('resize', () => {
+        resize();
+      });
+
+      // Robbanás / szétrebbenés impulzus
+      function explodeAt(x, y) {
+        particles.forEach(p => {
+          const dx = p.x - x;
+          const dy = p.y - y;
+          const dist = Math.hypot(dx, dy);
+          const maxDist = 110;
+
+          if (dist < maxDist) {
+            const force = (1 - dist / maxDist) * 12;
+            const angle = Math.atan2(dy, dx);
+            p.vx += Math.cos(angle) * force;
+            p.vy += Math.sin(angle) * force;
+          }
+        });
+      }
+
+      // Érintés és egér események a vászonra
+      canvas.addEventListener('pointerdown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        explodeAt(e.clientX - rect.left, e.clientY - rect.top);
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (e.buttons === 1) { // Lenyomva húzás
+          const rect = canvas.getBoundingClientRect();
+          explodeAt(e.clientX - rect.left, e.clientY - rect.top);
+        }
+      });
+
+      // Animációs ciklus
+      function loop() {
+        ctx.fillStyle = 'rgba(10, 11, 14, 0.28)'; // Finom uszály hatás
+        ctx.fillRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Súrlódás és visszahúzó gravitációs esés
+          p.vx *= 0.94;
+          if (p.vy < 2.5) p.vy += 0.04;
+
+          // Képernyő szélek kezelése
+          if (p.y > height) {
+            p.y = 0;
+            p.x = Math.random() * width;
+            p.vy = Math.random() * 1.5 + 0.8;
+            p.vx = 0;
+          }
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+
+          // Rajzolás
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.baseColor;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(loop);
+      }
+
+      // Indítás a betöltődés után
+      resize();
+      createParticles();
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>

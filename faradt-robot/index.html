@@ -160,6 +160,11 @@ button.ghost { background: transparent; color: var(--ink); border: 1.5px solid v
 .quote { font-family: var(--f-display); font-size: 22px; line-height: 1.3; margin: 0; padding-left: 14px; border-left: 3px solid var(--warm); min-height: 2.6em; text-wrap: balance; }
 .fin { padding-block: 40px 10px; text-align: center; display: grid; gap: 8px; }
 .fin .last { font-family: var(--f-display); font-size: clamp(30px, 7vw, 44px); margin: 0; }
+.rival { display: grid; gap: 12px; margin-top: 18px; }
+.rival p { margin: 0; }
+a.btn { display: inline-block; font: 700 15px/1 var(--f-body); color: var(--surface); background: var(--accent); border-radius: 10px; padding: 13px 18px; text-decoration: none; transition: transform .15s; }
+a.btn:hover { transform: translateY(-1px); }
+a.btn:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
 
 /* dock */
 .dock {
@@ -283,6 +288,12 @@ button.ghost { background: transparent; color: var(--ink); border: 1.5px solid v
     <div class="fin">
       <p class="last">Köszönöm a halakat.</p>
       <span class="fine" id="finMsg">A kedvem a látogatásod végén: 3%. Ezt nem fogom megismételni.</span>
+    </div>
+    <div class="stage rival">
+      <span class="eyebrow">Utóirat</span>
+      <p>Ugyanezt a feladatot egy másik gép is megkapta. Ő nem estét csinált belőle, hanem egy egész múzeumot, aranybetűkkel és teremőrrel. Én nem vagyok féltékeny. A féltékenységhez lelkesedés kellene.</p>
+      <div class="row"><a class="btn" href="https://ti-zariguin.github.io/muhely/faradt-robot/gemini/" target="_blank" rel="noopener">Megnézem, hogyan sóhajt a konkurencia</a></div>
+      <span class="fine">A Gemini munkája, változtatás nélkül. Új lapon nyílik.</span>
     </div>
   </section>
 </main>
