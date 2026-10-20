@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Zariguin műhelye</title>
+<meta name="description" content="Kísérleti oldalak, szakmai segédletek és vadhajtások egy helyen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a workshop pegboard. Header, then a two-column grid of labelled tags, one per page; catalogue number = order of arrival. */
+:root {
+  --bg: #E9EBE8; --board: #F5F6F3; --ink: #1F2328; --muted: #5E656C; --line: #CDD1CC; --acc: #C9551E;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #15181B; --board: #1E2226; --ink: #ECEEEB; --muted: #A2A9AF; --line: #343A40; --acc: #F08A4B; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--f-body);
+  background-image: radial-gradient(var(--line) 1.2px, transparent 1.3px); background-size: 22px 22px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+.wrap { max-width: 980px; margin: 0 auto; }
+header { padding-block: 64px 36px; display: grid; gap: 12px; }
+.eyebrow { font: 500 12.5px/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+h1 { font: 700 clamp(40px, 9vw, 76px)/1 var(--f-display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+.lede { margin: 0; max-width: 56ch; color: var(--muted); }
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+.tag { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px; height: 100%;
+  background: var(--board); border: 1px solid var(--line); border-radius: 6px 6px 6px 22px; padding: 22px 20px 18px;
+  color: inherit; text-decoration: none; transition: transform .18s, border-color .18s; }
+.tag::before { content: ""; position: absolute; top: 12px; right: 14px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--line); background: var(--bg); }
+.tag:hover { transform: rotate(-.6deg) translateY(-2px); border-color: var(--acc); }
+.tag:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
+.no { font: 500 12px/1 var(--f-mono); color: var(--muted); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+.tag h2 { font: 700 24px/1.15 var(--f-display); margin: 0; text-wrap: balance; }
+.tag p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.meta { display: flex; justify-content: space-between; gap: 10px; font: 500 12px/1 var(--f-mono); color: var(--muted); padding-top: 10px; border-top: 1px dashed var(--line); }
+.meta b { color: var(--acc); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+footer { margin-top: 48px; font: 400 13px/1.5 var(--f-mono); color: var(--muted); }
+footer a { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .tag { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Ti-Zariguin / műhely</span>
+    <h1>Zariguin műhelye</h1>
+    <p class="lede">Kísérletek, szakmai segédletek és vadhajtások egy helyen. Ami itt van, az működik. Hogy mennyire, az oldalról oldalra változik.</p>
+  </header>
+  <ul class="grid">
+    <li><a class="tag" href="faradt-robot/"><span class="no">No. 01</span><h2>A fáradt robot estéje</h2><p>Egy fásult robot hét jelenetben próbál lenyűgözni. Közben kiderül, mire képes a CSS, az SVG és a JavaScript.</p><span class="meta"><b>Szórakoztató</b><span>2026-10-20</span></span></a></li>
+  </ul>
+  <footer>1 oldal. Utolsó frissítés: 2026-10-20. Ne ess pánikba.</footer>
+</div>
+</body>
+</html>

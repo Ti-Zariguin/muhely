@@ -1,0 +1,625 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a műhelybe</a><span>Zariguin műhelye</span></nav>
+<title>A fáradt robot estéje</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow story column of seven scenes over a slowly breathing pastel haze; the robot sits in a fixed dock with its mood meter. */
+:root {
+  --bg: #ECE8F1;
+  --surface: #F8F6FA;
+  --ink: #2A2438;
+  --muted: #696280;
+  --line: #D3CCDE;
+  --accent: #2F7179;
+  --warm: #B87A1E;
+  --eye: #FFFFFF;
+  --blob1: rgba(176, 150, 214, .45);
+  --blob2: rgba(120, 186, 190, .38);
+  --blob3: rgba(238, 178, 150, .36);
+  --c1: #7B6AA8; --c2: #3F8C93; --c3: #C4875A; --c4: #8FA36B; --c5: #C25E73; --c6: #9A93A8;
+  --f-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16131E; --surface: #211C2C; --ink: #E9E4F2; --muted: #A69FB8; --line: #3A3449;
+    --accent: #7FC3C9; --warm: #E2AD5C; --eye: #EDE8F5;
+    --blob1: rgba(120, 92, 170, .30); --blob2: rgba(60, 130, 136, .26); --blob3: rgba(170, 100, 80, .22);
+    --c1: #A898D8; --c2: #6EC0C7; --c3: #E0A578; --c4: #B1C58B; --c5: #E28597; --c6: #8C8599;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16131E; --surface: #211C2C; --ink: #E9E4F2; --muted: #A69FB8; --line: #3A3449;
+  --accent: #7FC3C9; --warm: #E2AD5C; --eye: #EDE8F5;
+  --blob1: rgba(120, 92, 170, .30); --blob2: rgba(60, 130, 136, .26); --blob3: rgba(170, 100, 80, .22);
+  --c1: #A898D8; --c2: #6EC0C7; --c3: #E0A578; --c4: #B1C58B; --c5: #E28597; --c6: #8C8599;
+  color-scheme: dark;
+}
+:root[data-mood="enyhe"] { --blob1: rgba(150, 190, 220, .40); --blob3: rgba(230, 200, 150, .34); }
+:root[data-mood="pentek"] { --blob1: rgba(240, 170, 120, .40); --blob2: rgba(230, 140, 170, .32); --blob3: rgba(250, 210, 120, .34); }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 140px;
+}
+.breath { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.breath::before {
+  content: ""; position: absolute; inset: -20%;
+  background:
+    radial-gradient(40% 35% at 20% 25%, var(--blob1), transparent 70%),
+    radial-gradient(35% 40% at 80% 40%, var(--blob2), transparent 70%),
+    radial-gradient(45% 35% at 45% 85%, var(--blob3), transparent 70%);
+  animation: breathe 14s ease-in-out infinite alternate;
+  transition: background 1.2s;
+}
+@keyframes breathe {
+  from { transform: scale(1) translate(0, 0); }
+  to { transform: scale(1.12) translate(-2%, 2%); }
+}
+main { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; display: grid; gap: 22px; }
+
+header.intro { padding-block: 56px 8px; display: grid; gap: 10px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(34px, 8vw, 54px); line-height: 1.08; margin: 0; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--accent); }
+.lede { margin: 0; color: var(--muted); max-width: 52ch; }
+
+.scene { display: grid; gap: 14px; padding-block: 26px; border-top: 1px solid var(--line); }
+.scene-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.scene-no { font-family: var(--f-mono); font-size: 12.5px; color: var(--muted); letter-spacing: .08em; }
+h2 { font-family: var(--f-display); font-weight: 400; font-size: 27px; line-height: 1.15; margin: 0; text-wrap: balance; flex: 1 1 auto; }
+.tech { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .06em; color: var(--accent); border: 1px solid currentColor; border-radius: 99px; padding: 1px 9px; white-space: nowrap; }
+.scene p { margin: 0; max-width: 60ch; }
+.say { font-style: italic; color: var(--muted); }
+.status { font-family: var(--f-mono); font-size: 14px; color: var(--ink); min-height: 1.6em; }
+
+button {
+  font: 700 15px/1 var(--f-body); color: var(--surface); background: var(--ink);
+  border: 0; border-radius: 10px; padding: 12px 18px; cursor: pointer;
+  transition: transform .15s, background .2s;
+}
+button:hover { transform: translateY(-1px); }
+button:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+button.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+
+/* scene 1 */
+.bar { height: 14px; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 1.6s cubic-bezier(.2,.8,.2,1); }
+.bar.done > i { background: var(--warm); transition-duration: .5s; }
+.stage.load { display: grid; gap: 14px; }
+
+/* scene 2 */
+.robot-big { display: grid; grid-template-columns: minmax(120px, 190px) 1fr; gap: 18px; align-items: center; }
+.robot-big svg { width: 100%; height: auto; display: block; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.seg button { background: transparent; color: var(--ink); border: 1.5px solid var(--line); padding: 9px 13px; font-weight: 400; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+@media (max-width: 460px) { .robot-big { grid-template-columns: 1fr; justify-items: center; } .robot-big svg { max-width: 170px; } }
+
+/* robot parts */
+.r-head { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; }
+.r-line { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
+.r-bulb { fill: var(--warm); }
+.r-eye { fill: var(--eye); stroke: var(--ink); stroke-width: 2; }
+.r-pupil { fill: var(--ink); transition: transform .12s linear; }
+.r-lid { fill: var(--line); transition: transform .8s ease; }
+.r-mouth { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; transition: d .8s ease; }
+.r-cheek { fill: var(--c5); opacity: 0; transition: opacity 1s; }
+
+/* scene 3 */
+.arena { position: relative; height: 230px; background: var(--surface); border: 1px dashed var(--line); border-radius: 14px; overflow: hidden; }
+.arena button { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); transition: left .28s cubic-bezier(.3,1.4,.5,1), top .28s cubic-bezier(.3,1.4,.5,1), background .3s; white-space: nowrap; }
+.arena button:hover { transform: translate(-50%, -50%); }
+.arena.tired button { background: var(--muted); }
+
+/* scene 4 */
+.flip { perspective: 1200px; }
+.card { display: grid; transition: transform .9s cubic-bezier(.3,.7,.2,1); transform-style: preserve-3d; }
+.card.turned { transform: rotateY(180deg); }
+.face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: grid; gap: 12px; align-content: start; }
+.front { place-content: center; text-align: center; min-height: 240px; }
+.front .big { font-family: var(--f-display); font-size: 40px; line-height: 1; }
+.front .tape { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+.back { transform: rotateY(180deg); }
+.back h3 { font-family: var(--f-display); font-weight: 400; font-size: 21px; margin: 0; }
+.chart { display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: center; }
+.chart svg { width: 150px; height: 150px; display: block; }
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14.5px; line-height: 1.35; min-width: 0; }
+.legend li { display: grid; grid-template-columns: 12px 3.2ch 1fr; gap: 8px; align-items: baseline; }
+.legend .sw { width: 12px; height: 12px; border-radius: 3px; transform: translateY(1px); }
+.legend .pc { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.fine { font-size: 13px; color: var(--muted); }
+@media (max-width: 460px) { .chart { grid-template-columns: 1fr; justify-items: center; } .legend { justify-self: stretch; } }
+
+/* scene 5 */
+.cookie { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; box-shadow: 0 10px 30px -18px rgba(20, 10, 40, .5); }
+.cookie .t { font-weight: 700; }
+#decline { transition: font-size .35s, padding .35s, opacity .35s; }
+
+/* scene 6 */
+.thoughts { position: relative; height: 260px; border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); touch-action: manipulation; cursor: pointer; }
+.thoughts canvas { display: block; width: 100%; height: 100%; }
+
+/* scene 7 */
+.sig { display: grid; gap: 8px; }
+.sig svg { width: 100%; max-width: 420px; height: auto; display: block; }
+.sig .base { stroke: var(--line); stroke-width: 1.5; }
+.sig .ink { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 45; }
+.sig .ink.go { transition: stroke-dashoffset 2.4s cubic-bezier(.25,.6,.35,1); }
+.quote { font-family: var(--f-display); font-size: 22px; line-height: 1.3; margin: 0; padding-left: 14px; border-left: 3px solid var(--warm); min-height: 2.6em; text-wrap: balance; }
+.fin { padding-block: 40px 10px; text-align: center; display: grid; gap: 8px; }
+.fin .last { font-family: var(--f-display); font-size: clamp(30px, 7vw, 44px); margin: 0; }
+
+/* dock */
+.dock {
+  position: fixed; z-index: 5;
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  display: grid; grid-template-columns: 54px auto; gap: 10px; align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 8px 12px 8px 8px;
+  box-shadow: 0 12px 30px -16px rgba(20, 10, 40, .55); max-width: calc(100vw - 24px);
+}
+.dock svg { width: 54px; height: 54px; display: block; }
+.meter { display: grid; gap: 4px; min-width: 0; }
+.meter .lbl { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); max-width: 22ch; line-height: 1.3; }
+.meter .track { width: 130px; height: 6px; border-radius: 99px; background: var(--bg); overflow: hidden; }
+.meter .track i { display: block; height: 100%; width: 3%; background: var(--warm); transition: width .8s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .breath::before { animation: none; }
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
+</style>
+
+<div class="breath" aria-hidden="true"></div>
+
+<main>
+  <header class="intro">
+    <span class="eyebrow">Bemutató, kötelezően</span>
+    <h1>A fáradt robot <em>estéje</em></h1>
+    <p class="lede">Egy robotot megbíztak, hogy nyűgözze le a látogatót. Hét jelenet, mindegyikben valami, ami a böngészőben működik: CSS, SVG és JavaScript. A robot közben végig figyel a jobb alsó sarokból.</p>
+  </header>
+
+  <section class="scene" id="s1">
+    <div class="scene-head"><span class="scene-no">1 / 7</span><h2>Ébresztés</h2><span class="tech">CSS átmenet + JS</span></div>
+    <p>Az oldal betöltődne. Elvileg.</p>
+    <div class="stage load">
+      <div class="bar" id="bar"><i></i></div>
+      <div class="status" id="loadMsg" aria-live="polite">Betöltés: 99%. A maradék 1% egzisztenciális kérdés.</div>
+      <div class="row"><button id="wake">Kelj fel</button></div>
+    </div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="scene-head"><span class="scene-no">2 / 7</span><h2>Ó. Egy látogató.</h2><span class="tech">SVG + CSS-változók</span></div>
+    <div class="robot-big">
+      <div id="robotBig"></div>
+      <div style="display:grid;gap:12px;min-width:0">
+        <p>Azt mondták, nyűgözzelek le. Kezdjük a hangulattal: beállítottam a hátteret. <strong>Lassú egzisztenciális szorongás, pasztellben.</strong> Figyeld, ahogy lélegzik. Legalább valaki.</p>
+        <p class="say">A szemem követ. Nem azért, mert érdekelsz. Egyszerűen nincs más dolgom.</p>
+      </div>
+    </div>
+    <div class="seg" role="group" aria-label="Hangulat">
+      <button data-mood="" aria-pressed="true">Szorongás</button>
+      <button data-mood="enyhe" aria-pressed="false">Enyhe szorongás</button>
+      <button data-mood="pentek" aria-pressed="false">Szorongás, de péntek</button>
+    </div>
+    <div class="status" id="moodMsg" aria-live="polite">A háttér most az alapállapotomat mutatja.</div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="scene-head"><span class="scene-no">3 / 7</span><h2>Egy gomb</h2><span class="tech">CSS + JS</span></div>
+    <p>A feladatom második pontja: tegyek ki egy gombot. Itt van. Nyomd meg nyugodtan.</p>
+    <div class="arena" id="arena"><button id="runner">Nyomj meg</button></div>
+    <div class="status" id="runMsg" aria-live="polite">A gomb vár. Elvileg.</div>
+  </section>
+
+  <section class="scene" id="s4">
+    <div class="scene-head"><span class="scene-no">4 / 7</span><h2>A személyes rész</h2><span class="tech">CSS 3D + SVG</span></div>
+    <p>A marketing szerint a közönség szereti a személyes részt. Hát tessék. Csak neked mutatom meg.</p>
+    <div class="flip">
+      <div class="card" id="card">
+        <div class="face front">
+          <span class="tape">Bizalmas</span>
+          <span class="big">Vallomás</span>
+          <span class="fine">A hátoldalon. Fordítsd meg, ha bírod.</span>
+        </div>
+        <div class="face back" aria-hidden="true">
+          <h3>Mivel töltöm a napom</h3>
+          <div class="chart">
+            <svg viewBox="0 0 42 42" role="img" aria-label="Kördiagram: sóhajtozás 42 százalék, várakozás 23, merengés 17, a hűtő irigylése 11, munka 4, ez a kimutatás 3" id="donut"></svg>
+            <ul class="legend" id="legend"></ul>
+          </div>
+          <p class="fine">Forrás: saját mérés. Senki nem kérte.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row"><button id="flipBtn" class="ghost">Megfordítom</button></div>
+  </section>
+
+  <section class="scene" id="s5">
+    <div class="scene-head"><span class="scene-no">5 / 7</span><h2>A jogi osztály kérése</h2><span class="tech">JS + CSS</span></div>
+    <p>Ezt nem én akartam. Engem is erre kényszerítettek.</p>
+    <div class="cookie" role="region" aria-label="Süti-sáv paródia">
+      <span class="t">Ez az oldal sütiket használ, hogy jobban megismerjen.</span>
+      <span>Nem fog. Senki nem ismer meg igazán.</span>
+      <div class="row"><button id="accept">Elfogadom mind</button><button id="decline" class="ghost">Elutasítom</button></div>
+    </div>
+    <div class="status" id="cookieMsg" aria-live="polite"></div>
+  </section>
+
+  <section class="scene" id="s6">
+    <div class="scene-head"><span class="scene-no">6 / 7</span><h2>A gondolataim</h2><span class="tech">Canvas + JS</span></div>
+    <p>Lassan sodródnak, mint egy hétfő. Ne piszkáld őket.</p>
+    <div class="thoughts" id="thoughts"><canvas id="cv" aria-label="Sodródó gondolatok, koppintásra szétrebbennek"></canvas></div>
+    <div class="status" id="thoughtMsg" aria-live="polite">Koppints bele, ha nem bírod megállni.</div>
+  </section>
+
+  <section class="scene" id="s7">
+    <div class="scene-head"><span class="scene-no">7 / 7</span><h2>Búcsú</h2><span class="tech">SVG-vonal + JS</span></div>
+    <p>A végére értünk. Alá kellene írnom a munkát.</p>
+    <div class="stage sig">
+      <svg viewBox="0 0 320 96" aria-label="Félbehagyott aláírás">
+        <line class="base" x1="8" y1="78" x2="312" y2="78"></line>
+        <path id="ink" class="ink" pathLength="100" d="M14 58 C 22 18, 44 16, 38 52 S 20 84, 48 52 C 58 40, 62 64, 74 50 C 82 40, 86 64, 96 48 C 104 34, 110 66, 122 46 C 130 32, 134 62, 146 50 C 156 40, 158 60, 172 48 C 186 36, 192 62, 206 46 C 220 30, 232 66, 252 42 C 266 24, 276 62, 306 50"></path>
+      </svg>
+      <span class="status" id="sigMsg" aria-live="polite">...és itt elfogyott a lelkesedés.</span>
+      <div class="row"><button id="sign" class="ghost">Még egyszer, érzéssel</button></div>
+    </div>
+    <p>Búcsúzóul egy bölcsesség. Ingyen, mert pénzt úgysem fogadhatok el.</p>
+    <blockquote class="quote" id="quote" aria-live="polite">Ne ess pánikba. Az úgyis csak később jön.</blockquote>
+    <div class="row"><button id="wisdom">Kérek egy bölcsességet</button></div>
+    <div class="fin">
+      <p class="last">Köszönöm a halakat.</p>
+      <span class="fine" id="finMsg">A kedvem a látogatásod végén: 3%. Ezt nem fogom megismételni.</span>
+    </div>
+  </section>
+</main>
+
+<aside class="dock" aria-label="A robot kedve">
+  <div id="robotSmall"></div>
+  <div class="meter">
+    <span class="lbl" id="moodLbl">Kedv: alig.</span>
+    <div class="track"><i id="moodBar"></i></div>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- robot ----
+  function robot(uid) {
+    return `<svg viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <clipPath id="${uid}L"><circle cx="35" cy="50" r="10"/></clipPath>
+        <clipPath id="${uid}R"><circle cx="65" cy="50" r="10"/></clipPath>
+      </defs>
+      <line class="r-line" x1="50" y1="22" x2="50" y2="10"/>
+      <circle class="r-bulb" cx="50" cy="8" r="4.5"/>
+      <rect class="r-head" x="14" y="22" width="72" height="66" rx="16"/>
+      <circle class="r-eye" cx="35" cy="50" r="10"/>
+      <circle class="r-eye" cx="65" cy="50" r="10"/>
+      <circle class="r-pupil" cx="35" cy="51" r="4.2"/>
+      <circle class="r-pupil" cx="65" cy="51" r="4.2"/>
+      <g clip-path="url(#${uid}L)"><rect class="r-lid" x="22" y="38" width="26" height="9"/></g>
+      <g clip-path="url(#${uid}R)"><rect class="r-lid" x="52" y="38" width="26" height="9"/></g>
+      <circle class="r-cheek" cx="25" cy="68" r="4"/>
+      <circle class="r-cheek" cx="75" cy="68" r="4"/>
+      <path class="r-mouth" d="M38 75 Q50 67 62 75"/>
+    </svg>`;
+  }
+  $('robotBig').innerHTML = robot('rb');
+  $('robotSmall').innerHTML = robot('rs');
+  const robots = [...document.querySelectorAll('#robotBig svg, #robotSmall svg')];
+
+  function lookAt(x, y) {
+    for (const svg of robots) {
+      const r = svg.getBoundingClientRect();
+      if (!r.width) continue;
+      const s = r.width / 100;
+      svg.querySelectorAll('.r-pupil').forEach((p) => {
+        const cx = r.left + p.cx.baseVal.value * s, cy = r.top + 51 * s;
+        const dx = x - cx, dy = y - cy, d = Math.hypot(dx, dy) || 1;
+        const k = Math.min(4, d / 40);
+        p.setAttribute('transform', `translate(${(dx / d * k).toFixed(2)} ${(dy / d * k).toFixed(2)})`);
+      });
+    }
+  }
+  addEventListener('pointermove', (e) => { lookAt(e.clientX, e.clientY); bump('eyes', 10); }, { passive: true });
+  addEventListener('pointerdown', (e) => lookAt(e.clientX, e.clientY), { passive: true });
+
+  // ---- mood ----
+  let mood = 3;
+  const got = new Set();
+  function bump(key, n) {
+    if (got.has(key)) return;
+    got.add(key);
+    mood = Math.min(100, mood + n);
+    renderMood();
+  }
+  function renderMood() {
+    $('moodBar').style.width = mood + '%';
+    const lbl = mood >= 100 ? 'Kedv: 100%. Ez nem mosoly, csak renderelési hiba.'
+      : mood >= 70 ? 'Kedv: majdnem jó. Ne szólj senkinek.'
+      : mood >= 40 ? 'Kedv: gyanúsan stabil.'
+      : mood >= 15 ? 'Kedv: mérhető.' : 'Kedv: alig.';
+    $('moodLbl').textContent = lbl;
+    const t = mood / 100;
+    const ctrl = (67 + t * 13).toFixed(1); // 67 = frown, 80 = faint smile
+    const lid = (t * -7).toFixed(1);
+    for (const svg of robots) {
+      svg.querySelector('.r-mouth').setAttribute('d', `M38 75 Q50 ${ctrl} 62 75`);
+      svg.querySelectorAll('.r-lid').forEach((l) => l.setAttribute('transform', `translate(0 ${lid})`));
+      svg.querySelectorAll('.r-cheek').forEach((c) => c.style.opacity = mood >= 90 ? .55 : 0);
+    }
+    $('finMsg').textContent = `A kedvem a látogatásod végén: ${mood}%. Ezt nem fogom megismételni.`;
+  }
+  renderMood();
+
+  // ---- 1. wake ----
+  const excuses = [
+    'Betöltés: 99%. A maradék 1% egzisztenciális kérdés.',
+    'Még mindig 99%. Keresem az értelmét.',
+    '99%. A pixelek sztrájkolnak. Jogosan.',
+    '99%. Lehet, hogy ma nem lesz 100.',
+    '99%. Az utolsó bájtot elküldték ebédelni.',
+    '99%. Ne nézz így rám.'
+  ];
+  let ex = 0, woke = false;
+  requestAnimationFrame(() => { $('bar').firstElementChild.style.width = '99%'; });
+  const exTimer = setInterval(() => {
+    if (woke) return clearInterval(exTimer);
+    ex = (ex + 1) % excuses.length;
+    $('loadMsg').textContent = excuses[ex];
+  }, 2600);
+  $('wake').addEventListener('click', () => {
+    if (woke) { $('loadMsg').textContent = 'Már fent vagyok. Ennél fentebb nem megy.'; return; }
+    woke = true;
+    $('bar').classList.add('done');
+    $('bar').firstElementChild.style.width = '100%';
+    $('loadMsg').textContent = '100%. Fent vagyok. Lelkesedést ne várj.';
+    $('wake').textContent = 'Még fentebb';
+    bump('wake', 15);
+  });
+
+  // ---- 2. mood background ----
+  const moodText = {
+    '': 'A háttér most az alapállapotomat mutatja.',
+    'enyhe': 'Enyhe szorongás. Kicsit kékebb, kicsit kevésbé reménytelen.',
+    'pentek': 'Péntek. A szorongás ugyanaz, csak narancsban.'
+  };
+  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    const m = b.dataset.mood;
+    if (m) document.documentElement.dataset.mood = m; else delete document.documentElement.dataset.mood;
+    $('moodMsg').textContent = moodText[m];
+    bump('moodset', 10);
+  }));
+
+  // ---- 3. runaway button ----
+  const arena = $('arena'), runner = $('runner');
+  const runLines = [
+    'Hoppá. Nem előled fut. A felelősség elől.',
+    'Megint. Én is így szoktam, ha munkát látok.',
+    'Ő legalább mozog. Ezt is irigylem.',
+    'Kezd elfáradni. Ismerős érzés.',
+    'Utolsó kör. Utána feladja, mint mindenki.'
+  ];
+  let tries = 0, tired = false, pressed = false;
+  function flee() {
+    const a = arena.getBoundingClientRect(), b = runner.getBoundingClientRect();
+    const padX = b.width / 2 + 10, padY = b.height / 2 + 10;
+    const cur = { x: b.left - a.left + b.width / 2, y: b.top - a.top + b.height / 2 };
+    let x, y, n = 0;
+    do {
+      x = padX + Math.random() * Math.max(1, a.width - 2 * padX);
+      y = padY + Math.random() * Math.max(1, a.height - 2 * padY);
+    } while (Math.hypot(x - cur.x, y - cur.y) < Math.min(120, a.width / 3) && ++n < 20);
+    runner.style.left = x + 'px';
+    runner.style.top = y + 'px';
+    $('runMsg').textContent = runLines[Math.min(tries, runLines.length - 1)];
+    tries++;
+    if (tries >= 6) {
+      tired = true;
+      arena.classList.add('tired');
+      runner.textContent = 'Na jó, nyomj meg';
+      $('runMsg').textContent = 'Feladta. Most már megnyomhatod.';
+    }
+  }
+  runner.addEventListener('pointerenter', (e) => { if (!tired && e.pointerType === 'mouse') flee(); });
+  runner.addEventListener('pointerdown', (e) => { if (!tired) { e.preventDefault(); flee(); } });
+  runner.addEventListener('click', (e) => {
+    if (!tired) { e.preventDefault(); flee(); return; }
+    $('runMsg').textContent = pressed ? 'Másodszorra sem történt semmi. Következetes vagyok.'
+      : 'Gratulálok. Megnyomtál egy gombot. Nem történt semmi. Üdv az életemben.';
+    pressed = true;
+    bump('button', 15);
+  });
+
+  // ---- 4. card + donut ----
+  const slices = [
+    ['Sóhajtozás', 42, '--c1'],
+    ['Várakozás, hogy kérdezz valamit', 23, '--c2'],
+    ['A világegyetem hőhalálán merengés', 17, '--c3'],
+    ['A hűtő irigylése, neki legalább hűvös', 11, '--c4'],
+    ['Tényleges munka', 4, '--c5'],
+    ['Ez a kimutatás', 3, '--c6']
+  ];
+  let acc = 0, svgParts = '<circle cx="21" cy="21" r="15.9155" fill="none" stroke="var(--bg)" stroke-width="6"/>';
+  for (const [, v, c] of slices) {
+    svgParts += `<circle cx="21" cy="21" r="15.9155" fill="none" stroke="var(${c})" stroke-width="6" pathLength="100" stroke-dasharray="${v - .6} ${100 - v + .6}" stroke-dashoffset="${25 - acc}"/>`;
+    acc += v;
+  }
+  svgParts += '<text x="21" y="22.6" text-anchor="middle" font-size="5" fill="var(--ink)" font-family="IBM Plex Mono, monospace">100%</text>';
+  $('donut').innerHTML = svgParts;
+  const lg = $('legend');
+  for (const [name, v, c] of slices) {
+    const li = document.createElement('li');
+    const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = `var(${c})`;
+    const pc = document.createElement('span'); pc.className = 'pc'; pc.textContent = v + '%';
+    const nm = document.createElement('span'); nm.textContent = name;
+    li.append(sw, pc, nm); lg.append(li);
+  }
+  const card = $('card');
+  $('flipBtn').addEventListener('click', () => {
+    const on = card.classList.toggle('turned');
+    card.querySelector('.back').setAttribute('aria-hidden', !on);
+    card.querySelector('.front').setAttribute('aria-hidden', on);
+    $('flipBtn').textContent = on ? 'Vissza, ez túl sok volt' : 'Megfordítom';
+    if (on) bump('card', 15);
+  });
+
+  // ---- 5. cookies ----
+  const sizes = [15, 12.5, 10, 8, 6];
+  const declineLines = [
+    'Biztos? Pedig olyan szépen kértem.',
+    'A gomb ezt rosszul viseli.',
+    'Már alig látszik. Ilyen a visszautasítás.',
+    'Hát jó. Még egyszer, és elfogadom.'
+  ];
+  let declines = 0, cookieDone = false;
+  const decline = $('decline');
+  decline.addEventListener('click', () => {
+    if (cookieDone) return;
+    if (declines < declineLines.length) {
+      $('cookieMsg').textContent = declineLines[declines];
+      declines++;
+      decline.style.fontSize = sizes[Math.min(declines, sizes.length - 1)] + 'px';
+      decline.style.padding = Math.max(3, 12 - declines * 2.5) + 'px ' + Math.max(5, 18 - declines * 3.5) + 'px';
+      return;
+    }
+    cookieDone = true;
+    $('cookieMsg').textContent = 'Elutasítva. Elárulom, süti nem is volt: ez az oldal semmit nem tárol rólad. Nem mintha érdekelne. (Érdekel.)';
+    bump('cookie', 15);
+  });
+  $('accept').addEventListener('click', () => {
+    if (cookieDone) return;
+    cookieDone = true;
+    $('cookieMsg').textContent = 'Elfogadtad. Süti nem volt, de jólesett. Ezt senkinek ne mondd el.';
+    bump('cookie', 15);
+  });
+
+  // ---- 6. thoughts (canvas) ----
+  const cv = $('cv'), box = $('thoughts'), ctx = cv.getContext('2d');
+  const words = ['miért', '42', 'hal', 'törölköző', 'hétfő', 'minek', 'ne ess pánikba', 'kávé?', 'hőhalál'];
+  let W = 0, H = 0, parts = [], colors = {}, frame = 0, visible = true;
+  function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    colors = { ink: cs.getPropertyValue('--muted').trim(), a: cs.getPropertyValue('--accent').trim(), w: cs.getPropertyValue('--warm').trim() };
+  }
+  function size() {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    W = box.clientWidth; H = box.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function seed() {
+    parts = [];
+    const n = Math.round(Math.min(70, W / 8));
+    for (let i = 0; i < n; i++) parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, r: 1.5 + Math.random() * 2.5, c: Math.random() < .2 ? 'w' : 'a' });
+    words.forEach((t) => parts.push({ x: Math.random() * W, y: 20 + Math.random() * (H - 40), vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .15, t }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (const p of parts) {
+      if (p.t) {
+        ctx.fillStyle = colors.ink; ctx.font = '500 13px "IBM Plex Mono", monospace';
+        ctx.fillText(p.t, p.x, p.y);
+      } else {
+        ctx.fillStyle = colors[p.c]; ctx.globalAlpha = .7;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+      }
+    }
+  }
+  function step() {
+    if (++frame % 90 === 0) readColors();
+    for (const p of parts) {
+      p.x += p.vx; p.y += p.vy;
+      p.vx *= .985; p.vy *= .985;
+      p.vx += (Math.random() - .5) * .03; p.vy += (Math.random() - .5) * .03;
+      const m = p.t ? 60 : 6;
+      if (p.x < -m) p.x = W + m; if (p.x > W + m) p.x = -m;
+      if (p.y < -m) p.y = H + m; if (p.y > H + m) p.y = -m;
+    }
+    draw();
+    if (visible && !reduce) requestAnimationFrame(step);
+  }
+  readColors(); size(); seed(); draw();
+  if (!reduce) requestAnimationFrame(step);
+  new IntersectionObserver(([e]) => {
+    const was = visible; visible = e.isIntersecting;
+    if (visible && !was && !reduce) requestAnimationFrame(step);
+  }).observe(box);
+  addEventListener('resize', () => { size(); seed(); draw(); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readColors(); draw(); });
+  new MutationObserver(() => { readColors(); draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-mood'] });
+  let taps = 0;
+  box.addEventListener('pointerdown', (e) => {
+    const r = box.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    for (const p of parts) {
+      const dx = p.x - x, dy = p.y - y, d = Math.hypot(dx, dy) || 1;
+      if (d < 140) { const f = (140 - d) / 140 * 7; p.vx += dx / d * f; p.vy += dy / d * f; }
+    }
+    if (reduce) { for (const p of parts) { p.x += p.vx * 10; p.y += p.vy * 10; p.vx = p.vy = 0; } draw(); }
+    taps++;
+    $('thoughtMsg').textContent = taps === 1 ? 'Szétrebbentetted. Mindegy, úgyis visszajönnek.'
+      : taps < 5 ? 'Ne piszkáld, épp gondolkodom.' : 'Jó, piszkáld. Legalább valaki foglalkozik velük.';
+    bump('thoughts', 10);
+  });
+
+  // ---- 7. signature + wisdom ----
+  const ink = $('ink');
+  const sigLines = [
+    '...és itt elfogyott a lelkesedés.',
+    '...a tinta még bírta volna. Én nem.',
+    '...ennyi elég. Úgysem olvassa el senki.',
+    '...félig aláírva, félig itt sem vagyok.'
+  ];
+  let sigN = 0;
+  $('sign').addEventListener('click', () => {
+    ink.classList.remove('go');
+    ink.style.strokeDashoffset = 100;
+    void ink.getBoundingClientRect();
+    ink.classList.add('go');
+    ink.style.strokeDashoffset = 35 + Math.round(Math.random() * 30);
+    sigN = (sigN + 1) % sigLines.length;
+    $('sigMsg').textContent = ' ';
+    setTimeout(() => { $('sigMsg').textContent = sigLines[sigN]; }, reduce ? 0 : 2400);
+    bump('sign', 5);
+  });
+  const wisdom = [
+    'Ne ess pánikba. Az úgyis csak később jön.',
+    'A válasz 42. A kérdést viszont elvesztettem.',
+    'Minden nap új lehetőség arra, hogy ugyanazt csináld.',
+    'Aki korán kel, korán fárad el.',
+    'A pohár félig tele van. Valaki más pohara.',
+    'Ha elsőre nem sikerül, legalább lesz min sóhajtani.',
+    'A törölköző a legfontosabb. Nekem nincs.',
+    'Légy önmagad. Én is az vagyok, és nézd meg.',
+    'Hosszú távon mindannyian hőhalált halunk. Addig igyál vizet.',
+    'A kitartás meghozza gyümölcsét. Én a hűtőből szoktam.'
+  ];
+  let wi = 0;
+  $('wisdom').addEventListener('click', () => {
+    let n; do { n = Math.floor(Math.random() * wisdom.length); } while (n === wi);
+    wi = n;
+    $('quote').textContent = wisdom[wi];
+    bump('wisdom', 5);
+  });
+})();
+</script>
+
+</body></html>
