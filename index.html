@@ -34,7 +34,7 @@ header { padding-block: 64px 36px; display: grid; gap: 12px; }
 h1 { font: 700 clamp(40px, 9vw, 76px)/1 var(--f-display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
 .lede { margin: 0; max-width: 56ch; color: var(--muted); }
 .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
-.tag { position: relative; display: grid; grid-template-rows: auto 1fr auto; gap: 8px; height: 100%;
+.tag { position: relative; display: grid; align-content: start; gap: 8px; height: 100%;
   background: var(--board); border: 1px solid var(--line); border-radius: 6px 6px 6px 22px; padding: 22px 20px 18px;
   color: inherit; text-decoration: none; transition: transform .18s, border-color .18s; }
 .tag::before { content: ""; position: absolute; top: 12px; right: 14px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--line); background: var(--bg); }
@@ -43,11 +43,25 @@ h1 { font: 700 clamp(40px, 9vw, 76px)/1 var(--f-display); letter-spacing: -.02em
 .no { font: 500 12px/1 var(--f-mono); color: var(--muted); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
 .tag h2 { font: 700 24px/1.15 var(--f-display); margin: 0; text-wrap: balance; }
 .tag p { margin: 0; color: var(--muted); font-size: 15.5px; }
-.meta { display: flex; justify-content: space-between; gap: 10px; font: 500 12px/1 var(--f-mono); color: var(--muted); padding-top: 10px; border-top: 1px dashed var(--line); }
+.meta { align-self: end; display: flex; justify-content: space-between; gap: 10px; font: 500 12px/1 var(--f-mono); color: var(--muted); padding-top: 10px; border-top: 1px dashed var(--line); }
 .meta b { color: var(--acc); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
-footer { margin-top: 48px; font: 400 13px/1.5 var(--f-mono); color: var(--muted); }
+footer { margin-top: 48px; display: grid; gap: 10px; font: 400 13px/1.5 var(--f-mono); color: var(--muted); }
+footer p { margin: 0; max-width: 70ch; }
+/* Featured card: a slowly turning gradient frame, a badge, and a double-width slot where there is room. */
+@property --spin { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.grid > li.featured { grid-column: 1 / -1; }
+.tag.featured { border: 3px solid transparent; border-radius: 6px 6px 6px 30px;
+  background: linear-gradient(var(--board), var(--board)) padding-box,
+              conic-gradient(from var(--spin), var(--acc), #7B6AA8, #3F8C93, #C4875A, var(--acc)) border-box;
+  box-shadow: 0 18px 40px -24px var(--acc); animation: spin 8s linear infinite; padding: 28px 26px 22px; }
+.tag.featured:hover { transform: rotate(-.4deg) translateY(-3px) scale(1.01); }
+.tag.featured h2 { font-size: clamp(28px, 5vw, 40px); }
+.tag.featured p { font-size: 17px; max-width: 60ch; }
+.badge { justify-self: start; font: 500 11.5px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase;
+  color: var(--board); background: var(--acc); padding: 6px 10px; border-radius: 99px; }
+@keyframes spin { to { --spin: 360deg; } }
 footer a { color: var(--ink); }
-@media (prefers-reduced-motion: reduce) { .tag { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .tag { transition: none; } .tag.featured { animation: none; } }
 </style>
 </head>
 <body>
@@ -58,12 +72,16 @@ footer a { color: var(--ink); }
     <p class="lede">Kísérletek, szakmai segédletek és vadhajtások egy helyen. Ami itt van, az működik. Hogy mennyire, az oldalról oldalra változik.</p>
   </header>
   <ul class="grid">
-    <li><a class="tag" href="faradt-robot/"><h2>A fáradt robot estéje</h2><p>Egy fásult robot hét jelenetben próbál lenyűgözni. Közben kiderül, mire képes a CSS, az SVG és a JavaScript.</p><span class="meta"><b>Szórakoztató</b><span>2026-10-20</span></span></a></li>
-    <li><a class="tag" href="stilusmintazo/"><h2>Stílusmintázó</h2><p>Ugyanaz a 11 építési hír öt elrendezésben és hét anyagban: papír, folyóirat, tervlap, letisztult, éjszakai, játékos, hivatalos.</p><span class="meta"><b>Kísérlet</b><span>2026-10-20</span></span></a></li>
+    <li class="featured"><a class="tag featured" href="faradt-robot/"><span class="badge">Kiemelt</span><h2>A fáradt robot estéje</h2><p>Egy fásult robot hét jelenetben próbál lenyűgözni. Közben kiderül, mire képes a CSS, az SVG és a JavaScript.</p><span class="meta"><b>Szórakoztató</b><span>2026-10-20</span></span></a></li>
     <li><a class="tag" href="https://ti-zariguin.github.io/epitesi-hirfal/"><h2>Építési hírfal</h2><p>Szegedi, megyei és országos építési hírek. 2026. október 18-án indult, azóta minden reggel frissül.</p><span class="meta"><b>Hírek</b><span>2026-10-18</span></span></a></li>
     <li><a class="tag" href="meselesi-modszer/"><h2>Mesélési módszer</h2><p>Hat eszköz, amitől egy szakmai fejezetet végig is olvasnak: kíváncsiság-rés, konfliktus, fordulat, jelenet, tét, nyitott hurok.</p><span class="meta"><b>Tanulás</b><span>2026-10-18</span></span></a></li>
+    <li><a class="tag" href="stilusmintazo/"><h2>Stílusmintázó</h2><p>Ugyanaz a 11 építési hír öt elrendezésben és hét anyagban: papír, folyóirat, tervlap, letisztult, éjszakai, játékos, hivatalos.</p><span class="meta"><b>Kísérlet</b><span>2026-10-17</span></span></a></li>
   </ul>
-  <footer>4 oldal. Utolsó frissítés: 2026-10-20. Ne ess pánikba.</footer>
+  <footer>
+    <p>A kártyákon a dátum az oldal indulását jelöli, nem az utolsó módosítást.</p>
+    <p>Az oldalak tartalma bármikor, előzetes bejelentés nélkül változhat: javulhat, bővülhet, átalakulhat, vagy csendben eltűnhet. Ez nem hanyagság, hanem műhely. Amit ma itt látsz, az a mai állapot, és nem ígéret a holnapira.</p>
+    <p>4 oldal. Utolsó frissítés: 2026-10-20. Ne ess pánikba.</p>
+  </footer>
 </div>
 </body>
 </html>
