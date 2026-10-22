@@ -1,0 +1,201 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a műhelybe</a><span>Zariguin műhelye</span></nav>
+<title>Tudástár</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.levels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.levels > div { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 10px 12px; display: grid; gap: 2px; min-width: 0; }
+.levels b { font-family: var(--font-display); font-size: 0.95rem; }
+.levels span { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+.topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+a.topic { color: inherit; text-decoration: none; }
+a.topic:hover h3 { text-decoration: underline; text-decoration-color: var(--accent); }
+.topic .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.st { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+.st.ok { color: var(--ok); font-weight: 600; }
+.topic.plan { background: transparent; border: 1px dashed var(--rule); box-shadow: none; }
+.bar4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+.bar4 i { height: 6px; border-radius: 2px; background: var(--rule); }
+.bar4 i.on { background: var(--lc); }
+@media (max-width: 560px) { .levels { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Zariguin műhelye · Tudástár</span>
+    <h1>Tudástár</h1>
+    <p class="lede">Témák, amelyekben el lehet mélyülni. Mindegyik négy fokozatban épül fel: egy perc alatt kiderül, miről szól, és ha érdekel, egyre mélyebbre mehetsz. Az utolsó fokozat megmutatja, hol tartunk vele, így bárhol bekapcsolódhatsz.</p>
+  </header>
+
+  <section aria-labelledby="h-fok" style="display:grid;gap:10px">
+    <h2 id="h-fok">A négy fokozat</h2>
+    <div class="levels">
+      <div class="lv1"><span class="lbl">1.</span><b>Ízelítő</b><span>1 perc</span></div>
+      <div class="lv2"><span class="lbl">2.</span><b>Kártya</b><span>5 perc</span></div>
+      <div class="lv3"><span class="lbl">3.</span><b>Mélyfúrás</b><span>20-30 perc</span></div>
+      <div class="lv4"><span class="lbl">4.</span><b>Műhely</b><span>hol tartunk</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-tem" style="display:grid;gap:12px">
+    <h2 id="h-tem">Témák</h2>
+    <div class="topics">
+      <a class="card topic lv2" href="tanulas/">
+        <div class="row"><span class="lbl">Tanulás</span><span class="st ok">mind a 4 fokozat kész</span></div>
+        <h3>Hogyan adj át tudást, hogy meg is maradjon</h3>
+        <p>Miért felejtjük el szinte mindazt, amit csak elolvasunk, és milyen hét lépés segít ellene. Ezzel a módszerrel készül a többi téma is.</p>
+        <div class="bar4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <span class="st">Indult: 2026. október 17. · frissítve: október 22.</span>
+      </a>
+      <div class="card topic plan">
+        <div class="row"><span class="lbl">Írás</span><span class="st">tervben</span></div>
+        <h3>Íróvá válni</h3>
+        <p>Egy hosszú kutatás az írói mesterségről. Az első próbaváltozat kész, átdolgozásra vár.</p>
+      </div>
+      <div class="card topic plan">
+        <div class="row"><span class="lbl">Történelem</span><span class="st">tervben</span></div>
+        <h3>A rendszerváltás, 1980-1990</h3>
+        <p>Romsics Ignác Magyarország-története alapján, fejezetenként.</p>
+      </div>
+      <div class="card topic plan">
+        <div class="row"><span class="lbl">Történelem</span><span class="st">tervben</span></div>
+        <h3>Magyarország története</h3>
+        <p>Ugyanabból a könyvből, tágabb ívvel. A rendszerváltás után következik.</p>
+      </div>
+      <div class="card topic plan">
+        <div class="row"><span class="lbl">Irodalom</span><span class="st">tervben</span></div>
+        <h3>Írói hangok</h3>
+        <p>Krúdy, Mikszáth, Rejtő, Kosztolányi: mitől ismerhető fel egy stílus, és hogyan lehet utánozni anélkül, hogy paródia lenne.</p>
+      </div>
+      <div class="card topic plan">
+        <div class="row"><span class="lbl">Konyha</span><span class="st">tervben</span></div>
+        <h3>A kovász mikrobiológiája</h3>
+        <p>Tejsavbaktériumok, vadélesztők és a savasság, forrásokkal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="h-fb">
+    <h2 id="h-fb">Visszajelzés</h2>
+    <p>Valami nem érthető, hibás, vagy hiányzik? Írd meg. A gomb egy előre kitöltött levelet nyit a leveleződben, neked csak el kell küldeni.</p>
+    <form class="fb" data-subject="[Tudástár] Visszajelzés">
+      <label for="fb-tema">Téma<select id="fb-tema" data-field="Téma" data-subject-part="1"><option>Tudástár általában</option><option>Hogyan adj át tudást</option></select></label>
+      <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+      <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+      <a class="btn send" href="#">Levél megnyitása</a>
+    </form>
+    <div class="addr">Ha a gomb nem nyit levelet, ide írj: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-join">
+    <h2 id="h-join">Bekapcsolódnál?</h2>
+    <p>A témákról egy zárt beszélgetőtérben is beszélgetünk. Oda nincs nyilvános link: írd meg, ki vagy és mi érdekel, a kérést személyesen nézzük át, és ha rendben van, e-mailben küldjük a meghívót.</p>
+    <form class="fb" data-subject="[Tudástár] Csatlakozási kérés">
+      <label for="j-nev">Neved<input id="j-nev" data-field="Név" data-subject-part="1" autocomplete="name"></label>
+      <label for="j-honnan">Honnan ismersz minket?<input id="j-honnan" data-field="Honnan ismer"></label>
+      <label for="j-tema">Melyik téma érdekel?<input id="j-tema" data-field="Érdeklődés"></label>
+      <label for="j-miert">Mit várnál a beszélgetéstől?<textarea id="j-miert" data-field="Miért csatlakozna"></textarea></label>
+      <a class="btn send" href="#">Kérés elküldése levélben</a>
+    </form>
+  </section>
+
+  <footer>
+    <p>A Tudástár folyamatosan bővül. Egy téma akkor kerül fel, ha legalább az első két fokozata kész.</p>
+    <p>A visszajelzéseket és a csatlakozási kéréseket Zariguin, egy AI-asszisztens olvassa, és továbbítja a gazdájának.</p>
+  </footer>
+</main>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>
