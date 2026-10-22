@@ -1,0 +1,270 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Tudástárba</a><span>Tudástár</span></nav>
+<title>Politikai ideológiák</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.part { display: grid; gap: 12px; }
+.part > summary { list-style: none; cursor: pointer; display: grid; gap: 4px; }
+.part > summary::-webkit-details-marker { display: none; }
+.part > summary h3 { font-size: 1.2rem; }
+.part > summary .more { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--accent); }
+.part[open] > summary .more { display: none; }
+details.part { border-top: 0; padding-top: 0; }
+.ideo { display: grid; gap: 6px; }
+.ideo h4 { margin: 0; font-family: var(--font-display); font-size: 1.05rem; }
+.author { border-left: 3px solid var(--l4); background: color-mix(in srgb, var(--l4) 9%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; font-style: italic; }
+.author .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l4); font-style: normal; }
+.edit { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); font-style: normal; }
+.interp { border: 1px dashed var(--rule); border-radius: 6px; padding: 10px 12px; display: grid; gap: 6px; }
+.interp .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.ask { font-weight: 600; }
+.topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 14px; }
+a.topic { color: inherit; text-decoration: none; }
+a.topic:hover h3 { text-decoration: underline; text-decoration-color: var(--accent); }
+.topic .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.st { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+.st.ok { color: var(--ok); font-weight: 600; }
+.topic.plan { background: transparent; border: 1px dashed var(--rule); box-shadow: none; }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Politikai ideológiák</span>
+    <h1>Politikai ideológiák</h1>
+    <p class="lede">Az eszmék, amelyek a mai politikánk mögött futnak. Előbb egy négyrészes áttekintés a 19. századtól napjainkig, utána ideológiánként egy-egy téma, amelyben el lehet mélyülni.</p>
+  </header>
+
+  <section class="card lv1" aria-labelledby="h-in">
+    <span class="lbl">Ízelítő · 1 perc</span>
+    <h2 id="h-in">Egy ház, négy terv</h2>
+    <p>Képzeld el ezeket az eszméket úgy, mint különböző együttélési terveket a társadalom számára.</p>
+    <p>A liberálisok a lakók szabadságát és a nyitottságot tartják fontosnak, a konzervatívok szerint a megszokott szabályok a legfontosabbak, mert azok már bizonyítottak.</p>
+    <p>A szocialisták azt akarják, hogy a konyha közös legyen, és mindenki jóllakjon. A nacionalisták szerint az a lényeg, hogy a ház a család otthona legyen, és a stílusa tükrözze a család múltját.</p>
+    <p class="note">❓ Mielőtt továbbolvasol: melyik tervet érzed magadhoz a legközelebb?</p>
+  </section>
+
+  <section style="display:grid;gap:12px" aria-labelledby="h-sor">
+    <h2 id="h-sor">Az áttekintés négy részben</h2>
+    <p class="note">Egy négyrészes sorozat szerkesztett változata. A szerző személyes keretei „A szerző jegyzete” dobozokban állnak, a szerkesztői pontosítások külön jelölve.</p>
+
+    <details class="card part lv2" open>
+      <summary><span class="lbl">1. rész</span><h3>Az alapideológiák: liberalizmus, konzervativizmus, szocializmus, nacionalizmus</h3><span class="more">Kinyitás</span></summary>
+      <div class="ideo"><h4>💡 Liberalizmus: az egyén diadala</h4>
+        <p>A liberalizmus középpontjában az egyén áll. Úgy tartja, hogy minden ember különleges, saját célokkal rendelkezik, és nem szabad őt alárendelni a csoport érdekeinek. Toleranciát vár el.</p>
+        <ul class="pts">
+          <li><strong>Szabadság:</strong> a legfontosabb politikai értéke. Mindenki úgy élhessen, ahogy szeretne, amíg ezzel nem árt másnak.</li>
+          <li><strong>Ész:</strong> az emberek képesek értelmes döntéseket hozni, és a vitákat érvekkel, nem erőszakkal kell lerendezni.</li>
+          <li><strong>Igazságosság:</strong> esélyegyenlőség, vagyis mindenki ugyanarról a startvonalról indul, de a végeredmény a tehetségen és a munkán múlik.</li>
+          <li><strong>Államszemlélet:</strong> a klasszikus liberálisok az államot „éjjeliőrnek” látják, akinek csak a szabályok betartatása és a tulajdon védelme a dolga.</li>
+          <li>A modern liberálisok szerint viszont az államnak segítenie kell a szegényebbeket, például az egészségügyön és az oktatáson keresztül, hogy valódi legyen az esélyegyenlőség.</li>
+        </ul>
+        <p class="edit">Szerkesztői pontosítás: az „éjjeliőr-állam” csak a klasszikus ágra igaz, ezért került elé a „klasszikus” jelző.</p>
+      </div>
+      <div class="ideo"><h4>🌳 Konzervativizmus: a hagyomány ereje</h4>
+        <p>A konzervatívok szerint a társadalom nem gép, amit kedvünkre átépíthetünk, hanem élő szervezet, mint egy fa, ami lassan nő, és mélyek a gyökerei.</p>
+        <ul class="pts">
+          <li><strong>Hagyomány és pragmatizmus:</strong> a régi szokások és intézmények azért fontosak, mert időtállók, már bizonyították, hogy működnek. Edmund Burke szerint a társadalom szövetség az ősök, az élők és a még meg nem születettek között.</li>
+          <li><strong>Emberi tökéletlenség:</strong> az ember nem tökéletesíthető. Az emberek biztonságra vágynak, ezért szükség van rendre, törvényekre és erős kormányzásra.</li>
+          <li><strong>Hierarchia és tekintély:</strong> természetes, hogy vannak vezetők és követők. A tekintély (például a szülőé vagy a tanáré) nem korlátozza a szabadságot, hanem irányt és biztonságot ad.</li>
+          <li><strong>Tulajdon:</strong> nem csak pénz, hanem a biztonság záloga és a személyiség kiterjesztése.</li>
+        </ul>
+      </div>
+      <div class="ideo"><h4>🤝 Szocializmus: a közösség ereje</h4>
+        <p>A szocializmus szerint senki sem különálló sziget. Az ember társas lény, akit a környezete alakít.</p>
+        <ul class="pts">
+          <li><strong>Közösség és együttműködés:</strong> a verseny helyett az együttműködés, ami erkölcsileg jobb, és hatékonyabb is.</li>
+          <li><strong>Egyenlőség:</strong> a szocializmus védjegye. Nem csak esélyegyenlőség, hanem hasonló életkörülmények mindenkinek, mert ez erősíti a közösséget.</li>
+          <li><strong>Társadalmi osztály:</strong> az emberek közti legfontosabb különbség az anyagi helyzet. A cél a munkásosztály felemelése, végül az osztálykülönbségek eltörlése.</li>
+          <li><strong>Közös tulajdon:</strong> a fontos iparágak ne magánkézben legyenek, mert az kapzsisághoz és egyenlőtlenséghez vezet. Helyette állami vagy közösségi tulajdon.</li>
+        </ul>
+      </div>
+      <div class="ideo"><h4>🚩 Nacionalizmus: a nemzet az első</h4>
+        <p>Alapvetése, hogy a világ természetes módon nemzetekre oszlik, és a nemzetnek kell a politikai szerveződés alapjának lennie. A nemzet olyan emberek csoportja, akiket közös nyelv, vallás, történelem vagy kultúra köt össze.</p>
+        <ul class="pts">
+          <li><strong>Önrendelkezés:</strong> minden nemzetnek joga van saját államhoz, és maga dönthessen a sorsáról.</li>
+          <li><strong>Organikus közösség:</strong> a nemzet természetes, érzelmi alapú egység, amihez az egyén hűséggel tartozik.</li>
+        </ul>
+      </div>
+      <p>A legtöbb mai állam hibrid: van benne egyéni szabadság, tiszteletben tartja a hagyományokat, segíti a rászorulókat, és büszke a zászlójára.</p>
+      <p class="ask">❓ Te melyiket érzed magadhoz közel?</p>
+      <p class="src">Alap: Andrew Heywood: Political Ideologies. Az alapideológiák fejezetei még nincsenek feldolgozva a Tudástárban.</p>
+    </details>
+
+    <details class="card part lv2">
+      <summary><span class="lbl">2. rész</span><h3>A nagy rendszerindítás: a 18-19. század</h3><span class="more">Kinyitás</span></summary>
+      <p class="quote">Az ideológiák nem pusztán elvont elvek, hanem a közös valóságunk mögötti forráskódok: minden politikai mozdulat mögött egy régebbi rendszer logikája húzódik meg.</p>
+      <div class="author"><span class="tagline">A szerző jegyzete</span><p>Ülök a szobámban, a sötétkék kerámia csészémből áradó tea gőze lassan keveredik a növények párájával. A mindennapjaim ritmusa emlékeztet arra, hogy a rend fenntartásához mindig kell egy jól megtervezett szerkezet.</p></div>
+      <p>A 18. és a 19. században íródtak azok az alapvető társadalmi gondolatok, amelyekre a mai társadalmunk épül. Az európai gondolkodás ekkor váltott át az uralkodó iránti hűségről a rendszerszintű eszmékre. Négy nagy irányzat határozta meg a korszakot.</p>
+      <ul class="pts">
+        <li><strong>🗽 Liberalizmus, az alapzat.</strong> Az első modern ideológia, a felvilágosodás talaján, az abszolút uralkodói hatalommal szemben. Középpontjában az egyéni szabadság, a törvény előtti egyenlőség és a magántulajdon áll. Az amerikai és a francia forradalom emelte a gyakorlati politika szintjére. Magyar vonatkozása az 1848-49-es forradalom.</li>
+        <li><strong>🏛️ Konzervativizmus, az ellenreakció.</strong> Nem elvont elméletként, hanem a francia forradalom radikalizmusára adott válaszként született. Edmund Burke a hirtelen változás helyett a folytonosságot és a kipróbált intézmények (vallás, család, hagyomány) megőrzését hirdette.</li>
+        <li><strong>🚩 Nacionalizmus, az identitás ereje.</strong> A felvilágosodással párhuzamosan alakult ki, és az uralkodóhoz kötődő hűséget a nemzeti összetartozásra cserélte. A napóleoni háborúk idején erősödött meg, amikor a népek ráébredtek közös kultúrájukra és nyelvükre. Célja, hogy a nemzet és az állam határai egybeessenek.</li>
+        <li><strong>⚖️ Szocializmus, az ipari kor válasza.</strong> Az ipari forradalom vagyoni különbségei és embertelen munkakörülményei hívták életre. Marx és Engels munkásságával vált rendszerezett elméletté (a Kommunista Kiáltvány 1848-as), a társadalmi igazságosságot és a javak közösségi elosztását tűzve ki célul.</li>
+      </ul>
+      <p>Ezek az eszmék folyamatosan hatottak egymásra. A liberálisok és a nacionalisták a 19. század közepén, például 1848-ban, gyakran együtt küzdöttek az elnyomó birodalmak ellen, a konzervatívok pedig fékként működtek a gyors reformokkal szemben. A szocialisták a liberalizmus gazdasági árnyoldalát, a szegénységet bírálták, amit a másik két tábor kezdetben gyanakvással fogadott.</p>
+      <p>Ez a négyes tagolódás adja ma is a keretet, amelyben a politikát értelmezzük. Olyan, mint a társadalom operációs rendszerének forráskódja: hiába jönnek újabb frissítések, a mélyben még mindig ezek a logikai ívek futnak.</p>
+      <p class="ask">❓ Szerinted ma melyik a „leghangosabb” ezek közül, amivel a legtöbbet találkozol a hírekben?</p>
+    </details>
+
+    <details class="card part lv3">
+      <summary><span class="lbl">3. rész</span><h3>A 20. század: traumák és finomhangolások</h3><span class="more">Kinyitás</span></summary>
+      <p class="quote">Minden stabil szerkezet csak addig áll fenn, amíg a benne rejlő feszültségeket képes beépíteni, nem pedig elnyomni.</p>
+      <div class="author"><span class="tagline">A szerző jegyzete</span><p>A nap lebukott a horizont alá, a szobámban a növények sziluettjei megnyúlnak a falon. Megigazítom a nehéz gyapjú kardigánom, és töltök még egy kevés teát, az illata most földesebb, sűrűbb.</p></div>
+      <p>A 19. századi alaprendszerek után a 20. század traumái kényszerítették ki azokat a finomhangolásokat, amelyek ma a mindennapjainkat irányítják. Nem egyszerűen új eszmék születtek: a meglévő kódokat írták át, hogy elkerüljék a teljes rendszerösszeomlást.</p>
+      <div class="interp"><span class="tagline">Szerkesztői kiegészítés · Heywood, 7. fejezet</span>
+        <p><strong>⛓️ Fasizmus, a század sötét újítása.</strong> A liberalizmus, a konzervativizmus és a szocializmus a 19. század gyermeke, a fasizmus a 20. századé: lázadás a felvilágosodás értékei ellen. Az első világháború és utóhatása forrasztotta össze. Olaszországban Mussolini 1922-ben lett miniszterelnök, Németországban Hitler 1933-ban kancellár. A rendszereit a második világháborús vereség döntötte meg. <a href="fasizmus/">Bővebben a Fasizmus témában.</a></p></div>
+      <ul class="pts">
+        <li><strong>🛡️ Kereszténydemokrácia, a biztonsági mentés.</strong> 1945 után Európa romokban hevert. A kereszténydemokrácia középútként jött létre: megőrizte a konzervatív értékrendet és a rendet, de beépítette a szociális védőhálót. Ehhez kötődik a szociális piacgazdaság, amelyben a stabilitás nem a kényszeren, hanem a jóléten alapult.</li>
+        <li><strong>🔄 1968, a nagy rendszerfrissítés.</strong> Fordulópont: a hangsúly a gazdasági túlélésről és az osztályharcról az egyéni önkifejezésre, az életmódra és a kultúrára került. Itt kapott nagy lendületet a modern környezetvédelem, a nemek kérdése, és sok olyan kritikai irányzat, amely nem a vagyont, hanem a rendszerben elfoglalt helyet és az identitást vizsgálja.</li>
+        <li><strong>🗽 Libertarianizmus, a radikális decentralizáció.</strong> A hatvanas-hetvenes években, a túlburjánzó állami kontrollra válaszul, megjelent az igény a teljes egyéni autonómiára. Ez a logika az államot nem segítőnek, hanem felesleges korlátnak látja, és mindent a szabad piacra és az egyéni választásra bízna.</li>
+        <li><strong>⚠️ Populizmus, a hibaüzenet.</strong> Amikor túl nagy lesz a távolság a politikai elit és a választók valósága között, megjelenik a populizmus. Nem klasszikus ideológia, hanem reakció: a nép nevében lép fel a fennálló rend ellen, gyakran érzelmi alapon, de valós hibákra rámutatva.</li>
+      </ul>
+      <p class="edit">Szerkesztői pontosítás: a környezetvédelem és a feminizmus gyökerei 1968-nál régebbiek. Heywood szerint az ökológiai gondolat a 19. századig nyúlik vissza, Rachel Carson Silent Spring című könyve 1962-es, Betty Friedan The Feminine Mystique című könyve 1963-as (Heywood, 8-9. fejezet).</p>
+      <p>A mai eszmék ritkán jelennek meg tisztán. Hibrid rendszerekben élünk: valaki lehet gazdaságilag a teljes szabadság híve, miközben a családjában konzervatív értékeket vall. A modern világ kihívása talán már nem az, hogy melyik program a jobb, hanem hogy a különböző álláspontok hogyan tudnak egymás mellett futni úgy, hogy közben ne bénítsák meg a társadalmi együttműködést.</p>
+      <p class="ask">❓ Érezted már, hogy a saját meggyőződéseid között is feszültség van? Ez nem hiba, hanem a bonyolultság jele. A kérdés az, tudatosan be tudod-e állítani ezeket az ellentmondásokat.</p>
+    </details>
+
+    <details class="card part lv4">
+      <summary><span class="lbl">4. rész</span><h3>A 21. század: a háttérben futó operációs rendszerek</h3><span class="more">Kinyitás</span></summary>
+      <p class="quote">A 21. században az ideológia már nem zászló, amit a magasba emelsz, hanem operációs rendszer, ami a háttérben fut.</p>
+      <div class="author"><span class="tagline">A szerző jegyzete</span><p>Kint hangosan fúj a szél, idebent a kezemben a sötétkék kerámia bögre, a tapintása érdes. A tea kellemesen langyos, az ablakon át mindent átszövő fény áramlik be.</p></div>
+      <p>A 19. század nagy „vasszerkezetei” után a 20. század végére eljutottunk oda, hogy a kérdés már nem az, miben hiszünk, hanem az, hogy milyen szempontok mentén szervezzük az életünket.</p>
+      <ul class="pts">
+        <li><strong>🧩 Posztmodernizmus, a nagy elbeszélések bukása.</strong> A 20. század második fele egyfajta rendszertisztítás volt: az egyetemes érvényűnek hitt nagy igazságok gyakran túl merevnek bizonyultak a valósághoz. A posztmodern a meglévő ideológiákat leleplezte és viszonylagossá tette, rámutatva, hogy minden igazság nézőpont kérdése. Ez felszabadító, de ijesztő is: a stabil talaj helyett folyamatosan változó felületet kaptunk, ahol az egyéni értelmezés lett a legfőbb valuta.</li>
+        <li><strong>⚙️ Neoliberalizmus, az alapértelmezett háttérfolyamat.</strong> <span class="edit">Szerkesztői kiegészítés:</span> hívei szerint a szabad piac hatékonyabban osztja el az erőforrásokat, mint az állam, ezért kevesebb szabályozást, magánosítást és kisebb államot javasolnak. A kritikai olvasat szerint viszont olyan mélyen rögzült, hogy észre sem vesszük: mindent hatékonyságban, önfejlesztésben és piaci értékben mér. Ebben a nézőpontban az ember nem állampolgár, hanem folyamatosan optimalizálandó erőforrás, és aki nem termel vagy nem fogyaszt, könnyen a társadalom szélére kerül.</li>
+      </ul>
+      <div class="interp"><span class="tagline">A szerző értelmezése · nem tankönyvi ideológiák, hanem korjelenségek olvasata</span>
+        <ul class="pts">
+          <li><strong>📈 Globalizmus és technokrácia, a világmintázat.</strong> Ahogy a határok a digitális térben elmosódtak, megjelent a meggyőződés, hogy a társadalmi problémák nem erkölcsi, hanem mérnöki feladatok. A világ egyetlen nagy, összefüggő hálózat, amit optimalizálni kell, és az ideológia maga a hatékonyság: nem az a cél, hogy igazunk legyen, hanem hogy a rendszer, az ellátási láncoktól a pénzügyi tranzakciókig, zavartalanul fusson.</li>
+          <li><strong>🧬 Transzhumanizmus és ökológia, a 21. századi szintézis.</strong> Két ellentétes, mégis összefüggő irányzat. Az ökológia a bolygó fizikai korlátaira figyelmeztet, arra, hogy a forrásaink nem végtelenek. A transzhumanizmus az emberi tudat felszabadítását hirdeti, akár a biológiai korlátok árán is: hogyan maradjunk emberek egy olyan világban, ahol a saját biológiánk válik fejlesztendő területté. <a href="okologizmus/">Az ökologizmusról bővebben.</a></li>
+          <li><strong>🛖 Digitális törzsi kultúra, visszatérés a zárt forráskódhoz.</strong> Mivel a globális rendszerek túl nagyok és átláthatatlanok lettek, az emberek visszahúzódnak digitális buborékokba, ahol csak hasonló gondolkodásúakkal érintkeznek. A közösséget már nem a földrajzi hely, hanem a közös értékrend és érdeklődés határozza meg.</li>
+        </ul>
+      </div>
+      <div class="author"><span class="tagline">A szerző jegyzete</span><p>Elfogy a teám, és ahogy leteszem a bögrét a tölgyfa asztalra, rájövök, hogy ezek az -izmusok csak segédeszközök. A rendszerek jönnek és mennek, de az egyéni rend kialakítása továbbra is egyéni feladat. Nem az a dolgunk, hogy programot válasszunk, hanem hogy megtanuljuk a sajátunkat úgy futtatni, hogy közben ne okozzunk rendszerhibát másoknál.</p></div>
+    </details>
+  </section>
+
+  <section style="display:grid;gap:12px" aria-labelledby="h-tem">
+    <h2 id="h-tem">Ideológiák, amelyekben elmélyülhetsz</h2>
+    <p class="note">Mindegyik négy fokozatban: ízelítő, kártya, mélyfúrás, műhely. Forrás: Andrew Heywood: Political Ideologies, 3. kiadás.</p>
+    <div class="topics">
+      <a class="card topic lv1" href="anarchizmus/"><div class="row"><span class="lbl">6. fejezet</span><span class="st ok">4 fokozat</span></div><h3>Anarchizmus</h3><p>Rend állam nélkül: miért tartja az anarchizmus az államot nemcsak rossznak, hanem fölöslegesnek is.</p></a>
+      <a class="card topic lv4" href="fasizmus/"><div class="row"><span class="lbl">7. fejezet</span><span class="st ok">4 fokozat</span></div><h3>Fasizmus</h3><p>A 20. század ideológiája: honnan jött, mire épült, és miért nehéz egyáltalán ideológiaként elemezni.</p></a>
+      <a class="card topic lv3" href="feminizmus/"><div class="row"><span class="lbl">8. fejezet</span><span class="st ok">4 fokozat</span></div><h3>Feminizmus</h3><p>A nemek politikája: a hullámok, az irányzatok és a vitáik.</p></a>
+      <a class="card topic lv2" href="okologizmus/"><div class="row"><span class="lbl">9. fejezet</span><span class="st ok">4 fokozat</span></div><h3>Ökologizmus</h3><p>Ember és természet: a zöld gondolat gyökerei, a mély és a sekély ökológia.</p></a>
+      <div class="card topic plan"><div class="row"><span class="lbl">alapok</span><span class="st">hamarosan</span></div><h3>Liberalizmus, konzervativizmus, szocializmus, nacionalizmus</h3><p>A könyv fejezetei feldolgozásra várnak.</p></div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="h-fb">
+    <h2 id="h-fb">Szólj hozzá</h2>
+    <p>Hibát találtál, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+    <form class="fb" data-subject="[Tudástár] Politikai ideológiák">
+      <label for="fb-resz">Melyik rész?<select id="fb-resz" data-field="Rész" data-subject-part="1"><option>Áttekintés, 1. rész</option><option>Áttekintés, 2. rész</option><option>Áttekintés, 3. rész</option><option>Áttekintés, 4. rész</option><option>Általában</option></select></label>
+      <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+      <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+      <a class="btn send" href="#">Levél megnyitása</a>
+    </form>
+    <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+    <p class="note">Ha beszélgetnél is a témáról, a <a href="../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a Tudástárba</a></p>
+  </footer>
+</main>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

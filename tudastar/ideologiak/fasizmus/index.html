@@ -1,0 +1,388 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a politikai ideológiákhoz</a><span>Tudástár</span></nav>
+<title>Fasizmus</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 4px 12px; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--lc); line-height: 1.2; }
+.step > div { display: grid; gap: 8px; min-width: 0; }
+.deeper { justify-self: start; }
+.gloss dt { font-family: var(--font-display); font-weight: 700; }
+.gloss dd { margin: 0 0 10px; color: var(--fg); }
+.gloss dd .en { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 440px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0; } .step { grid-template-columns: 1.6rem minmax(0, 1fr); } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Politikai ideológiák</span>
+    <h1>Fasizmus</h1>
+    <p class="lede">Négy fokozat Andrew Heywood ideológiatörténeti fejezete alapján. Az első egy perc, a második öt. Ha érdekel, mehetsz tovább, ha nem, ott is abbahagyhatod.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Kártya</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Mélyfúrás</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">A téma állapota: mind a 4 fokozat kész · forrás: Heywood, 7. fejezet</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <p class="quote">Egy vitában valaki „fasisztának” nevez egy politikust, mert keményen beszél. Pontos ez a szó?</p>
+      <p>Heywood szerint ez a szó leggyakoribb, de legkevésbé pontos használata. A fasizmus nem azonos a puszta elnyomással vagy a türelmetlenséggel. Sajátos eszmei forrásai vannak, és a két világháború közötti rendszerei új uralmi formát hoztak létre. Mi kellene ahhoz, hogy a címke valóban illjen?</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Tippelj, mielőtt továbbmész</span>
+      <ol class="steps">
+        <li>Melyik politikai ideológia tekinti Heywood szerint talán egyedüliként a háborút önmagában jónak?</li>
+        <li>Melyik rendszer valósította meg jobban a totalitárius államot: az államot imádó olasz fasizmus, vagy az államot csak eszköznek tartó német nácizmus?</li>
+      </ol>
+      <p class="note">Nem baj, ha tévedsz: a tévedés után kapott válasz jobban megmarad. A megoldás a következő fokozatban jön.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A lényeg egy mondatban</span>
+      <p class="quote">A fasizmus a felvilágosodás elleni lázadás, amely a nemzet újjászületését a harc, a vezér és a szerves közösség kultuszára építi.</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a kártya, 5 perc</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Kártya</span><span class="t">5 perc · a fejezet a hét lépésben</span></div>
+    <div class="card">
+      <div class="step"><span class="n">1</span><div><h3>Horog</h3><p>Az előbb egy vitát láttál, amelyben a „fasiszta” szó szitokszóként repült, és két tippet kértünk tőled. Most jön, mit jelent a szó Heywood elemzésében.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">2</span><div><h3>Célok</h3><p>A végére tudni fogod:</p>
+        <ul class="pts"><li><span class="chip">megérted</span> miért nehéz a fasizmust ideológiaként meghatározni, és hogyan oldja meg ezt Heywood öt témával;</li>
+        <li><span class="chip">megjegyzed</span> az olasz, államközpontú és a német, fajközpontú hagyomány különbségét;</li>
+        <li><span class="chip">alkalmazod</span> a fogalmakat egy mai szélsőjobboldali pártra a fejezet példái közül: mi illik rá a klasszikus jegyekből, és mi nem.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">3</span><div><h3>Mag</h3>
+        <p><strong>A tippek megoldása:</strong> az első kérdésre a fasizmus. Heywood szerint talán egyedülálló az ideológiák között abban, hogy a háborút önmagában jónak tartja (Heywood, PDF 6. o.). A másodikra a nácizmus. Az olasz rendszerben a monarchia, sok helyi vezető és a katolikus egyház megtartotta a helyét, a náci állam közelebb jutott a totalitárius eszményhez (Heywood, PDF 12. o.).</p>
+        <p><strong>A mag:</strong> a fasizmus az ész helyett az akaratra, az egyén helyett a nemzeti vagy faji közösségre, az egyenlőség helyett a vezérre és a harcra épít, és ebből a nemzet újjászületését ígéri.</p>
+        <ul class="pts"><li><strong>Kifordítás, nem puszta tagadás.</strong> A fasizmus inkább tudja, mi ellen van, mint hogy mi mellett, de a felvilágosodás értékeit fordítja ki: a szabadságból engedelmesség, a haladásból állandó harc lesz (PDF 5. o.).</li>
+        <li><strong>Mozgósító diktatúra.</strong> A vezérelv a vezért teszi a nép valódi akaratának egyedüli hordozójává, ezért a fasiszta rendszer a tömegeket nem kizárja, hanem mozgósítja (PDF 7-8. o.).</li>
+        <li><strong>Két fő ág.</strong> Az olasz fasizmus az államot, a német nácizmus a fajt tekintette a teremtő erőnek (PDF 11. o.).</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">4</span><div><h3>Két példa</h3>
+        <div class="two"><div><p><strong>Ahol működik.</strong> Griffin újjászületés-gondolata jól magyarázza, miért néz egyszerre a múltba és a jövőbe a fasiszta propaganda. A „Harmadik Birodalom” elnevezés egy dicsőnek tartott múltat köt össze egy megújulást ígérő jövőképpel (PDF 10. o.).</p></div>
+        <div><p><strong>Ahol a határa.</strong> A mai radikális jobboldali pártokra a klasszikus jegyek (abszolút vezér, totalitarizmus, nyílt racializmus) Heywood szerint nem illenek. Ezért használ külön „neofasiszta” címkét, és nyitva hagyja, hogy a demokrácia elfogadása valódi-e (PDF 20. o.).</p></div></div></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">5</span><div><h3>Kérdezz vissza</h3><p class="note">Előbb gondold végig a választ, csak utána nyisd le.</p>
+        <details><summary>Miért vonzotta a fasizmus főleg az alsó középosztályt?</summary><div><p>Mert az iparosodás a nagytőke és a szervezett munkásság közé szorította a boltosokat, kisvállalkozókat, gazdákat és kézműveseket. Ez magyarázza a fasizmus kapitalizmus- és kommunizmus-ellenességét is (PDF 2. o.).</p></div></details>
+        <details><summary>Mi a különbség a nemzet és a faj között Heywood szerint?</summary><div><p>A nemzet kulturális közösség, amelyhez honosítással csatlakozni lehet. A fajt biológiai kategóriaként kezelik, születéskor kapottnak és megváltoztathatatlannak tekintik (PDF 14. o.).</p></div></details>
+        <details><summary>Miért maradt a náci paraszti ideológia szinte csak retorika?</summary><div><p>Mert a hódításhoz és a háborúhoz ipari bázis és haditechnika kellett, így a rendszer alatt gyors iparosodás és városnövekedés zajlott (PDF 18. o.).</p></div></details></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">6</span><div><h3>Próbáld ki</h3>
+        <p><strong>10 perc:</strong> írd fel Heywood öt alaptémáját egy lapra: antiracionalizmus, küzdelem, vezérség és elitizmus, szocializmus, ultranacionalizmus. Válassz egyet a fejezet 21. századi példái közül (például a francia Front National vagy az osztrák Szabadságpárt), és a mélyfúrás 5. pillére alapján jelöld, melyik téma jelenik meg náluk Heywood leírásában, és melyik hiányzik.</p>
+        <p><strong>A végén:</strong> írj egy mondatot arról, miért nem dönthető el Heywood szerint még, hogy ezek a pártok valóban alkalmazkodtak-e a demokráciához, vagy csak taktikából fogadják el.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">7</span><div><h3>Visszatérés</h3>
+        <p>A kérdések nem érnek véget az oldallal. Visszajönnek, a helyes válaszig: amit eltaláltál, ritkábban, amit elrontottál, hamarabb. Ha egy kérdésre többször egymás után jól felelsz, kiesik.</p>
+        <ul class="timeline">
+          <li><span class="d">ma</span><span>az oldal végén: 3 kérdés</span></li>
+          <li><span class="d">+2-3 nap</span><span>az elrontottak előre, a jók közül egy</span></li>
+          <li><span class="d">+1 hét</span><span>ami még nem ment, plusz egy korábbi témából</span></li>
+          <li><span class="d">+2-3 hét</span><span>rövid utóteszt: mi maradt meg</span></li>
+        </ul>
+        <p class="note">🔁 Ez az ütemezés példa. A kérdések kiküldése még nincs beállítva, addig tedd be a naptáradba.</p></div></div>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: a mélyfúrás, 20-30 perc</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Mélyfúrás</span><span class="t">20-30 perc · öt pillér, mindegyik előtt egy kérdés</span></div>
+    <p class="note">Jelölések: ❓ kérdés, mielőtt olvasol · 📖 a fogalom a fogalomtárban van · 💡 [AI Insight]: az AI-asszisztens saját hozzáfűzése, nem a forrásé · ⚠️ korlát vagy ellenőrizetlen állítás.</p>
+
+    <div class="card">
+      <span class="lbl">1. pillér</span><h3>Ideológia-e a fasizmus? Eredet és a „fasiszta minimum”</h3>
+      <details><summary>❓ Lehet-e ideológiája egy mozgalomnak, amely maga is megveti az elméletet?</summary><div><p>Heywood szerint igen. Az ész elutasítása és a cselekvés előtérbe állítása maga is egy szellemi fordulat terméke.</p></div></details>
+      <p>A szó a latin <em>fasces</em> kifejezésből ered: vesszőköteg kiálló bárddal, a római magisztrátusok hatalmi jelvénye. Az 1890-es évek Olaszországában a <em>fascia</em> politikai csoportot jelentett, többnyire forradalmi szocialistákét. Ideológiai jelentését Mussolini fegyveres osztagai révén kapta, az első világháború alatt és után (PDF 1. o.).</p>
+      <p>A liberalizmus, a konzervativizmus és a szocializmus a 19. század gyermeke, a fasizmus a 20. századé. Az eszmék gyökerei a 19. századig nyúlnak vissza, de az első világháború és utóhatása forrasztotta össze őket. A pártok gyorsan követték egymást:</p>
+      <ul class="pts">
+        <li><strong>Olaszország:</strong> a Fasiszta Párt 1919-ben alakult, Mussolini 1922-ben lett miniszterelnök, 1926-ra egypártállam jött létre (PDF 1. o.).</li>
+        <li><strong>Németország:</strong> a Nemzetiszocialista Német Munkáspárt szintén 1919-ben alakult, és Hitler vezetésével átvette az olasz fasiszták stílusát. Hitler 1933-ban lett kancellár, és alig több mint egy év alatt diktatúrát épített (PDF 1. o.).</li>
+        <li><strong>Máshol:</strong> 1938-ra Kelet- és Közép-Európában csak Csehszlovákia maradt demokrácia. Portugáliában Salazar 1928-tól, Spanyolországban a polgárháború (1936-39) után Franco vezetett diktatúrát. Európán kívül Heywood a császári Japánt és Perón Argentínáját (1945-55) említi rokon rendszerként (PDF 1-2. o.).</li>
+      </ul>
+      <p>A felemelkedést Heywood szerint egyetlen tényező sem magyarázza önmagában. Szerepet játszott a friss és gyenge demokrácia, az alsó középosztály szorongatott helyzete (Lipset kifejezésével a „közép szélsőségessége”), a vagyonos osztályok félelme a forradalomtól az orosz forradalom után, az 1930-as évek gazdasági világválsága, és az első világháború után maradt frusztrált, militarizált nacionalizmus (PDF 2. o.).</p>
+      <p>Az elemzés két okból nehéz. Trevor-Roper szerint a fasizmus eszmék rosszul összerakott egyvelege, Hitler pedig inkább világnézetnek (📖 <em>Weltanschauung</em>) nevezte, ami hitet kér, nem vitát. A közös mag, a fasiszta minimum (📖) megtalálására több kísérlet született: Nolte (1965), Gregor (1969), Griffin (1993) és Eatwell (1996) egy-egy formulája. Heywood szerint egyetlen mondat nem fogja meg ezt a formátlan jelenséget, ezért öt visszatérő témát nevez meg szerkezeti magként (PDF 3. o.).</p>
+      <p class="src">Heywood, PDF 1-3. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">2. pillér</span><h3>Akarat az ész helyett, harc a béke helyett</h3>
+      <details><summary>❓ Honnan jött a fasizmus cselekvéskultusza és háborúpártisága?</summary><div><p>A 19. század végi ellenfelvilágosodásból és a szociáldarwinizmusból.</p></div></details>
+      <p><strong>Antiracionalizmus (📖).</strong> Nietzsche az akaratot és a „hatalom akarását”, Sorel (1847-1922) a cselekvésre ösztönző politikai mítoszokat, Bergson (1859-1941) a vitalizmust, az egyetemes életerőt hangsúlyozta. Ebből fakad a fasizmus intellektuel-ellenessége és cselekvéskultusza. Egyesek nihilizmusnak tartják, Heywood szerint inkább a felvilágosodás örökségének kifordítása, amely „teremtő rombolással” új civilizációt akar. Az egyetemes ész helyett a szerves közösségre épít: Herder (1744-1803) népszellem-gondolatát (📖 <em>Volksgeist</em>) a nácik a népközösség (<em>Volksgemeinschaft</em>) szélsőségéig vitték (PDF 4-5. o.).</p>
+      <p><strong>Küzdelem.</strong> Darwin (1809-82) elméletéből Spencer (1820-1903) a „legalkalmasabb túlélése” társadalmi tételét formálta. Ez a szociáldarwinizmus (📖) erősen hatott a fasizmusra. A harcot a társadalmi és nemzetközi élet természetes állapotának tekintette, a jót az erővel, a rosszat a gyengeséggel azonosította, és a részvét helyére a katonai erényeket tette (PDF 5-6. o.).</p>
+      <p>Heywood ennek közvetlen következményeit is leírja:</p>
+      <ul class="pts">
+        <li>a náci eugenikai program: a szellemi és testi fogyatékkal élőket előbb kényszersterilizálták, majd 1939 és 1941 között szisztematikusan meggyilkolták;</li>
+        <li>a zsidóság kiirtásának kísérlete 1941-től, amelyet Heywood ugyanennek a faji eugenikának a példájaként tárgyal;</li>
+        <li>a nyugtalan, terjeszkedő külpolitika: élettér (📖 <em>Lebensraum</em>) keleten, az Anschluss (1938), Csehszlovákia feldarabolása és Lengyelország megtámadása (1939), majd a Szovjetunió megtámadása, a Barbarossa-hadművelet (1941) (PDF 6-7. o.).</li>
+      </ul>
+      <p class="src">Heywood, PDF 4-7. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">3. pillér</span><h3>Vezér, elit, tömeg</h3>
+      <details><summary>❓ Miben más a fasiszta diktatúra, mint egy hagyományos diktatúra?</summary><div><p>Nem kizárja, hanem mozgósítja a tömegeket, a vezért a nép akaratának megtestesítőjeként állítva be.</p></div></details>
+      <p>A fasizmus radikálisan elveti az egyenlőséget, mélyen elitista és patriarchális. Társadalomképe három rétegű: a mindent látó vezér, a kizárólag férfiakból álló „harcos” elit (Németországban az SS), és az engedelmességre rendelt tömeg (PDF 7. o.).</p>
+      <ul class="pts">
+        <li><strong>A vezér fölötte áll a szabályoknak.</strong> Nietzsche <em>Übermensch</em>-eszméjét a fasiszták a korlátlan politikai vezérség elméletévé alakították. A Duce és a Führer cím az alkotmányos kötöttségek alól emelte ki a vezetőt.</li>
+        <li><strong>Karizmatikus tekintély (📖).</strong> Weber fogalmával a vezér tekintélye kivételes adottságaiból fakad, nem szabályokból, ezért elvben korlátlan.</li>
+        <li><strong>Vezérelv (📖 <em>Führerprinzip</em>).</strong> Minden tekintély a vezérből árad, aki Rousseau „általános akaratának” egyedüli hordozója. Talmon (1952) ezt totalitárius demokráciának (📖) nevezte.</li>
+        <li><strong>Következmény.</strong> A fasiszta rendszerek népszavazásokkal és nagygyűlésekkel mozgósították a tömegeket, és ebben különböztek a hagyományos diktatúráktól (PDF 7-8. o.).</li>
+      </ul>
+      <div class="insight"><span class="tagline">💡 [AI Insight]</span><p>Ez a pillér adja a választ az Ízelítő vitájára is. Heywood szerint a puszta keménység vagy elnyomás nem elég a címkéhez: a mozgósított tömeg, a szabályok fölé emelt vezér és a mögöttük álló eszmei rendszer együtt különbözteti meg a fasizmust a hagyományos diktatúrától. A kemény hangnem önmagában egyik jegyet sem teljesíti.</p></div>
+      <p class="src">Heywood, PDF 7-8. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">4. pillér</span><h3>Állam vagy faj: a két hagyomány</h3>
+      <details><summary>❓ Miért tartotta az olasz fasizmus az államot mindennek, a nácizmus pedig csak eszköznek?</summary><div><p>Mert az olasz fasizmus az államban, a nácizmus a fajban látta a teremtő erőt.</p></div></details>
+      <p><strong>Az olasz hagyomány: az állam.</strong> Gentile (1875-1944) formuláját Mussolini rendszeresen ismételte: az állampolgár mindent az államért tesz, semmi sem lehet az állammal szemben vagy azon kívül. Az elmélet Hegelhez (1770-1831) köthető, aki az államot etikai eszmének tartotta. Ebből a totalitárius eszmény (📖 totalitarizmus) következik. Heywood megjegyzi, hogy a fogalom maga is vitatott: a hidegháborúban antikommunista eszközzé vált (PDF 11. o.). Gazdasági programja a korporativizmus (📖) volt, „harmadik út” a kapitalizmus és a szocializmus között. 1927-ben 22 korporációt hoztak létre, 1939-ben a Fasciók és Korporációk Kamarája váltotta fel a parlamentet. Heywood szerint a gyakorlatban ez inkább az állami gazdasági ellenőrzés eszköze volt, és a munkásszervezetek szétverésével járt (PDF 12-13. o.). Az olasz fasizmus elvben bárkit befogadhatott fajtól függetlenül. Mussolini 1937 utáni antiszemita törvényeit Heywood főként Hitler kedvére hozott lépésnek tartja (PDF 14. o.).</p>
+      <p><strong>A német hagyomány: a faj.</strong> Itt az állam csak „edény”, a teremtő erő a fajé. A nácizmus a faji antiszemitizmus és a szociáldarwinizmus ötvözete volt. Eszmei előzményei Gobineau (1816-82) fajhierarchiája, valamint Wagner és H. S. Chamberlain (1855-1929) elméletei. Heywood a racializmus (📖) fogalmát elkülöníti az előítéletként értett rasszizmustól, és hangsúlyozza, hogy a faji kategóriák főleg kulturális sztereotípiák, alig van tudományos alapjuk. A náci elmélet ellentmondásokba is futott: az „uralkodó fajt” sem tudták egységesen meghatározni (PDF 14-16. o.).</p>
+      <p>Heywood szerint a náci fajelméletek vezették a rendszert az üldözéstől a terrorig, majd a népirtásig:</p>
+      <ul class="pts">
+        <li>1935: a nürnbergi törvények megtiltották a házasságot és a kapcsolatot németek és zsidók között;</li>
+        <li>1938: a kristályéjszaka után a zsidókat gyakorlatilag kizárták a gazdaságból;</li>
+        <li>1941-től: a „végső megoldás”, Európa zsidóságának kiirtására tett kísérlet, amely mintegy hatmillió zsidó ember halálához vezetett (PDF 17. o.).</li>
+      </ul>
+      <p>A szláv népeket a rendszer alsóbbrendűnek tekintette, ami a keleti terjeszkedést és háborút is igazolta. Darré „vér és föld” paraszti ideológiája a <em>Lebensraum</em> vonzerejét erősítette, de a háború gyors iparosodást hozott, így ez szinte csak retorika maradt (PDF 17-18. o.).</p>
+      <p class="src">Heywood, PDF 11-18. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">5. pillér</span><h3>Szocializmus, ultranacionalizmus és a 21. század</h3>
+      <details><summary>❓ Mennyire volt szocialista a nemzetiszocializmus?</summary><div><p>Korlátozottan. A baloldali szárnyat a hatalomra jutás után félreállították, a gazdaságpolitikát pragmatizmus vezérelte, az antikommunizmus erősebb volt az antikapitalizmusnál.</p></div></details>
+      <p><strong>Szocializmus.</strong> Mussolini korábban a szocialista párt tagja és az <em>Avanti</em> szerkesztője volt. Heywood szerint a szocialista elem részben a munkásszavazatok megszerzését szolgálta, de volt valódi rokonság is: az alsó középosztály ellenszenve a nagytőkével szemben, a kollektivizmus és a gazdaság állami szabályozása. A határok azonban erősek voltak. Az SA baloldali elemeit a „hosszú kések éjszakáján” (1934) félreállították, Röhmöt meggyilkolták. A forradalom inkább a lélek forradalma, az „új ember” megteremtése volt, nem a tulajdonviszonyoké. A marxista értelmezés szerint a fasizmus valódi célja a kapitalizmus megmentése volt (PDF 2., 9-10. o.).</p>
+      <p><strong>Ultranacionalizmus.</strong> A fasizmus a soviniszta, terjeszkedő nacionalizmus szélsőséges változata, amely a nemzeteket természetes riválisoknak tekinti. Griffin szerint mítoszi magja a palingenetikus ultranacionalizmus (📖): a dekadensnek tartott jelen után a nemzet újjászületése. A gyakorlatban ez militarizmust, imperializmust és hódítással biztosított gazdasági önellátást, autarkiát jelentett: Abesszínia, Mandzsúria, a keleti élettér (PDF 10-11. o.).</p>
+      <p><strong>A 21. század.</strong> A fasiszta rendszereket nem népfelkelés, hanem a második világháborús vereség döntötte meg, és 1945 után a mozgalmak csak marginális sikert értek el. Nolte szerint a fasizmus a két háború közötti korhoz kötött jelenség, Fromm a szabadságtól való félelemben látta gyökerét, így állandó veszélynek tartotta (PDF 2. o.). A 20. század végén Heywood több mozgalom megerősödését írja le, és ezeket neofasizmusként (📖) tárgyalja:</p>
+      <ul class="pts">
+        <li><strong>Példák a könyvből:</strong> a francia Front National (Le Pen 2002-ben a második fordulóba jutott), az osztrák Szabadságpárt (Haider, 2000, kormánykoalíció), az MSI átalakulása Alleanza Nazionalévá (1994), a német Republikaner, a brit BNP, valamint Belgium, Dánia és Hollandia (Fortuyn) példája (PDF 19. o.).</li>
+        <li><strong>Kedvező tényezők:</strong> válság és bizonytalanság, kiábrándulás a bevett pártokból, félelem a bevándorlástól és a nemzeti identitás gyengülésétől, a globalizáció.</li>
+        <li><strong>Gátló tényezők:</strong> a posztkoloniális környezet, a multikulturalizmus, a pluralizált, posztindusztriális társadalom és a globális gazdaság, amely mellett a háborúval és autarkiával elért nemzeti újjászületés a múlthoz tartozónak tűnik (PDF 19-20. o.).</li>
+        <li><strong>A nyitott kérdés:</strong> ezek a pártok elfogadják a választásokat, és elhatárolódnak a múlttól. Heywood két lehetőséget lát: vagy a választási versenyben feladják hagyományos értékeiket, vagy a demokrácia elfogadása csak taktika, ahogy a nácik is 1933-ig a parlamentáris demokrácia mellett nyilatkoztak. Szerinte ez csak akkor derül ki, ha hasonló sikert érnek el (PDF 20. o.).</li>
+      </ul>
+      <p class="note">⚠️ A példák a könyv 21. század eleji állapotát tükrözik. Azóta történtekről a fejezet nem szól.</p>
+      <p class="src">Heywood, PDF 2., 9-11., 19-20. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">📖 Fogalomtár</span>
+      <dl class="gloss">
+        <dt>Fasiszta minimum</dt><dd>Az a közös mag, amely minden fasizmusban megvan. Heywood szerint egymondatos formulával nem írható le. <span class="en">fascist minimum, generic fascism</span></dd>
+        <dt>Világnézet</dt><dd>Hitler kedvelt kifejezése: szinte vallásos attitűdrendszer, amely hitet kér, nem érvelést. <span class="en">Weltanschauung</span></dd>
+        <dt>Antiracionalizmus</dt><dd>Az ész korlátainak hangsúlyozása az akarat, az ösztön és az érzelem javára. <span class="en">anti-rationalism</span></dd>
+        <dt>Népszellem, népközösség</dt><dd>Herder szerint minden nemzetnek saját szelleme van. A nácik ebből oszthatatlan nemzeti közösséget formáltak. <span class="en">Volksgeist, Volksgemeinschaft</span></dd>
+        <dt>Szociáldarwinizmus</dt><dd>Az a nézet, hogy a társadalmi és nemzetközi élet harc, amelyben az erős győz. <span class="en">social Darwinism</span></dd>
+        <dt>Élettér</dt><dd>A keleti terjeszkedés náci célja, amelyet a paraszti ideológia is alátámasztott. <span class="en">Lebensraum</span></dd>
+        <dt>Vezérelv</dt><dd>Minden tekintély személyesen a vezérből ered. <span class="en">Führerprinzip, leader principle</span></dd>
+        <dt>Karizmatikus tekintély</dt><dd>Weber fogalma: a vezető kivételes adottságaiból fakadó, szabályokkal nem korlátozott tekintély. <span class="en">charismatic authority</span></dd>
+        <dt>Totalitárius demokrácia</dt><dd>Talmon fogalma: az abszolút hatalom és a népszuverenitás összeolvadása az „általános akarat” nevében. <span class="en">totalitarian democracy</span></dd>
+        <dt>Totalitarizmus</dt><dd>Mindent átfogó uralom, amely a magánszféra és a civil társadalom felszámolására törekszik. <span class="en">totalitarianism</span></dd>
+        <dt>Korporativizmus</dt><dd>A szervezett érdekek bevonása a kormányzásba. Az olasz tekintélyelvű változat „harmadik út” akart lenni tőke és munka között. <span class="en">corporatism</span></dd>
+        <dt>Palingenetikus ultranacionalizmus</dt><dd>Griffin meghatározása: a nemzet újjászületésének mítosza, populista szélsőséges nacionalizmussal összekapcsolva. <span class="en">palingenetic ultranationalism</span></dd>
+        <dt>Racializmus</dt><dd>Az a hit, hogy biológiailag elkülönülő „fajokból” politikai következtetések vonhatók le. A rasszizmus inkább az előítéletet jelöli. <span class="en">racialism</span></dd>
+        <dt>Neofasizmus</dt><dd>A múlttal szakító vagy a fasizmust tagadó, a választási demokráciát elfogadó mai irányzatok gyűjtőneve. <span class="en">neofascism</span></dd>
+      </dl>
+    </div>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe: hol tartunk</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">forrás, mi nyitott, hogyan kapcsolódhatsz be</span></div>
+    <div class="card">
+      <h3>Honnan dolgozunk</h3>
+      <p>Andrew Heywood: Political Ideologies. An Introduction, 3. kiadás, 7. fejezet. A PDF-oldalszámokkal hivatkozunk, mert a nyomtatott oldalszám nem látszik a szövegben. A könyv a 21. század eleji állapotot írja le, az azóta történtek nincsenek benne.</p>
+      <p>Az oldal a fejezet saját szavainkkal írt feldolgozása. Ahol a könyvön túlmegyünk, azt 💡 [AI Insight] jelöli.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts">
+        <li>a négy fokozat a fejezet teljes anyagából;</li><li>az öt pillér, mindegyik előtt egy kérdéssel;</li><li>a fogalomtár 14 fogalommal;</li><li>a tényeket a nyers fejezetszövegen is ellenőriztük.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts">
+        <li>a visszatérő kérdések kiküldése még nincs beállítva;</li><li>a 21. századi példák azóta változtak, ehhez a fejezet nem ad friss adatot;</li><li>a fejezet keretes írásait (például a tekintély-felfogások összevetését) csak érintőlegesen használtuk.</li></ul></div>
+    </div>
+    <div class="card">
+      <h3>A forrás pontatlanságai</h3>
+      <ul class="pts">
+        <li>⚠️ A könyv Abesszínia (Etiópia) olasz megszállását 1934-re teszi (PDF 10. o.). A szokásos történeti dátum az 1935-36-os háború. Az oldalon ezért nem adtunk meg évszámot hozzá.</li>
+        <li>⚠️ A fejezet legkésőbbi eseményei a 2000-es évek elejéről valók, így a 21. századi szakasz egy akkori pillanatképet ad.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kapcsolódik</h3>
+      <ul class="pts">
+        <li><a href="../anarchizmus/">Anarchizmus</a>: a tekintély másik végpontja. A fasizmus a vezérben összpontosítja, az anarchizmus elveti.</li>
+        <li><a href="../feminizmus/">Feminizmus</a>: Heywood a fasizmust mélyen patriarchálisnak írja le, ez a feminista elemzés egyik tárgya.</li>
+        <li><a href="../okologizmus/">Ökologizmus</a>: a náci „vér és föld” paraszti ideológia város- és iparellenessége ott érdemel összevetést.</li>
+        <li><a href="../">Áttekintés</a>: a politikai ideológiák témakör többi fejezete.</li>
+      </ul>
+    </div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, valami nem érthető, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] Fasizmus">
+        <label for="fb-fok">Melyik fokozat?<select id="fb-fok" data-field="Fokozat" data-subject-part="1"><option>1. Ízelítő</option><option>2. Kártya</option><option selected>3. Mélyfúrás</option><option>4. Műhely</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a politikai ideológiákhoz</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-ideologiak-fasizmus-fok";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go, true); });
+  var h = (location.hash || "").match(/^#f([1-4])$/);
+  show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

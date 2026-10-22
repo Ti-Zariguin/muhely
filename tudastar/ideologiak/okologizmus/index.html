@@ -1,0 +1,396 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a politikai ideológiákhoz</a><span>Tudástár</span></nav>
+<title>Ökologizmus</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 4px 12px; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--lc); line-height: 1.2; }
+.step > div { display: grid; gap: 8px; min-width: 0; }
+.deeper { justify-self: start; }
+.gloss dt { font-family: var(--font-display); font-weight: 700; }
+.gloss dd { margin: 0 0 10px; color: var(--fg); }
+.gloss dd .en { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 440px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0; } .step { grid-template-columns: 1.6rem minmax(0, 1fr); } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Politikai ideológiák</span>
+    <h1>Ökologizmus: az ember mint a természet egy szála</h1>
+    <p class="lede">Négy fokozat Andrew Heywood könyvének 9. fejezetéből. Az első egy perc, a második öt. Ha érdekel, mehetsz tovább, ha nem, ott is abbahagyhatod.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Kártya</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Mélyfúrás</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">A téma állapota: mind a 4 fokozat kész · forrás: Heywood, 9. fejezet</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <p class="quote">Egy tó partján falu él. A tó vizet és halat ad, a falu egyre több halat fog, és a szennyvizét is a tóba engedi. Ki a főnök ebben a rendszerben: a falu vagy a tó?</p>
+      <p>Az ökologizmus szerint maga a kérdés rossz. A falu és a tó ugyanannak a hálónak a része, és egyik sem marad meg a másik nélkül.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Tippelj, mielőtt továbbmész</span>
+      <ol class="steps">
+        <li>Melyik könyvet tartják sokan az első olyan műnek, amely az ökológiai válságra figyelmeztetett, és mikor jelent meg?</li>
+        <li>Hol jelent meg először a politikai ökológia Heywood szerint: a baloldalon vagy a jobboldalon?</li>
+      </ol>
+      <p class="note">Nem baj, ha tévedsz: a tévedés után kapott válasz jobban megmarad. A megoldás a következő fokozatban jön.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A lényeg egy mondatban</span>
+      <p class="quote">Az ökologizmus az embert a természet egyik részének tekinti, nem az urának, és ebből gyökeresen új politikát vezet le.</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a kártya, 5 perc</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Kártya</span><span class="t">5 perc · a fejezet lényege hét lépésben</span></div>
+    <div class="card">
+      <div class="step"><span class="n">1</span><div><h3>Horog</h3><p>A falu és a tó, meg két tipp. Az előbb ezt kaptad. Most jönnek a válaszok.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">2</span><div><h3>Célok</h3><p>A végére tudni fogod:</p>
+        <ul class="pts"><li><span class="chip">megérted</span> miben más a természetközpontú szemlélet, mint az emberközpontú;</li>
+        <li><span class="chip">megjegyzed</span> az öt alaptémát és a négy politikai ágat;</li>
+        <li><span class="chip">alkalmazod</span> a sekély és a mély ökológia megkülönböztetését egy konkrét környezeti döntésre.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">3</span><div><h3>Mag</h3>
+        <p><strong>A tippek megoldása:</strong> az első Rachel Carson könyve, a The Silent Spring, 1962-ből. A második a jobboldal: Heywood Bramwell nyomán azt írja, hogy a politikai ökológia legkorábbi megjelenései jobboldaliak voltak, a legélesebb példa a náci kori „Vér és talaj” agrárfilozófia (Heywood, PDF 2. és 15. o.).</p>
+        <p><strong>Egy mondatban:</strong> az ökologizmus a természetet egymásra utalt rendszerek hálójának látja, amelyben az ember egy szál a sok közül, ezért a korlátlan anyagi növekedés helyett fenntarthatóságot követel.</p>
+        <ul class="pts"><li><strong>A hagyományos ideológiák emberközpontúak.</strong> Egyénben, osztályban, nemzetben gondolkodnak, és a természetet főként erőforrásnak tekintik (PDF 2-3. o.).</li>
+        <li><strong>A Föld zárt, véges rendszer.</strong> Ezért a korlátlan növekedés nem tartható fenn (PDF 9-10. o.).</li>
+        <li><strong>Az ökologizmus keresztező ideológia.</strong> Konzervatívok, szocialisták, anarchisták és feministák is magukévá tették, más-más céllal (PDF 15. o.).</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">4</span><div><h3>Két példa</h3>
+        <div class="two"><div><p><strong>Ahol működik.</strong> A fosszilis energia. Schumacher szerint az emberiség jövedelemként költi el azt, ami valójában természeti tőke. A nap-, a szél- és a hullámenergia ezzel szemben valóban jövedelemként kezelhető (PDF 10-11. o.).</p></div>
+        <div><p><strong>Ahol a határa.</strong> A fejlődő országok. Számukra az ökológiai korlátok azt jelenthetik, hogy elzárják előlük a felzárkózást, amit a Nyugat éppen iparosodással és szennyezéssel ért el. Heywood szerint ezért nehéz az ökologizmusból globális ideológiát csinálni (PDF 20. o.).</p></div></div></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">5</span><div><h3>Kérdezz vissza</h3><p class="note">Előbb gondold végig a választ, csak utána nyisd le.</p>
+        <details><summary>Miért nem lehet Heywood szerint az ökologizmust elhelyezni a bal-jobb tengelyen?</summary><div><p>Mert abból indul ki, amit a hagyományos ideológiák figyelmen kívül hagytak: az embert minden élőlényhez kötő kapcsolatokból. A megszokott kategóriák ezt nem írják le (PDF 2. o.).</p></div></details>
+        <details><summary>Mi a különbség a világos és a sötét zöldek között?</summary><div><p>A világos zöldek elfogadják a fenntartható, lassabb növekedést. A sötét zöldek nulla növekedést, kis falusi közösségeket akarnak, és elutasítják az ipart és a modern technológiát (PDF 11. o.).</p></div></details>
+        <details><summary>Miben látja a fő bajt az ökoszocializmus, és miben az ökofeminizmus?</summary><div><p>Az ökoszocializmus a kapitalizmus profithajhászásában, az ökofeminizmus a patriarchátusban (PDF 16. és 18. o.).</p></div></details></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">6</span><div><h3>Próbáld ki</h3>
+        <p><strong>10 perc:</strong> válassz egy hírt egy helyi környezeti döntésről, például egy útról, egy erőműről vagy egy parkról. Írd le két mondatban, hogyan érvelne róla egy sekély ökológus, és két mondatban, hogyan egy mélyökológus.</p>
+        <p><strong>Utána egy mondat:</strong> mit tartana a probléma gyökerének a jobboldali ökologizmus, az ökoszocializmus, az ökoanarchizmus és az ökofeminizmus?</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">7</span><div><h3>Visszatérés</h3>
+        <p>A kérdések nem érnek véget az oldallal. Visszajönnek, a helyes válaszig: amit eltaláltál, ritkábban, amit elrontottál, hamarabb. Ha egy kérdésre többször egymás után jól felelsz, kiesik.</p>
+        <ul class="timeline">
+          <li><span class="d">ma</span><span>az oldal végén: 3 kérdés</span></li>
+          <li><span class="d">+2-3 nap</span><span>az elrontottak előre, a jók közül egy</span></li>
+          <li><span class="d">+1 hét</span><span>ami még nem ment, plusz egy korábbi témából</span></li>
+          <li><span class="d">+2-3 hét</span><span>rövid utóteszt: mi maradt meg</span></li>
+        </ul>
+        <p class="note">🔁 Ez az ütemezés példa. A kérdések kiküldése még nincs beállítva, addig tedd be a naptáradba.</p></div></div>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: a mélyfúrás, 20-30 perc</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Mélyfúrás</span><span class="t">20-30 perc · öt pillér, mindegyik előtt egy kérdés</span></div>
+    <p class="note">Jelölések: ❓ kérdés, mielőtt olvasol · 📖 a fogalom a fogalomtárban van · 💡 [AI Insight]: az AI-asszisztens saját hozzáfűzése, nem a forrásé · ⚠️ korlát vagy ellenőrizetlen állítás.</p>
+
+    <div class="card">
+      <span class="lbl">1. pillér</span><h3>Ki áll a középpontban? Ember vagy természet</h3>
+      <details><summary>❓ Miért mondják az ökológusok, hogy a hagyományos ideológiák mind ugyanazt a hibát követik el?</summary><div><p>Mert mind emberi kategóriákban (egyén, osztály, nem, nemzet) és emberi értékekben (szabadság, egyenlőség, igazságosság, rend) gondolkodnak, a természetet pedig erőforrásnak tekintik.</p></div></details>
+      <p>Heywood szerint az ökologizmus a hagyományos politikai gondolkodás legalapvetőbb feltevését bírálja: hogy az ember a létezés középpontja. Ez az antropocentrizmus (📖). David Ehrenfeld 1978-ban ezt a humanizmus arroganciájának nevezte. Ebben a szemléletben a természetet meg kell hódítani, le kell győzni.</p>
+      <p>Az ökologizmus másik pontból indul: a természetből mint élő fajok és élettelen környezet törékeny kapcsolatainak hálójából. Az ember ennek elválaszthatatlan része, nem a főszereplője. Ez az ökocentrizmus (📖). A kulcsfogalom az ökoszisztéma (📖): élő és élettelen elemekből álló, önszabályozó rendszer, például egy tó. A tó üledéke táplálja a növényeket, azok a halakat, az elhalt élőlények pedig visszajutnak az üledékbe. Az ökoszisztémák egymásba kapcsolódnak, a legnagyobb a bioszféra.</p>
+      <p>A legfontosabb belső választóvonalat Arne Naess norvég filozófus húzta meg 1973-ban. A sekély ökológia (📖) elfogadja az ökológia tanulságait, de az emberi szükségletek szolgálatába állítja: ha óvjuk a természetet, az továbbra is eltart minket. A mélyökológia (📖) elutasítja, hogy az ember bármely más fajnál fontosabb volna, és azt mondja, az emberi élet célja a természet fenntartása, nem fordítva.</p>
+      <p>A két tábor kölcsönösen bírálja egymást. A mélyökológusok szerint a sekély ökológia rejtett emberközpontúság, amely a fejlett országok jólétét védi. A sekély, vagy ahogy magukat nevezik, humanista ökológusok szerint a mélyökológia irracionális és misztikus, és olyan irreális megoldásokat javasol, amelyek népszerűtlenek lennének.</p>
+      <div class="insight"><span class="tagline">💡 [AI Insight]</span><p>A sekély és a mély ökológia gyakran ugyanazt akarja megtenni, és csak az indoklásban tér el. Mindkettő védheti ugyanazt az erdőt, de az egyik az emberekért, a másik az erdőért. Érdemes ezért mindig azt kérdezni, kinek az érdekében szól az érv.</p></div>
+      <p class="src">Heywood, PDF 2-5. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">2. pillér</span><h3>A gép helyett a háló: holizmus</h3>
+      <details><summary>❓ Mit kifogásol Fritjof Capra a Descartes és Newton nyomán kialakult tudományban?</summary><div><p>Hogy gépnek látja a világot, amit szét lehet szedni, meg lehet javítani, ki lehet cserélni. Capra szerint ez a szemlélet a mai környezeti válság filozófiai alapja.</p></div></details>
+      <p>Capra a karteziánus-newtoni paradigmát teszi felelőssé. Ez a világot különálló részekre bontja, és részenként magyarázza. Ez a redukcionizmus. Vele szemben áll a holizmus (📖), Jan Smuts 1926-os szava: az egész fontosabb a részeinél, és a részek csak egymáshoz és az egészhez viszonyítva értelmesek.</p>
+      <p>Az ökológusok több helyről merítenek új paradigmát:</p>
+      <ul class="pts">
+        <li><strong>Az új fizika.</strong> Einstein, Bohr és Heisenberg nyomán a világ kölcsönhatások rendszereként jelenik meg, nem egyetlen ok-okozati láncként.</li>
+        <li><strong>A keleti miszticizmus.</strong> Capra 1975-ös könyve, a The Tao of Physics párhuzamot vont az új fizika és a keleti gondolkodás között.</li>
+        <li><strong>A sáfárság eszméje</strong> a monoteista vallásokban: az ember gondozója a teremtett világnak, nem ura.</li>
+        <li><strong>A Föld-anya képzete</strong> a kereszténység előtti vallásokban, ahol kövek, folyók és maga a Föld is élőnek számított.</li>
+      </ul>
+      <p>Erre épül James Lovelock Gaia-hipotézise (📖), amelyet 1979-es könyvében fejtett ki: a Föld önmagát fenntartó élő szervezet. Heywood rámutat egy feszültségre is. A Gaia-elméletben a bolygó egészsége bármely fajénál fontosabb, az emberénél is, ezért nem mindig egyezik a környezetvédő mozgalom céljaival. Lovelock ráadásul támogatja a technológiát, és ellenzi a Föld imádatát.</p>
+      <p class="src">Heywood, PDF 6-9. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">3. pillér</span><h3>Véges hajón utazunk: fenntarthatóság</h3>
+      <details><summary>❓ Miért veszélyes Kenneth Boulding szerint a „cowboy-gazdaság” gondolkodása?</summary><div><p>Mert korlátlan lehetőségeket feltételez, és felelőtlen, kizsákmányoló viselkedésre ösztönöz, holott a Föld véges erőforrású zárt rendszer.</p></div></details>
+      <p>A zöldek szerint a hagyományos, általuk „szürkének” nevezett pártok mind korlátlan anyagi növekedést ígérnek. Herman Daly 1974-ben ezt növekedésmániának hívta. A zöldek a kapitalizmust és a kommunizmust egyaránt az iparizmus (📖) változatának tekintik: mindkettő nagyüzemi termelésre és szüntelen növekedésre épül.</p>
+      <p>Boulding 1966-ban vetette fel a Föld-űrhajó (📖) képét. A múlt cowboy-gazdaságával szemben a jövő űrhajós gazdaságát állította, amely tudja, hogy a készletek végesek. Zárt rendszerben az entrópia érvényesül: a rendszer hajlik a hanyatlásra. E. F. Schumacher (1911-1977) szerint a fosszilis energia természeti tőke, nem folyó jövedelem, és az emberiség hibásan éli fel.</p>
+      <p>A fenntarthatóság (📖) a bioszféra képessége arra, hogy egészséges maradjon és fennmaradjon. Ehhez megújuló energia kell, és más gazdasági szemlélet is. Schumacher 1973-as Small is Beautiful című könyvében ezt „buddhista gazdaságtannak” nevezte, amely a „helyes megélhetés” elvére épül: a termelés a személyes fejlődést és a közösséget is szolgálja.</p>
+      <ul class="pts">
+        <li><strong>Világos zöldek</strong> (Németországban Realos): elfogadják a fenntartható növekedést, lassabb gazdagodással, például adózási ösztönzőkkel.</li>
+        <li><strong>Sötét zöldek</strong> (Fundis): ez szerintük nem elég radikális. Nulla növekedést, kis falusi közösségeket, kézműves tudást akarnak, és elutasítják az ipart és a modern technológiát.</li>
+      </ul>
+      <p class="src">Heywood, PDF 9-11. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">4. pillér</span><h3>Kinek tartozunk erkölcsileg? Környezeti etika és önmegvalósítás</h3>
+      <details><summary>❓ Miért nem elég a mélyökológusoknak az állatjogi érvelés?</summary><div><p>Mert csak bizonyos élőlényekre terjed ki, és egyéni jogokra épül. A mélyökológusok viszont az egész természet belső értékét vallják.</p></div></details>
+      <p>A hagyományos etika emberközpontú. Az utilitarizmus, Locke, Ricardo és Marx munkaérték-elmélete a természetnek csak eszközértéket ad: annyit ér, amennyit az ember kihoz belőle. Az ökológusok lépésenként tágítják az erkölcsi kört:</p>
+      <ul class="pts">
+        <li><strong>A jövő nemzedékek.</strong> Ma úgy kell élni, hogy az utánunk jövőknek is maradjon.</li>
+        <li><strong>Az állatok.</strong> Peter Singer 1976-ban az állatjólét mellett érvelt, és a fajizmus szóval bírálta az ember érdekeinek önkényes előnyben részesítését. Érve viszont nem terjed ki a nem érző létezőkre, például a fákra és a folyókra. Tom Regan 1983-ban jogalapon érvelt, de ez individualista, ezért a mélyökológusokat nem elégíti ki. Goodin „zöld értékelmélete” is maradék humanizmust hordoz.</li>
+        <li><strong>A természet egésze.</strong> A mélyökológia a természet belső értékét vallja. Ide tartozik Aldo Leopold földetikája és Naess elve, a biocentrikus egyenlőség (📖), vagyis minden élőlény egyenlő joga az életre és a virágzásra.</li>
+      </ul>
+      <p>⚠️ Heywood a bírálatokat is bemutatja. Egyesek szerint a biocentrikus egyenlőség idealizált természetképre épül, és nem számol a tápláléklánccal és a létharccal. Mások szerint elfelejti, hogy az erkölcs emberi találmány, a természet pedig épp attól természetes, hogy nem erkölcsi.</p>
+      <p>Az ötödik alaptéma az önmegvalósítás. A környezeti érzékenység növekedését gyakran a posztmaterializmussal (📖) magyarázzák, Inglehart 1977-es elmélete nyomán, amely Maslow szükséglethierarchiájára épül. Az ökologizmus szerint az emberiségnek sok a tudása arról, hogyan tegyen valamit, de kevés arról, miért. A megoldás egy kiterjesztett én, amely azonosul a természettel: Naess, Warwick Fox ausztrál filozófus és a buddhista „nem-én” gondolata. Erich Fromm (1900-80) a birtoklás helyett a létezés módját ajánlja.</p>
+      <p class="src">Heywood, PDF 12-14. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">5. pillér</span><h3>Sok ideológia zöld arca, és a jövő kihívásai</h3>
+      <details><summary>❓ Miért nevezi Heywood az ökologizmust keresztező ideológiának?</summary><div><p>Mert a nacionalizmushoz és a feminizmushoz hasonlóan több hagyomány is magáévá tette: konzervatívok, fasiszták, szocialisták, anarchisták, feministák, más-más politikai célra.</p></div></details>
+      <div class="tbl"><table>
+        <thead><tr><th>Ág</th><th>Mit tart a baj gyökerének</th><th>Kulcsnevek</th></tr></thead>
+        <tbody>
+          <tr><td>Jobboldali ökologizmus</td><td>Kemény változata a náci kori „Vér és talaj” agrárfilozófia. Puha változata az ökokonzervativizmus: a vidéki élet, a természeti, építészeti és társadalmi örökség megőrzése.</td><td>Walter Darré (mezőgazdasági miniszter 1933-42), Edward Goldsmith</td></tr>
+          <tr><td>Ökoszocializmus</td><td>A kapitalizmus profithajhászása. A kapitalizmus a környezet ellensége, a szocializmus a barátja.</td><td>Rudolf Bahro</td></tr>
+          <tr><td>Ökoanarchizmus</td><td>A hierarchia. A társadalmi ökológia (📖) szerint az ökológiai egyensúly a társadalmi stabilitás alapja, és a decentralizált, önellátó közösség úgy működik, mint egy ökoszisztéma.</td><td>Murray Bookchin, Peter Kropotkin, William Morris</td></tr>
+          <tr><td>Ökofeminizmus</td><td>A patriarchátus: a természetet a férfiak és a férfiuralom intézményei fenyegetik.</td><td>Mary Daly (Gyn/Ecology, 1979)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Mindegyik ágnak megvan a maga belső vitája, ahogy Heywood bemutatja. A náci rezsim katonai terjeszkedése a valóságban fokozta az iparosodást. Az ökoszocializmusban feszül a vörös és a zöld prioritás, és a szovjet, kelet-európai államszocializmus súlyos károkat okozott, az Aral-tótól Csernobilig (1986). Az ökoanarchizmus jövőképét a zöldek gyakran elfogadják, az odavezető utat nem: sokan a kormányt tartják a közös cselekvés eszközének. Az ökofeministák egy része a nők biológiai természetközelségét hangsúlyozza, más része társadalmi okokat lát.</p>
+      <p>A 21. századra Heywood négy nehézséget sorol fel:</p>
+      <ul class="pts">
+        <li>nehéz globális ideológiává válnia, mert a fejlődő országok szemében elzárja a felzárkózást, a Nyugat pedig nem akar lemondani jólétéről;</li>
+        <li>a gazdasági globalizáció, mint egyfajta hiper-iparizmus, még mélyebbre ágyazta a fogyasztói kultúrát;</li>
+        <li>a növekedésellenes üzenet választási szempontból vonzatlan lehet, Bramwell szerint pedig téves is, mert a válságot csak gazdag társadalmak tudják kezelni;</li>
+        <li>a zöld gondolkodás talán csak városi divat, a fiatalok és jómódúak átmeneti reakciója.</li>
+      </ul>
+      <p>A legnagyobb kihívás a kívánt változás mérete. A mélyökológia minden más ideológiánál radikálisabb, új létezésmódot akar, ami idegen az iparosodott kultúrától. Heywood hozzáteszi, hogy épp ez lehet a vonzereje is. A zöld pártok ingadozó választási sikere szerinte nem jó mércéje a zöld eszmék erejének, mert a nagy pártok is átvették a környezetbarát álláspontokat.</p>
+      <div class="insight"><span class="tagline">💡 [AI Insight]</span><p>A táblázat egy olvasási kulcsot is ad. Ha egy zöld érvet hallasz, kérdezd meg, mit tart a baj gyökerének: a piacot, a hierarchiát, a férfiuralmat vagy az elveszett vidéki rendet. Ebből általában kiderül, melyik hagyományból jön.</p></div>
+      <p class="src">Heywood, PDF 15-20. o.</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">📖 Fogalomtár</span>
+      <dl class="gloss">
+        <dt>Ökológia</dt><dd>Az élőlények és környezetük kapcsolatait vizsgáló tudomány, Ernst Haeckel szava 1866-ból. Az ökologizmus központi elve. <span class="en">ecology</span></dd>
+        <dt>Ökoszisztéma</dt><dd>Élő és élettelen elemekből álló, önszabályozó természeti rendszer, például egy tó. <span class="en">ecosystem</span></dd>
+        <dt>Antropocentrizmus</dt><dd>Emberközpontú szemlélet, amely az embert a létezés középpontjába helyezi. <span class="en">anthropocentrism</span></dd>
+        <dt>Ökocentrizmus</dt><dd>Természetközpontú szemlélet, amelyben az ember a természet elválaszthatatlan része. <span class="en">ecocentrism</span></dd>
+        <dt>Sekély ökológia</dt><dd>Az ökológia tanulságait az emberi szükségletek szolgálatába állító irányzat. <span class="en">shallow ecology</span></dd>
+        <dt>Mélyökológia</dt><dd>Az ember elsőbbségét elutasító, a természet belső értékét valló irányzat. <span class="en">deep ecology</span></dd>
+        <dt>Holizmus</dt><dd>Az a nézet, hogy az egész fontosabb a részeinél, és a részek csak az egészben értelmesek. <span class="en">holism</span></dd>
+        <dt>Gaia-hipotézis</dt><dd>Lovelock elmélete, amely szerint a Föld önmagát fenntartó élő szervezet. <span class="en">Gaia hypothesis</span></dd>
+        <dt>Iparizmus</dt><dd>A kapitalizmust és a szocializmust egyaránt átfogó „szuperideológia”, amely nagyüzemi termelésre és szüntelen növekedésre épül. <span class="en">industrialism</span></dd>
+        <dt>Föld-űrhajó</dt><dd>Boulding képe a véges, kimeríthető erőforrásokról. <span class="en">spaceship Earth</span></dd>
+        <dt>Fenntarthatóság</dt><dd>Egy rendszer, itt a bioszféra, képessége arra, hogy egészséges maradjon és fennmaradjon. <span class="en">sustainability</span></dd>
+        <dt>Biocentrikus egyenlőség</dt><dd>Az az elv, hogy az ökoszféra minden élőlénye és létezője egyenlő erkölcsi értékű. <span class="en">biocentric equality</span></dd>
+        <dt>Posztmaterializmus</dt><dd>Elmélet, amely szerint jólétben az emberek az életminőség kérdései felé fordulnak. <span class="en">postmaterialism</span></dd>
+        <dt>Társadalmi ökológia</dt><dd>Bookchin nézete, hogy az ökológiai egyensúly a társadalmi stabilitás legbiztosabb alapja. <span class="en">social ecology</span></dd>
+      </dl>
+    </div>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe: hol tartunk</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">honnan dolgozunk, mi nyitott, hogyan kapcsolódhatsz be</span></div>
+    <div class="card">
+      <h3>Honnan dolgozunk</h3>
+      <p>Andrew Heywood: Political Ideologies. An Introduction, 3. kiadás, 9. fejezet (Ecologism). A fejezet 21 PDF-oldal.</p>
+      <p>PDF-oldalszámokkal hivatkozunk, mert a nyomtatott oldalszám a kinyert szövegben nem látszik. A „PDF 5. o.” tehát a fejezetfájl ötödik oldala.</p>
+      <p>A könyv a 21. század eleji állapotot írja le. Ami azóta történt, például a későbbi klímapolitika, nincs benne, és ezen az oldalon sem.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts">
+        <li>a fejezet mind a négy fő része feldolgozva;</li><li>az öt alaptéma és a négy politikai ág;</li><li>a bírálatok, ahogy Heywood bemutatja;</li><li>fogalomtár 14 fogalommal.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts">
+        <li>a visszatérő kérdések kiküldése még nincs beállítva;</li><li>a fejezet ajánlott irodalmát nem dolgoztuk fel;</li><li>a könyv óta eltelt évek fejleményei kimaradtak.</li></ul></div>
+    </div>
+    <div class="card">
+      <h3>A forrás pontatlanságai</h3>
+      <ul class="pts">
+        <li>A könyv James Lovelockot kanadai légkörkémikusnak írja. Lovelock brit tudós volt, ezért ezt az oldal nem vette át.</li>
+        <li>A kinyert szövegben „Verner Heisenberg” áll. A fizikus neve helyesen Werner Heisenberg.</li>
+        <li>A kinyert szövegben „Eric Fromm” és „Rudolph Bahro” áll. A szokásos írásmód Erich Fromm és Rudolf Bahro.</li>
+        <li>A 3. kiadás Lovelockot és Bookchint még élőként, csak születési évvel említi (1919, 1921). Lovelock 2022-ben, Bookchin 2006-ban halt meg.</li>
+      </ul>
+      <p class="note">⚠️ Ezek a kiegészítések nem a könyvből valók.</p>
+    </div>
+    <div class="card">
+      <h3>Kapcsolódik</h3>
+      <ul class="pts">
+        <li><a href="../anarchizmus/">Anarchizmus</a>: Kropotkin és Morris, akikre az ökoanarchizmus épít.</li>
+        <li><a href="../fasizmus/">Fasizmus</a>: a „Vér és talaj” ideológia és a jobboldali ökologizmus.</li>
+        <li><a href="../feminizmus/">Feminizmus</a>: a patriarchátus fogalma, amelyből az ökofeminizmus kiindul.</li>
+        <li><a href="../">A politikai ideológiák áttekintése</a></li>
+      </ul>
+    </div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, valami nem érthető, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] Ökologizmus">
+        <label for="fb-fok">Melyik fokozat?<select id="fb-fok" data-field="Fokozat" data-subject-part="1"><option>1. Ízelítő</option><option>2. Kártya</option><option selected>3. Mélyfúrás</option><option>4. Műhely</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a politikai ideológiákhoz</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-ideologiak-okologizmus-fok";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go, true); });
+  var h = (location.hash || "").match(/^#f([1-4])$/);
+  show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

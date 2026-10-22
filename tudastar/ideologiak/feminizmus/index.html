@@ -1,0 +1,367 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a politikai ideológiákhoz</a><span>Tudástár</span></nav>
+<title>Feminizmus</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 4px 12px; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--lc); line-height: 1.2; }
+.step > div { display: grid; gap: 8px; min-width: 0; }
+.deeper { justify-self: start; }
+.gloss dt { font-family: var(--font-display); font-weight: 700; }
+.gloss dd { margin: 0 0 10px; color: var(--fg); }
+.gloss dd .en { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 440px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0; } .step { grid-template-columns: 1.6rem minmax(0, 1fr); } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Politikai ideológiák</span>
+    <h1>Feminizmus</h1>
+    <p class="lede">Négy fokozat. Az első egy perc, a második öt. Ha érdekel, mehetsz tovább, ha nem, ott is abbahagyhatod.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Kártya</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Mélyfúrás</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">A téma állapota: mind a 4 fokozat kész · forrás: Heywood, 8. fejezet</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <p class="quote">Egy pár mindkét tagja teljes munkaidőben dolgozik. Este a nő főz, mos és leckét ír a gyerekkel, a férfi pihen. Mindketten azt mondják: „ez a mi magánügyünk”. Politikai kérdés ez?</p>
+      <p>A hagyományos politikaelmélet szerint nem, hiszen a politika a parlamentben és a pártokban zajlik. A feminizmus szerint viszont igen. Ez az oldal arról szól, miért gondolják így, és miben vitatkoznak egymással a feministák.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Tippelj, mielőtt továbbmész</span>
+      <ol class="steps">
+        <li>Hol és mikor szavazhattak először a nők országos választáson?</li>
+        <li>Mit jelent szó szerint a „patriarchátus” szó?</li>
+      </ol>
+      <p class="note">Nem baj, ha tévedsz: a tévedés után kapott válasz jobban megmarad. A megoldás a következő fokozatban jön.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A lényeg egy mondatban</span>
+      <p class="quote">A feminizmus szerint a nők nemük miatt hátrányban vannak, ez a hátrány társadalmi eredetű, ezért megszüntethető, de hogy hogyan, abban az irányzatok élesen eltérnek.</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a kártya, 5 perc</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Kártya</span><span class="t">5 perc · a feminizmus hét lépésben</span></div>
+    <div class="card">
+      <div class="step"><span class="n">1</span><div><h3>Horog</h3><p>Az esti házimunka egy kétkeresős családban: magánügy vagy politika? Az Ízelítőben ezt a kérdést kaptad, és két tippet. Tartsd észben a válaszodat.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">2</span><div><h3>Célok</h3><p>A végére tudni fogod:</p>
+        <ul class="pts"><li><span class="chip">megérted</span> miért tekinti a feminizmus a családot és a magánéletet is politikai terepnek;</li>
+        <li><span class="chip">megjegyzed</span> a három fő irányzatot (liberális, szocialista, radikális) és mindegyik egy-egy fő gondolkodóját;</li>
+        <li><span class="chip">alkalmazod</span> a biológiai és a társadalmi nem megkülönböztetését egy hétköznapi helyzetre.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">3</span><div><h3>Mag</h3>
+        <p><strong>A tippek megoldása:</strong> a nők először Új-Zélandon szavazhattak, 1893-ban. A „patriarchátus” szó szerint „az apa uralmát” jelenti, tágabb értelemben a férfiak uralmát. <span class="src">Heywood, PDF 2. és 5. o.</span></p>
+        <p>A feminizmus a nemek közti viszonyt hatalmi, tehát politikai viszonynak látja. Ezt a viszonyt társadalmilag felépítettnek, ezért megváltoztathatónak tartja.</p>
+        <ul class="pts"><li><strong>A politika nem áll meg a bejárati ajtónál.</strong> A családi munkamegosztás is hatalmi kérdés. <span class="src">PDF 4. o.</span></li>
+        <li><strong>A biológiai nem adott, a társadalmi nem kijelölt.</strong> A szerepeket és elvárásokat a kultúra rendeli a nőkhöz és a férfiakhoz. <span class="src">PDF 7. o.</span></li>
+        <li><strong>Az egyenlőség mást jelent irányzatonként.</strong> A liberálisoknak jogi, a szocialistáknak gazdasági, a radikálisoknak a magánéletben érvényes egyenlőséget. <span class="src">PDF 8-9. o.</span></li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">4</span><div><h3>Két példa</h3>
+        <div class="two"><div><p><strong>Ahol működik.</strong> A 19. századi nők választójog nélkül éltek. A liberális feminizmus pontosan megnevezte a hiányt: egyenlő jogokat követelt a nyilvános életben. A követelés sikerrel járt.</p></div>
+        <div><p><strong>Ahol a határa.</strong> A választójog után sokan azt hitték, kész a felszabadulás, és a mozgalom meggyengült. A magánszféra egyenlőtlenségei viszont megmaradtak. A jog nem fed le minden hátrányt, és az osztály- és faji különbségek is kimaradhatnak.</p></div></div></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">5</span><div><h3>Kérdezz vissza</h3><p class="note">Előbb gondold végig a választ, csak utána nyisd le.</p>
+        <details><summary>Miért tartják a radikális feministák elégtelennek a liberális individualizmust?</summary><div><p>Mert elfedi, hogy a patriarchátus szerkezeti jelenség. Gyengíti a nők közös összetartozását. A nemsemleges „egyén” mögött pedig rejtett férfinorma állhat. <span class="src">PDF 12. o.</span></p></div></details>
+        <details><summary>Miben tér el az ortodox marxista és a modern szocialista feminista álláspont?</summary><div><p>Az ortodox marxisták szerint az osztály az elsődleges, és a szocialista forradalom a nőket is felszabadítja. A modern szocialista feministák szerint a nemi elnyomás ugyanolyan fontos, és kulturális gyökerei is vannak. <span class="src">PDF 14-15. o.</span></p></div></details>
+        <details><summary>Mit vet fel a különbség-feminizmus az egyenlőség eszményével szemben?</summary><div><p>Azt, hogy a férfiakkal való egyenlőség igénye a férfiakat teszi mércévé. Szerintük ez „férfiazonosult” cél, ehelyett a sajátosan női tulajdonságokat kell megbecsülni. <span class="src">PDF 9. o.</span></p></div></details></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">6</span><div><h3>Próbáld ki</h3>
+        <p><strong>10 perc:</strong> írd le egy átlagos hétköznapod házimunkáit és gondozási feladatait egy táblázatba: ki végzi, mennyi ideig. Jelöld meg, melyik sor mögött áll biológiai kényszer, és melyik mögött szokás vagy elvárás.</p>
+        <p><strong>Utána:</strong> írj egy-egy mondatot arról, mit mondana a táblázatról egy liberális, egy szocialista és egy radikális feminista.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">7</span><div><h3>Visszatérés</h3>
+        <p>A kérdések nem érnek véget az oldallal. Visszajönnek, a helyes válaszig: amit eltaláltál, ritkábban, amit elrontottál, hamarabb. Ha egy kérdésre többször egymás után jól felelsz, kiesik.</p>
+        <ul class="timeline">
+          <li><span class="d">ma</span><span>az oldal végén: 3 kérdés</span></li>
+          <li><span class="d">+2-3 nap</span><span>az elrontottak előre, a jók közül egy</span></li>
+          <li><span class="d">+1 hét</span><span>ami még nem ment, plusz egy korábbi témából</span></li>
+          <li><span class="d">+2-3 hét</span><span>rövid utóteszt: mi maradt meg</span></li>
+        </ul>
+        <p class="note">🔁 Ez az ütemezés példa. A kérdések kiküldése még nincs beállítva, addig tedd be a naptáradba.</p></div></div>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: a mélyfúrás, 20-30 perc</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Mélyfúrás</span><span class="t">20-30 perc · öt pillér, mindegyik előtt egy kérdés</span></div>
+    <p class="note">Jelölések: ❓ kérdés, mielőtt olvasol · 📖 a fogalom a fogalomtárban van · 💡 [AI Insight]: az AI-asszisztens saját hozzáfűzése, nem a forrásé · ⚠️ korlát vagy ellenőrizetlen állítás.</p>
+
+    <div class="card">
+      <span class="lbl">1. pillér</span><h3>Eredet és két hullám</h3>
+      <details><summary>❓ Mikor kezdtek a nők szervezetten fellépni a jogaikért?</summary><div><p>A szervezett nőmozgalom a 19. században alakult ki. Feminista nézetek viszont már az ókori Görögországban és Kínában is megjelentek. <span class="src">PDF 1. o.</span></p></div></details>
+      <p>A „feminizmus” mint politikai fogalom 20. századi. Az 1960-as évekig a nemek közti megosztottságot ritkán tartották politikai kérdésnek, a szerepeket természetesnek vették. Korai előzmény Christine de Pisan műve (1405), amely a nők oktatáshoz és politikai befolyáshoz való jogát hirdette. A modern feminizmus első szövegének Mary Wollstonecraft 1792-es könyvét tartják. <span class="src">PDF 1-2. o.</span></p>
+      <p>Az <strong>első hullám</strong> (📖) a 19. század közepétől a női választójogért küzdött. Az Egyesült Államokban 1848-ban a Seneca Falls-i konvenció volt a nyitány, Elizabeth Cady Stanton (1815-1902) szövegével. Nagy-Britanniában 1903-tól Emmeline Pankhurst (1858-1928) és lánya, Christabel szervezett egyre militánsabb akciókat. A választójogot Új-Zéland adta meg először (1893), az Egyesült Államok 1920-ban, Nagy-Britannia 1918-ban. Heywood szerint a siker paradox módon gyengítette a mozgalmat, mert elveszett az egyesítő cél. <span class="src">PDF 2. o.</span></p>
+      <p>A <strong>második hullámot</strong> (📖) Betty Friedan könyve, a „The Feminine Mystique” (1963) indította el. Kate Millett és Germaine Greer 1970-es könyvei a személyes, lélektani és szexuális elnyomásra is kiterjesztették a „politikai” fogalmát. A cél már nem csak a jogi egyenlőség volt, hanem a nők felszabadítása. Az 1990-es évekre a mozgalom deradikalizálódott és széttöredezett. <span class="src">PDF 2-3. o.</span></p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">2. pillér</span><h3>A „politikai” kitágítása és a patriarchátus</h3>
+      <details><summary>❓ Politikai kérdés-e, ki mosogat otthon?</summary><div><p>A feministák szerint igen, mert a politika minden hatalmi viszonyban jelen van, a családban is.</p></div></details>
+      <p>A hagyományos felfogás a politikát a nyilvános szférába helyezi: kormány, pártok, érdekcsoportok. A családot nem politikainak tekinti. Ezt hívják a <strong>köz- és magánszféra szétválasztásának</strong> (📖). Ha a politika csak a nyilvánosságban zajlik, a házi szerepbe szorított nők gyakorlatilag kimaradnak belőle. Jean B. Elshtain „Public Man, Private Woman” (1981) című könyve már címében ezt mutatja. <span class="src">PDF 4. o.</span></p>
+      <p>Abban viszont nincs egyetértés, mennyire kell lebontani a határt. A radikálisok jelszava: <strong>„a személyes politikai”</strong> (📖). A liberálisok csak a nyilvános szférát akarják megnyitni a nők előtt, és óvnak a magánélet politizálásától. <span class="src">PDF 4-5. o.</span></p>
+      <p>A <strong>patriarchátus</strong> (📖) szűken a családfő, tágan általában a férfiak uralmát jelenti. Millett szerint két elvre épül: a férfi uralkodik a nőn, az idősebb férfi a fiatalabbon. Az elnyomás formája koronként és kultúránként eltér. A liberálisok a jogok egyenlőtlen elosztását, a szocialisták a gazdasági oldalt, a radikálisok a családban gyökerező, rendszerszintű férfihatalmat hangsúlyozzák. <span class="src">PDF 5-6. o.</span></p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">3. pillér</span><h3>Biológiai nem, társadalmi nem, egyenlőség és különbség</h3>
+      <details><summary>❓ Ha a szülés biológiai tény, a gyereknevelés is az?</summary><div><p>A fejezet szerint nem. A gyermekszülés női sajátosság, de a gyermeknevelés felelőssége kulturális kérdés: vállalhatja a férj, megoszthatják, végezheti a közösség vagy a tágabb rokonság. <span class="src">PDF 6-7. o.</span></p></div></details>
+      <p>A leggyakoribb antifeminista érv, főleg konzervatív oldalról, hogy a szerepek természetesek: „a biológia sors”. A feministák erre a <strong>biológiai nem</strong> (📖) és a <strong>társadalmi nem</strong> (📖) szétválasztásával felelnek. A biológiai nem természetes és megváltoztathatatlan. A társadalmi nem a kultúra által kijelölt szerepek összessége. Heywood Simone de Beauvoirt idézi: „A nők nem születnek, hanem azzá lesznek.” <span class="src">PDF 7. o.</span></p>
+      <p>A legtöbb feminista szerint az emberi természet <strong>androgün</strong> (📖). A cél a nemtől független <strong>személyiség</strong> (📖): az embert egyénként, ne a neme szerint ítéljék meg. Ezt a megkülönböztetést kétfelől támadják. A <strong>különbség-feministák</strong> (📖) lényegi különbséget látnak a nemek között. A posztmodern feministák magát a „biológiai nem” kategóriát is vitatják. <span class="src">PDF 7. o.</span></p>
+      <ul class="pts">
+        <li><strong>Liberálisok:</strong> jogi és politikai egyenlőség, egyenlő hozzáférés a nyilvános élethez.</li>
+        <li><strong>Szocialisták:</strong> társadalmi és gazdasági egyenlőség: vagyon, bér, fizetett és fizetetlen munka.</li>
+        <li><strong>Radikálisok:</strong> egyenlőség a családban és a magánéletben: gyermekgondozás, a saját test feletti rendelkezés, szexualitás.</li>
+        <li><strong>Különbség-feministák:</strong> az egyenlőség követelése „férfiazonosult” cél. Ők „nőpárti” álláspontot vallanak, és a sajátosan női tulajdonságokat ünneplik. <span class="src">PDF 8-9. o.</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="lbl">4. pillér</span><h3>A három fő irányzat</h3>
+      <details><summary>❓ Elég-e az egyenlő jog ahhoz, hogy a nők egyenlők legyenek?</summary><div><p>A liberálisok szerint ez a döntő lépés. A szocialisták szerint gazdasági egyenlőség nélkül üres, a radikálisok szerint a családot és a kultúrát is át kell alakítani.</p></div></details>
+      <p><strong>Liberális feminizmus.</strong> Az individualizmusra épül: minden ember egyenlő erkölcsi értékű. Egyenlő jogokat és hozzáférést követel az oktatáshoz, a szavazáshoz, a karrierhez. Reformista, a köz- és magánszféra elválasztását nem akarja megszüntetni. Fő gondolkodói Mary Wollstonecraft (1759-97), John Stuart Mill (1869-es könyvével, Harriet Taylorral együttműködve) és Betty Friedan, aki 1966-ban a NOW egyik alapítója és első elnöke lett. Heywood szerint eredményei közé tartozik a választójog, a válás és az abortusz liberalizálása és az egyenlő bér. A radikálisok szerint viszont elfedi a patriarchátus szerkezeti jellegét, és bírálják, hogy főleg a képzett, középosztálybeli nők érdekeit tükrözi. <span class="src">PDF 10-12. o.</span></p>
+      <p><strong>Szocialista feminizmus.</strong> A nemek viszonya a társadalmi és gazdasági szerkezetben gyökerezik, ezért mély társadalmi változás kell. Friedrich Engels (1820-95) 1884-es műve szerint a magántulajdon megjelenése hozta el a nők alárendelését, a polgári család pedig az örökösödés biztosítására épül. A nőket <strong>tartalék munkaerő-hadseregként</strong> (📖) kezelik, a fizetetlen házimunka a tőkés gazdaságot szolgálja. A „bért a házimunkáért” kampányt (Costa és James, 1972) a legtöbb szocialista feminista elutasította, mert szerintük bebetonozná a hagyományos szerepeket. Juliet Mitchell (1971) a nők négy társadalmi funkcióját írta le: termelés, szaporodás, a gyermekek szocializálása, szexuális tárgy. A belső vita az, hogy az osztály vagy a nem az elsődleges. <span class="src">PDF 13-15. o.</span></p>
+      <p><strong>Radikális feminizmus.</strong> A nemi elnyomás a társadalom legalapvetőbb vonása, az osztály és a faj másodlagos. A patriarchátus rendszerszintű és mindent átható. Simone de Beauvoir (1906-86) „A második nem” (1949) című könyve szerint a férfi a norma, a nő a „másik”. Millett (1970) szerint a patriarchátus fő intézménye a család, ellenszere a <strong>tudatosítás</strong> (📖). Shulamith Firestone a marxi osztály helyére a nemet tette, és a kiutat a technológiában látta: fogamzásgátlás, abortusz, a gyermeknevelés társadalmasítása. Eva Figes és Germaine Greer a kultúrát átható patriarchális értékeket elemezte. <span class="src">PDF 15-17. o.</span></p>
+      <p>Heywood ezek előtt egy negyedik formát is említ, a reakciós feminizmust. Ez akkor jelenik meg, amikor gyors társadalmi változás fenyegeti a nők hagyományos helyzetét; a hagyományos feminizmus szemében fogalmi ellentmondás. <span class="src">PDF 10. o.</span></p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">5. pillér</span><h3>Belső ágak, új irányzatok és a 21. század</h3>
+      <details><summary>❓ Ha sok cél megvalósult, van-e még szükség feminizmusra?</summary><div><p>Heywood szerint igen, amíg a patriarchátus fennáll. A <strong>posztfeminizmus</strong> (📖) fő illúziója, hogy a társadalom már nem patriarchális. <span class="src">PDF 20. o.</span></p></div></details>
+      <ul class="pts">
+        <li><strong>Nőpárti ág és szeparatizmus.</strong> A radikálisok egy része az anyaságot ünnepli, és bizonyos női tulajdonságokat felsőbbrendűnek tart. Ebből egyik irányban a <strong>kulturális feminizmus</strong> (📖), másik irányban a szeparatizmus nőtt ki. Susan Brownmiller (1975) a nemi erőszakot a félelemben tartás eszközeként írta le. A feministák többsége a szeparatizmust és a politikai leszbikusságot elutasítja, a szexuális irányultságot magánügynek tekinti. <span class="src">PDF 17-18. o.</span></li>
+        <li><strong>Új irányzatok.</strong> A pszichoanalitikus feminizmus (Juliet Mitchell, 1974) Freudot és Lacant olvassa újra. A posztmodern feminizmus szerint nincs rögzített női identitás; Heywood szerint ez talán végzetesen aláássa a nőmozgalom eszméjét. A fekete feminizmus a szexizmus és a rasszizmus összefonódását vizsgálja. A leszbikus feminizmus egyes ágai a homofóbia elleni harcot is központinak tartják. <span class="src">PDF 18-19. o.</span></li>
+        <li><strong>Ellenséges környezet.</strong> Az 1980-as években Nyugaton Thatcher és Reagan kormánya a „családi értékeket” hirdette. Susan Faludi „Backlash” (1991) című könyve ezt a feminizmus hibáztatásaként írta le. Heywood szerint ez visszás elismerés: a hagyományos értékek visszaállításának igénye a feminizmus sikerét jelzi. <span class="src">PDF 19. o.</span></li>
+        <li><strong>Deradikalizálódás.</strong> Friedan (1983) és Greer (1985) az anyaságot ünnepelte, amiért radikális bírálatot kaptak. Camille Paglia (1990) a nők áldozatképét támadta. <span class="src">PDF 20. o.</span></li>
+        <li><strong>Heywood értékelése.</strong> A széttöredezés inkább erő lehet, mert azt mutatja, hogy a mozgalomból versengő irányzatokkal bíró ideológia lett. A nők továbbra is jellemzően rosszul fizetett, alacsony státuszú állásokban dolgoznak, és alulreprezentáltak a hatalmi pozíciókban. A fő kihívás egy koherens „harmadik hullám” kialakítása. <span class="src">PDF 19-20. o.</span></li>
+      </ul>
+      <div class="insight"><span class="tagline">💡 [AI Insight]</span><p>A „harmadik hullámot” a fejezet még megvalósítandó kihívásként említi. A későbbi szakirodalom ezt a kifejezést, és egy „negyedik hullámot” is, már leíró címkeként használja. Erről ez a fejezet nem szól.</p></div>
+      <div class="insight"><span class="tagline">💡 [AI Insight] · ⚠️ ellenőrizendő</span><p>A könyv a 21. század eleji állapotot írja le. Több szerzőnél csak születési évet ad, élő szerzőként. Azóta közülük többen elhunytak, ezért az életrajzi adatokat érdemes friss forrásból ellenőrizni, mielőtt továbbadod.</p></div>
+    </div>
+
+    <div class="card">
+      <span class="lbl">📖 Fogalomtár</span>
+      <dl class="gloss">
+        <dt>Első hullám</dt><dd>A 19. század közepétől a női választójog elnyeréséig tartó szakasz, a jogi és politikai egyenlőség követelésével. <span class="en">first wave</span></dd>
+        <dt>Második hullám</dt><dd>Az 1960-as évektől induló szakasz, amely a nők felszabadítását és mély társadalmi változást tűzött ki célul. <span class="en">second wave</span></dd>
+        <dt>Köz- és magánszféra szétválasztása</dt><dd>A politikát a nyilvános intézményekre korlátozó felfogás, amely a családot nem politikainak tekinti. <span class="en">public/private divide</span></dd>
+        <dt>A személyes politikai</dt><dd>Radikális feminista jelszó: az elnyomás a magánéletben, a családban is működik. <span class="en">the personal is the political</span></dd>
+        <dt>Patriarchátus</dt><dd>Szó szerint „az apa uralma”, tágabb értelemben a férfiak uralma a családban és azon kívül. <span class="en">patriarchy</span></dd>
+        <dt>Biológiai nem</dt><dd>A nők és férfiak közti természetes, megváltoztathatatlan biológiai különbségek. <span class="en">sex</span></dd>
+        <dt>Társadalmi nem</dt><dd>A társadalom által a nőkhöz és férfiakhoz rendelt eltérő szerepek; kulturális fogalom. <span class="en">gender</span></dd>
+        <dt>Androgün emberi természet</dt><dd>Az a nézet, hogy minden ember mindkét nem tulajdonságait hordozza. <span class="en">androgyny</span></dd>
+        <dt>Személyiség (nemtől független)</dt><dd>Az a cél, hogy az embereket ne a nemük, hanem egyénként ítéljék meg. <span class="en">personhood</span></dd>
+        <dt>Különbség-feminizmus</dt><dd>Irányzat, amely szerint a nők és férfiak lényegileg különböznek, és ezt meg kell becsülni. <span class="en">difference feminism</span></dd>
+        <dt>Tartalék munkaerő-hadsereg</dt><dd>Szocialista feminista nézet: a nőket szükség szerint bevonják a munkába, majd visszaküldik a háztartásba. <span class="en">reserve army of labour</span></dd>
+        <dt>Tudatosítás</dt><dd>Beszélgetés és oktatás, amely révén a nők felismerik a társadalmat átható szexizmust. <span class="en">consciousness raising</span></dd>
+        <dt>Kulturális feminizmus</dt><dd>Visszavonulás egy apolitikus, nőközpontú kultúrába és életmódba. <span class="en">cultural feminism</span></dd>
+        <dt>Posztfeminizmus</dt><dd>Az a nézet, hogy a feminista célok nagyrészt teljesültek, és túl vagyunk a feminizmuson. <span class="en">post-feminism</span></dd>
+      </dl>
+    </div>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe: hol tartunk</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">forrás, nyitott kérdések, hogyan kapcsolódhatsz be</span></div>
+    <div class="card">
+      <h3>Honnan dolgozunk</h3>
+      <p>Andrew Heywood: Political Ideologies. An Introduction, 3. kiadás, 8. fejezet (Feminism).</p>
+      <p>PDF-oldalszámokkal hivatkozunk, mert a nyomtatott oldalszám a kinyert szövegben nem látszik. A könyv a 21. század eleji állapotot írja le, az azóta történtek nincsenek benne.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts">
+        <li>a fejezet lebontása és a négy fokozat;</li><li>a hét lépéses kártya;</li><li>öt pillér és a fogalomtár;</li><li>a fontosabb adatok ellenőrzése a nyers szövegben.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts">
+        <li>a visszatérő kérdések kiküldése még nincs beállítva;</li><li>a szerzők életrajzi adatai nincsenek friss forrásból frissítve;</li><li>a fejezet utáni fejlemények (újabb hullámok) nincsenek feldolgozva.</li></ul></div>
+    </div>
+    <div class="card">
+      <h3>A forrás pontatlanságai</h3>
+      <ul class="pts">
+        <li>A 21. századi részben a szöveg az ellenséges környezet idejét „1980s and 1980ss” alakban írja. A második évtized nyilvánvalóan elírás; a lebontás ezt az 1990-es évekként értelmezi. <span class="src">PDF 19. o.</span></li>
+        <li>Friedan, Greer, Millett és Firestone mellett a könyv csak születési évet ad, a kiadás idejének állapotát tükrözve. Ezek az adatok azóta elavulhattak.</li>
+        <li>Firestone „The Dialectic of Sex” című könyvének évét a könyv 1972-ként adja meg. Ezt a könyv adataként vesszük át, külső forrásból nem ellenőriztük. <span class="src">PDF 17. o.</span></li>
+        <li>A szövegben szereplő kereszthivatkozások a könyv más részeinek nyomtatott oldalaira mutatnak, ezekből e fejezet oldalszámai nem fejthetők vissza biztosan.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kapcsolódik</h3>
+      <ul class="pts">
+        <li><a href="../okologizmus/">Ökologizmus</a>: Heywood az ökofeminizmust a radikális feminizmus „nőpárti” ágához köti, és a következő fejezetben tárgyalja.</li>
+        <li><a href="../fasizmus/">Fasizmus</a>: a társadalmi nemről szóló összevetésben a fasizmus a nemek megosztottságát alapvetőnek tekinti, a férfiak vezető szerepével.</li>
+        <li><a href="../">Politikai ideológiák</a>: az összes téma áttekintése.</li>
+      </ul>
+    </div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, valami nem érthető, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] Feminizmus">
+        <label for="fb-fok">Melyik fokozat?<select id="fb-fok" data-field="Fokozat" data-subject-part="1"><option>1. Ízelítő</option><option>2. Kártya</option><option selected>3. Mélyfúrás</option><option>4. Műhely</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a politikai ideológiákhoz</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-ideologiak-feminizmus-fok";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go, true); });
+  var h = (location.hash || "").match(/^#f([1-4])$/);
+  show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

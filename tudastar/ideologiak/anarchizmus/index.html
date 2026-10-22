@@ -1,0 +1,381 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a politikai ideológiákhoz</a><span>Tudástár</span></nav>
+<title>Anarchizmus</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 4px 12px; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--lc); line-height: 1.2; }
+.step > div { display: grid; gap: 8px; min-width: 0; }
+.deeper { justify-self: start; }
+.gloss dt { font-family: var(--font-display); font-weight: 700; }
+.gloss dd { margin: 0 0 10px; color: var(--fg); }
+.gloss dd .en { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 440px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0; } .step { grid-template-columns: 1.6rem minmax(0, 1fr); } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Politikai ideológiák</span>
+    <h1>Anarchizmus: rend állam nélkül?</h1>
+    <p class="lede">Négy fokozat. Az első egy perc, a második öt. Ha érdekel, mehetsz tovább, ha nem, ott is abbahagyhatod.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Kártya</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Mélyfúrás</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">A téma állapota: mind a 4 fokozat kész · forrás: Heywood, 6. fejezet</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <p class="quote">Egy lépcsőházban senki sem bízik a közös képviselőben. A lakók mégis megszervezik maguk a takarítást, a kerékpártárolót, és csőtörésnél is összefognak.</p>
+      <p>Kell ehhez főnök? És mi lenne, ha nemcsak egy ház, hanem egy egész ország így működne? Erre a kérdésre épül az anarchizmus.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Tippelj, mielőtt továbbmész</span>
+      <ol class="steps">
+        <li>Mit jelent szó szerint az „anarchia”?</li>
+        <li>Melyik anarchista tömegszervezetnek volt kétmilliónál több tagja, és mikor?</li>
+      </ol>
+      <p class="note">Nem baj, ha tévedsz: a tévedés után kapott válasz jobban megmarad. A megoldás a következő fokozatban jön.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A lényeg egy mondatban</span>
+      <p class="quote">Az anarchizmus szerint az állam nemcsak rossz, hanem fölösleges is, mert a rend magától is kialakul, ha a kényszer megszűnik.</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a kártya, 5 perc</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Kártya</span><span class="t">5 perc · a fejezet hét lépésben</span></div>
+    <div class="card">
+      <div class="step"><span class="n">1</span><div><h3>Horog</h3><p>A lépcsőház, ahol főnök nélkül is megy a közös munka, és a két tipp. Az előbb ezt kaptad.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">2</span><div><h3>Célok</h3><p>A végére tudni fogod:</p>
+        <ul class="pts"><li><span class="chip">megérted</span> miért tartja az anarchizmus az állami tekintélyt önmagában rossznak, és miért nem csak egy-egy rossz kormányt bírál;</li>
+        <li><span class="chip">megjegyzed</span> a két fő ágat, a kollektivistát és az individualistát, és mindkettőnek legalább két irányzatát;</li>
+        <li><span class="chip">alkalmazod</span> egy mai mozgalomnál felismered a közvetlen akciót és a decentralizált szervezést mint anarchista hatást.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">3</span><div><h3>Mag</h3>
+        <p><strong>A tippek megoldása:</strong> az „anarchia” görög eredetű szó, jelentése „uralom nélkül”, nem „káosz”. A kétmilliónál több tagot a spanyol CNT szakszervezet állította, a spanyol polgárháború idején (Heywood, PDF 1. o.).</p>
+        <p>Az anarchizmus az állam, a törvény és a kényszerítő tekintély elutasítására épül. Abban hisz, hogy a szabad emberek önkéntes megállapodással is rendet tartanak.</p>
+        <ul class="pts"><li><strong>Minden hatalom megront, nemcsak a korlátlan.</strong> Ezért az anarchista szerint nincs „jó állam”.</li>
+        <li><strong>A rend nem a törvényből fakad.</strong> Godwin szerint épp a kormányzat okozza a rendetlenséget.</li>
+        <li><strong>Két gyökere van, és ezek feszülnek egymásnak.</strong> Az egyik a szocialista kollektivizmus, a másik a liberális individualizmus.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">4</span><div><h3>Két példa</h3>
+        <div class="two"><div><p><strong>Ahol működik.</strong> A spanyol polgárháborúban (1936-39) Kelet-Spanyolország egyes részein és a katalóniai munkás- és parasztkollektívákban az anarchisták rövid ideig ténylegesen irányítottak. Ekkor kerültek a legközelebb a hatalomhoz (Heywood, PDF 2. o.).</p></div>
+        <div><p><strong>Ahol a határa.</strong> A forradalmi erőszak nem rázta fel a tömegeket. Megdöbbenést keltett, rontotta az eszme vonzerejét, és az állami elnyomás megerősödéséhez vezetett (Heywood, PDF 18. o.).</p></div></div></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">5</span><div><h3>Kérdezz vissza</h3><p class="note">Előbb gondold végig a választ, csak utána nyisd le.</p>
+        <details><summary>Miért utasítja el az anarchista a „proletárdiktatúrát”, ha a marxistához hasonlóan ő is államnélküli kommunizmust akar?</summary><div><p>Mert szerinte az állam önmagában romlott és elnyomó, nem csak az osztályviszonyok tükre. Ezért nem lehet átmenetileg megtartani és hagyni, hogy „elhaljon”, hanem azonnal meg kell szüntetni.</p></div></details>
+        <details><summary>Miben más a mutualizmus és az anarchokommunizmus tulajdonfelfogása?</summary><div><p>Proudhon megkülönböztette a kizsákmányoló tulajdont és a saját munkán alapuló birtokot, és az utóbbit elfogadta. Az anarchokommunisták a megtermelt vagyon teljes közösségi tulajdonát akarják.</p></div></details>
+        <details><summary>Mivel pótolná az anarchokapitalizmus a rendőrséget?</summary><div><p>Magántulajdonú, egymással versengő védelmi társulásokkal és magánbíróságokkal, amelyeket az egyén önként választ. Ez Rothbard elképzelése.</p></div></details></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">6</span><div><h3>Próbáld ki</h3>
+        <p><strong>10 perc:</strong> írj fél oldalt arról, hogyan oldana meg egy kollektivista és egy individualista anarchista egy konkrét ügyet. Például: ki javítsa meg a falu útját, és ki fizesse? Utána jelöld meg, melyik megoldásnál jön elő a fejezet két gyenge pontja: a természetes rend és a közjavak kérdése.</p>
+        <p><strong>A héten:</strong> figyeld meg egy hírben szereplő mozgalmat. Van-e benne közvetlen akció vagy vezető nélküli, decentralizált szervezés?</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">7</span><div><h3>Visszatérés</h3>
+        <p>A kérdések nem érnek véget az oldallal. Visszajönnek, a helyes válaszig: amit eltaláltál, ritkábban, amit elrontottál, hamarabb. Ha egy kérdésre többször egymás után jól felelsz, kiesik.</p>
+        <ul class="timeline">
+          <li><span class="d">ma</span><span>az oldal végén: 3 kérdés</span></li>
+          <li><span class="d">+2-3 nap</span><span>az elrontottak előre, a jók közül egy</span></li>
+          <li><span class="d">+1 hét</span><span>ami még nem ment, plusz egy korábbi témából</span></li>
+          <li><span class="d">+2-3 hét</span><span>rövid utóteszt: mi maradt meg</span></li>
+        </ul>
+        <p class="note">🔁 Ez az ütemezés példa. A kérdések kiküldése még nincs beállítva, addig tedd be a naptáradba.</p></div></div>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: a mélyfúrás, 20-30 perc</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Mélyfúrás</span><span class="t">20-30 perc · öt pillér, mindegyik előtt egy kérdés</span></div>
+    <p class="note">Jelölések: ❓ kérdés, mielőtt olvasol · 📖 a fogalom a fogalomtárban van · 💡 [AI Insight]: az AI-asszisztens saját hozzáfűzése, nem a forrásé · ⚠️ korlát vagy ellenőrizetlen állítás.</p>
+
+    <div class="card">
+      <span class="lbl">1. pillér</span><h3>Miért rossz az állam?</h3>
+      <details><summary>❓ Lord Acton szerint a hatalom hajlamos megrontani, az abszolút hatalom pedig abszolút módon ront meg. Miben megy ennél tovább az anarchista?</summary><div><p>Abban, hogy szerinte bármilyen hatalom, bármilyen formában, abszolút módon megront. Nem csak a korlátlan (Heywood, PDF 5. o.).</p></div></details>
+      <p>Heywood szerint az anarchizmust az <strong>antietatizmus</strong> (📖) határozza meg: az állam és a hozzá tartozó kormányzati és jogi intézmények elutasítása. A tekintély az anarchista szemében a szabadság és az egyenlőség megsértése, mert az egyik ember másik feletti befolyásán alapul. Megrontja az alávetettet és azt is, aki gyakorolja, és az uralom és alávetés „hatalmi lélektanát” szüli (Heywood, PDF 3-4. o.).</p>
+      <p>Az <strong>állam</strong> (📖) öt vonása miatt kerül a bírálat középpontjába:</p>
+      <ul class="pts">
+        <li><strong>szuverén:</strong> legfőbb tekintélyt gyakorol egy terület minden lakója felett;</li>
+        <li><strong>kötelező:</strong> születéssel vagy hódítással kerülünk alá, nem önkéntes társadalmi szerződéssel;</li>
+        <li><strong>kényszerítő:</strong> törvényei mögött büntetés áll. Emma Goldman (1869-1940) a gumibottal, a fegyverrel, a bilinccsel és a börtönnel jelképezte;</li>
+        <li><strong>kizsákmányoló:</strong> adóztatással veszi el a vagyont;</li>
+        <li><strong>pusztító:</strong> háborúba küldi az embereket. Randolph Bourne (1886-1918) szerint a háború az, amiből az állam erőt merít (Heywood, PDF 5. o.).</li>
+      </ul>
+      <p>Mögötte egy emberkép áll: az ember a körülményeitől függően lesz jó vagy rossz. Aki együttműködő lenne, az a hatalom, kiváltság vagy vagyon révén mások fölé emelve elnyomóvá válik. A könyv egy összevető keretben azt is megmutatja, hogy a többi ideológia hogyan látja az államot: a liberális semleges döntőbírónak, a konzervatív a rend biztosítékának, az anarchista szükségtelen rossznak (Heywood, PDF 4. o.).</p>
+      <p class="note">⚠️ A kritika, ahogy Heywood bemutatja: ha az elnyomás abból fakad, hogy a körülmények megrontják az egyént, ez a magyarázat körben forog. Nem mondja meg, hogyan jött létre a politikai tekintély első helyen (PDF 5. o.).</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">2. pillér</span><h3>Rend állam nélkül</h3>
+      <details><summary>❓ Hobbes és Locke az önző emberi természettel indokolta az államot. Hogyan fordította meg ezt az érvet Godwin?</summary><div><p>Godwin szerint az ember racionális lény, és nem az önzése teszi szükségessé az államot. Épp a kormányzat és a természetellenes törvények okozzák az igazságtalanságot és az agressziót (Heywood, PDF 6. o.).</p></div></details>
+      <p>Az anarchisták szerint az állam nemcsak rossz, hanem fölösleges is. A <strong>természetes rend</strong> (📖) gondolata szerint a társadalom törvény és állam nélkül, spontán módon is rendbe szerveződik. Proudhon így fogalmazott: „a társadalom az anarchiában keresi a rendet” (Heywood, PDF 1. o.).</p>
+      <p>A szó története is ide tartozik. Az „anarchia” (📖) a francia forradalom óta használatos, kezdetben a rend összeomlását jelentő, negatív értelemben. Az első klasszikus kifejtést William Godwin (1756-1836) adta az „Enquiry Concerning Political Justice” című művében, bár magát sosem nevezte anarchistának. Pierre-Joseph Proudhon (1809-65) volt az, aki 1840-ben büszkén vállalta az anarchista nevet (Heywood, PDF 1. o.).</p>
+      <p>Az anarchizmus mélyén nyílt utópizmus van, de nem naiv hit az ember jóságában. Proudhon, Bakunyin és Kropotkin elismerte az önzés lehetőségét is. Az emberi természetet képlékenynek tekintik, amelyet az intézmények formálnak (Heywood, PDF 6-7. o.).</p>
+      <p>Ugyanezen az alapon bírálják az egyházat is: ez az <strong>antiklerikalizmus</strong> (📖). Isten eszméje a végső, megkérdőjelezhetetlen tekintély mintája, a vallás engedelmességet hirdet, és legitimálja az uralkodókat. Közben az anarchizmusban misztikus vonás is van: a korai anarchistákra a millenarizmus, a modernekre a taoizmus és a zen buddhizmus hatott (Heywood, PDF 7-8. o.).</p>
+      <p class="note">⚠️ A kritika, ahogy Heywood bemutatja: a stabil, békés államnélküli társadalomba vetett hitet általában az elmélet leggyengébb és legvitatottabb pontjának tartják. Ha az önző késztetés az emberi természet része, a természetes rend utópia (PDF 7. o.).</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">3. pillér</span><h3>A kollektivista ág</h3>
+      <details><summary>❓ Miben ért egyet a kollektivista anarchista a marxistával, és hol válnak el?</summary><div><p>Egyetértenek a kapitalizmus elutasításában, a forradalomban, a közös tulajdonban és abban, hogy a cél egy államnélküli kommunizmus. Az átmeneti proletárállamon válnak el: az anarchista azonnal megszüntetné az államot (Heywood, PDF 9-10. o.).</p></div></details>
+      <p>Ez az ág a szocialista kollektivizmust viszi a végsőkig. Az ember társas lény, és a szolidaritás révén kormányzat nélkül is rendezheti az ügyeit. Kropotkin ezt <strong>kölcsönös segítségnek</strong> (📖) hívta. Bakunyin (1814-76) szerint az „uralkodó osztály” tágabb, mint Marxnál: mindenki ide tartozik, aki vagyon, hatalom vagy kiváltság felett rendelkezik (Heywood, PDF 8-10. o.).</p>
+      <ul class="pts">
+        <li><strong>Mutualizmus</strong> (📖). Proudhon rendszere: méltányos csere egyének és csoportok között, profit és kizsákmányolás nélkül. Híres tétele szerint a tulajdon lopás, de a saját munkán alapuló birtokot elfogadta. Követői kölcsönös hitelbankokat alapítottak Franciaországban és Svájcban, csak a működési költséget fedező kamattal (PDF 10-11. o.).</li>
+        <li><strong>Anarchoszindikalizmus</strong> (📖). Forradalmi szakszervezeti mozgalom. Rövid távon bérért és munkaidőért küzd, hosszú távon az <strong>általános sztrájkkal</strong> (📖) döntené meg a kapitalizmust. Georges Sorel (1847-1922) ezt lelkesítő „mítosznak” tekintette. A szakszervezet egyben a hierarchia nélküli jövő mintája volt. Ez tette a 20. század elején tömegmozgalommá az anarchizmust: a francia CGT-t és a spanyol CNT-t is anarchisták uralták (PDF 1. o., 11-12. o.).</li>
+        <li><strong>Anarchokommunizmus.</strong> A munka társas tevékenység, ezért a vagyon is a közösségé. Pjotr Kropotkin (1842-1921) Darwint újraértelmezve azt állította, hogy az evolúció az együttműködést részesíti előnyben, nem a versengést. Az eszmény a nagyrészt önellátó kommunák hálózata, három előnnyel: szolidaritás, közvetlen demokrácia, emberi lépték. Malatesta (1853-1932) is ehhez az irányhoz tartozik (PDF 12-13. o.).</li>
+      </ul>
+      <p class="note">⚠️ A kritika, ahogy Heywood bemutatja: az anarchoszindikalizmus az általános sztrájkon túl nem dolgozott ki stratégiát vagy forradalomelméletet. Más anarchisták szerint a rövid távú szakszervezeti célok a reformizmus felé vitték (PDF 12. o.).</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">4. pillér</span><h3>Az individualista ág</h3>
+      <details><summary>❓ A liberális is az egyéni szabadságot védi. Akkor miért nem anarchista?</summary><div><p>Mert szerinte a szabadságot egy minimális, „éjjeliőr” állam védi meg, és az alkotmányos, képviseleti kormányzat megszelídíthető. Az anarchista mindkettőt tagadja: az ész és az erkölcs elég a békés együttéléshez, a képviseleti kormányzat pedig csak homlokzat (Heywood, PDF 13-14. o.).</p></div></details>
+      <p>Ez az ág a liberális individualizmust viszi a végsőkig: ha az egyén szuverén, az állam abszolút rossz. Heywood Godwint is a szélsőséges klasszikus liberalizmus egy formájaként mutatja be (PDF 13-14. o.).</p>
+      <ul class="pts">
+        <li><strong>Egoizmus</strong> (📖). Max Stirner (1806-56) 1845-ös „The Ego and His Own” című műve az egyéni ént teszi a morál középpontjába. Az egyén törvényre, szokásra, vallási és erkölcsi elvre tekintet nélkül cselekedjen. A mozgalomra kevés hatása volt, Nietzschére és a 20. századi egzisztencializmusra viszont hatott (PDF 14. o.).</li>
+        <li><strong>Amerikai libertarianizmus.</strong> Henry David Thoreau (1817-62) az egyéni lelkiismeretet a politikai kötelezettség fölé helyezte: ez a <strong>polgári engedetlenség</strong> (📖). Benjamin Tucker (1854-1939) és Josiah Warren (1798-1874) a piaci cserében látta a harmónia mechanizmusát. Warren „munkát munkáért” cserére épülő „időboltokat” hozott létre. Lysander Spooner (1808-87) is ehhez a vonalhoz tartozik (PDF 14-15. o.).</li>
+        <li><strong>Anarchokapitalizmus</strong> (📖). A 20. század második felének szabadpiaci reneszánszából nőtt ki. Ayn Rand (1905-82), Murray Rothbard (1926-95) és David Friedman szerint a kormányzat megszüntethető, és a szabályozatlan piaci verseny pótolja, még a rendfenntartást és az igazságszolgáltatást is. A liberálisokkal szemben nem ismerik el, hogy vannak csak az állam által nyújtható közjavak. Heywood a magánbörtönöket és a „Neighbourhood Watch” programot hozza példának arra, hogy egyes feladatok az államtól a magánszférába kerültek (PDF 15-16. o.).</li>
+      </ul>
+      <p class="note">⚠️ A kritika, ahogy Heywood bemutatja: Stirner egoizmusa szakított a felvilágosodással, és nem adott választ arra, hogyan maradna fenn a rend. Heywood a nihilizmus egy formájának nevezi (PDF 14. o.).</p>
+      <div class="insight"><span class="tagline">💡 [AI Insight]</span><p>A két ág közti feszültséget egy kérdéssel lehet a legkönnyebben megfogni: kié legyen a megtermelt vagyon? A kollektivista válasza a közösség, az individualistáé az egyén és a piac. Heywood is a gazdaság kérdésében látja a legélesebbnek ezt a szakadást (PDF 8-9. o.), és a két ág csak abban egyezik, hogy az 1945 utáni irányított kapitalizmust és a szovjet típusú államszocializmust is elveti.</p></div>
+    </div>
+
+    <div class="card">
+      <span class="lbl">5. pillér</span><h3>Utak az anarchiához és a jelen</h3>
+      <details><summary>❓ Miért nem alapíthat az anarchista pártot, és miért nem indul választáson?</summary><div><p>Mert a párt bürokratikus és hierarchikus, és a kormányzati hatalom megszerzése vagy befolyásolása is megront. Az anarchista kormány, párt vagy politikus önellentmondás. Az anarchisták ezért nemcsak apolitikusak, hanem kifejezetten antipolitikusak (Heywood, PDF 16-17. o.).</p></div></details>
+      <p>A hagyományos politika helyett három utat jártak:</p>
+      <ul class="pts">
+        <li><strong>Forradalmi erőszak.</strong> Előbb felkelések (Bakunyin, Malatesta, az orosz narodnyikok, Zapata), majd merényletek két hullámban: az 1890-es és az 1970-es években. Az erőszakot bosszúnak, „forradalmi igazságszolgáltatásnak” és <strong>tett általi propagandának</strong> (📖) tekintették (PDF 17-18. o.).</li>
+        <li><strong>Közvetlen akció</strong> (📖). Alkotmányos kereten kívüli cselekvés, a passzív ellenállástól a terrorizmusig. Előnye, hogy nem szennyezi az állami gépezet, és decentralizáltan szervezhető (PDF 18. o.).</li>
+        <li><strong>Erőszakmentesség.</strong> Godwin és Proudhon követői elvből utasítják el az erőszakot. Hatott rájuk Lev Tolsztoj (1828-1910) és Mahatma Gandhi (1869-1948) satyagrahája, bár Heywood szerint egyikük sem sorolható szorosan az anarchisták közé. Ez az irány inkább mintaközösségeket épít (PDF 18-19. o.).</li>
+      </ul>
+      <p>A 21. századról Heywood két képet ad. Az egyik szerint az anarchizmust könnyű fantáziának tekinteni: a 20. század eleje óta nem jelentős mozgalom, és egyetlen nagy társadalmat sem szervezett újjá. Tartós jelentősége inkább az, hogy ellensúlyozta a liberalizmus, a szocializmus és a konzervativizmus államközpontú hajlamait. Hatása látszik az 1960-as évek új baloldalán, és az anarchokapitalistákon keresztül az új jobboldal szabadpiaci fordulatán is (PDF 19-20. o.).</p>
+      <p>A másik, optimistább kép szerint gyakorlati jelentősége csak sokszínűsége miatt rejtett. Új témái a környezetszennyezés, a fogyasztói társadalom, a városfejlődés, a nemi viszonyok és a globális egyenlőtlenség. A globalizációellenes mozgalom anarchista vonásokat mutat, és Heywood Noam Chomskyt (szül. 1928) nevezi a mozgalom legfontosabb elméleti hatásának. Felveti azt is, hogy ha a tömegpolitika kora lejárt, az anarchizmus az individualizmus, a részvétel, a decentralizáció és az egyenlőség értékeivel jobban felkészült a posztmodernitásra, mint sok más ideológia (PDF 20. o.).</p>
+      <p class="note">⚠️ A kritika, ahogy Heywood bemutatja: a forradalmi erőszak legjobb esetben is kontraproduktív volt. A közvetlen akció a felelőtlenség vagy szélsőségesség vádját hozhatja, és kívülállóvá teheti a mozgalmat. Az erőszakmentes anarchisták gyakran visszahúzódnak a tömeges politikától. A pártok és választások elutasításával az anarchisták lemondtak a szervezés és a stratégiai tervezés előnyeiről (PDF 2. o., 18-19. o.).</p>
+    </div>
+
+    <div class="card">
+      <span class="lbl">📖 Fogalomtár</span>
+      <dl class="gloss">
+        <dt>Anarchia</dt><dd>Görög eredetű szó, jelentése „uralom nélkül”. A hétköznapi nyelvben gyakran a káosz szinonimája. <span class="en">anarchy</span></dd>
+        <dt>Antietatizmus</dt><dd>Az állam és a hozzá tartozó kormányzati és jogi intézmények elutasítása, az anarchizmus meghatározó vonása. <span class="en">anti-statism</span></dd>
+        <dt>Állam</dt><dd>Szuverén testület, amely egy adott terület minden lakója és társulása felett legfőbb tekintélyt gyakorol. <span class="en">state</span></dd>
+        <dt>Természetes rend</dt><dd>A hit, hogy a társadalmi rend spontán módon, törvény és állam nélkül is kialakul. <span class="en">natural order</span></dd>
+        <dt>Antiklerikalizmus</dt><dd>Az egyház tekintélyének elutasítása, mert a vallás az engedelmességet és az állam legitimálását szolgálja. <span class="en">anti-clericalism</span></dd>
+        <dt>Kölcsönös segítség</dt><dd>Kropotkin fogalma: az együttműködés mint az emberi és állati fejlődés fő hajtóereje. <span class="en">mutual aid</span></dd>
+        <dt>Mutualizmus</dt><dd>Proudhon rendszere: méltányos, profit és kizsákmányolás nélküli csere egyének és csoportok között. <span class="en">mutualism</span></dd>
+        <dt>Anarchoszindikalizmus</dt><dd>Forradalmi szakszervezeti mozgalom, amely közvetlen akcióval és általános sztrájkkal akarja megdönteni a kapitalizmust. <span class="en">anarcho-syndicalism</span></dd>
+        <dt>Általános sztrájk</dt><dd>Sorelnél a munkásosztály erejének lelkesítő „mítosza”. <span class="en">general strike</span></dd>
+        <dt>Egoizmus</dt><dd>Stirnernél az egyéni ént a morál középpontjába állító filozófia, amely minden törvényt és konvenciót elvet. <span class="en">egoism</span></dd>
+        <dt>Polgári engedetlenség</dt><dd>Thoreau elve: az egyén a lelkiismeretét követi, a kormány törvényeivel szemben is. <span class="en">civil disobedience</span></dd>
+        <dt>Anarchokapitalizmus</dt><dd>Az a nézet, hogy a kormányzat megszüntethető és teljesen pótolható szabályozatlan piaci versennyel. <span class="en">anarcho-capitalism</span></dd>
+        <dt>Közvetlen akció</dt><dd>Az alkotmányos és jogi kereten kívüli politikai cselekvés, a passzív ellenállástól a terrorizmusig. <span class="en">direct action</span></dd>
+        <dt>Tett általi propaganda</dt><dd>Az elképzelés, hogy az erőszak megmutatja az uralkodó osztály gyengeségét, és felkelésre ösztönöz. <span class="en">propaganda by the deed</span></dd>
+      </dl>
+    </div>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe: hol tartunk</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">honnan dolgozunk, mi nyitott, hogyan kapcsolódhatsz be</span></div>
+    <div class="card">
+      <h3>Honnan dolgozunk</h3>
+      <p>Az oldal egyetlen forrása Andrew Heywood: Political Ideologies. An Introduction, 3. kiadás, 6. fejezet. A szöveg saját összefoglalás, nem fordítás.</p>
+      <p>PDF-oldalszámokkal hivatkozunk, mert a nyomtatott oldalszám a kinyert szövegben nem látszik. A könyv a 21. század eleji állapotot írja le, az azóta történtek nincsenek benne.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts">
+        <li>az Ízelítő a két tippel;</li><li>a Kártya a hét lépéssel;</li><li>a Mélyfúrás öt pillérrel és fogalomtárral;</li><li>ez a Műhely.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts">
+        <li>a többi ideológia oldala még nem mind készült el;</li><li>az ideológiák összevetése, például az államról, még nincs külön oldalon;</li><li>magyar vonatkozás nincs benne, a fejezet sem tárgyal ilyet;</li><li>a visszatérő kérdések kiküldése még nincs beállítva.</li></ul></div>
+    </div>
+    <div class="card">
+      <h3>A forrás pontatlanságai</h3>
+      <p>A fejezet két helyen önmagának ellentmondó évszámot ad. Az oldalon azt használtuk, amelyik a főszövegben áll, és a pontos évszámot kerültük, ahol nem kellett.</p>
+      <ul class="pts">
+        <li>Godwin „Enquiry Concerning Political Justice” című műve a főszövegben 1793-as (PDF 1. o.), az életrajzi keretben 1773-as (PDF 5. o.).</li>
+        <li>Az Első Internacionálé vége a főszövegben 1871 (PDF 1. o.), egy későbbi helyen 1864-72 az időszak (PDF 9. o.).</li>
+      </ul>
+      <p class="note">A szociális ökológiát és az ökoanarchizmust a fejezet a könyv 9. fejezetére utalja tovább (PDF 6. o.), ezért itt nem tárgyaljuk.</p>
+    </div>
+    <div class="card">
+      <h3>Kapcsolódik</h3>
+      <ul class="pts">
+        <li><a href="../okologizmus/">Ökologizmus</a>: a fejezet szerint az ökoanarchizmus és a szociális ökológia a könyv 9. fejezetében kerül elő.</li>
+        <li><a href="../feminizmus/">Feminizmus</a>: az új baloldal része volt, és a nemi viszonyok az anarchizmus újabb témái között is ott vannak.</li>
+        <li><a href="../fasizmus/">Fasizmus</a>: az államról a legtávolabbi álláspont. A fasizmus legfőbb erkölcsi eszménynek látja, amit az anarchizmus szükségtelen rossznak.</li>
+        <li><a href="../">A politikai ideológiák áttekintése</a></li>
+      </ul>
+    </div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, valami nem érthető, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] Anarchizmus">
+        <label for="fb-fok">Melyik fokozat?<select id="fb-fok" data-field="Fokozat" data-subject-part="1"><option>1. Ízelítő</option><option>2. Kártya</option><option selected>3. Mélyfúrás</option><option>4. Műhely</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a politikai ideológiákhoz</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-ideologiak-anarchizmus-fok";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go, true); });
+  var h = (location.hash || "").match(/^#f([1-4])$/);
+  show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>
