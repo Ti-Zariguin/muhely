@@ -1,0 +1,463 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Kádár-korhoz</a><span>Tudástár</span></nav>
+<title>Külpolitika 1945-1990</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 4px 12px; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--lc); line-height: 1.2; }
+.step > div { display: grid; gap: 8px; min-width: 0; }
+.deeper { justify-self: start; }
+.gloss dt { font-family: var(--font-display); font-weight: 700; }
+.gloss dd { margin: 0 0 10px; color: var(--fg); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+details.blk { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 12px 16px; border-top: 0; scroll-margin-top: 90px; }
+details.blk > summary { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; }
+details.blk > summary::-webkit-details-marker { display: none; }
+details.blk > summary .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.12rem; }
+details.blk > summary .tg { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+details.blk > summary .one { grid-column: 1 / -1; font-family: var(--font-body); font-weight: 400; color: var(--muted); font-size: 0.98rem; }
+details.blk[open] > summary .one { color: var(--fg); }
+details.blk > div { padding-top: 10px; display: grid; gap: 10px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0; } .step { grid-template-columns: 1.6rem minmax(0, 1fr); } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Kádár-kor</span>
+    <h1>Külpolitika, 1945-1990: mekkora volt a mozgástér?</h1>
+    <p class="lede">Négy fokozat. Az első egy perc, a második öt. Ha érdekel, mehetsz tovább, ha nem, ott is abbahagyhatod.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Kártya</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Mélyfúrás</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">A téma állapota: mind a 4 fokozat kész · forrás: egyetemi előadás-diasor</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <p class="quote">1968 tavaszán Kádár János az egyetlen a szövetséges vezetők közül, aki Dubčeket védi. Augusztus 21-én magyar katonák is ott vannak a Csehszlovákiába bevonuló seregek között.</p>
+      <p>Két évtizeddel később, 1989 júliusában George Bush az első amerikai elnök, aki Magyarországra látogat. Lelkes tömeg előtt beszél, és önmérsékletre kéri az ellenzéket. A két kép között húzódik egy szovjet csatlós külpolitikájának története.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Tippelj, mielőtt továbbmész</span>
+      <ol class="steps">
+        <li>Melyik volt az első magyar külpolitikai lépés, amelyet a diasor szerint a Szovjetunió ellenében tettünk meg, és mikor?</li>
+        <li>Hány évig volt napirenden az ENSZ-ben a „magyar kérdés” 1956 után?</li>
+      </ol>
+      <p class="note">Nem baj, ha tévedsz: a tévedés után kapott válasz jobban megmarad. A megoldás a következő fokozatban jön.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A lényeg egy mondatban</span>
+      <p class="quote">Magyarország 1945 után alig rendelkezett saját külpolitikával, és a mozgástere lassan, mindig a szovjet tűréshatárig tágult, amíg 1989-ben ez a határ el nem tűnt.</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a kártya, 5 perc</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Kártya</span><span class="t">5 perc · hat korszak hét lépésben</span></div>
+    <div class="card">
+      <div class="step"><span class="n">1</span><div><h3>Horog</h3><p>Kádár, aki tavasszal Dubčeket védi, nyáron beáll a megszállók közé, és a két tipp. Az előbb ezt kaptad.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">2</span><div><h3>Célok</h3><p>A végére tudni fogod:</p>
+        <ul class="pts"><li><span class="chip">megérted</span> mit jelent a „vonakodó csatlós” szerep, és hol volt a határa;</li>
+        <li><span class="chip">megjegyzed</span> a diasor hat korszakát, sorrendben, egy-egy jellemzővel;</li>
+        <li><span class="chip">alkalmazod</span> egy eseményről meg tudod mondani, hogy tágította vagy szűkítette a mozgásteret.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">3</span><div><h3>Mag</h3>
+        <p><strong>A tippek megoldása:</strong> a csatlakozás a Nemzetközi Valutaalaphoz (IMF) és a Világbankhoz 1982-ben. Az ENSZ 1956 és 1962 decembere között, évről évre szavazott a magyar kérdésről.</p>
+        <ul class="timeline">
+          <li><span class="d">1945-1947</span><span><strong>Békeelőkészítés.</strong> Vesztesként a trianoni határt kaptuk vissza, és még három falut is elvesztettünk.</span></li>
+          <li><span class="d">1947-1956</span><span><strong>Szovjet blokk.</strong> Kominform és kétoldalú szerződések: önálló magyar külpolitika nem is létezett.</span></li>
+          <li><span class="d">1956-1963</span><span><strong>Elszigeteltség.</strong> A Kádár-kormányt szinte csak a szövetségesek ismerték el, amíg egy alku le nem zárta a magyar kérdést.</span></li>
+          <li><span class="d">1963-1975</span><span><strong>Pragmatikus évek.</strong> Nyitás nyugat felé, de 1968-ban Kádár beállt a prágai intervencióba.</span></li>
+          <li><span class="d">1975-1982</span><span><strong>Korlátozott szuverenitás.</strong> Helsinki után bővülő nyugati kapcsolatok, a Szent Korona hazatérése, romló viszony Romániával.</span></li>
+          <li><span class="d">1982-1990</span><span><strong>Önállóság és rendszerváltozás.</strong> Az IMF-tagság után a nyugati hitelek a reformot kényszerítették ki, 1989-ben jött a nyugati fordulat.</span></li>
+        </ul>
+        <ul class="pts"><li><strong>Vonakodó csatlós.</strong> Kádár kifelé a blokk egységét mutatta, de kölcsönös egyeztetést várt Moszkvától, és a hűségért belső önállóságot.</li>
+        <li><strong>Kettős gyakorlat.</strong> A Nyugattal szemben ideológiai harc elvben, békés egymás mellett élés a gyakorlatban: a diasor szavával „index balra, kanyar jobbra”.</li>
+        <li><strong>A határ Moszkvában volt.</strong> A külpolitikában a párt döntött mindenről, a végső szó Kádáré, és ő tudta, meddig mehet el.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">4</span><div><h3>Két példa</h3>
+        <div class="two"><div><p><strong>Ahol tágult.</strong> 1962-ben az USA és Magyarország megalkudott: általános amnesztiáért cserébe lekerült a napirendről a magyar kérdés. 1963-ban U Thant ENSZ-főtitkár Budapestre látogatott, és szuverén államnak nevezte az országot.</p></div>
+        <div><p><strong>Ahol a határa.</strong> 1967-ben a Szovjetunió aggodalmát fejezte ki a magyar IMF- és világbanki tárgyalások miatt, és azok le is álltak. A lépést csak 1982-ben, pénzügyi kényszerben tették meg.</p></div></div></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">5</span><div><h3>Kérdezz vissza</h3><p class="note">Előbb gondold végig a választ, csak utána nyisd le.</p>
+        <details><summary>Az osztrák államszerződéssel 1955-ben a szovjetek kivonultak Ausztriából. Miért maradhattak mégis Magyarországon?</summary><div><p>Mert egy nappal korábban megalakult a Varsói Szerződés, és ez új jogalapot adott az itt-tartózkodásukhoz.</p></div></details>
+        <details><summary>Mit kért az USA a magyar kérdés napirendről való levételéért?</summary><div><p>Általános amnesztiát. Az alkudozás 1961 augusztusától tartott, Hruscsov 1962 novemberében engedte meg, és az amnesztia 1963-ban jött.</p></div></details>
+        <details><summary>Miért kezelte a dia az 1982-es IMF-csatlakozást fordulópontként?</summary><div><p>Mert ez volt az első, a Szovjetunió ellenében tett magyar külpolitikai lépés. A gazdasági reformok kudarca és az eladósodás kényszerítette ki.</p></div></details></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">6</span><div><h3>Próbáld ki</h3>
+        <p><strong>10 perc:</strong> rajzolj egy vonalat 1945-től 1990-ig, és tégy rá öt eseményt a kártyáról. Mindegyik mellé írj egy nyilat: felfelé, ha tágította a mozgásteret, lefelé, ha szűkítette. Hol fordul a görbe?</p>
+        <p><strong>A héten:</strong> mondd el valakinek egy mondatban, mit jelent a „vonakodó csatlós” szerep.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">7</span><div><h3>Visszatérés</h3>
+        <p>A kérdések nem érnek véget az oldallal. Visszajönnek, a helyes válaszig: amit eltaláltál, ritkábban, amit elrontottál, hamarabb. Ha egy kérdésre többször egymás után jól felelsz, kiesik.</p>
+        <ul class="timeline">
+          <li><span class="d">ma</span><span>az oldal végén: 3 kérdés</span></li>
+          <li><span class="d">+2-3 nap</span><span>az elrontottak előre, a jók közül egy</span></li>
+          <li><span class="d">+1 hét</span><span>ami még nem ment, plusz egy korábbi témából</span></li>
+          <li><span class="d">+2-3 hét</span><span>rövid utóteszt: mi maradt meg</span></li>
+        </ul>
+        <p class="note">🔁 Ez az ütemezés példa. A kérdések kiküldése még nincs beállítva, addig tedd be a naptáradba.</p></div></div>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: a mélyfúrás, 20-30 perc</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Mélyfúrás</span><span class="t">20-30 perc · nyolc blokk, mindegyik előtt egy kérdés</span></div>
+    <p class="note">Jelölések: ❓ kérdés, mielőtt olvasol · 📖 a fogalom a fogalomtárban van · ⚠️ a diasor bizonytalansága vagy hiánya. A blokkok csukva vannak: nyisd azt, ami érdekel.</p>
+
+    <details class="blk" id="b-beke">
+      <summary><span class="nm">A béke és a csehszlovák igények</span><span class="tg">1945-1947</span><span class="one">Vesztesként kampányoltunk, de a határról már előre döntöttek.</span></summary>
+      <div>
+        <details><summary>❓ Mi volt a nagyhatalmak alapelve a vesztesek területi igényeiről?</summary><div><p>Hogy vesztes ország győztes országtól nem kaphat területet. Az USA 1941-től etnikai határkiigazításon gondolkodott, a Szovjetunió viszont a trianoni határok helyreállítását akarta.</p></div></details>
+        <ul class="pts">
+          <li><strong>Itthon vita.</strong> A polgári erők etnikai alapú határkiigazítást akartak, a baloldal eleinte sovinizmusnak tartotta. 1946 tavaszán Rákosi Moszkvában feltehetően ígéretet kapott, és az MKP (📖) is támogatta az igényt Romániával szemben. Közös cél csak június 24-én lett: 22 ezer km² Erdélyből.</li>
+          <li><strong>Kampánykörút, 1946. ápr.-jún.</strong> Moszkva átütemezte és részben elengedte a jóvátételt, és hazaengedte a hadifoglyokat. Május 7-én azonban a külügyminiszterek tanácsa megerősítette a trianoni határt, Washingtonban kiderült, hogy szovjet követelésre. London és Párizs nem tudott érdemben beavatkozni.</li>
+          <li><strong>A konferencia (1946. júl. 29.-okt. 15.).</strong> 1919-hez képest a vesztesek is felszólalhattak, de csak a plenáris ülésen. Augusztus 13-án a román Tătărescu jóvátételt kért Magyarországtól, 14-én Gyöngyösi János 22 ezer km²-t. Auer Pál augusztus 31-én már csak 4000 km²-t és székely autonómiát kért. Szeptember 5-én a bizottság a trianoni határ mellett döntött.</li>
+          <li><strong>Csehszlovák igények.</strong> Prága 200 ezer magyar egyoldalú kitelepítését és öt Pozsony alatti község átcsatolását kérte. A kitelepítést a bizottság nem támogatta, a hídfőt Csehszlovákiának ítélte, de csak három faluval.</li>
+          <li><strong>A párizsi béke (1947. febr. 10.).</strong> Trianoni határok, három falu (43 km²) Csehszlovákiához; 300 millió dollár jóvátétel (200 a Szovjetuniónak, 70 Jugoszláviának, 30 Csehszlovákiának); legfeljebb 65 ezer fős hadsereg és 5 ezer fős légierő. Hatályba lépett 1947. szeptember 15-én, aznap feloszlott a SZEB (📖). A szovjet csapatok az ausztriai megszállás utánpótlására hivatkozva maradhattak.</li>
+        </ul>
+        <p class="note">⚠️ A csehszlovák-magyar lakosságcsere-egyezményt (1946. febr. 27.) a diasor egy másik tételre utalja tovább, ez az anyag nincs meg.</p>
+      </div>
+    </details>
+
+    <details class="blk" id="b-blokk">
+      <summary><span class="nm">Szovjet blokk és Kominform</span><span class="tg">1947-1956</span><span class="one">Frontállam kettős szorításban, önálló külpolitika nélkül.</span></summary>
+      <div>
+        <details><summary>❓ Miért nem kötött Sztálin egyetlen közös katonai szerződést a csatlósaival?</summary><div><p>A diasor szerint (egyebek mellett) azért, mert félt egy a Szovjetunióval rivális közép-európai blokk létrejöttétől. Helyette kétoldalú szerződések hálója épült ki.</p></div></details>
+        <ul class="pts">
+          <li><strong>Kominform (📖), 1947. szept.</strong> A tömbön belüli vitákat félre kellett tenni, Moszkva irányítása erősödött, a nyugati kapcsolatok megszakadtak.</li>
+          <li><strong>Barátsági szerződések (📖), 1947-1949.</strong> Jugoszlávia, Románia, 1948. febr. 18-án a Szovjetunió, majd Lengyelország, Bulgária, Csehszlovákia. Lényegében Németország elleni katonai szövetségek. A KGST (📖) 1949-től tíz évig csak elvben létezett.</li>
+          <li><strong>Teljes alárendelődés.</strong> Szovjet tanácsadók, szovjet fegyverek és egyenruha, készülés egy harmadik világháborúra. A külkereskedelem zöme a blokkal ment, az árakat a szovjet érdek szabta, vegyes vállalatok és előnytelen szerződések (például a mecseki uránról) kötötték a gazdaságot.</li>
+          <li><strong>Szakítás Jugoszláviával.</strong> Magyarország frontállam lett. A Rajk-per fővádlottja a diasor szerint tulajdonképpen Tito volt; 1949. szeptember 30-án a barátsági szerződést is felmondtuk.</li>
+          <li><strong>A Nyugat.</strong> A Mindszenty- és a Standard-per miatt jegyzékháborúk, kiutasított követek, 1950-ben bezárt konzulátusok. A diplomáciai viszony azért maradt meg, mert az amerikai követség megfigyelőhelyként is szolgált.</li>
+          <li><strong>Sztálin után.</strong> Szovjet nyomásra személycserék 1953-ban, 1954-55-ben és 1956-ban. 1955 májusában Varsói Szerződés és osztrák államszerződés, Hruscsov bocsánatkérő belgrádi útja, decemberben ENSZ-tagság. A kibékülés és az osztrák semlegesség Nagy Imre 1956-os terveire is hatott.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="blk" id="b-56">
+      <summary><span class="nm">1956 és a „magyar kérdés”</span><span class="tg">1956-1963</span><span class="one">ENSZ-napirend, elszigeteltség, majd egy alku.</span></summary>
+      <div>
+        <details><summary>❓ Mit állapított meg az ENSZ különbizottsága 1957-ben?</summary><div><p>Hogy Magyarországon spontán nemzeti felkelés zajlott, a Szovjetunió agressziót követett el, és a magyar nép jogait folyamatosan megsértik. Az ENSZ szabad választást és szovjet kivonulást követelt.</p></div></details>
+        <ul class="pts">
+          <li><strong>Emigráció.</strong> 200 ezren hagyták el az országot. 1957 januárjában Strasbourgban megalakult a Magyar Forradalmi Tanács (Kéthly Anna, Király Béla, Kővágó József).</li>
+          <li><strong>Az ENSZ.</strong> A Biztonsági Tanácsban a Szovjetunió vétózott, a közgyűlés több határozatot hozott. Mivel Kádár nem engedte be a vizsgálókat, 1957. január 10-én ötös különbizottság alakult, jelentését szeptember 14-én fogadták el.</li>
+          <li><strong>Évről évre.</strong> A napirenden tartáshoz kétharmad kellett, és a támogatók aránya évről évre csökkent. Kádár 1960. október 3-i ENSZ-beszédét hűvösen fogadták, többen kivonultak.</li>
+          <li><strong>A rendezés oka.</strong> A két fél mást akart: az USA a Szovjetuniótól való távolodást, Kádár a szovjet jelenlét elfogadását. A krónikus devizahiány miatt kellettek a nyugati kapcsolatok. Akadály volt Mindszenty, aki az amerikai követségen kapott menedéket, és a kölcsönös pénzügyi követelések.</li>
+          <li><strong>Elszigeteltség.</strong> Csak a VSZ-államok, Jugoszlávia és Kína ismerte el Kádárt. Belgrád Nagy Imre ügye miatt került bajba. Moszkvával viszont szoros maradt a viszony: kölcsön, segély, 1957-es szerződés a csapatokról, baráti Hruscsov-Kádár kapcsolat.</li>
+          <li><strong>Kitörési utak.</strong> A szomszédok bizalma (Kádár Romániában, Münnich Csehszlovákiában járt) és a harmadik világ: 1957-ben küldöttség Indiába, Burmába, Indonéziába, Szíriába, Egyiptomba.</li>
+          <li><strong>Az alku.</strong> 1961-től tárgyaltak, 1962 decemberében lezárult a magyar ügy, 1963-ban általános amnesztia, és elfogadták a magyar ENSZ-küldöttség mandátumát.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="blk" id="b-vatikan">
+      <summary><span class="nm">A Vatikán és Mindszenty</span><span class="tg">1962-1990</span><span class="one">Részmegállapodás, egy bíboros a követségen, végül diplomáciai kapcsolat.</span></summary>
+      <div>
+        <details><summary>❓ Mit adott egymásnak a Vatikán és a Kádár-rendszer az 1964-es részmegállapodásban?</summary><div><p>A Vatikán elismerte a Kádár-rendszert, az pedig a vallás létjogosultságát. A püspököket előzetes egyeztetéssel nevezték ki, az állam vétójoga megmaradt.</p></div></details>
+        <ul class="pts">
+          <li><strong>A zsinat idején.</strong> A magyar cél a diasor szerint ügynökök kijuttatása és hírszerzés volt. Casaroli érsek 1963-ban Bécsben, majd Budapesten tárgyalt, a szállodai szobáját lehallgatták.</li>
+          <li><strong>1964. szept. 15.</strong> Casaroli és Prantner József ÁEH-elnök (📖) aláírta a részmegállapodást (📖). Mindszentyről, a hitoktatásról és a szerzetesrendekről nem egyeztek meg.</li>
+          <li><strong>Mindszenty.</strong> A zsinatra sem engedték ki. Kádár 1964-ben kegyelemkérést és lemondást várt volna. A bíboros elítélte a megállapodást. 1971. szept. 28-án megegyezés: elhagyta a követséget és az országot. 1973-ban a pápa lemondásra szólította fel, ő megtagadta, VI. Pál 1974-ben üresnek nyilvánította a székét.</li>
+          <li><strong>1977. jún.</strong> VI. Pál magánkihallgatáson fogadta Kádárt. Teljes diplomáciai kapcsolatról nem tárgyaltak, ahhoz Moszkva engedélye kellett volna. Megegyeztek a templomi hitoktatásban, Lénárd Ödön kiszabadult.</li>
+          <li><strong>1990. febr. 9.</strong> Casaroli és Németh Miklós: diplomáciai kapcsolatfelvétel, az 1964-es megállapodás érvényét vesztette.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="blk" id="b-praga">
+      <summary><span class="nm">A prágai tavasz és a Brezsnyev-doktrína</span><span class="tg">1964-1972</span><span class="one">A patrónusból résztvevő lett.</span></summary>
+      <div>
+        <details><summary>❓ Ki döntött a magyar részvételről a csehszlovákiai intervencióban?</summary><div><p>Kádár személyesen. A Politikai Bizottság egyik tagja sem támogatta a katonai akciót, és a diasor szerint a PB is csak augusztus 20-án tudta meg.</p></div></details>
+        <ul class="pts">
+          <li><strong>Előzmény: Hruscsov bukása, 1964. okt.</strong> Kádár nem gratulált Brezsnyevnek, nyilvánosan méltatta Hruscsovot, és ezt Moszkvában személyesen is megismételte. A diasor szerint Brezsnyev ezt sosem bocsátotta meg.</li>
+          <li><strong>Brezsnyev első évei.</strong> A szovjet-kínai vitában Moszkva mellé álltunk, cserébe belső önállóságot vártunk. 1965-ben segélyt kaptunk, a javasolt VSZ-reform elmaradt. 1967-ben Brezsnyev bírálta a nyugatnémet gazdasági kapcsolatokat és a reformot.</li>
+          <li><strong>A patrónus, 1968 tavasza.</strong> Drezdában márciusban csak Kádár szólalt fel Dubček mellett. Májusban Moszkvában cáfolta, hogy ellenforradalom folyna. Júniusban Dubček Budapesten barátsági szerződést írt alá.</li>
+          <li><strong>Az átállás.</strong> Júniusban egy prágai lap Nagy Imrére emlékezett, megjelent a „2000 szó”. Júliusban Varsóban Kádár saját PB-jét felülbírálva támogatta a szovjet ultimátumot, július 22-én hozzájárult a magyar részvételhez. Pozsonyban és Komáromban még figyelmeztette Dubčeket. Augusztus 21-én megindult az intervenció.</li>
+          <li><strong>A doktrína (📖), 1968. szept.</strong> A kommunista pártok az egész mozgalomnak is felelősek, a szocialista vívmányok védelme mindegyik kötelessége. A blokkban apadtak a reformok, Gomułkát és Ulbrichtot leváltották, és a diasor szerint Kádár elleni puccs terve is volt.</li>
+          <li><strong>Nyugaton nem lett törés.</strong> Épp ekkor indult a nyugatnémet Ostpolitik (📖). Vízummentesség Finnországgal (1970) és Ausztriával (1979), 1973-ban kártérítési megállapodás az USA-val.</li>
+        </ul>
+        <p class="note">⚠️ Az 1972-es zavidovói találkozót ez a diasor csak megemlíti, a puha diktatúra témában van kifejtve.</p>
+      </div>
+    </details>
+
+    <details class="blk" id="b-ebee">
+      <summary><span class="nm">Az EBEÉ és a német kérdés</span><span class="tg">1966-1982</span><span class="one">Helsinki, Bonn és a korlátozott szuverenitás évei.</span></summary>
+      <div>
+        <details><summary>❓ Miért vette fel Magyarország csak 1973-ban a diplomáciai kapcsolatot az NSZK-val, ha Bonn már 1966-ban felajánlotta?</summary><div><p>Mert Lengyelország a szocialista országoknak megtiltotta, illetve hat feltételhez kötötte a kapcsolatfelvételt. Meg kellett várni, amíg Lengyelország, az NDK és Csehszlovákia rendezi a vitáit az NSZK-val.</p></div></details>
+        <ul class="pts">
+          <li><strong>Az EBK (📖) útja.</strong> 1966 Bukarest: a VSZ javaslata. 1969 márciusában budapesti nyilatkozat, magyar közvetítéssel, feltételek nélkül. 1970-ben a VSZ elfogadta az USA és Kanada részvételét és a humanitárius „harmadik kosarat”. 1973-ban Helsinkiben kezdődött az előkészítés.</li>
+          <li><strong>Helsinki, 1975.</strong> Kádár július 31-i beszéde büszkén utalt a magyar történelemre, és először említette Trianont. A záródokumentum tiltotta a határok erőszakos megváltoztatását, de a személyes és kulturális kötelékek erősítését is rögzítette.</li>
+          <li><strong>Bővülő kapcsolatok.</strong> 1978-ban hazatért a Szent Korona, az NSZK lett a második legfontosabb kereskedelmi partner. Az EBEÉ utótalálkozóin (Belgrád, Madrid, Ottawa) Magyarország aktív volt a kisebbségi és emberi jogi kérdésekben.</li>
+          <li><strong>Románia.</strong> 1972-ben Kádár Bukarestben járt, de ott a kisebbségek diszkriminációja erősödött. Az 1977-es debreceni és nagyváradi megállapodást Románia elszabotálta, Kádár többé nem hívta meg Ceauşescut.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="blk" id="b-imf">
+      <summary><span class="nm">IMF 1982 és a nyolcvanas évek</span><span class="tg">1982-1988</span><span class="one">Az első lépés Moszkva ellenében, és a legszalonképesebb kommunista.</span></summary>
+      <div>
+        <details><summary>❓ Mi kényszerítette ki 1982-ben az IMF-csatlakozást?</summary><div><p>A gazdasági reformok kudarcai és a pénzügyi válság, az eladósodás. A diasor szerint ez volt az első, a Szovjetunió ellenében tett magyar külpolitikai lépés.</p></div></details>
+        <ul class="pts">
+          <li><strong>Andropov.</strong> Kádár 1956 óta barátjának tekintette, de figyeltette a magyar külpolitikát, és nehezményezte Szűrös Mátyás nézeteit a nemzeti érdekek elsőbbségéről.</li>
+          <li><strong>Gorbacsov.</strong> A peresztrojka és a glasznoszty (📖) Kádárnak már nem tetszett. Gorbacsov nem erőltette a reformokat a szövetségesekre, de 1985-től utalt rá, hogy Kádárnak utódot kellene keresnie.</li>
+          <li><strong>Erdélyi menekültek.</strong> 1987-től egyre többen jöttek. A pártvezetés eleinte nem törődött velük, civilek és a népi ellenzék karolta fel őket.</li>
+          <li><strong>Nyugati elismertség.</strong> A Nyugat szerint Kádár szabad választáson is győzött volna. Fogadták Rómában, Bonnban, Párizsban, és Budapestre jött a francia elnök, a német kancellár, a brit és az olasz miniszterelnök.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="blk" id="b-rv">
+      <summary><span class="nm">A rendszerváltozás külpolitikája</span><span class="tg">1988-1990</span><span class="one">Kényszerpálya nyugat felé, és Moszkva tudomásul veszi.</span></summary>
+      <div>
+        <details><summary>❓ Mit kért Bush 1989-es budapesti látogatásán az ellenzék vezetőitől, és mit nem hozott?</summary><div><p>Önmérsékletet kért tőlük. Jelentős gazdasági segítséget nem ajánlott fel, pedig Budapesten ezt várták.</p></div></details>
+        <ul class="pts">
+          <li><strong>Gazdasági függőség.</strong> A nyugati hitelek feltétele a politikai reform folytatása volt, a diasor szerint kényszerpálya. Grósz Károly 1988-ban Bonnban, Londonban, Washingtonban járt.</li>
+          <li><strong>Románia, 1988.</strong> Az „Erdély története” román tiltakozást váltott ki, a falurombolási terv (📖) miatt nőtt a menekültek száma. Grósz aradi tárgyalása Ceauşescuval súlyos kudarc lett.</li>
+          <li><strong>Moszkva.</strong> Gorbacsovék nem ellenezték a nyugati orientációt, 1988-ban felmerült a csapatkivonás, 1989 elején tudomásul vették 1956 átértékelését. Sevardnadze ugyanakkor a párt vezető szerepének megóvását kérte.</li>
+          <li><strong>Fordulat 1989 első felében.</strong> Diplomáciai kapcsolat Izraellel (1988) és Dél-Koreával, Szűrös márciusban a nyugati integráció felé fordulást javasolta, májustól Horn Gyula a külügyminiszter, júniusban megfigyelői státusz az Európa Tanácsban. Az ellenzék távlati célként a semlegességet és a VSZ-ből legalább katonai kilépést fogalmazta meg.</li>
+          <li><strong>Szomszédok.</strong> Az MTV interjút adott Dubčekkel, júliusban jelezték a nagymarosi vízlépcső leállítását, augusztus 20-án Prágában magyar ellenzékieket tartóztattak le.</li>
+          <li><strong>Határnyitás.</strong> A vasfüggöny lebontása után keletnémetek érkeztek, augusztusban páneurópai piknik (📖) Sopronnál, szeptember 11-én kiengedték a menekülteket, konfliktus az NDK-val.</li>
+          <li><strong>Kivonulás.</strong> 1990 február-márciusában megállapodás a szovjet csapatok teljes kivonásáról, határidő 1991. június 30.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="blk" id="b-gloss">
+      <summary><span class="nm">📖 Fogalomtár</span><span class="tg">rövidítések</span><span class="one">A diasor rövidítései és fogalmai, ábécé helyett előfordulási sorrendben.</span></summary>
+      <div>
+        <dl class="gloss">
+          <dt>MKP, MDP, MSZMP</dt><dd>Magyar Kommunista Párt, Magyar Dolgozók Pártja, Magyar Szocialista Munkáspárt. PB: Politikai Bizottság, KB: Központi Bizottság.</dd>
+          <dt>SZEB</dt><dd>Szövetséges Ellenőrző Bizottság, a béke hatályba lépésével feloszlott.</dd>
+          <dt>Kominform</dt><dd>A kommunista pártok tájékoztató irodája, 1947-től 1956 áprilisáig.</dd>
+          <dt>Barátsági szerződés</dt><dd>Teljes nevén barátsági, együttműködési és kölcsönös segélynyújtási egyezmény: kétoldalú, lényegében Németország elleni katonai szövetség.</dd>
+          <dt>KGST</dt><dd>Kölcsönös Gazdasági Segítség Tanácsa, 1949. Tíz évig csak elvben létezett.</dd>
+          <dt>VSZ, VSZ PTT</dt><dd>Varsói Szerződés (1955) és Politikai Tanácskozó Testülete.</dd>
+          <dt>ÁEH</dt><dd>Állami Egyházügyi Hivatal.</dd>
+          <dt>Részmegállapodás</dt><dd>Az 1964-es vatikáni-magyar egyezség, főként a püspökkinevezésekről. Az Elnöki Tanács lemondott a főkegyúri jogról, de vétójogot tartott meg.</dd>
+          <dt>Vonakodó csatlós</dt><dd>Kádár szerepe a diasorban: kifelé egység, cserébe kölcsönös egyeztetés és belső önállóság.</dd>
+          <dt>Brezsnyev-doktrína</dt><dd>A kommunista pártok az egész mozgalomnak felelősek, a szocialista vívmányok védelme minden szocialista ország kötelessége.</dd>
+          <dt>Ostpolitik</dt><dd>A nyugatnémet keleti politika, az 1960-as évek végétől.</dd>
+          <dt>EBK, EBEÉ</dt><dd>Európai Biztonsági Konferencia, majd Európai Biztonsági és Együttműködési Értekezlet. A „harmadik kosár” a humanitárius együttműködés.</dd>
+          <dt>IMF</dt><dd>Nemzetközi Valutaalap.</dd>
+          <dt>Peresztrojka, glasznoszty</dt><dd>Gorbacsov reformjai: átalakítás és nyilvánosság.</dd>
+          <dt>Falurombolás</dt><dd>A román „település-szisztematizálási” terv.</dd>
+          <dt>EKA</dt><dd>Ellenzéki Kerekasztal.</dd>
+          <dt>Páneurópai piknik</dt><dd>Sopronnál tartott rendezvény, 1989 augusztusában.</dd>
+        </dl>
+      </div>
+    </details>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe: hol tartunk</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">honnan dolgozunk, mi nyitott, hogyan kapcsolódhatsz be</span></div>
+    <div class="card">
+      <h3>Honnan dolgozunk</h3>
+      <p>Az oldal egyetlen forrása egy egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), a „Külpolitika, 1945-1990” előadás. Az előadó neve nem ismert.</p>
+      <p>A diák vázlatpontokból és rövidítésekből állnak. A szöveg ezekből készült saját összefoglalás. Tényt csak a diasorból vettünk, a közismert háttérkiegészítéseket lent külön jelöljük.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts">
+        <li>az Ízelítő a két tippel;</li><li>a Kártya a hat korszakkal;</li><li>a Mélyfúrás nyolc blokkal és fogalomtárral;</li><li>ez a Műhely.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts">
+        <li>a lakosságcsere-egyezményt a diasor egy másik tételre utalja, az nincs meg;</li><li>a diákon szereplő idézeteket és számokat nem vetettük össze más forrással;</li><li>a visszatérő kérdések kiküldése még nincs beállítva.</li></ul></div>
+    </div>
+    <div class="card">
+      <h3>A forrás pontatlanságai</h3>
+      <ul class="pts">
+        <li>A francia elnök neve a dián „Mitterand”, helyesen Mitterrand.</li>
+        <li>A Varsói Szerződés sora az osztrák államszerződés (máj. 15.) után áll, de máj. 14-i, „egy nappal azelőtti” eseményként. A sorrend zavaró, ellentmondás nincs: a VSZ volt előbb.</li>
+        <li>1968: Kádár július 22-én hozzájárult a magyar részvételhez, a diasor mégis azt írja, hogy a PB „csak 20-án” tudta meg. Nem derül ki, mit tudott meg a PB augusztus 20-án; az oldal a dia szavait követi.</li>
+        <li>Az USA legnagyobb kereskedelmi kedvezményének megadása évszám nélkül, az 1968 utáni részben szerepel. Évszámot ezért mi sem írunk.</li>
+        <li>A nemzeti érdekek elsőbbségéről szóló mondat a dián gazdátlan, Szűrös Mátyás nézetei után áll. Az oldalon a nézeteihez kötöttük, idézetként nem.</li>
+        <li>Rákosi 1946-os moszkvai ígérete a dián „feltehetően” szerepel. Ez bizonytalanság, nem tény.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Szerkesztői kiegészítések</h3>
+      <p>A diasor ezeket nem tartalmazza, közismert háttérként tettük hozzá:</p>
+      <ul class="pts">
+        <li>[szerkesztői kiegészítés] A Kominform teljes neve: Kommunista és Munkáspártok Tájékoztató Irodája.</li>
+        <li>[szerkesztői kiegészítés] EKA: Ellenzéki Kerekasztal.</li>
+        <li>[szerkesztői kiegészítés] A peresztrojka átalakítást, a glasznoszty nyilvánosságot jelent.</li>
+        <li>[szerkesztői kiegészítés] Andropov 1956-ban budapesti szovjet nagykövet volt. Ez magyarázza, miért tekintette Kádár „1956 óta” barátjának.</li>
+        <li>[szerkesztői kiegészítés] A „Canossa-járás” IV. Henrik 1077-es vezeklő útjára utal; a diasor így nevezi Hruscsov 1955-ös belgrádi bocsánatkérését.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kapcsolódik</h3>
+      <ul class="pts">
+        <li><a href="../puha-diktatura/">A puha diktatúra</a>: a belpolitikai oldal, benne az 1972-es zavidovói találkozó, amelyre ez a diasor utal.</li>
+        <li><a href="../rendszervaltozas/">A rendszerváltozás</a>: a külpolitika utolsó két évének belpolitikai háttere.</li>
+        <li><a href="../idovonal/">Idővonal</a>: a dátumok egy helyen.</li>
+        <li><a href="../">A Kádár-kor áttekintése</a></li>
+      </ul>
+    </div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, valami nem érthető, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] Kádár-kor">
+        <label for="fb-tema">Téma<select id="fb-tema" data-field="Téma" data-subject-part="1"><option selected>Külpolitika 1945-1990</option></select></label>
+        <label for="fb-fok">Melyik fokozat?<select id="fb-fok" data-field="Fokozat" data-subject-part="1"><option>1. Ízelítő</option><option>2. Kártya</option><option selected>3. Mélyfúrás</option><option>4. Műhely</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a Kádár-korhoz</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-kadar-kulpol-v1";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go, true); });
+  var h = (location.hash || "").match(/^#f([1-4])$/);
+  show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

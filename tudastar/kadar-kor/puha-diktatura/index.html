@@ -1,0 +1,493 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Kádár-korhoz</a><span>Tudástár</span></nav>
+<title>A puha diktatúra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 4px 12px; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--lc); line-height: 1.2; }
+.step > div { display: grid; gap: 8px; min-width: 0; }
+.deeper { justify-self: start; }
+.gloss dt { font-family: var(--font-display); font-weight: 700; }
+.gloss dd { margin: 0 0 10px; color: var(--fg); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+details.part { border-top: 0; padding-top: 0; }
+details.part > summary { display: grid; gap: 4px; list-style: none; }
+details.part > summary::-webkit-details-marker { display: none; }
+details.part > summary .h { font-size: 1.1rem; }
+details.part > summary .h::before { content: "▸ "; color: var(--lc); }
+details.part[open] > summary .h::before { content: "▾ "; }
+details.part > summary .s { font-family: var(--font-body, inherit); font-weight: 400; color: var(--muted); font-size: 0.92rem; }
+details.part > div { gap: 12px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0; } .step { grid-template-columns: 1.6rem minmax(0, 1fr); } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · A Kádár-kor</span>
+    <h1>A puha diktatúra, 1963-1985</h1>
+    <p class="lede">Négy fokozat. Az első egy perc, a második öt. Ha érdekel, mehetsz tovább, ha nem, ott is abbahagyhatod.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Kártya</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Mélyfúrás</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">A téma állapota: mind a 4 fokozat kész · forrás: egyetemi előadás-diasor</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <p class="quote">1972 februárja, Zavidovo. Brezsnyev azt tanácsolja Kádárnak, hogy a párt jobban ellenőrizze a folyamatokat, és ideológiailag legyen szilárd.</p>
+      <p>Hazatérve a Politikai Bizottságban sosem látott törés nyílik a reformerek és a keményvonalasok között. Kádár látszólag a balosok mellé áll, valójában elszabotálja a követeléseiket.</p>
+      <p>Májusban betölti a hatvanat, és bejelenti, hogy nyugdíjba vonul. Erre hűséget esküszik neki mindkét tábor, még azok is, akik addig puccsra készültek.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Gondold végig, mielőtt továbbmész</span>
+      <ol class="steps">
+        <li>Miért esküdött hűséget Kádárnak az is, aki addig a megbuktatására készült?</li>
+        <li>Mikor indult az Új Gazdasági Mechanizmus, és mikor legalizálták a „második gazdaságot”?</li>
+      </ol>
+      <p class="note">Nem baj, ha tévedsz: a tévedés után kapott válasz jobban megmarad. A megoldás a következő fokozatban jön.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A lényeg egy mondatban</span>
+      <p class="quote">A Kádár-rendszer diktatúra maradt, de már nem átnevelni akarta a társadalmat, csak megtartani: aki elfogadta a rendet, azt békén hagyta, és cserébe teret meg életszínvonalat adott.</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a kártya, 5 perc</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Kártya</span><span class="t">5 perc · a korszak íve, a „puha” lényege, négy fogalom</span></div>
+    <div class="card">
+      <p><strong>A tippek megoldása.</strong> Mindkét tábor attól félt, hogy Kádár utódja a másik oldalról kerül ki. Kádár maradt, és a helyzete erősebb lett, mint előtte. Az ÚGM 1968. január 1-jén indult, a második gazdaságot 1980. február 19-én legalizálták.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A korszak íve hét lépésben</span>
+      <ol class="steps">
+        <li><strong>Agrárreform (60-as évek).</strong> A kollektivizálás után a téeszek háztájit, részes művelést, saját gépet kapnak. 1967-ben új téesz- és földtörvény.</li>
+        <li><strong>Új Gazdasági Mechanizmus (1968).</strong> Kevesebb központi terv, több vállalati önállóság, árreform. Kádár kérésére „fékekkel”.</li>
+        <li><strong>A fordulat éve (1972).</strong> Zavidovo, a munkásellenzék támadása, novemberben a reformok leállítása.</li>
+        <li><strong>Reformellenes évek (1973-1975).</strong> A reformer vezetők háttérbe szorulnak, a XI. kongresszus után „pangás”.</li>
+        <li><strong>Válság 1973 után.</strong> Olajár-robbanás, nyugati hitelek, az adósság tíz év alatt 800 millióról 9,1 milliárd dollárra nő.</li>
+        <li><strong>Újabb reformok (1977-1982).</strong> Árreform, második gazdaság, gmk, kisvállalatok, IMF- és világbanki tagság.</li>
+        <li><strong>A 80-as évek eleje.</strong> Elöregedő vezetés, egyre zárkózottabb Kádár, reformtervek, amelyeket ő maga fékez.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <span class="lbl">Mitől „puha”?</span>
+      <ul class="pts">
+        <li><strong>Cél a konzerválás.</strong> A tömegek átnevelése helyett már csak a rendszer fenntartása.</li>
+        <li><strong>Differenciálás.</strong> Mást kap az „ellenség”, és mást a „megtévesztett”.</li>
+        <li><strong>Szocialista törvényesség.</strong> Aki elfogadja a fennálló rendet, annak a jogait tiszteletben tartják.</li>
+        <li><strong>Életszínvonal.</strong> A diasor szerint minden szakasz növelte, rétegenként eltérően.</li>
+      </ul>
+      <p class="note">⚠️ A határa: az állambiztonság végig szoros pártirányítás alatt működött, a választás formaság maradt, és egyházellenes per még 1972-ben is volt.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">Négy kulcsfogalom</span>
+      <dl class="gloss">
+        <dt>ÚGM</dt><dd>Új Gazdasági Mechanizmus: az 1968-as gazdasági reform.</dd>
+        <dt>Háztáji</dt><dd>A téesz-tag saját művelésű földje. A tagok jövedelmének fele innen jött.</dd>
+        <dt>Munkásellenzék</dt><dd>Balos, Moszkva-barát csoport a vezetésben: Komócsin, Biszku, Gáspár, Pullai.</dd>
+        <dt>Második gazdaság</dt><dd>A hivatalos szektoron kívüli kereső tevékenység, 1980-ban legalizálták.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <span class="lbl">Kérdezz vissza</span>
+      <p class="note">Előbb gondold végig a választ, csak utána nyisd le.</p>
+      <details><summary>Miért tekintik a mezőgazdaságot az ÚGM „próbaüzemének”?</summary><div><p>Mert a téeszek már 1966-67-ben nagyobb önállóságot kaptak, és vállalatszerűen működhettek, mielőtt 1968-ban az egész gazdaságban bevezették a reformot.</p></div></details>
+      <details><summary>Mi történt a reformokkal 1972 novemberében?</summary><div><p>A KB-ülés leállította őket. Jött a gazdasági recentralizáció, 1973-ban létrejött az Állami Tervbizottság, és a párt a tagfelvételnél a munkásokat kezdte előnyben részesíteni.</p></div></details>
+      <details><summary>Mire fordították a 70-es évek nyugati hiteleit?</summary><div><p>Közvetlenül nem az életszínvonalra, hanem beruházásokra, de rossz iparágakba. Hitel nélkül viszont az életszínvonalat csökkenteni kellett volna, ehhez pedig nem mertek nyúlni.</p></div></details>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: a mélyfúrás, 20-30 perc</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Mélyfúrás</span><span class="t">20-30 perc · hét rész, egyenként nyitható</span></div>
+    <p class="note">Jelölések: ❓ kérdés, mielőtt olvasol · 💡 [AI Insight]: saját összefüggés a diák tényeiből, nem a forrásé · ⚠️ korlát vagy bizonytalanság · (?) a dián is kérdőjel áll. Nyiss ki egy részt, olvasd el, aztán csukd vissza.</p>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">1. rész</span><span class="h">Állambiztonság és pártirányítás</span><span class="s">Kisebb hatalom, szoros póráz, új szemlélet.</span></summary><div>
+        <details><summary>❓ Megfigyelhették-e a párttagokat?</summary><div><p>Elvileg nem, csak a pártból való kizárásuk után. 1974-ben mégis lehallgatták Fock Jenő és Nyers Rezső telefonját.</p></div></details>
+        <p><strong>Szervezet.</strong> 1956-57-ben a politikai rendőrség az ORFK Politikai Nyomozó Főosztálya volt, 1957 és 1962 között a BM II. főosztálya. Itt a II/5. osztály foglalkozott a „belső reakció” elhárításával.</p>
+        <p>1962. június 26-án a Belügyminisztériumot főcsoportfőnökségekre szervezték át. Az állambiztonság a BM III. főcsoportfőnöksége lett, öt csoportfőnökséggel:</p>
+        <ul class="pts">
+          <li><strong>III/I.</strong> hírszerzés;</li>
+          <li><strong>III/II.</strong> kémelhárítás;</li>
+          <li><strong>III/III.</strong> a belső reakció és a szabotázs elhárítása;</li>
+          <li><strong>III/IV.</strong> katonai elhárítás;</li>
+          <li><strong>III/V.</strong> operatív technika.</li>
+        </ul>
+        <p><strong>Pártirányítás.</strong> A politikai rendőrség hatalma csökkent, de végig a párt szoros irányítása alatt maradt. A feladatokat a KB és a PB szabta meg, a végrehajtást a Titkárság és az Adminisztratív Osztály ellenőrizte (1969-től Közigazgatási és Adminisztratív Osztály, KAO). Mellette informális csatornákon, „kézi vezérléssel” is irányítottak. 1979-től napi operatív információs jelentések (NOIJ) mentek a pártvezetésnek.</p>
+        <p><strong>Új szemlélet.</strong> Papíron a feladat maradt: az imperialista titkosszolgálatok kémkedésének, terrorjának, szabotázsának és a „belső reakció” aknamunkájának felderítése. A második normarendszer (pszeudojog) is megmaradt. A módszer viszont változott: szocialista törvényesség, differenciálás, és <strong>szignalizáció</strong>, azaz megelőző, előzetes jelentés.</p>
+        <details><summary>A „hálózat”: kik voltak a besúgók?</summary><div>
+          <p><strong>1972-ig:</strong> az informátor kívülről figyelt, az ügynök az ellenséges kör bizalmába férkőzött, a rezidens egy informátorcsoportot vezetett, operatív tiszt ellenőrzése mellett. A hálózathoz hivatásos „tartótisztek” kapcsolódtak.</p>
+          <p><strong>1972 után:</strong> az ügynököt zsarolással vagy pénzzel szervezték be. A titkos megbízott (tmb) hazafias alapon állt, de kevés lehetősége volt. A titkos munkatárs (tmt) kipróbált, régi, elvi alapon dolgozó tag volt.</p>
+        </div></details>
+        <div class="insight"><span class="tagline">💡 [AI Insight]</span><p>A „puhaság” itt nem a megfigyelés hiánya, hanem a célja: már nem átnevelni, hanem megelőzni akartak. A lehallgatott PB-tagok mutatják, hogy a szabály („párttagot nem figyelünk”) a frakcióharcban nem volt áthághatatlan.</p></div>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">2. rész</span><span class="h">Mezőgazdaság: el a kolhoztól</span><span class="s">Válságból a háztájiig, onnan a téesz-önállóságig.</span></summary><div>
+        <details><summary>❓ Miért kellett 1960-tól gabonát behozni Kanadából?</summary><div><p>Mert a kollektivizálás után a termelés 10%-kal visszaesett. Nem volt gép, vezetői gyakorlat, munkaerő és munkakedv, és sok termés a földeken maradt.</p></div></details>
+        <p><strong>Káosz.</strong> A föld tulajdona a parasztoké maradt, a használata a téeszé lett. Adásvétel nem volt, cserejog sem. Mintegy 350 ezer ember, főleg fiatal férfi ment el az iparba. A téeszbe az idősebbek és a nők léptek be, és csak annyit dolgoztak, amennyi a háztájihoz kellett.</p>
+        <p><strong>Engedmények.</strong> Sokan ideiglenesnek hitték őket, de Fehér Lajos és Erdei Ferenc tudatos, tartós reformnak szánta:</p>
+        <ul class="pts">
+          <li>1 hold <strong>háztáji</strong> a munkaegységét teljesítő tagnak, árutermelési joggal. Később nőtt a mérete, és már nem téesz-tagok is kaphattak, a dia szerint még a falusi pap is. A tagok jövedelmének fele innen jött.</li>
+          <li>családi állattartás, ami 1956 előtt tilos volt;</li>
+          <li><strong>részes művelés</strong>: a többlettermés 25-50%-a a művelőé. Évekig éles ideológiai vita folyt róla;</li>
+          <li>prémium a túlteljesítésért, havi előleg;</li>
+          <li>a gépállomások helyett saját géppark. Ez a vegyiparra és a gépgyártásra is kihatott.</li>
+        </ul>
+        <details><summary>Az 1966-67-es reformok</summary><div>
+          <p>1964-67 között lebontották a mezőgazdaság központi tervezését. 1966 októberében a PB nagyobb önállóságot és vállalatszerű működést adott a téeszeknek, és elismerte a szövetkezeti tulajdon szocialista jellegét. A diasor szerint a mezőgazdaság volt az ÚGM „próbaüzeme”.</p>
+          <p><strong>Téesz-törvény (1967. III. tv.).</strong> A munkaegység helyett előre meghatározott bér. A közgyűlés dönt az alapszabályról, a termelésről, a beruházásról, és ő választja a vezetőket. A tervet nem kell a tanácsnak jóváhagynia. Melléküzemágak is létesíthetők. Saját érdekvédelem: Termelőszövetkezetek Országos Tanácsa. A dia szerint ez Nagy Imre agrárkoncepciójának megvalósulása.</p>
+          <p><strong>Földtörvény (1967. IV. tv.).</strong> Szövetkezeti földtulajdon. Aki örökölt, de nem volt tag, el kellett adnia a földet a téesznek, vagy be kellett lépnie.</p>
+        </div></details>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">3. rész</span><span class="h">Az ÚGM és a korlátai</span><span class="s">Piac a terv mellett, de beépített fékekkel.</span></summary><div>
+        <details><summary>❓ Mit mondott Kádár a reformanyagról 1966. május 3-án?</summary><div><p>Hogy szakmailag jó, de politikailag problémás, ezért „fékeket” kell beépíteni. Nyers Rezső megdöbbent, de végül engedett.</p></div></details>
+        <p><strong>Miért?</strong> Az életszínvonal-politika nyomása és más szocialista országok példája miatt. Az előkészítést 1964-től Nyers Rezső vezette, 11 munkacsoportban. Kádár ellentmondásosan állt hozzá: félt a piac és a haszon „kapitalista” fogalmaitól, a balos ellenfeleitől és Brezsnyevtől is.</p>
+        <p><strong>Menetrend.</strong> 1965 novemberében elhalasztották, 1966. május 25-27-én KB-határozat lett belőle, a IX. kongresszus (1966. nov.-dec.) véglegesen jóváhagyta. 1968. január 1-jén indult.</p>
+        <details><summary>Mit változtatott?</summary><div>
+          <ul class="pts">
+            <li><strong>Terv:</strong> ötéves tervek maradtak, de vállalatra bontott tervmutatók helyett adókkal és hitelekkel irányítottak.</li>
+            <li><strong>Árak:</strong> rögzített, sávos és szabad árak. Az alapvető élelmiszer végig kötött maradt. A termelői árak a világpiachoz közeledtek, ami fékezte a beruházást és inflációt okozott.</li>
+            <li><strong>Bérek:</strong> átlagbér-szabályozás. Az alacsony átlaghoz sok rosszul fizetett munkást vettek fel: ez a „kapun belüli munkanélküliség”.</li>
+          </ul>
+        </div></details>
+        <details><summary>Mit ért el, és mit nem?</summary><div>
+          <p><strong>Eredmény:</strong> közeledés a világpiachoz, minőség és gazdaságosság a mennyiség helyett, fontos lett a nyereség. A termelékenység ekkor nőtt a legjobban. Vállalkozó szellem, jobb áruellátás.</p>
+          <p><strong>Korlát:</strong> a jövedelmezőség nem lett igazi ösztönző, a hiány és a verseny gyenge maradt. Az örökölt intézményi szerkezet nem változott, és ez lett a reform legfőbb gátja. A nyugati fejlettséget nem sikerült megközelíteni.</p>
+        </div></details>
+        <details><summary>A választójogi reformok</summary><div>
+          <p><strong>1966:</strong> a listás szavazás helyett egyéni kerületek, elvileg több jelölttel. 1967-ben 340 körzetből csak 9-ben volt több jelölt. Részvétel 98,9%, a Népfront támogatottsága 99,7%.</p>
+          <p><strong>1970. III. tv.:</strong> megszűnt a HNF jelölési monopóliuma, és bevezették az aktív szavazást (két jelöltnél az egyiket át kell húzni). Kettős jelölés 1971-ben 49, 1975-ben 34, 1980-ban 15 helyen volt.</p>
+          <p class="note">⚠️ A diasor szerint az országgyűlés kirakatszerv, a választás formaság maradt.</p>
+        </div></details>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">4. rész</span><span class="h">1972 és a reformellenes évek</span><span class="s">Munkásellenzék, szovjet nyomás, „pangás”.</span></summary><div>
+        <details><summary>❓ Kik alkották a „munkásellenzéket”, és mit kifogásoltak?</summary><div><p>Komócsin Zoltán, Biszku Béla, Gáspár Sándor és Pullai Árpád. Szerintük a reform a munkások kárára tolta el a jövedelmeket, terjedt a magánszektor, a korrupció és a nyugati adósság, a pártban pedig túlsúlyba került a „karrierista értelmiség”.</p></div></details>
+        <p><strong>Frakciók.</strong> Reformer: Fock, Nyers, Fehér, Aczél. Centrum: Kádár, Németh K., Losonczi. A szovjetek attól tartottak, hogy a nyitás a Nyugat felé (tervezett GATT-, IMF-, világbanki tagság) megbontja a szocialista világ egységét. A X. kongresszus (1970. nov.) még a reformot hagyta jóvá. 1971-ben Kádár erősödött: meghalt Rákosi, és Nyugatra távozott Mindszenty.</p>
+        <details><summary>1972 négy állomása</summary><div>
+          <ul class="timeline">
+            <li><span class="d">febr.</span><span>Zavidovo, Brezsnyev tanácsa. Utána Komócsin személycserét követel, Kádár látszólag enged, valójában szabotál.</span></li>
+            <li><span class="d">ápr. 19.</span><span>Alkotmánymódosítás: a marxista-leninista párt a társadalom vezető ereje. A „munkások” helyett többnyire „állampolgárok” áll benne.</span></li>
+            <li><span class="d">máj.</span><span>Kádár 60 éves, bejelenti nyugdíjba vonulását. Mindkét frakció hűséget esküszik. Ettől kezdve minden 60 éves vezetőnek „illett” nyugdíjazást kérni.</span></li>
+            <li><span class="d">nov. 14-15.</span><span>KB-ülés, a reformok leállítása: „a határozatok jók, de a végrehajtásba hibák csúsztak”. Recentralizáció, Állami Tervbizottság (1973. jún.).</span></li>
+          </ul>
+        </div></details>
+        <details><summary>A reformerek eltávolítása, 1973-1975</summary><div>
+          <p>1974 márciusában a KB munkás-tagtoborzást hirdetett, és jelentős béremelést ért el az ipari munkásoknak. Fehér nyugdíjba ment, Nyers intézetigazgató lett, Aczél „felfelé bukott”. Komócsin egészségügyi okból kikerült a Titkárságból, és 1974 májusában meghalt.</p>
+          <p>A XI. kongresszus (1975. márc.) a „fejlett szocialista társadalom” építését hirdette, a diasor szerint a valóságtól elrugaszkodva. Fehér és Nyers kimaradt a PB-ből, bekerült Óvári Miklós. Fock Jenő nyugdíjazását kérte, utóda május 15-én Lázár György lett, 1987-ig. A korszak jellemzője a változatlanság, a „pangás”.</p>
+        </div></details>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">5. rész</span><span class="h">Perek és rejtélyes ügyek</span><span class="s">A puha diktatúra kemény oldala.</span></summary><div>
+        <details><summary>❓ Melyik évben volt a diasor szerint az utolsó egyházellenes per?</summary><div><p>1972-ben, illegálisan működő domonkos szerzetesek ellen.</p></div></details>
+        <details><summary>Egyházellenes perek (Regnum Marianum)</summary><div>
+          <ul class="timeline">
+            <li><span class="d">1961</span><span>„Fekete Hollók” akció illegális szerzetesrendek és papi szeminárium ellen. Utána Tabódy István 12, Lénárd Ödön 7,5 év, az 1. Regnum-perben Werner Alajos és társai 1,5-5,5 év.</span></li>
+            <li><span class="d">1964</span><span>2. Regnum-per: Emődy László és társai, 2-5 év.</span></li>
+            <li><span class="d">1965</span><span>Jezsuiták, köztük Rózsa Elemér: 4-8 év.</span></li>
+            <li><span class="d">1966</span><span>Lénárd Ödön újabb 8 évet kap, korábbi ítéleteivel összevonva 19-et.</span></li>
+            <li><span class="d">1971</span><span>3. Regnum-per: Hagemann Frigyes és társai, 1966 óta megfigyelve.</span></li>
+            <li><span class="d">1972</span><span>Domonkos szerzetesek pere, az utolsó.</span></li>
+          </ul>
+        </div></details>
+        <details><summary>Politikai és gazdasági perek</summary><div>
+          <p><strong>Politikai:</strong> 1956 tizedik évfordulóján röplapozók, sőt sínrobbantók (Hamusics János). 1962-ben parasztpárti értelmiségiek (Zsigmond Gyula 2, Püski Sándor 4,5 év), 1966-ban a DNP-s Matheovits Ferenc 10 év.</p>
+          <p><strong>MEGÉV-ügy (1972-73):</strong> egy kiskapukat kihasználó reformer cég elleni koncepciós eljárás. Fehér és Nyers leállította, Biszku a szocialista törvényességre hivatkozva panaszt tett, és Kádár kénytelen volt mellé állni.</p>
+          <p><strong>Téesz-vezetők:</strong> tömeges perek a sikeres, kiskapukat kihasználó vezetők ellen, hamis tanúvallomásokkal, sematikus vádakkal. A diasor szerint így érvényesültek a lobbiérdekek a bíróságon keresztül.</p>
+        </div></details>
+        <details><summary>Négy rejtélyes halál</summary><div>
+          <ul class="pts">
+            <li><strong>Péter György</strong>, reformközgazdász, a KSH elnöke. 1968-ban ezüstérméket vett egy csempésztől, szívbetegen őrizetbe vették. 1969 elején állítólag öngyilkos lett (?), ami egészségi állapota miatt kétes.</li>
+            <li><strong>Erdélyi Károly</strong>, Kádár titkára és orosz tolmácsa, majd külügyminiszter-helyettes. Lehangoló képet festett a szovjet vezetőkről. 1971-ben búcsúlevelekkel, öngyilkosként találták meg egy erdőben (?).</li>
+            <li><strong>Tömpe András</strong>, NDK-nagykövet, a prágai bevonulás után tiltakozásul lemondott. Egy általa kirúgott párttitkár ráállította a KEB-et és az állambiztonságot. 1971 végén agyonlőtte magát.</li>
+            <li><strong>Vályi Péter</strong>, reformer gazdasági vezető. 1973-ban vadászat után a Lenin Kohászati Művekben 700 °C-os öntőformák közé zuhant, és négy nap múlva meghalt. A vizsgálat kizárta az idegenkezűséget, de választ nem adott.</li>
+          </ul>
+          <p class="note">⚠️ A diasor kérdőjelei bizonytalanságot jelölnek, nem bizonyítékot. Itt is azok maradnak.</p>
+        </div></details>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">6. rész</span><span class="h">Válság 1973 után</span><span class="s">Olajár, hitel, stagfláció.</span></summary><div>
+        <details><summary>❓ Mennyi volt Magyarország nyugati adóssága 1970-ben és 1980-ban?</summary><div><p>800 millió, illetve 9,1 milliárd dollár.</p></div></details>
+        <p><strong>Olaj és cserearány.</strong> 1973-tól nőttek az energiaárak, és az ideológiai szólamok ellenére a válság begyűrűzött. A Szovjetunió saját olajánál is éves átlagárra és dollár-elszámolásra tért át. A gyengébb magyar ipari termékek leértékelődtek, a szerkezetváltás elmaradt.</p>
+        <p><strong>Hitel.</strong> Az arab olajdollárok nyugati bankokba kerültek, amelyek szívesen hiteleztek. A pénz rossz iparágakba ment: esett a termékek ára, vagy nem feleltek meg a szigorúbb nyugati szabványoknak. Tipikus példa az 1976-os eocén- és liászprogram: sokba került, és gyenge minőségű szenet adott.</p>
+        <ul class="timeline">
+          <li><span class="d">1978</span><span>a törlesztés már csak újabb hitelből megy, de az életszínvonalhoz nem nyúlnak</span></li>
+          <li><span class="d">1982</span><span>szovjet és világbanki segítség kell; az USA politikai okból élezi a KGST-országok hitelválságát</span></li>
+          <li><span class="d">1985</span><span>újabb fizetési nehézség, hibás gazdaságélénkítési tervek</span></li>
+        </ul>
+        <p><strong>Következmény.</strong> A nemzeti jövedelem 1976 és 1985 között a két ötéves szakaszban 2,9, majd 1,6 százalékkal nőtt. Megjelent a <strong>stagfláció</strong>: a stagnálás inflációval járt együtt.</p>
+        <p class="note">⚠️ A dia nem mondja meg egyértelműen, hogy a 2,9 és az 1,6% évi átlag vagy ötéves összeg.</p>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">7. rész</span><span class="h">Újra reform és a 80-as évek eleje</span><span class="s">Gazdasági nyitás, megöregedő Kádár.</span></summary><div>
+        <details><summary>❓ Mit mondott Kádár 1984-ben az új reformról?</summary><div><p>Hogy nincs rá szükség, mert 1968 óta folyamatosan reform van. A kormány az ellenérveit figyelmen kívül hagyta, és a változások elindultak.</p></div></details>
+        <p><strong>A dogmatikusok távoznak.</strong> 1976 októberében Pullai Árpádot felmentik titkári posztjáról, miniszter lesz. 1978 áprilisában Biszku Bélát nyugdíjba küldik.</p>
+        <details><summary>Gazdasági reformok, 1977-1982</summary><div>
+          <ul class="timeline">
+            <li><span class="d">1977. okt.</span><span>a KB felismeri a gazdasági válságot</span></li>
+            <li><span class="d">1979</span><span>radikális árreform, „szocialista vállalkozói szellem”</span></li>
+            <li><span class="d">1980. febr. 19.</span><span>a „második gazdaság” legalizálása</span></li>
+            <li><span class="d">1980 ősze</span><span>üzletek és vendéglők szerződéses üzemeltetése</span></li>
+            <li><span class="d">1981. szept. 9.</span><span>gazdasági munkaközösségek (gmk); kisvállalatok, leányvállalatok</span></li>
+            <li><span class="d">1982</span><span>lakossági kötvények, vállalati részvények; csatlakozás az IMF-hez és a Világbankhoz</span></li>
+          </ul>
+          <p>Az IMF-tagságot 1967-ben és 1973-ban is megkísérelték, 1978-79-ben Brezsnyev ismét megvétózta. 1981-ben, amikor már nem jött szovjet gazdasági segítség, titkos tárgyalások indultak.</p>
+        </div></details>
+        <details><summary>Kádár és a politika a 80-as években</summary><div>
+          <p>A XII. kongresszuson (1980. márc.) alig változott az elöregedő KB, és nem volt válasz a gazdasági bajokra. Kádár munkabírása csökkent, zárkózott lett, beszédei durvák, csapongók. A lengyel válság (1980-81) után aggódni kezdett, és 1982-ben többször ideológiai szigort hirdetett.</p>
+          <p>A Gazdaságpolitikai Bizottság mellett konzultatív testület működött, ellenzéki közgazdászokkal is (Tardos Márton, Bauer Tamás, Matolcsy György), valamint Lengyel Lászlóval. 1983 szeptemberében Kádár a tervet szakmailag jónak, politikailag alkalmatlannak nevezte. A cél végül a vegyes tulajdonú, irányított piacgazdaság lett.</p>
+          <p><strong>Politikai kiigazítások:</strong> 1983. III. tv., kötelező kettős jelölés és országos lista a legfőbb vezetőknek. 1984. I. tv., Alkotmányjogi Tanács az országgyűlés részeként, de csak megyei és országos vezetők fordulhattak hozzá. A XIII. kongresszus (1985. márc.) a diasor szerint balra nyitott, hibás döntésekkel.</p>
+        </div></details>
+        <div class="insight"><span class="tagline">💡 [AI Insight]</span><p>Kádár 1966-ban és 1983-ban szinte ugyanazt mondta: szakmailag jó, politikailag gond. Ez a mondat jól összefoglalja, miért haladt a reform húsz évig előre-hátra: a szakmai érv rendre a hatalmi számításba ütközött.</p></div>
+        <p><strong>Hosszú távon</strong> a frakcióharcok a diasor szerint a hivatalos vonaltól eltérő csoportérdekeket hoztak felszínre, a nyilvánosság előtt, sőt a sajtóban.</p>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <details class="part"><summary><span class="lbl">📖 Fogalom- és rövidítéstár</span><span class="h">Amit a diák rövidítve írnak</span><span class="s">Nyisd le, ha elakadtál egy betűszónál.</span></summary><div>
+        <dl class="gloss">
+          <dt>ORFK PNYF</dt><dd>Országos Rendőrfőkapitányság Politikai Nyomozó Főosztálya (1956-57).</dd>
+          <dt>BM III. főcsoportfőnökség</dt><dd>Az állambiztonság szervezete 1962-től, öt csoportfőnökséggel (III/I.-III/V.).</dd>
+          <dt>KAO</dt><dd>(Közigazgatási és) Adminisztratív Osztály, 1969 előtt AO: a pártban az állambiztonság ellenőrzője.</dd>
+          <dt>NOIJ</dt><dd>Napi operatív információs jelentések, 1979-től.</dd>
+          <dt>tmb, tmt</dt><dd>Titkos megbízott, titkos munkatárs: a hálózat két szintje 1972 után.</dd>
+          <dt>Szignalizáció</dt><dd>Megelőzés céljából adott előzetes jelentés.</dd>
+          <dt>Differenciálás</dt><dd>Az „ellenséges” és a „megtévesztett” személyek eltérő kezelése.</dd>
+          <dt>Pszeudojog</dt><dd>A „második normarendszer”: a jog mellett élő, párt szabta szabályok.</dd>
+          <dt>Részes művelés</dt><dd>A többlettermés 25-50%-a a művelőé.</dd>
+          <dt>Kapun belüli munkanélküliség</dt><dd>Fölösleges, alacsony bérű munkások felvétele az átlagbér-szabályozás miatt.</dd>
+          <dt>Aktív szavazás</dt><dd>Két jelölt esetén az egyik nevet át kell húzni (1970).</dd>
+          <dt>Felfelé bukás</dt><dd>Látszólagos előléptetés, valójában háttérbe szorítás.</dd>
+          <dt>MEGÉV</dt><dd>Mezőgazdasági Gép- és Alkatrészkereskedelmi Vállalat.</dd>
+          <dt>Stagfláció</dt><dd>Gazdasági stagnálás és infláció egyszerre.</dd>
+          <dt>gmk</dt><dd>Gazdasági munkaközösség, 1981-től.</dd>
+          <dt>IMF, IBRD</dt><dd>Valutaalap, Világbank: a dia így oldja fel.</dd>
+          <dt>Alkotmányjogi Tanács</dt><dd>1984-től, az alkotmánnyal ellentétes alsóbb jogszabályok hatályon kívül helyezésére.</dd>
+        </dl>
+        <p class="note">A diák által fel nem oldott rövidítések (MSZMP, KB, PB, HNF, KGST, KSH, KEB, DNP, GATT) a Műhelyben vannak, szerkesztői kiegészítésként.</p>
+      </div></details>
+    </div>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe: hol tartunk</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">honnan dolgozunk, mi nyitott, hogyan kapcsolódhatsz be</span></div>
+    <div class="card">
+      <h3>Honnan dolgozunk</h3>
+      <p>Az oldal egyetlen forrása egy egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), „A puha diktatúra, 1963-1985” című előadás. A diák vázlatpontokból és rövidítésekből állnak, a szöveg ezekből írt saját összefoglalás.</p>
+      <p>A tények a diákról származnak. Ami kívülről jön, azt lent külön felsoroljuk.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts">
+        <li>az Ízelítő a zavidovói történettel;</li><li>a Kártya a korszak ívével;</li><li>a Mélyfúrás hét nyitható résszel és rövidítéstárral;</li><li>ez a Műhely.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts">
+        <li>a diák vázlatosak, sok névnél csak vezetéknév áll (Tímár, Ajtai, Dimény, Németh K.), ezeket nem egészítettük ki;</li><li>a kulturális élet és a társadalom hétköznapjai a diasorban szinte nem szerepelnek;</li><li>a külpolitika és a rendszerváltozás külön oldalt kap;</li><li>a visszatérő kérdések kiküldése még nincs beállítva.</li></ul></div>
+    </div>
+    <div class="card">
+      <h3>A forrás pontatlanságai</h3>
+      <ul class="pts">
+        <li>A cím 1963-tól számol, de a diák 1956-57-tel (állambiztonság) és 1961-gyel (perek) kezdenek. A kezdőévet a diasor nem indokolja.</li>
+        <li>„A szovjet vezetők eme követelését Kádár is felismeri” (1973): a dia nem mondja meg, mi volt a követelés. A szövegkörnyezetből a reformer vezetők eltávolítására lehet gondolni, de ez értelmezés.</li>
+        <li>A KAO-ról szóló pont „ettől kezdve” új feladatot említ, de nem derül ki, mitől kezdve.</li>
+        <li>A nemzeti jövedelem „5-5 év alatt 2,9%-kal, majd 1,6%-kal” nőtt: nem egyértelmű, hogy évi átlag vagy ötéves összeg.</li>
+        <li>„Kádár 60 éves, bejelenti nyugdíjba vonulását”: a dia nem mondja ki, hogy végül maradt; ez a későbbi diákból következik.</li>
+        <li>A „Rejtélyes ügyek, reformerek halála” cím alatt Erdélyi Károly és Tömpe András is szerepel, akiket a dia nem nevez reformernek.</li>
+        <li>Apró elírások: „a 1966.: III. tv.”, illetve egy helyen többes szám első személy („megkíséreltük”).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Szerkesztői kiegészítések</h3>
+      <p>Ezek nem a diákról valók. Csak közismert tényt vettünk fel.</p>
+      <ul class="pts">
+        <li>Rövidítések: MSZMP = Magyar Szocialista Munkáspárt; KB = Központi Bizottság; PB = Politikai Bizottság; HNF = Hazafias Népfront; téesz = termelőszövetkezet; SZKP = Szovjetunió Kommunista Pártja; KGST = Kölcsönös Gazdasági Segítség Tanácsa; KSH = Központi Statisztikai Hivatal; KEB = Központi Ellenőrző Bizottság; DNP = Demokrata Néppárt; GATT = Általános Vám- és Kereskedelmi Egyezmény; NDK = Német Demokratikus Köztársaság.</li>
+        <li>Brezsnyev: Leonyid Brezsnyev, az SZKP főtitkára.</li>
+        <li>Zavidovo: Brezsnyev Moszkva környéki vadászbirtoka. A dia csak „találkozót” ír.</li>
+        <li>A „prágai bevonulás”: az 1968-as csehszlovákiai katonai bevonulás.</li>
+        <li>A második gazdaság rövid magyarázata a Kártyán („a hivatalos szektoron kívüli kereső tevékenység”): a dia nem definiálja.</li>
+        <li>Az 1963-as korszakhatárt a szakirodalom gyakran az 1963-as amnesztiához köti. A diasor ezt nem mondja.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kapcsolódik</h3>
+      <ul class="pts">
+        <li><a href="../kulpolitika/">A Kádár-kor külpolitikája</a>: a szovjet nyomás, Zavidovo és az IMF-tagság másik oldala.</li>
+        <li><a href="../rendszervaltozas/">A rendszerváltozás</a>: ahová a 80-as évek reformjai és az eladósodás vezettek.</li>
+        <li><a href="../idovonal/">Idővonal</a>: a korszak dátumai egy helyen.</li>
+        <li><a href="../">A Kádár-kor áttekintése</a></li>
+      </ul>
+    </div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, valami nem érthető, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] Kádár-kor">
+        <label for="fb-tema">Téma<select id="fb-tema" data-field="Téma" data-subject-part="1"><option selected>A puha diktatúra</option><option>A Kádár-kor általában</option></select></label>
+        <label for="fb-fok">Melyik fokozat?<select id="fb-fok" data-field="Fokozat" data-subject-part="1"><option>1. Ízelítő</option><option>2. Kártya</option><option selected>3. Mélyfúrás</option><option>4. Műhely</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a Kádár-korhoz</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-kadar-puha-v1";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go, true); });
+  var h = (location.hash || "").match(/^#f([1-4])$/);
+  show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

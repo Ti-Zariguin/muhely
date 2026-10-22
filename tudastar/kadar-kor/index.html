@@ -1,0 +1,319 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Tudástárba</a><span>Tudástár</span></nav>
+<title>A Kádár-kor és a rendszerváltozás</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.deeper { justify-self: start; }
+.era { display: grid; gap: 10px; }
+.era h3 { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.era h3 .yr { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button, .chips a { font: 600 0.88rem var(--font-display); color: var(--fg); background: var(--chip); border: 1px solid transparent; border-radius: 999px; padding: 5px 12px; cursor: pointer; text-decoration: none; }
+.chips button:hover, .chips a:hover { border-color: var(--accent); }
+.chips .deep::after { content: " ›"; color: var(--accent); }
+.cards { display: grid; gap: 10px; }
+details.ideo { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 12px 16px; border-top: 0; scroll-margin-top: 90px; }
+details.ideo > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; }
+details.ideo > summary::-webkit-details-marker { display: none; }
+details.ideo > summary .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.12rem; }
+details.ideo > summary .tg { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+details.ideo > summary .one { grid-column: 1 / -1; font-family: var(--font-body); font-weight: 400; color: var(--muted); font-size: 0.98rem; }
+details.ideo[open] > summary .one { color: var(--fg); }
+details.ideo > div { padding-top: 10px; display: grid; gap: 10px; }
+.go { justify-self: start; }
+.tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 12px; }
+a.tool { color: inherit; text-decoration: none; display: grid; gap: 6px; }
+a.tool:hover h3 { text-decoration: underline; text-decoration-color: var(--accent); }
+.ask { font-weight: 600; }
+.edit { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Történelem</span>
+    <h1>A Kádár-kor és a rendszerváltozás</h1>
+    <p class="lede">Magyarország 1945 és 1990 között, belülről és kívülről nézve: a puha diktatúra, a külpolitika mozgástere, és az út a tárgyalásos rendszerváltozásig. Négy fokozat, mellé egy idővonal és egy döntéses játék.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Térkép</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Témák</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">3 téma · idővonal · játék · frissítve 2026. október 22.</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <h2>Index balra, kanyar jobbra</h2>
+      <p>A diasor egy szólással foglalja össze az 1968 utáni magyar külpolitikát: <strong>„index balra, kanyar jobbra”</strong>. Szóban a vezetés hűséges maradt Moszkvához, a gyakorlatban viszont óvatosan nyitott a Nyugat felé: osztrák és finn kapcsolatok, nyugatnémet kereskedelem, később vízummentesség Ausztriába.</p>
+      <p>Ugyanez a kettősség jellemezte a belpolitikát is. A rendszer nem akarta többé átnevelni a tömegeket, csak fenntartani önmagát. Aki elfogadta a fennálló rendet, azt többnyire békén hagyták. Ezért hívják ezt a korszakot <strong>puha diktatúrának</strong>: diktatúra maradt, megfigyeléssel és perekkel, de a mindennapokban több mozgásteret adott, mint az ötvenes évek.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Mielőtt továbbmész</span>
+      <p class="ask">Mit gondolsz, meddig működhet egy rendszer, amely mást mond, mint amit csinál? És mi borítja fel végül?</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a térkép</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Térkép</span><span class="t">3 perc · hat korszak, egy-egy mondatban</span></div>
+    <p class="note">Rajzosan is megnézheted: az <a href="idovonal/">Idővonal</a> csillagtérképen mutatja a belpolitika és a külpolitika eseményeit egymás alatt. Koppints egy fogalomra, és a következő fokozatban kinyílik a magyarázata. A › jelű gomb egy téma mélyfúrására visz.</p>
+    <div class="card era">
+      <h3>Béke és szovjet blokk <span class="yr">1945-1956</span></h3>
+      <p>A párizsi béke visszaállítja a trianoni határokat, az ország a szovjet tömb része lesz, önálló külpolitika nélkül.</p>
+      <div class="chips"><a class="deep" href="kulpolitika/">Külpolitika 1945-1990</a></div>
+    </div>
+    <div class="card era">
+      <h3>Elszigeteltség <span class="yr">1956-1963</span></h3>
+      <p>A forradalom leverése után csak a szovjet szövetségesek ismerik el Kádárt; a „magyar kérdés” az ENSZ napirendjén marad, egészen az 1963-as általános amnesztiáig.</p>
+      <div class="chips"><button type="button" data-open="magyar-kerdes">A „magyar kérdés”</button></div>
+    </div>
+    <div class="card era">
+      <h3>Reformok és pragmatizmus <span class="yr">1963-1972</span></h3>
+      <p>Az állambiztonság hatalma csökken, a mezőgazdaság után 1968-ban az egész gazdaságban elindul az Új Gazdasági Mechanizmus, kifelé pedig a „vonakodó csatlós” óvatos nyitása.</p>
+      <div class="chips"><button type="button" data-open="puha">Puha diktatúra</button><button type="button" data-open="ugm">ÚGM</button><button type="button" data-open="brezsnyev">Brezsnyev-doktrína</button><a class="deep" href="puha-diktatura/">A puha diktatúra</a></div>
+    </div>
+    <div class="card era">
+      <h3>Reformellenes évek és válság <span class="yr">1972-1978</span></h3>
+      <p>Brezsnyev nyomására és a párton belüli „munkásellenzék” erősödésével a reformok leállnak, közben az 1973-as olajár-robbanás után az ország egyre gyorsabban adósodik el.</p>
+      <div class="chips"><button type="button" data-open="zavidovo">Zavidovo, 1972</button><button type="button" data-open="adossag">Az eladósodás</button></div>
+    </div>
+    <div class="card era">
+      <h3>Újra reformok, fogyó idő <span class="yr">1978-1985</span></h3>
+      <p>A dogmatikusokat leváltják, legalizálják a második gazdaságot, 1982-ben az ország Moszkva ellenében belép az IMF-be, de Kádár megöregszik, és a rendszer nem talál választ a gazdasági bajokra.</p>
+      <div class="chips"><button type="button" data-open="masodik">Második gazdaság</button></div>
+    </div>
+    <div class="card era">
+      <h3>Az út a köztársaságig <span class="yr">1985-1989</span></h3>
+      <p>Az ellenzék kilép a nyilvánosságba, Kádárt 1988-ban leváltják, a kerekasztal-tárgyalásokon kialkudják a békés átmenetet, és 1989. október 23-án kikiáltják a köztársaságot.</p>
+      <div class="chips"><button type="button" data-open="ellenzek">A két ellenzék</button><button type="button" data-open="kerekasztal">Kerekasztal</button><a class="deep" href="rendszervaltozas/">A rendszerváltozáshoz vezető út</a></div>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: témák és fogalmak</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Témák</span><span class="t">egy-egy téma 20-30 perc · a fogalmak 1 perc</span></div>
+
+    <h3>A három téma</h3>
+    <div class="cards">
+      <details class="ideo" id="i-t-puha"><summary><span class="nm">🏛️ A puha diktatúra</span><span class="tg">1963-1985</span><span class="one">Hogyan működött a Kádár-rendszer belülről: állambiztonság, reformok, fékek és válság.</span></summary><div>
+        <p>Az állambiztonság átszervezésétől az agrárreformon és az ÚGM-en át a reformellenes évekig, a politikai perekig és a 80-as évek elejéig. Benne a Kádár-kor rejtélyes halálesetei, és az, hogyan lett az olajválságból adósságválság.</p>
+        <a class="btn go" href="puha-diktatura/">Mélyfúrás: A puha diktatúra</a></div></details>
+      <details class="ideo" id="i-t-kulpol"><summary><span class="nm">🌍 Külpolitika</span><span class="tg">1945-1990</span><span class="one">Mekkora volt a mozgástér Moszkva és a Nyugat között, és hogyan tágult.</span></summary><div>
+        <p>A párizsi békétől a szovjet blokkon, az 1956 utáni elszigeteltségen, a Vatikánnal kötött részmegállapodáson és a prágai tavaszon át Helsinkiig, az IMF-csatlakozásig és George Bush budapesti látogatásáig.</p>
+        <a class="btn go" href="kulpolitika/">Mélyfúrás: Külpolitika</a></div></details>
+      <details class="ideo" id="i-t-rendszer"><summary><span class="nm">🗳️ A rendszerváltozáshoz vezető út</span><span class="tg">1985-1989</span><span class="one">Hogyan lett egy pártállamból tárgyalások útján köztársaság.</span></summary><div>
+        <p>A válság okai, az urbánus és a népi ellenzék, Monor és Lakitelek, Kádár bukása, az új pártok, az Ellenzéki és a Nemzeti Kerekasztal, Nagy Imre újratemetése, a sarkalatos törvények és a négyigenes népszavazás.</p>
+        <a class="btn go" href="rendszervaltozas/">Mélyfúrás: A rendszerváltozáshoz vezető út</a></div></details>
+    </div>
+
+    <h3>Kulcsfogalmak</h3>
+    <div class="cards">
+      <details class="ideo" id="i-puha"><summary><span class="nm">Puha diktatúra</span><span class="tg">fogalom</span><span class="one">Diktatúra, de már nem átnevelni akar, csak fennmaradni.</span></summary><div>
+        <p>A diasor szerint 1963 után a politikai rendőrség hatalma csökkent, és végig szoros pártirányítás alatt maradt. Új elvek jelentek meg: a „szocialista törvényesség” (aki elfogadja a rendet, annak jogait tiszteletben tartják), a „differenciálás” (más bánásmód jár az ellenségnek és a „megtévesztettnek”), és a megelőző jelentés. A cél már nem a tömegek átnevelése volt, hanem a rendszer konzerválása. A titkos szabályok (a „második normarendszer”) közben megmaradtak.</p>
+        <a class="btn go" href="puha-diktatura/">Bővebben</a></div></details>
+      <details class="ideo" id="i-magyar-kerdes"><summary><span class="nm">A „magyar kérdés”</span><span class="tg">1956-1963</span><span class="one">Az ENSZ évről évre napirenden tartotta az 1956-os szovjet beavatkozást.</span></summary><div>
+        <p>Egy ENSZ-különbizottság 1957-es jelentése szerint Magyarországon spontán nemzeti felkelés zajlott, a Szovjetunió pedig agressziót követett el. A kérdést évről évre megszavazták, egyre kisebb többséggel. Az alku végül 1962-ben jött létre: az általános amnesztiáért cserébe levették a napirendről, és 1963-ban az ENSZ-főtitkár Budapestre látogatott.</p>
+        <a class="btn go" href="kulpolitika/">Bővebben</a></div></details>
+      <details class="ideo" id="i-ugm"><summary><span class="nm">Új Gazdasági Mechanizmus (ÚGM)</span><span class="tg">1968</span><span class="one">Kevesebb központi utasítás, több vállalati önállóság, de beépített fékekkel.</span></summary><div>
+        <p>1968. január 1-jén indult, Nyers Rezső vezetésével készítették elő. A vállalatoknak nem írták elő tételesen a tervet, az állam adókkal és hitelekkel próbálta irányítani őket, és részben szabaddá váltak az árak. Javult az áruellátás és a minőség, de Kádár már 1966-ban „fékeket” kért bele, a hiány nem szűnt meg, és az öröklött intézményrendszer lett a reform legfőbb gátja.</p>
+        <a class="btn go" href="puha-diktatura/">Bővebben</a></div></details>
+      <details class="ideo" id="i-brezsnyev"><summary><span class="nm">Brezsnyev-doktrína</span><span class="tg">1968</span><span class="one">A szocializmus „vívmányait” minden szocialista ország köteles megvédeni, akár a többi ellen is.</span></summary><div>
+        <p>A prágai tavasz leverése után, 1968 szeptemberében közölte a szovjet pártlap. Kádár előbb Dubček mellett állt ki, aztán 1968 júliusában a saját Politikai Bizottságát felülbírálva átállt, és a magyar hadsereg is részt vett az augusztus 21-i bevonulásban. A doktrína a blokkban a reformok apályát hozta; Gorbacsov alatt előbb lebegtették, majd feladták.</p>
+        <a class="btn go" href="kulpolitika/">Bővebben</a></div></details>
+      <details class="ideo" id="i-zavidovo"><summary><span class="nm">Zavidovo, 1972</span><span class="tg">fordulópont</span><span class="one">Egy találkozó Brezsnyevvel, és utána leállnak a reformok.</span></summary><div>
+        <p>1972 februárjában Brezsnyev azt javasolta Kádárnak, hogy a párt jobban ellenőrizze a folyamatokat, és ideológiailag legyen szilárdabb. Ezután a Politikai Bizottságban éles törés jött a reformerek és a „munkásellenzék” között. Kádár 60 évesen bejelentette, hogy nyugdíjba vonulna, de maradt; novemberben leállították a reformokat, 1974-ben pedig a reformer vezetőket félreállították.</p>
+        <a class="btn go" href="puha-diktatura/">Bővebben</a></div></details>
+      <details class="ideo" id="i-adossag"><summary><span class="nm">Az eladósodás</span><span class="tg">1973 után</span><span class="one">Nyugati hitelből tartott életszínvonal és rossz beruházások.</span></summary><div>
+        <p>Az olajár-robbanás után a magyar termékek leértékelődtek, a nyugati bankok viszont könnyen adtak kölcsönt. A hiteleket olyan iparágakba fektették, amelyek termékeinek ára esett. Az adósság 1970-ben 800 millió dollár volt, 1980-ban 9,1 milliárd; 1978-tól a törlesztést már csak újabb hitelből lehetett fizetni, de az életszínvonalhoz nem mertek nyúlni.</p>
+        <a class="btn go" href="puha-diktatura/">Bővebben</a></div></details>
+      <details class="ideo" id="i-masodik"><summary><span class="nm">Második gazdaság</span><span class="tg">1980</span><span class="one">1980-tól legális, és innen indulnak a kisvállalkozási formák.</span></summary><div>
+        <p>1980. február 19-én legalizálták, ősszel engedélyezték az üzletek szerződéses üzemeltetését, 1981-ben megjelentek a gazdasági munkaközösségek (gmk) és a kisvállalatok. Ezek a reformok már tisztán gazdaságiak voltak, politikai változás nélkül.</p>
+        <a class="btn go" href="puha-diktatura/">Bővebben</a></div></details>
+      <details class="ideo" id="i-ellenzek"><summary><span class="nm">A két ellenzék</span><span class="tg">1970-es évektől</span><span class="one">Urbánus (demokratikus) és népi (nemzeti) ellenzék: más gyökér, más téma.</span></summary><div>
+        <p>Az urbánus ellenzék Lukács György tanítványainak tanítványaiból nőtt ki, és eltávolodott a marxizmustól; szamizdatokat adott ki (a legismertebb a Beszélő). A népi ellenzék legális irodalmi lapok köré szerveződött (Tiszatáj, Forrás, Alföld), és a nemzet sorskérdései meg a határon túli magyarok foglalkoztatták. 1985-ben Monoron ültek össze először, 1987-ben Lakiteleken megalakult az MDF, és ezzel a két tábor útja szétvált.</p>
+        <a class="btn go" href="rendszervaltozas/">Bővebben</a></div></details>
+      <details class="ideo" id="i-kerekasztal"><summary><span class="nm">Kerekasztal</span><span class="tg">1989</span><span class="one">Tárgyalásos forradalom: az átmenet szabályait közösen alkudták ki.</span></summary><div>
+        <p>1989. március 22-én nyolc ellenzéki szervezet megalakította az Ellenzéki Kerekasztalt (EKA). Júniusban jött létre a Nemzeti Kerekasztal, három oldallal: az EKA, az MSZMP és a „harmadik oldal”. A megállapodások alapján született meg az alkotmánymódosítás és több sarkalatos törvény; a köztársasági elnök választásának módjáról végül népszavazás döntött 1989. november 26-án.</p>
+        <a class="btn go" href="rendszervaltozas/">Bővebben</a></div></details>
+    </div>
+
+    <h3>Másképp is</h3>
+    <div class="tools">
+      <a class="card tool" href="idovonal/"><span class="lbl">Térkép</span><h3>Idővonal 1945-1990</h3><p>Csillagtérkép: a belpolitika fölül, a külpolitika alul, az összetartozó eseményeket csillagképek kötik össze. Kattintásra kártya nyílik.</p></a>
+      <a class="card tool" href="../../mozgaster/"><span class="lbl">Játék</span><h3>Mozgástér</h3><p>Döntéses játék: egy tanácsadó szemével döntesz 1963 és 1989 között, utána kiderül, mi történt valójában, és miért.</p></a>
+    </div>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">hol tartunk, források, ami hiányzik</span></div>
+    <div class="card">
+      <h3>Hogyan készült</h3>
+      <p>Az alap három egyetemi előadás-diasor. A diák sűrű vázlatpontokban, sok rövidítéssel írnak; ezekből lett összefüggő szöveg. A tények a diákból származnak. Ahol egy összefüggéshez közismert háttér kellett, azt a témaoldalak Műhely-fokozata szerkesztői kiegészítésként külön jelöli. Ahol maga a dia is bizonytalan (például egy halálesetnél kérdőjellel), a bizonytalanság megmaradt.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts"><li>három téma négy fokozatban: a puha diktatúra, a külpolitika, a rendszerváltozáshoz vezető út;</li><li>idővonal 1945 és 1990 között;</li><li>döntéses játék 1963-tól 1989-ig.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts"><li>a tárgy további tételei: a diák hivatkoznak rájuk (például az 1946-os lakosságcserére), de ezek a fájlok nincsenek meg, így az 1945-1963 közti belpolitika és 1956 itt csak érintőlegesen szerepel;</li><li>a rendszerváltás egy tankönyvi feldolgozása, hogy a diák vázlatát egy összefüggő szövegű forrással is össze lehessen vetni;</li><li>ismétlő kvíz a fogalmakhoz és dátumokhoz.</li></ul></div>
+    </div>
+    <div class="card"><h3>Források</h3><ul class="pts src"><li>Egyetemi előadás-diasorok, A jelenkori magyar történelem alapjai II.: A puha diktatúra, 1963-1985; Külpolitika, 1945-1990; A rendszerváltozáshoz vezető út, 1985-1989. Az előadó neve a fájlokban nem szerepel.</li><li>A szerkesztői kiegészítések témánként jelölve, a témaoldalak Műhely-fokozatában.</li></ul></div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] A Kádár-kor és a rendszerváltozás">
+        <label for="fb-resz">Melyik rész?<select id="fb-resz" data-field="Rész" data-subject-part="1"><option>Ízelítő</option><option>Térkép</option><option>Témák és fogalmak</option><option>Idővonal</option><option>Játék</option><option>Általában</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a Tudástárba</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-kadar-kor-fok";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: calm });
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-go]");
+    if (b) { show(+b.dataset.go, true); return; }
+    var o = e.target.closest("[data-open]");
+    if (o) { show(3, false); var d = document.getElementById("i-" + o.dataset.open); if (d) { d.open = true; d.scrollIntoView({ behavior: calm }); } }
+  });
+  var h = (location.hash || "").match(/^#f([1-4])$/), ih = (location.hash || "").match(/^#i-([a-z0-9-]+)$/);
+  if (ih && document.getElementById("i-" + ih[1])) { show(3, false); var d = document.getElementById("i-" + ih[1]); d.open = true; setTimeout(function () { d.scrollIntoView({ behavior: "auto" }); }, 50); }
+  else show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,572 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a műhelybe</a><span>Zariguin műhelye</span></nav>
+<title>Mozgástér</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Döntéses történelmi játék: egy névtelen tanácsadó javaslatai a magyar pártvezetésnek, 1963-1989, és amit a vezetés valójában lépett.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap">
+<style>
+/* Layout: an archive file on a grey desk. Sticky file tab with four gauges on top, one typed sheet per case in a single column,
+   the main action in a bar at the bottom. Typed (monospace) text = the game's file; printed serif card = what really happened. */
+:root {
+  --desk: #b4b3a8; --folder: #d8ceb3; --folder-edge: #b6aa8b; --paper: #f4f0e3; --card: #fbf9f2;
+  --ink: #25262a; --muted: #625d51; --rule: #cdc3aa; --stamp: #a2322a; --violet: #4a428c; --ok: #3b6a48; --shade: rgba(40, 36, 28, 0.16);
+  --font-type: "Courier Prime", "Courier New", Courier, monospace;
+  --font-print: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --font-stamp: "Special Elite", "Courier Prime", "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --desk: #1c1d1b; --folder: #3a362d; --folder-edge: #575040; --paper: #2a2823; --card: #322f29;
+  --ink: #ebe5d5; --muted: #b3ab94; --rule: #4d4739; --stamp: #e46a5c; --violet: #aaa2f2; --ok: #8fc79d; --shade: rgba(0, 0, 0, 0.35); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --desk: #1c1d1b; --folder: #3a362d; --folder-edge: #575040; --paper: #2a2823; --card: #322f29;
+  --ink: #ebe5d5; --muted: #b3ab94; --rule: #4d4739; --stamp: #e46a5c; --violet: #aaa2f2; --ok: #8fc79d; --shade: rgba(0, 0, 0, 0.35); color-scheme: dark; }
+
+html, body { overflow-x: clip; }
+body { background: var(--desk); color: var(--ink); font-family: var(--font-print); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 calc(96px + env(safe-area-inset-bottom, 0px)); -webkit-tap-highlight-color: transparent; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--folder); }
+.wrap { max-width: 640px; margin: 0 auto; display: grid; gap: 14px; }
+p { margin: 0; }
+a { color: var(--violet); text-underline-offset: 3px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; }
+
+/* File tab with gauges */
+.tab { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--folder); border: 1px solid var(--folder-edge); border-top: 0;
+  border-radius: 0 0 6px 6px; padding: 8px 12px 10px; display: grid; gap: 8px; box-shadow: 0 3px 10px var(--shade); }
+.tab .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; min-width: 0; }
+.brand { font-family: var(--font-stamp); font-size: 1.25rem; letter-spacing: 0.08em; }
+.case { font-family: var(--font-type); font-size: 0.85rem; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.gauges { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+.g { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px; font-family: var(--font-type); font-size: 0.8rem; min-width: 0; }
+.g .l { text-transform: uppercase; letter-spacing: 0.06em; }
+.g .v { font-variant-numeric: tabular-nums; min-width: 4.6em; text-align: right; }
+.g .dv { font-weight: 700; }
+.g .dv.up { color: var(--ok); } .g .dv.down { color: var(--stamp); }
+.bar { position: relative; height: 9px; border: 1px solid var(--ink); background: var(--paper); min-width: 40px; }
+.bar i { position: absolute; inset: 0 auto 0 0; background: var(--ink); transition: width 0.5s ease; }
+.bar.warn i { background: var(--stamp); }
+.bar::before, .bar::after { content: ""; position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--muted); }
+.bar::before { left: 25%; } .bar::after { left: 75%; }
+
+/* Sheet */
+.sheet { position: relative; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; box-shadow: 0 1px 0 var(--folder-edge), 0 8px 18px var(--shade);
+  padding: 20px 18px 22px; display: grid; gap: 14px; min-width: 0; }
+.head { font-family: var(--font-type); font-size: 0.85rem; color: var(--muted); border-bottom: 1px dashed var(--rule); padding-bottom: 8px; display: grid; gap: 2px; padding-right: 92px; }
+.head b { color: var(--ink); font-weight: 700; }
+.corner { position: absolute; top: 14px; right: 12px; font-family: var(--font-stamp); font-size: 0.75rem; color: var(--stamp); border: 2px solid var(--stamp);
+  padding: 2px 6px; transform: rotate(4deg); letter-spacing: 0.08em; opacity: 0.85; }
+.year { font-family: var(--font-type); font-weight: 700; font-size: 2.1rem; line-height: 1.1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1 { font-family: var(--font-type); font-weight: 700; font-size: 1.35rem; line-height: 1.25; }
+h2 { font-family: var(--font-type); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.typed { font-family: var(--font-type); font-size: 1rem; line-height: 1.6; display: grid; gap: 10px; }
+.ask { font-family: var(--font-type); font-weight: 700; font-size: 1.05rem; border-top: 1px dashed var(--rule); padding-top: 12px; }
+
+/* Proposals */
+.opts { display: grid; gap: 10px; }
+.opt { display: grid; grid-template-columns: 2.2em 1fr; gap: 10px; align-items: start; text-align: left; background: var(--card); border: 2px solid var(--ink);
+  border-radius: 3px; padding: 14px 14px 14px 10px; cursor: pointer; min-height: 56px; box-shadow: 3px 3px 0 var(--folder-edge); }
+.opt:hover { background: var(--folder); }
+.opt:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--folder-edge); }
+.opt .key { font-family: var(--font-type); font-weight: 700; font-size: 1.2rem; text-align: center; }
+.opt .s { font-family: var(--font-type); font-weight: 700; display: block; }
+.opt .t { display: block; font-size: 0.95rem; color: var(--muted); margin-top: 2px; }
+
+/* Outcome */
+.mine { font-family: var(--font-type); border-left: 3px solid var(--ink); padding-left: 10px; display: grid; gap: 4px; }
+.mine .lab { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--font-type); font-size: 0.85rem; }
+.chip { border: 1px solid var(--rule); padding: 1px 7px; border-radius: 2px; font-variant-numeric: tabular-nums; }
+.chip.up { color: var(--ok); border-color: currentColor; } .chip.down { color: var(--stamp); border-color: currentColor; }
+.press { font-family: var(--font-type); font-size: 0.88rem; color: var(--muted); font-style: italic; }
+.stamp { justify-self: start; font-family: var(--font-stamp); font-size: 1.5rem; letter-spacing: 0.12em; padding: 4px 14px; border: 3px solid currentColor;
+  border-radius: 4px; transform: rotate(-3deg); animation: press 0.45s ease-out both; }
+.stamp.s2 { color: var(--ok); } .stamp.s1 { color: var(--violet); } .stamp.s0 { color: var(--stamp); }
+@keyframes press { from { transform: rotate(-3deg) scale(1.6); opacity: 0; } 60% { transform: rotate(-3deg) scale(0.96); opacity: 1; } to { transform: rotate(-3deg) scale(1); opacity: 1; } }
+.real { background: var(--card); border: 1px solid var(--rule); border-radius: 2px; padding: 16px; display: grid; gap: 10px; min-width: 0;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(1.55em - 1px), var(--rule) calc(1.55em - 1px), var(--rule) 1.55em); background-position: 0 2.6em; background-size: 100% 1.55em; background-repeat: repeat-y; }
+.real h3 { font-family: var(--font-type); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.real .rs { font-weight: 600; }
+.src { font-family: var(--font-type); font-size: 0.8rem; color: var(--muted); display: grid; gap: 2px; }
+.warn { border: 2px dashed var(--stamp); padding: 12px 14px; display: grid; gap: 6px; background: var(--paper); }
+.warn h3 { font-family: var(--font-type); color: var(--stamp); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Summary */
+.scores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.score { border: 1px solid var(--rule); background: var(--card); padding: 10px 12px; display: grid; gap: 2px; }
+.score .n { font-family: var(--font-type); font-weight: 700; font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.score .l { font-family: var(--font-type); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--ink); }
+.tl li { position: relative; padding: 0 0 14px 16px; display: grid; gap: 3px; min-width: 0; }
+.tl li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; background: var(--paper); border: 2px solid var(--ink); border-radius: 50%; }
+.tl .y { font-family: var(--font-type); font-weight: 700; font-variant-numeric: tabular-nums; }
+.tl .pair { display: grid; grid-template-columns: 6.2em 1fr; gap: 2px 8px; font-size: 0.93rem; }
+.tl .pair span:nth-child(odd) { font-family: var(--font-type); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding-top: 2px; }
+.mini { font-family: var(--font-stamp); font-size: 0.8rem; letter-spacing: 0.08em; border: 2px solid currentColor; padding: 0 5px; justify-self: start; }
+.mini.s2 { color: var(--ok); } .mini.s1 { color: var(--violet); } .mini.s0 { color: var(--stamp); }
+.links { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.links a { font-family: var(--font-type); font-weight: 700; display: inline-block; padding: 6px 0; }
+.epi { display: grid; gap: 8px; }
+.epi div { display: grid; grid-template-columns: 7.6em 1fr; gap: 8px; font-size: 0.95rem; }
+.epi b { font-family: var(--font-type); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.legend { display: grid; gap: 6px; font-size: 0.95rem; }
+.legend div { display: grid; grid-template-columns: 7.5em 1fr; gap: 8px; }
+.legend b { font-family: var(--font-type); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.fine { font-size: 0.85rem; color: var(--muted); }
+.reset { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; font-family: var(--font-type); font-size: 0.85rem; }
+.link { background: none; border: 0; padding: 6px 2px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; color: var(--muted); }
+.link.danger { color: var(--stamp); }
+
+/* Bottom action bar */
+.act { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: var(--folder); border-top: 1px solid var(--folder-edge);
+  padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.act .in { max-width: 640px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
+.act .hint { font-family: var(--font-type); font-size: 0.9rem; color: var(--muted); flex: 1; }
+.prim { flex: 1; min-height: 52px; background: var(--ink); color: var(--paper); border: 0; border-radius: 3px; font-family: var(--font-type); font-weight: 700;
+  font-size: 1.05rem; letter-spacing: 0.04em; cursor: pointer; padding: 10px 16px; }
+.prim:active { transform: translateY(1px); }
+
+@media (max-width: 420px) {
+  .gauges { gap: 5px 10px; }
+  .g { grid-template-columns: 4.6em 1fr auto; font-size: 0.74rem; }
+  .g .v { min-width: 3.9em; }
+  .year { font-size: 1.8rem; }
+  .sheet { padding: 16px 14px 18px; }
+  .tl .pair { grid-template-columns: 1fr; }
+  .epi div, .legend div { grid-template-columns: 1fr; gap: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .stamp { animation: none; } .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="tab" id="tab"></header>
+  <main id="view" aria-live="polite"></main>
+</div>
+<div class="act" id="act"></div>
+
+<script>
+// Mozgástér: pure game logic and content (no DOM). Every historical statement in the "real"/"why"/"sit" fields
+// comes from the course slides (A jelenkori magyar történelem alapjai II., tételek 7, 9, 10).
+var SIM = (function () {
+  "use strict";
+
+  var METERS = [
+    { k: "M", name: "Moszkva bizalma", short: "Moszkva" },
+    { k: "N", name: "Lakossági nyugalom", short: "Nyugalom" },
+    { k: "G", name: "Gazdasági egyensúly", short: "Gazdaság" },
+    { k: "R", name: "Reform-lendület", short: "Reform" }
+  ];
+  var START = { M: 60, N: 55, G: 60, R: 45 };
+  var LOW = 25, HIGH = 75, RESET = 15;
+
+  var SRC = {
+    7: "7. tétel: A puha diktatúra, 1963-1985",
+    9: "9. tétel: Külpolitika, 1945-1990",
+    10: "10. tétel: A rendszerváltozáshoz vezető út, 1985-1989"
+  };
+  var TT = "https://ti-zariguin.github.io/muhely/tudastar/kadar-kor/";
+  var LINKS = [
+    { href: TT + "puha-diktatura/", label: "A puha diktatúra, 1963-1985" },
+    { href: TT + "kulpolitika/", label: "Külpolitika a Kádár-korban" },
+    { href: TT + "rendszervaltozas/", label: "A rendszerváltozáshoz vezető út" },
+    { href: TT + "idovonal/", label: "Idővonal" }
+  ];
+
+  // match: 2 = what the leadership actually did, 1 = partly, 0 = not.
+  // d: meter shifts of the proposal; press: pressure of the era, applied whatever you propose.
+  var D = [
+    {
+      id: "amnesztia", year: "1962-1963", title: "A magyar kérdés és az amnesztia", src: [9], topic: "kulpolitika",
+      sit: [
+        "1956 óta a „magyar kérdés” évről évre az ENSZ-közgyűlés napirendjén van. Kádárt csak a Varsói Szerződés államai, Jugoszlávia és Kína ismerik el, a magyar kisebbséggel élő szomszédok is hűvösek.",
+        "Az ország krónikus devizahiánnyal küzd, nyugati kapcsolatok kellenének, ehhez pedig előbb Washingtonnal kell megegyezni. Az USA 1961 augusztusa óta alkut kínál: általános amnesztiáért cserébe leveszik a magyar kérdést a napirendről. A végső szó Moszkváé."
+      ],
+      q: "Mit javasolsz a pártvezetésnek?",
+      opts: [
+        { s: "Alku: amnesztia a napirendért", t: "Fogadjuk el az alkut. Általános amnesztia, cserébe a magyar kérdés lekerül a napirendről. Hruscsov jóváhagyását ehhez meg kell szerezni.", match: 2, d: { M: -3, N: 10, G: 6, R: 8 } },
+        { s: "Csendes egyéni kegyelmek", t: "Egyéni kegyelmek csendben, alku nélkül. A magyar kérdést továbbra is belügyeinkbe való beavatkozásnak nevezzük.", match: 1, d: { M: 4, N: 2, G: -4, R: -3 } },
+        { s: "Elutasítás", t: "Utasítsuk el. A megtorlás lezárása belügy, a Nyugat ne szabjon feltételt.", match: 0, d: { M: 6, N: -7, G: -8, R: -6 } }
+      ],
+      press: {},
+      rs: "Alku, 1963: általános amnesztia",
+      real: "Hosszas alkudozás után 1962 novemberében Hruscsov engedélyezte az alkut, és decemberben a magyar ügy lekerült a napirendről. 1963-ban általános amnesztia következett. U Thant ENSZ-főtitkár Budapestre látogatott, és kijelentette, hogy Magyarország szuverén állam; a magyar ENSZ-küldöttség mandátumát is elfogadták.",
+      why: "A rendezést mindkét fél akarta, de más okból: az USA azt várta, hogy Magyarország lassan távolodjon a Szovjetuniótól, Kádár pedig a szovjet jelenlét elfogadtatását. A devizahiány miatt a nyugati nyitás gazdasági kényszer is volt. Az egyéni kegyelem útja nem lett volna elég: korábban, 1960-as ENSZ-beszédében Kádár még belügynek nevezte a kérdést, és a küldöttek hűvösen fogadták."
+    },
+    {
+      id: "ugm", year: "1965-1966", title: "Az Új Gazdasági Mechanizmus", src: [7], topic: "puha-diktatura",
+      sit: [
+        "Az életszínvonal-politika nyomása és más szocialista országok példája reformot sürget. Nyers Rezső 1964 óta tizenegy munkacsoporttal dolgozza ki az Új Gazdasági Mechanizmust: kevesebb központi tervezés, több vállalati önállóság, új árrendszer. A bevezetést 1965 novemberében egyszer már elhalasztották.",
+        "Kádár maga is ellentmondásosan viszonyul a tervhez. Fél a piac és a haszon „kapitalista” fogalmaitól, a saját balos ellenfeleitől és Brezsnyevtől is. 1966. május 3., PB-ülés."
+      ],
+      q: "Mit javasolsz a reformcsomagról?",
+      opts: [
+        { s: "Teljes reform, fékek nélkül", t: "Vezessük be teljes egészében, most. Szabad árak, valódi piaci verseny, a tervutasítások vége.", match: 1, d: { M: -12, N: -3, G: 8, R: 15 } },
+        { s: "További halasztás", t: "Halasszuk el újra. Maradjon a tervutasításos rendszer, amíg a politikai helyzet nem tisztul.", match: 0, d: { M: 6, N: -3, G: -6, R: -10 } },
+        { s: "Reform beépített fékekkel", t: "Fogadjuk el, de politikai fékekkel: az alapvető élelmiszerek ára kötött marad, a változás fokozatos, a párt kezében marad az irányítás.", match: 2, d: { M: -4, N: 6, G: 5, R: 9 } }
+      ],
+      press: {},
+      rs: "Reform beépített fékekkel, 1968. jan. 1.",
+      real: "Kádár a PB-ülésen azt mondta, hogy az anyag szakmailag jó, de politikailag problémás, ezért „fékeket” kell beépíteni. Nyers megdöbbent, de engedett: május 25-27-én KB-határozat született, és az 1966 végi IX. kongresszus véglegesen jóváhagyta a reformot. Az ÚGM 1968. január 1-jén indult; az alapvető élelmiszerek ára végig kötött maradt.",
+      why: "A reform gazdasági kényszer volt, de politikai kockázat is. A fékekkel Kádár a balos ellenfeleinek és Moszkvának is jelezte, hogy a párt nem engedi ki a kezéből az irányítást. A termelékenység ekkor nőtt a legjobban, és javult az áruellátás. A vállalatok számára azonban a nyereség nem vált igazán motiválóvá, a hiány megmaradt, és az öröklött intézményi szerkezet lett a reform legfőbb gátja."
+    },
+    {
+      id: "praga", year: "1968", title: "A prágai tavasz", src: [9], topic: "kulpolitika",
+      sit: [
+        "1968 elején Kádár többször találkozik Dubčekkel, kölcsönösen támogatják egymást. Márciusban Drezdában az „Ötök” (Szovjetunió, NDK, Lengyelország, Magyarország, Bulgária) közül egyedül Kádár szólal fel Dubček mellett. Májusban Brezsnyev ellenforradalomról beszél; Kádár szerint csak a korábbi hibák kijavítása folyik.",
+        "Júniusban egy prágai lap Nagy Imrére emlékezik, megjelenik a 2000 szó című röpirat. Júliusban az Ötök újra tanácskoznak Varsóban, Dubček nem megy el. Az MSZMP Politikai Bizottságában senki nem támogat katonai akciót."
+      ],
+      q: "Mit tanácsolsz Varsóba?",
+      opts: [
+        { s: "Kitartás Dubček mellett", t: "Maradjunk Dubček mellett, és semmilyen katonai akcióban ne vegyünk részt.", match: 0, d: { M: -20, N: 2, G: 0, R: 6 } },
+        { s: "Közvetítés, végül részvétel", t: "Közvetítsünk a végsőkig, de ha a szovjet döntés megszületett, ne maradjunk ki: a magyar haderő is vonuljon be.", match: 2, d: { M: 8, N: -4, G: 0, R: -6 } },
+        { s: "Azonnal a szovjet vonal mellé", t: "Álljunk most, nyíltan a szovjet vonal mellé, Dubčekkel szemben.", match: 1, d: { M: 12, N: -5, G: 0, R: -10 } }
+      ],
+      press: {},
+      rs: "Átállás Varsóban, magyar részvétel az intervencióban",
+      real: "Varsóban, július 14-15-én Kádár saját PB-jét felülbírálva átállt, és támogatta a szovjet ultimátumot; július 22-én hozzájárult a magyar haderő részvételéhez. Augusztus 3-4-én Pozsonyban és 17-én Komáromban még figyelmeztette Dubčeket, hiába. Augusztus 21-én megindult az intervenció magyar részvétellel. Kádár személyes döntése volt, a PB csak 20-án tudta meg. Októberben az ő javaslatára vonták ki a nem szovjet megszálló csapatokat.",
+      why: "Kádár a szocialista országokkal szemben az egység demonstrálását tartotta fontosnak, a közvetítő szerepe az intervencióval véget ért. Szeptemberben a szovjet pártlap közölte a Brezsnyev-doktrínát: a szocialista vívmányok megvédése minden szocialista ország kötelessége. A blokkban a reformok apálya jött, Magyarország viszont tovább vitte kettős, pragmatikus külpolitikáját, amit a diasor így foglal össze: „index balra, kanyar jobbra”."
+    },
+    {
+      id: "zavidovo", year: "1972", title: "Zavidovo és Brezsnyev nyomása", src: [7, 9], topic: "puha-diktatura",
+      sit: [
+        "Az 1970-es X. kongresszus jóváhagyta a reformot, de a PB-üléseken egyre durvább viták folynak. A „munkásellenzék” (Komócsin Zoltán, Biszku Béla, Gáspár Sándor, Pullai Árpád) szerint a reform a munkások kárára tolja el a jövedelmeket, terjed a magánszektor és a korrupció, nő a nyugati adósság. Moszkvát a nyugati kapcsolatok és a tervezett GATT-, IMF- és Világbank-tagság nyugtalanítja.",
+        "1972 februárjában Zavidovóban Brezsnyev azt javasolja Kádárnak, hogy a párt jobban ellenőrizze a folyamatokat, és ideológiailag legyen szilárd. A következő PB-ülésen Komócsin személycserét követel."
+      ],
+      q: "Mit javasolsz Kádárnak?",
+      opts: [
+        { s: "Látszólagos engedés, időnyerés", t: "Álljon látszólag a balosok mellé, de a követeléseiket csendben fékezze. Időt kell nyerni.", match: 2, d: { M: 4, N: 2, G: 1, R: -3 } },
+        { s: "Nyílt kiállás a reformerek mellett", t: "Álljon ki nyíltan a reformerek mellett, Moszkvával szemben is.", match: 0, d: { M: -15, N: 3, G: 4, R: 8 } },
+        { s: "Azonnali személycserék", t: "Engedjen: azonnali személycserék, a reform leállítása.", match: 1, d: { M: 12, N: -2, G: -6, R: -15 } }
+      ],
+      press: {},
+      rs: "Látszólagos engedés, majd reformleállítás novemberben",
+      real: "Kádár látszólag a balosok mellé állt, valójában szabotálta a követeléseiket. Májusban, 60 évesen bejelentette nyugdíjba vonulását; mindkét frakció attól félt, hogy az utód a másik táborból kerül ki, így még azok is hűséget fogadtak, akik addig puccsra készültek. A nyomás mégis győzött: az 1972. november 14-15-i KB-ülés leállította a reformokat, 1973 júniusában létrejött az Állami Tervbizottság.",
+      why: "Kádár a centrumban állt a reformerek és a dogmatikusok között, és a két tábor kölcsönös félelmére épített. A szovjet aggodalmakat azonban nem lehetett tartósan kicselezni. A nyugdíjgesztusnak hivatali utóélete is lett: ettől kezdve minden 60 éves vezetőnek illett kérnie a nyugdíjazását."
+    },
+    {
+      id: "reformerek", year: "1973-1974", title: "A reformer vezetők sorsa", src: [7], topic: "puha-diktatura",
+      sit: [
+        "1973 első felében Kádár is felismeri: a szovjet vezetők a reformer vezetők eltávolítását várják. Az érintettek: Fehér Lajos, Nyers Rezső, Aczél György és a kormányfő, Fock Jenő. 1974 elején a PB javaslatokat tárgyal.",
+        "A munkásellenzék közben a munkások béremelését és a kulturális élet szigorítását sürgeti."
+      ],
+      q: "Hogyan bánjon a vezetés a reformerekkel?",
+      opts: [
+        { s: "Megvédeni őket", t: "Védjük meg őket, akár a szovjet rosszallás árán is.", match: 0, d: { M: -14, N: 0, G: 3, R: 6 } },
+        { s: "Teljes leszámolás", t: "Teljes leszámolás: kizárás minden vezető testületből, a reformpolitika nyilvános elítélése.", match: 0, d: { M: 12, N: -6, G: -4, R: -16 } },
+        { s: "Kíméletes eltávolítás, béremelés", t: "Kíméletes eltávolítás: nyugdíj, intézetigazgatói szék, „felfelé bukás”, a PB-tagság egyelőre marad. Mellé munkás-béremelés és tagtoborzás.", match: 2, d: { M: 8, N: 4, G: -5, R: -10 } }
+      ],
+      press: {},
+      rs: "Kíméletes eltávolítás, munkás-béremelés",
+      real: "Az 1974. március 19-20-i KB-ülés tagtoborzást hirdetett a munkások körében, és jelentős béremelést ért el az ipari munkásoknak. Fehér nyugdíjba vonult, Nyers intézetigazgató lett, Aczél „felfelé bukott”, de mindhárman PB-tagok maradtak; Fock és Nyers telefonját lehallgatták. Az ellentábor élén álló Komócsin egészségügyi okból szintén kikerült a Titkárságból. 1975-ben Fehér és Nyers a PB-ből is kimaradt, Fock nyugdíjba ment, utóda Lázár György lett.",
+      why: "Kádár mindkét oldalnak adott valamit: Moszkva és a dogmatikusok megkapták a személycseréket, a munkások a béremelést, a reformerek nem buktak el teljesen. Az ára a „pangás” lett: a munkások kiemelt támogatása, a régi gazdasági szerkezet fenntartása, és a világpiaci válság hazai hatásainak tagadása."
+    },
+    {
+      id: "olaj", year: "1973-1978", title: "Olajár-robbanás és hitelek", src: [7], topic: "puha-diktatura",
+      sit: [
+        "1973-tól az energiaárak jelentősen emelkednek a világpiacon, és a Szovjetunió is áttér az éves átlagár szerinti olajelszámolásra. A gyengébb minőségű magyar ipari termékek leértékelődnek, a cserearány romlik. A hivatalos szólamok szerint a válság nem érinti az országot.",
+        "A nyugati bankokban közben felgyűlnek az arab olajdollárok, és szívesen adnak kölcsönt. Az életszínvonal a rendszer egyik támasza."
+      ],
+      q: "Mit javasolsz a gazdaságpolitikára?",
+      opts: [
+        { s: "Kiigazítás, szerkezetváltás", t: "Kiigazítás: fogjuk vissza a fogyasztást, építsük le a veszteséges ágazatokat, kezdjünk ipari szerkezetváltásba.", match: 0, d: { M: -2, N: -15, G: 10, R: 6 } },
+        { s: "Nyugati hitelek, életszínvonal védelme", t: "Vegyünk fel nyugati hiteleket, hogy az életszínvonal ne essen, és fektessük be a meglévő iparba.", match: 2, d: { M: 3, N: 8, G: -12, R: -4 } },
+        { s: "KGST-be zárkózás, tagadás", t: "Szorosabb KGST-együttműködés, a nyugati hitelek kerülése, a válság hivatalos tagadása.", match: 1, d: { M: 8, N: -6, G: -8, R: -6 } }
+      ],
+      press: { G: -10 },
+      pressNote: "A cserearány romlása minden javaslattól függetlenül rontja az egyensúlyt.",
+      rs: "Nyugati hitelek, az életszínvonalhoz nem nyúltak",
+      real: "Hiteleket vettek fel. Ezeket nem közvetlenül az életszínvonalra fordították, de nélkülük azt csökkenteni kellett volna. A beruházások olyan iparágakba mentek, amelyek termékeinek ára esett, vagy nem feleltek meg a szigorúbb nyugati szabványoknak; tipikus példa az 1976-os eocén- és liászprogram: sok pénzért gyenge szén. Az adósság 1970-ben 800 millió, 1980-ban már 9,1 milliárd dollár volt. 1978-ban a törlesztést már csak újabb hitelből tudták fedezni, de az életszínvonalhoz nem mertek nyúlni.",
+      why: "Az ipari szerkezetváltás elmaradt: a nyugati csúcstechnológiát nem követték, nem is tudták követni. A hitel időt vett, de nem oldotta meg a gondot. 1976 és 1985 között a nemzeti jövedelem öt év alatt 2,9, majd csak 1,6 százalékkal nőtt, és megjelent a stagfláció: a stagnálás inflációval járt együtt. A KB csak 1977 októberében ismerte fel a válságot, radikális árreform 1979-ben jött."
+    },
+    {
+      id: "imf", year: "1981-1982", title: "Csatlakozás az IMF-hez", src: [7, 9], topic: "kulpolitika",
+      sit: [
+        "1981-ben már nincs szovjet gazdasági segítség, az adósság terhe nő. A Valutaalaphoz és a Világbankhoz 1967-ben és 1973-ban is megpróbáltak csatlakozni, de szovjet nyomásra nem lett belőle semmi; 1978-79-ben a PB döntött a tárgyalásról, és Brezsnyev ismét vétózott.",
+        "Közben újra nyílik a gazdaság: 1980-ban legalizálták a „második gazdaságot”, 1981-ben engedélyezték a gazdasági munkaközösségeket."
+      ],
+      q: "Mit javasolsz?",
+      opts: [
+        { s: "Titkos tárgyalás, csatlakozás", t: "Kezdjünk titkos tárgyalást, és csatlakozzunk az IMF-hez és a Világbankhoz, ha kell, Moszkva ellenében is.", match: 2, d: { M: -10, N: 3, G: 12, R: 8 } },
+        { s: "Szovjet segítség kérése", t: "Kérjünk újra szovjet segítséget, és várjunk egy kedvezőbb pillanatra.", match: 1, d: { M: 5, N: -3, G: -6, R: -4 } },
+        { s: "Átütemezés belépés nélkül", t: "Tárgyaljunk a nyugati bankokkal az adósság átütemezéséről, nemzetközi szervezetbe lépés nélkül.", match: 0, d: { M: 0, N: -2, G: -3, R: 0 } }
+      ],
+      press: { G: -6 },
+      pressNote: "Az eladósodás minden javaslattól függetlenül rontja az egyensúlyt.",
+      rs: "Csatlakozás 1982-ben, titkos tárgyalások után",
+      real: "1981-ben titkos csatlakozási tárgyalások indultak, és 1982-ben Magyarország csatlakozott a Valutaalaphoz és a Világbankhoz. Ugyanebben az évben az egyensúly megőrzéséhez szovjet és világbanki segítség is kellett, és megkezdődött a lakossági kötvények és vállalati részvények kibocsátása.",
+      why: "A diasor ezt a Szovjetunió ellenében megtett első magyar külpolitikai lépésnek nevezi, amelyet a gazdasági reformok kudarcai és az eladósodás kényszerítettek ki. Brezsnyev 1982-es halála után utóda, Andropov reformerként lépett fel, és Kádárt barátjának tekintette. Az USA ettől kezdve politikai okokból élezte a KGST-országok hitelválságát."
+    },
+    {
+      id: "valasztas", year: "1985", title: "Választás kettős jelöléssel", src: [7, 10], topic: "rendszervaltozas",
+      sit: [
+        "Az 1983. évi III. törvény kötelezővé teszi a kettős jelölést, és országos listát vezet be, hogy a legfőbb vezetők biztosan bejussanak. 1985 áprilisában és májusában a jelölőgyűléseken több mint 700 jelöltet állítanak, közülük 78 spontán, a Népfronton kívüli jelölt.",
+        "A demokratikus ellenzék néhány ismert tagja, például ifj. Rajk László, Tamás Gáspár Miklós és Bauer Tamás is indulni szeretne."
+      ],
+      q: "Mit javasolsz a jelölésekről?",
+      opts: [
+        { s: "Minden jelölt indulhat", t: "Mindenki indulhat, aki a jelölőgyűlésen támogatást kap, az ellenzékiek is.", match: 0, d: { M: -8, N: 6, G: 0, R: 12 } },
+        { s: "Vissza a népfrontos listához", t: "A spontán jelöléseket nyilvánítsuk érvénytelennek, maradjanak a Népfront jelöltjei.", match: 0, d: { M: 6, N: -8, G: 0, R: -10 } },
+        { s: "Spontán jelöltek igen, ellenzék nem", t: "A spontán jelöltek indulhatnak, de a demokratikus ellenzék ismert tagjait a jelölőgyűléseken meg kell állítani.", match: 2, d: { M: -2, N: 3, G: 0, R: 5 } }
+      ],
+      press: { G: -6 },
+      pressNote: "1985-ben ismét fizetési nehézségek jelentkeznek.",
+      rs: "Spontán jelöltek igen, ismert ellenzékiek nem",
+      real: "Az ellenzékiek indulását, illetve megválasztását sikerült meggátolni. Az eredmény mégis meglepő lett: 41 spontán jelölt jutott be, például Király Zoltán, aki Szegeden Komócsin Mihályt győzte le. A képviselők 63 százaléka kicserélődött, 1949 óta ez volt a legnagyobb személycsere a parlamentben, de 75 százalékuk párttag volt. Lázár György maradt a kormányfő, a parlamentben szigorú pártfegyelem uralkodott. Június 14-16-án, Monoron először ült össze a két ellenzéki tábor és a reformértelmiség; az állambiztonság előre tudott róla, nem akadályozta meg, de hangfelvételt készített.",
+      why: "A vezetés ellenőrzött nyitást akart: legyen választék, de a rendszer ellenfelei ne jussanak be. A választók viszont rájöttek, hogy a jelölés joga korlátozhatja a politikai hatalmat. A márciusi XIII. kongresszuson Kádár közben balra nyitott, és a gazdaság élénkítésére hibás döntések születtek."
+    },
+    {
+      id: "kadar", year: "1988", title: "Kádár bukása", src: [10, 9], topic: "rendszervaltozas",
+      sit: [
+        "1980 óta a reálbérek, 1985 óta a reáljövedelmek is csökkennek. Kádár hitelessége a reformellenessége és magas kora miatt megingott. Gorbacsov 1985 óta utal rá, hogy Kádárnak utódot kellene keresnie. Grósz Károly, 1987 júniusa óta miniszterelnök, Kádár leváltását tervezi, és titokban egyeztet Aczéllal és Pozsgayval.",
+        "Kádár figyelmezteti Pozsgayt és Nyerset, áprilisban négy pártértelmiségit kizárnak a pártból. Közeleg az 1988. májusi országos pártértekezlet."
+      ],
+      q: "Mit javasolsz a pártértekezletre?",
+      opts: [
+        { s: "Kádár marad", t: "Kádár maradjon főtitkár. Válságban a folytonosság a legfontosabb.", match: 0, d: { M: -10, N: -8, G: -3, R: -12 } },
+        { s: "Alku: Grósz főtitkár, a testületek maradnak", t: "Alku: Grósz legyen főtitkár, Kádár pártelnök, és a vezető testületek összetétele maradjon.", match: 1, d: { M: 5, N: 2, G: 1, R: 4 } },
+        { s: "Kádár pártelnök, de híveit lecserélik", t: "Kádár legyen pártelnök, de a hívei kerüljenek ki a KB-ból, és a PB újuljon meg reformerekkel.", match: 2, d: { M: 8, N: 4, G: 2, R: 10 } }
+      ],
+      press: { N: -10, G: -5 },
+      pressNote: "A csökkenő reáljövedelmek minden javaslattól függetlenül rontják a hangulatot.",
+      rs: "Grósz főtitkár, Kádár pártelnök, hívei kiestek",
+      real: "Alku született Kádár „konzervatív rendpártja” és Grósz „új rendpártja” között: Grósz lett a főtitkár, Kádár a pártelnök, reménye szerint nagy befolyással. Az értekezleten azonban Kádár ismét tagadta, hogy válság van, ezért Grósz felrúgta az alkut: Kádár híveit törölték a KB-tagok közül, a PB 60 százalékban megújult. Új PB-tag lett Nyers Rezső, Pozsgay Imre és Németh Miklós.",
+      why: "A harcban a Szovjetunió is Grószt támogatta, és Kádár belátta, hogy engednie kell. Grósz célja a „modellváltás” volt: alternatív szervezetek, de egypártrendszer. Az életszínvonal-alku, amely addig a rendszer legitimációját adta, ekkorra elveszítette ezt a szerepét."
+    },
+    {
+      id: "kerekasztal", year: "1989", title: "Kerekasztal", src: [10], topic: "rendszervaltozas",
+      sit: [
+        "Januárban Pozsgay Imre a rádióban kimondta, hogy 1956 népfelkelés volt. Moszkva nem tiltakozott, és a februári KB-ülés kimondta a többpártrendszert. A lengyel példa nyomán mindkét oldal kerekasztalt javasol, de az MSZMP célja az ellenzék megosztása.",
+        "Március 5-én az ellenzéki pártok elutasítják a meghívást. Március 22-én nyolc szervezet (köztük az MDF, az SZDSZ, a Fidesz és az FKGP) megalakítja az Ellenzéki Kerekasztalt, közös állásponttal és vétójoggal."
+      ],
+      q: "Mit javasolsz a párt tárgyalási stratégiájára?",
+      opts: [
+        { s: "Külön alkuk, megosztás", t: "Tárgyaljunk külön az egyes szervezetekkel, és próbáljuk megosztani őket.", match: 1, d: { M: 3, N: -6, G: 0, R: -6 } },
+        { s: "Háromoldalú tárgyalás, konszenzus", t: "Fogadjuk el az Ellenzéki Kerekasztalt tárgyalófélnek: konszenzusos megállapodás, erőszakmentesség, és a megállapodásig nincs közjogi változás.", match: 2, d: { M: 0, N: 8, G: 2, R: 12 } },
+        { s: "Az alkotmányt a párt írja meg", t: "Ne tárgyaljunk. Az új alkotmányt a párt és a parlament készítse el egyedül.", match: 0, d: { M: 3, N: -10, G: -2, R: -10 } }
+      ],
+      press: { G: -3 },
+      pressNote: "A nyugati hitelek feltétele a politikai reformok folytatása.",
+      rs: "Nemzeti Kerekasztal, június 13-tól",
+      real: "Az MSZMP elkötelezte magát a többpártrendszer, a demokrácia és a jogállam mellett, és elfogadta, hogy a megállapodás előtt nem lesz közjogi változás. Június 9-10-én aláírták az alapmegállapodást a békés átmenetről. A Nemzeti Kerekasztal június 13-án kezdődött három oldallal: az EKA, az MSZMP és a társutas szervezetek. Az MSZMP elérte, hogy gazdasági kérdésekről is tárgyaljanak, határidőt viszont nem szabtak. A szeptember 18-i megállapodást az SZDSZ és a Fidesz nem írta alá.",
+      why: "A megosztás terve elbukott, mert az ellenzék közös fórumot hozott létre. Moszkva tudomásul vette a változásokat, a nyugati hitelek feltétele pedig a politikai reformok folytatása volt; a diasor ezt kényszerpályának nevezi. A legvitásabb kérdés végül a köztársasági elnök megválasztásának módja lett."
+    }
+  ];
+
+  var EPILOGUE = [
+    { date: "1989. jún. 16.", t: "Nagy Imre és mártírtársai újratemetése. Az engedélyt Grósz még 1988 végén adta meg, kegyeleti okokból, de addigra politikai ügy lett. A TIB szervezte; az MSZMP-t nem hívták meg, a kormányt igen." },
+    { date: "1989. júl. 6.", t: "Kádár János halála. Aznap mentette fel a Legfelsőbb Bíróság Nagy Imrét és társait. Temetése újabb óriási, spontán tömeget mozgatott meg." },
+    { date: "1989. okt. 7.", t: "Az MSZMP XIV. kongresszusa kimondja a Magyar Szocialista Párt létrejöttét." },
+    { date: "1989. okt. 23.", t: "Szűrös Mátyás kikiáltja a köztársaságot, a pártállami rendszer véget ér." },
+    { date: "1989. nov. 26.", t: "A „négyigenes” népszavazás: az elnökválasztás csak az országgyűlési választás után lesz, 50,07 százalékkal." }
+  ];
+
+  // Warnings when a meter runs out. Text depends on the era (before / after Gorbachev).
+  function warning(k, i) {
+    var late = i >= 7;
+    if (k === "M") return late
+      ? { title: "Moszkva elfordul", t: "Gorbacsov nem akarta ráerőltetni a reformjait a szövetségesekre, de 1985-től jelezte, hogy Kádárnak utódot kellene keresnie. A szovjet bizalom hiánya ekkor személyi döntésekben jelentkezik: a harcban a Szovjetunió Grószt támogatta.", src: [9, 10] }
+      : { title: "A Brezsnyev-doktrína árnyéka", t: "1968 szeptembere óta a szovjet felfogás szerint a szocialista vívmányok megvédése minden szocialista ország kötelessége. Ezután fokozódott a beavatkozás a blokkban: Gomułkát és Ulbrichtot leváltották, és Kádár ellen is voltak puccstervek. Ekkora bizalomvesztés mellett a mozgástér nem a budapesti vezetésé.", src: [9] };
+    if (k === "N") return late
+      ? { title: "Megszűnő alku", t: "1985 után a reáljövedelmek is csökkentek, és az életszínvonal-alku elveszítette legitimáló szerepét. 1988 augusztusában a pécsi bányászok évtizedek óta az első sztrájkot tartották, a tüntetések egyre nagyobbak lettek.", src: [10] }
+      : { title: "Az életszínvonal a tét", t: "A rendszer hallgatólagos alkuja az életszínvonalra épült. 1978-ban, amikor a törlesztést már csak újabb hitelből lehetett fedezni, a vezetés még akkor sem mert hozzányúlni. A nyugalom elfogyása 1956 után a legkényesebb jel.", src: [7] };
+    if (k === "G") return { title: "Üres kassza", t: "1978-ban a törlesztést már csak újabb hitelből lehetett fedezni, 1982-ben pedig az egyensúlyhoz szovjet és világbanki segítség kellett. A következő lépéseknél a hitelezők feltételei is számítanak.", src: [7] };
+    return { title: "Pangás", t: "A diasor a hetvenes évek közepét a változatlanság és a „pangás” időszakaként írja le: a régi gazdasági szerkezet fenntartása, a világpiaci válság hazai hatásainak tagadása. A reform lendülete elfogyott, és ennek ára később, növekvő adósságban jelentkezik.", src: [7] };
+  }
+
+  function clamp(v) { return Math.max(0, Math.min(100, v)); }
+  function start() { return { v: 1, i: 0, phase: "intro", m: { M: START.M, N: START.N, G: START.G, R: START.R }, picks: [] }; }
+
+  function choose(S, k) {
+    if (S.phase !== "q") return null;
+    var d = D[S.i], o = d.opts[k];
+    if (!o) return null;
+    var before = {}, delta = {}, warns = [];
+    METERS.forEach(function (mt) {
+      var x = mt.k; before[x] = S.m[x];
+      var dv = (o.d[x] || 0) + (d.press[x] || 0);
+      S.m[x] = clamp(S.m[x] + dv);
+      if (S.m[x] <= 0) { warns.push(x); S.m[x] = RESET; }
+      delta[x] = S.m[x] - before[x];
+    });
+    var bal = 0; METERS.forEach(function (mt) { if (S.m[mt.k] >= LOW && S.m[mt.k] <= HIGH) bal++; });
+    var rec = { k: k, match: o.match, bal: bal, delta: delta, warns: warns };
+    S.picks.push(rec); S.phase = "real";
+    return rec;
+  }
+  function next(S) { if (S.phase !== "real") return; S.i++; S.phase = S.i >= D.length ? "end" : "q"; }
+  function begin(S) { if (S.phase === "intro") S.phase = "q"; }
+
+  function score(S) {
+    var hit = 0, bal = 0, falls = 0;
+    S.picks.forEach(function (p) { hit += p.match === 2 ? 10 : p.match === 1 ? 4 : 0; bal += p.bal; falls += p.warns.length; });
+    var n = D.length;
+    var hitPct = Math.round(hit / (n * 10) * 100);
+    var balPct = Math.max(0, Math.round((bal - falls * 2) / (n * 4) * 100));
+    var exact = S.picks.filter(function (p) { return p.match === 2; }).length;
+    var rank = hitPct >= 85 ? { t: "Előléptetés: osztályvezető", d: "A javaslataid szinte szó szerint egyeznek azzal, amit a vezetés lépett. A kor logikáját belülről ismered." }
+      : hitPct >= 60 ? { t: "Elvtársi dicséret", d: "A vezetés gondolkodását jól olvasod, néhány ponton a magad útját jártad." }
+      : hitPct >= 35 ? { t: "Áthelyezés egy kutatóintézetbe", d: "Sokszor mást javasoltál, mint ami történt. A hivatal ezt önálló gondolkodásnak könyveli el, és nem feltétlenül dicséretként." }
+      : { t: "Iktatva, olvasatlanul", d: "A javaslataid egy másik történelemhez illenének. Érdemes a „Mi történt valójában” lapokat újra átnézni." };
+    return { hit: hit, hitPct: hitPct, bal: bal, balPct: balPct, falls: falls, exact: exact, rank: rank };
+  }
+
+  return { METERS: METERS, START: START, LOW: LOW, HIGH: HIGH, RESET: RESET, SRC: SRC, LINKS: LINKS, TT: TT, D: D, EPILOGUE: EPILOGUE,
+    warning: warning, start: start, begin: begin, choose: choose, next: next, score: score };
+})();
+
+(function () {
+  "use strict";
+  var KEY = "mozgaster-v1";
+  var S = null, confirmReset = false;
+  var D = SIM.D, LET = ["A", "B", "C"], STAMP = ["ELTÉR", "RÉSZBEN", "EGYEZIK"];
+
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function valid(s) {
+    if (!s || s.v !== 1 || !s.m || !Array.isArray(s.picks) || typeof s.i !== "number") return false;
+    var want = { intro: 0, q: s.i, real: s.i + 1, end: D.length }[s.phase];
+    if (want === undefined || s.picks.length !== want) return false;
+    if (s.phase === "end" ? s.i !== D.length : (s.i < 0 || s.i >= D.length)) return false;
+    return SIM.METERS.every(function (mt) { return typeof s.m[mt.k] === "number"; });
+  }
+  function load() { try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); if (valid(s)) return s; } } catch (e) {} return null; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function srcLine(list) { return list.map(function (n) { return SIM.SRC[n]; }).join("; "); }
+  function signed(v) { return (v > 0 ? "+" : v < 0 ? "−" : "±") + Math.abs(v); }
+
+  function renderTab() {
+    var last = S.phase === "real" ? S.picks[S.picks.length - 1] : null;
+    var d = D[Math.min(S.i, D.length - 1)];
+    var caseTxt = S.phase === "intro" ? "Új dosszié" : S.phase === "end" ? "Lezárva, 1989" : "Ügy " + (S.i + 1) + "/" + D.length + " · " + d.year;
+    var h = '<div class="row"><span class="brand">MOZGÁSTÉR</span><span class="case">' + esc(caseTxt) + '</span></div><div class="gauges">';
+    SIM.METERS.forEach(function (mt) {
+      var v = S.m[mt.k], dv = last ? last.delta[mt.k] : 0;
+      h += '<div class="g" title="' + esc(mt.name) + '"><span class="l">' + esc(mt.short) + '</span><span class="bar' + (v < SIM.LOW ? " warn" : "") +
+        '" role="meter" aria-label="' + esc(mt.name) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + v + '"><i style="width:' + v + '%"></i></span><span class="v">' +
+        (last && dv ? '<span class="dv ' + (dv > 0 ? "up" : "down") + '">' + signed(dv) + "</span> " : "") + v + "</span></div>";
+    });
+    $("tab").innerHTML = h + "</div>";
+  }
+
+  function head(d, n) {
+    return '<span class="corner">BIZALMAS</span><div class="head"><span>Ügyszám: <b>MT-' + esc(d.year.slice(0, 4)) + "/" + n + "</b></span><span>Tárgy: " + esc(d.title) + "</span></div>";
+  }
+
+  function viewIntro() {
+    var h = '<article class="sheet"><span class="corner">BIZALMAS</span><div class="head"><span>Ügyszám: <b>MT-1963/0</b></span><span>Tárgy: Megbízás</span></div>' +
+      '<h1>Tanácsadói dosszié, 1963-1989</h1><div class="typed">' +
+      "<p>Te vagy a pártvezetés tanácsadója. Neved nincs, és az iratokban sem fog szerepelni. Tíz ügyben kérnek tőled javaslatot, 1963-tól 1989-ig.</p>" +
+      "<p>Minden ügynél két-három lehetőség közül választasz. A javaslatod megmozdítja a négy mérőt, de a történelmet nem írja át: utána jön a lap arról, mi történt valójában, és miért.</p>" +
+      "</div><h2>A négy mérő</h2><div class=\"legend\">" +
+      "<div><b>Moszkva</b><span>A szovjet vezetés bizalma. Nélküle a mozgástér a nulla felé szűkül.</span></div>" +
+      "<div><b>Nyugalom</b><span>A lakosság nyugalma, ami főleg az életszínvonalon múlik.</span></div>" +
+      "<div><b>Gazdaság</b><span>Egyensúly, adósság, fizetőképesség.</span></div>" +
+      "<div><b>Reform</b><span>Mennyi lendület maradt a változtatásra.</span></div></div>" +
+      '<p class="fine">Pontozás: mennyire találod el, mit lépett a valódi vezetés, és mennyire tartod a mérőket a középső sávban (a két jel között). Ha egy mérő kifogy, figyelmeztetést kapsz a korból, és a játék megy tovább.</p>' +
+      '<p class="fine">A tanácsadó kitalált szereplő. A valódi személyek és események a forrás szerint szerepelnek: egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), 7., 9. és 10. tétel. Játékidő: kb. 15-25 perc. Az állás ebben a böngészőben mentődik.</p>' +
+      "</article>";
+    return h;
+  }
+
+  function viewQ() {
+    var d = D[S.i], h = '<article class="sheet">' + head(d, S.i + 1) + '<div class="year">' + esc(d.year) + "</div><h1>" + esc(d.title) + '</h1><div class="typed">';
+    d.sit.forEach(function (p) { h += "<p>" + esc(p) + "</p>"; });
+    h += '</div><p class="ask">' + esc(d.q) + '</p><div class="opts">';
+    d.opts.forEach(function (o, k) {
+      h += '<button class="opt" type="button" id="opt-' + k + '" data-act="pick" data-k="' + k + '"><span class="key">' + LET[k] + '</span><span><span class="s">' + esc(o.s) + '</span><span class="t">' + esc(o.t) + "</span></span></button>";
+    });
+    return h + "</div>" + resetRow() + "</article>";
+  }
+
+  function viewReal() {
+    var d = D[S.i], p = S.picks[S.i], o = d.opts[p.k];
+    var h = '<article class="sheet">' + head(d, S.i + 1) + '<div class="year">' + esc(d.year) + "</div><h1>" + esc(d.title) + "</h1>" +
+      '<div class="mine"><span class="lab">A javaslatod, ' + LET[p.k] + "</span><span>" + esc(o.t) + '</span></div><div class="chips">';
+    SIM.METERS.forEach(function (mt) { var v = p.delta[mt.k]; h += '<span class="chip' + (v > 0 ? " up" : v < 0 ? " down" : "") + '">' + esc(mt.short) + " " + signed(v) + "</span>"; });
+    h += "</div>" + (d.pressNote ? '<p class="press">' + esc(d.pressNote) + "</p>" : "");
+    h += '<span class="stamp s' + p.match + '">' + STAMP[p.match] + "</span>";
+    h += '<section class="real"><h3>Mi történt valójában</h3><p class="rs">' + esc(d.rs) + ".</p><p>" + esc(d.real) + "</p><h3>Miért</h3><p>" + esc(d.why) + "</p></section>";
+    p.warns.forEach(function (k) {
+      var w = SIM.warning(k, S.i);
+      h += '<section class="warn"><h3>Figyelmeztetés: ' + esc(w.title) + "</h3><p>" + esc(w.t) + '</p><p class="fine">A mérő ' + SIM.RESET + "-re áll vissza, az egyensúly-pontszámból levonás jár. Forrás: " + esc(srcLine(w.src)) + ".</p></section>";
+    });
+    h += '<div class="src"><span>Forrás: egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), ' + esc(srcLine(d.src)) + '.</span><span>Tovább olvasva: <a href="' + SIM.TT + d.topic + '/" target="_blank" rel="noopener">Tudástár, ' +
+      esc(SIM.LINKS.filter(function (l) { return l.href === SIM.TT + d.topic + "/"; })[0].label) + "</a></span></div>";
+    return h + resetRow() + "</article>";
+  }
+
+  function viewEnd() {
+    var sc = SIM.score(S);
+    var h = '<article class="sheet"><span class="corner">LEZÁRVA</span><div class="head"><span>Ügyszám: <b>MT-1989/Z</b></span><span>Tárgy: Összesítő jelentés</span></div>' +
+      "<h1>Összesítő jelentés</h1>" +
+      '<div class="scores"><div class="score"><span class="n">' + sc.hitPct + '%</span><span class="l">Egyezés a valósággal</span><span class="fine">' + sc.exact + " ügyben pontos találat</span></div>" +
+      '<div class="score"><span class="n">' + sc.balPct + '%</span><span class="l">Egyensúly</span><span class="fine">' + (sc.falls ? sc.falls + " kifogyott mérő" : "Egy mérő sem fogyott ki") + "</span></div></div>" +
+      '<span class="stamp s' + (sc.hitPct >= 60 ? 2 : sc.hitPct >= 35 ? 1 : 0) + '">BESOROLVA</span><p><b>' + esc(sc.rank.t) + ".</b> " + esc(sc.rank.d) + "</p>" +
+      "<h2>A javaslataid és a valóság</h2><ol class=\"tl\">";
+    D.forEach(function (d, i) {
+      var p = S.picks[i]; if (!p) return;
+      h += '<li><span class="y">' + esc(d.year) + " · " + esc(d.title) + '</span><span class="mini s' + p.match + '">' + STAMP[p.match] + '</span><div class="pair"><span>Te</span><span>' +
+        esc(d.opts[p.k].s) + "</span><span>Valójában</span><span>" + esc(d.rs) + "</span></div></li>";
+    });
+    h += "</ol><h2>Utóirat, 1989</h2><div class=\"epi\">";
+    SIM.EPILOGUE.forEach(function (e) { h += "<div><b>" + esc(e.date) + "</b><span>" + esc(e.t) + "</span></div>"; });
+    h += "</div><h2>Tovább a Tudástárba</h2><ul class=\"links\">";
+    SIM.LINKS.forEach(function (l) { h += '<li><a href="' + l.href + '" target="_blank" rel="noopener">' + esc(l.label) + "</a></li>"; });
+    h += '</ul><p class="fine">Forrás: egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), 7., 9. és 10. tétel. A tanácsadó és a javaslatai kitaláltak, a „valójában” lapok a diasort követik.</p></article>';
+    return h;
+  }
+
+  function resetRow() {
+    return '<div class="reset">' + (confirmReset
+      ? '<span>Az eddigi javaslatok törlődnek.</span><button class="link danger" type="button" id="reset-yes" data-act="reset-yes">Igen, új dosszié</button><button class="link" type="button" id="reset-no" data-act="reset-no">Mégsem</button>'
+      : '<button class="link" type="button" id="reset-ask" data-act="reset-ask">Új dosszié</button>') + "</div>";
+  }
+
+  function renderAct() {
+    var h = '<div class="in">';
+    if (S.phase === "intro") h += '<button class="prim" type="button" id="act-begin" data-act="begin">Dosszié megnyitása</button>';
+    else if (S.phase === "q") h += '<span class="hint">Válassz egy javaslatot (A, B' + (D[S.i].opts.length > 2 ? " vagy C" : "") + ").</span>";
+    else if (S.phase === "real") h += '<button class="prim" type="button" id="act-next" data-act="next">' + (S.i + 1 < D.length ? "Következő ügy: " + esc(D[S.i + 1].year) : "Összesítő jelentés") + "</button>";
+    else h += confirmReset
+      ? '<button class="prim" type="button" id="act-reset-yes" data-act="reset-yes">Igen, kezdjük újra</button><button class="link" type="button" id="act-reset-no" data-act="reset-no">Mégsem</button>'
+      : '<button class="prim" type="button" id="act-reset" data-act="reset-ask">Új dosszié</button>';
+    $("act").innerHTML = h + "</div>";
+  }
+
+  function render(top) {
+    renderTab();
+    $("view").innerHTML = S.phase === "intro" ? viewIntro() : S.phase === "q" ? viewQ() : S.phase === "real" ? viewReal() : viewEnd();
+    renderAct();
+    if (top) { try { window.scrollTo(0, 0); } catch (e) {} }
+  }
+
+  document.addEventListener("click", function (ev) {
+    var b = ev.target && ev.target.closest ? ev.target.closest("[data-act]") : null;
+    if (!b) return;
+    var a = b.dataset.act, top = true;
+    if (a === "begin") SIM.begin(S);
+    else if (a === "pick") SIM.choose(S, +b.dataset.k);
+    else if (a === "next") SIM.next(S);
+    else if (a === "reset-ask") { confirmReset = true; top = false; }
+    else if (a === "reset-no") { confirmReset = false; top = false; }
+    else if (a === "reset-yes") { confirmReset = false; S = SIM.start(); }
+    else return;
+    if (a !== "reset-ask" && a !== "reset-no") confirmReset = false;
+    save(); render(top);
+  });
+
+  function start(data) {
+    S = data && valid(data.S) ? data.S : (load() || SIM.start());
+    render(false);
+  }
+  var hot = window.claude && window.claude.hot;
+  if (hot && hot.snapshot) { try { hot.snapshot(function () { return { S: S }; }); } catch (e) {} }
+  if (hot && hot.ready) hot.ready(start); else start(hot && hot.data ? hot.data : {});
+})();
+</script>
+
+</body></html>

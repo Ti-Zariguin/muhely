@@ -1,0 +1,683 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Kádár-korhoz</a><span>Tudástár</span></nav>
+<title>Idővonal 1945-1990</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+/* Layout: a night-sky timeline. Two bands (domestic above, foreign below) around a year axis; events are stars, related events form constellations. Deliberately single dark theme, like the concept map. */
+html:root:not(.x1):not(.x2) {
+  --bg: #070b1a; --paper: #10173a; --sheet: #0c1230; --fg: #e9ecf8; --muted: #9aa3c7; --rule: #26305e;
+  --accent: #ffd27a; --star: #cfe0ff; --kul: #9fd8ff; --bel: #ffd27a; --line: #3a4a8c; --line-hi: #ffe2a3; --sync: #8a6aa8; --chip: #1b2452;
+  --l1: #8fd3e0; --l2: #9fb2ff; --l3: #d6a8ff; --l4: #ffd27a; --ok: #8fe0b0; --shadow: 0 0 0 1px #1d2650;
+  color-scheme: dark;
+}
+body { background: radial-gradient(120% 80% at 50% 0%, #121a44 0%, var(--bg) 60%) fixed, var(--bg); }
+main { max-width: 1100px; }
+.views { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 999px; overflow: hidden; justify-self: start; }
+.views button { font: 700 0.9rem var(--font-display); color: var(--muted); background: transparent; border: 0; padding: 8px 16px; cursor: pointer; }
+.views button[aria-pressed="true"] { color: var(--bg); background: var(--accent); }
+.views button:focus-visible, .cons button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.controls { display: grid; gap: 10px; }
+.cons { display: flex; flex-wrap: wrap; gap: 6px; }
+.cons button { font: 600 0.82rem var(--font-display); color: var(--fg); background: var(--chip); border: 1px solid transparent; border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+.cons button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.cons-desc { min-height: 1.6em; }
+.sky { position: relative; border: 1px solid var(--rule); border-radius: 10px; background: radial-gradient(70% 60% at 50% 50%, #131c4a 0%, #080c20 100%); overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+.sky svg { display: block; width: 100%; height: auto; min-width: 1050px; }
+.stars circle { fill: #fff; }
+@media (prefers-reduced-motion: no-preference) { .stars .tw { animation: tw 4s ease-in-out infinite alternate; } }
+@keyframes tw { from { opacity: 0.25; } to { opacity: 0.9; } }
+.era { fill: #ffffff; opacity: 0.022; }
+.era.alt { opacity: 0.05; }
+.era-label { fill: var(--muted); font-family: var(--font-mono); font-size: 14px; }
+.band-label { fill: var(--muted); font-family: var(--font-display); font-weight: 800; font-size: 13px; letter-spacing: 0.14em; }
+.void { fill: var(--muted); font-family: var(--font-body); font-style: italic; font-size: 14px; opacity: 0.8; }
+.axis line { stroke: #4b5a9c; }
+.axis .tick { stroke: #4b5a9c; stroke-width: 1; }
+.axis text { fill: var(--muted); font-family: var(--font-mono); font-size: 15px; }
+.axis .zoom { fill: none; stroke: #4b5a9c; stroke-dasharray: 2 4; }
+.sync { stroke: var(--sync); stroke-width: 1.4; stroke-dasharray: 3 5; opacity: 0.55; transition: opacity 0.2s; }
+.sync-yr { fill: var(--sync); font-family: var(--font-mono); font-size: 13px; }
+.edge { fill: none; stroke: var(--line); stroke-width: 1.3; opacity: 0.55; transition: opacity 0.2s, stroke 0.2s; }
+.ev { cursor: pointer; outline: none; transition: opacity 0.2s; }
+.ev .glow { opacity: 0.16; }
+.ev.bel .glow, .ev.bel .core { fill: var(--bel); }
+.ev.kul .glow, .ev.kul .core { fill: var(--kul); }
+.ev.big .glow { opacity: 0.26; }
+.ev:focus-visible .glow, .ev.hl .glow { opacity: 0.6; }
+.ev:focus-visible .core { stroke: #fff; stroke-width: 2; }
+.lab { fill: var(--fg); font-family: var(--font-display); font-weight: 700; font-size: 17px; paint-order: stroke; stroke: #070b1a; stroke-width: 5px; stroke-linejoin: round; pointer-events: none; transition: opacity 0.2s, fill 0.2s; }
+.lab.bel { fill: #ffe6b0; }
+#hov { fill: #fff; font-size: 18px; }
+svg.dim .edge { opacity: 0.08; }
+svg.dim .sync { opacity: 0.15; }
+svg.dim .ev { opacity: 0.28; }
+svg.dim .lab { opacity: 0.3; }
+svg.dim .edge.on { opacity: 1; stroke: var(--line-hi); stroke-width: 2.2; }
+svg.dim .ev.on { opacity: 1; }
+svg.dim .lab.on { opacity: 1; fill: #fff; }
+svg .ev.off, svg .lab.off { opacity: 0.06 !important; pointer-events: none; }
+svg .edge.off { opacity: 0.03 !important; }
+.readout { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); min-height: 1.5em; }
+.readout b { color: var(--fg); font-family: var(--font-display); }
+.legend { display: grid; gap: 8px; font-size: 0.95rem; }
+.legend > span { display: flex; align-items: center; gap: 10px; }
+.legend i { flex: none; display: inline-block; width: 26px; height: 0; border-top: 2px solid var(--line-hi); }
+.legend i.s { border-top: 2px dashed var(--sync); }
+.legend b { flex: none; display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--bel); box-shadow: 0 0 10px var(--bel); margin: 0 6px; }
+.legend b.k { background: var(--kul); box-shadow: 0 0 10px var(--kul); }
+.legend b.m { width: 7px; height: 7px; margin: 0 9px; background: var(--star); box-shadow: none; }
+.legend em { flex: none; display: inline-block; width: 26px; height: 14px; background: rgba(255, 255, 255, 0.07); border-radius: 2px; }
+ol.evlist { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 14px; }
+ol.evlist li { display: grid; gap: 3px; border-left: 3px solid var(--line); padding-left: 12px; }
+ol.evlist li.bel { border-left-color: var(--bel); }
+ol.evlist li.kul { border-left-color: var(--kul); }
+ol.evlist .when { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); }
+ol.evlist li.kul .when { color: var(--kul); }
+ol.evlist .meta { font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); }
+/* Card */
+.veil { position: fixed; inset: 0; z-index: 20; background: rgba(3, 5, 15, 0.6); display: grid; place-items: center; overflow-y: auto;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); }
+.panel { width: 100%; max-width: 640px; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; box-shadow: 0 0 40px rgba(120, 150, 255, 0.15); padding: 18px 20px 22px; display: grid; gap: 12px; }
+.panel .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.panel h2 { color: var(--accent); }
+.panel.kul h2 { color: var(--kul); }
+.panel .close { font: 700 0.85rem var(--font-display); color: var(--fg); background: transparent; border: 1px solid var(--rule); border-radius: 6px; padding: 5px 12px; cursor: pointer; flex: none; }
+.panel .when { font-family: var(--font-mono); font-size: 0.9rem; color: var(--muted); }
+.linkrow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.linkrow button { font: 600 0.85rem var(--font-display); color: var(--fg); background: var(--chip); border: 0; border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+.linkrow .btn { justify-self: auto; }
+.nav { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.nav button { font: 600 0.85rem var(--font-display); color: var(--muted); background: transparent; border: 1px solid var(--rule); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.nav button:disabled { opacity: 0.35; cursor: default; }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Kádár-kor · Idővonal</span>
+    <h1>Idővonal 1945-1990</h1>
+    <p class="lede">Négy és fél évtized csillagtérképe. Fölül a belpolitika, alul a külpolitika; minden csillag egy esemény, a vonalak az összetartozó eseményeket fűzik csillagképpé. Vidd az egeret egy csillag fölé, és felragyog a csillagképe. Kattints rá, és kinyílik a kártyája. Telefonon az első koppintás kiemel, a második nyit, az idővonal pedig oldalra görgethető.</p>
+  </header>
+
+  <div class="controls">
+    <div class="views" role="group" aria-label="Sáv szűrése">
+      <button type="button" data-filter="mind" aria-pressed="true">Mind</button>
+      <button type="button" data-filter="bel" aria-pressed="false">Belpolitika</button>
+      <button type="button" data-filter="kul" aria-pressed="false">Külpolitika</button>
+    </div>
+    <div class="cons" id="cons" role="group" aria-label="Csillagkép kiválasztása"></div>
+    <p class="note cons-desc" id="cons-desc" aria-live="polite"></p>
+  </div>
+
+  <div class="sky" id="sky"><svg id="tl" viewBox="0 0 1500 760" role="group" aria-label="Idővonal 1945 és 1990 között: fölül belpolitikai, alul külpolitikai események"></svg></div>
+  <p class="readout" id="readout" aria-live="polite">Tab billentyűvel időrendben lépkedhetsz a csillagokon, Enter nyitja a kártyát.</p>
+
+  <section class="card">
+    <span class="lbl lv1">Olvasd így</span>
+    <p>Az idő balról jobbra halad. A középső vonal az évszámok tengelye; fölötte a belpolitika (a 7. és a 10. tétel diasora), alatta a külpolitika (a 9. tétel diasora). A háttér halvány sávjai a korszakok: alul a külpolitikai diasor saját korszakolása, fölül a belpolitikai diák fejezetei. Az 1985 utáni öt évben sűrűsödnek az események, ezért ez a szakasz kétszeres nagyításban látszik.</p>
+    <p>A csillagkép nem a forrás szava, hanem olvasási segédlet: azokat az eseményeket köti össze, amelyeket a diák egymásra épülőként vagy egy szálhoz tartozóként mutatnak be. Egy esemény több csillagképben is szerepelhet. A felső sáv 1960 előtt üres: a felhasznált belpolitikai diasorok ezzel az időszakkal nem foglalkoznak.</p>
+    <div class="legend">
+      <span><b></b>belpolitikai fő esemény (nagy, fényes csillag)</span>
+      <span><b class="k"></b>külpolitikai fő esemény</span>
+      <span><b class="m"></b>további esemény (kis csillag, a neve rámutatáskor látszik)</span>
+      <span><i></i>csillagkép: összetartozó események, időrendben összekötve</span>
+      <span><i class="s"></i>egyidejűség: ugyanabban az évben a belső és a külső sávon is fordulat történt</span>
+      <span><em></em>korszaksáv</span>
+    </div>
+    <details>
+      <summary>A korszaksávok</summary>
+      <div id="era-list"></div>
+    </details>
+  </section>
+
+  <section class="card">
+    <details>
+      <summary id="list-sum">Listanézet: az összes esemény időrendben</summary>
+      <div><ol class="evlist" id="evlist"></ol></div>
+    </details>
+  </section>
+
+  <footer>
+    <p>Témaoldalak: <a href="../puha-diktatura/">A puha diktatúra, 1963-1985</a> · <a href="../kulpolitika/">Külpolitika, 1945-1990</a> · <a href="../rendszervaltozas/">A rendszerváltozáshoz vezető út, 1985-1989</a></p>
+    <p><a href="../">Vissza a gyűjtőoldalra</a> · <a href="../../">Tudástár</a></p>
+    <p>Forrás: egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), 7., 9. és 10. tétel. A szövegek a diák vázlatpontjaiból készült saját összefoglalások; dátum csak az került a térképre, ami a diákban szerepel.</p>
+  </footer>
+</main>
+
+<div class="veil" id="veil" hidden><div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="p-title"></div></div>
+
+<script>
+/* Data: every date and fact comes from the three slide decks (07, 09, 10). s: band, big: main event, c: constellations. */
+var SRC = {
+  "07": { n: "7. tétel: A puha diktatúra, 1963-1985", page: "../puha-diktatura/", short: "Puha diktatúra" },
+  "09": { n: "9. tétel: Külpolitika, 1945-1990", page: "../kulpolitika/", short: "Külpolitika" },
+  "10": { n: "10. tétel: A rendszerváltozáshoz vezető út, 1985-1989", page: "../rendszervaltozas/", short: "Rendszerváltozás" }
+};
+var ERAS = {
+  kul: [
+    [1945, 1947, "Béke", "A békeelőkészítés, a békekonferencia és a párizsi béke"],
+    [1947, 1953, "Szovjet blokk", "Barátsági szerződések és a szovjet blokk kiépülése, Sztálin haláláig"],
+    [1953, 1956, "Mozgástér", "Mozgástér és erősödő szovjet beavatkozás Sztálin halála után"],
+    [1956, 1963, "Elszigeteltség", "Az elszigeteltség kora, 1956-63 (a dia saját évszámai)"],
+    [1963, 1975, "Pragmatikus külpolitika", "A pragmatikus külpolitika évei, 1963-75 (a dia saját évszámai)"],
+    [1975, 1982, "Korlátozott szuverenitás", "A korlátozott szuverenitás, 1975-82 (a dia saját évszámai)"],
+    [1982, 1988, "Kezdődő önállóság", "Kezdődő külpolitikai önállóság, az IMF-csatlakozástól; a záróévet a dia nem adja meg, itt 1988, ahol a következő fejezet eseményei kezdődnek"],
+    [1988, 1991, "Rendszerváltozás", "A rendszerváltozás külpolitikája, 1988-tól a szovjet csapatkivonásról szóló megállapodásig"]
+  ],
+  bel: [
+    [1956, 1963, "Kollektivizálás után", "A politikai rendőrség átszervezése és a mezőgazdaság a kollektivizálás után (a 7. tétel első fejezetei)"],
+    [1963, 1972, "Reformok, ÚGM", "Agrárreformok, választójogi reform és az Új Gazdasági Mechanizmus; a 7. tétel a puha diktatúrát 1963-1985 közé teszi"],
+    [1972, 1978, "Reformellenes évek", "Egy fontos év: 1972, majd a reformellenes évek, a dogmatikusok leváltásáig"],
+    [1978, 1985, "Vissza a reformokhoz?", "Visszatérés a reformokhoz? és a nyolcvanas évek első fele"],
+    [1985, 1991, "Út a rendszerváltozáshoz", "A rendszerváltozáshoz vezető út, 1985-1989 (10. tétel); az utolsó események 1989 őszén"]
+  ]
+};
+var CONS = {
+  reform:    { n: "Az ÚGM íve", d: "Az Új Gazdasági Mechanizmus előkészítésétől a reformerek félreállításáig: a reform elindul, majd a párton belüli balos ellenzék és Moszkva nyomására leáll, végül a dogmatikusok is távoznak." },
+  prag:      { n: "Prága 1968", d: "Kádár előbb Dubček mellett áll, majd átáll és részt vesz a bevonulásban. A Brezsnyev-doktrína után a blokkban apad a reformkedv; a szál 1989-ben a doktrína feladásával zárul." },
+  valsag:    { n: "Válság és hitelek", d: "Az olajár-robbanástól az IMF-tagságig és tovább: cserearány-romlás, nyugati hitelek, eladósodás, és ennek nyomán újabb, tisztán gazdasági reformok." },
+  valasztas: { n: "A szavazólap útja", d: "A választójog lépésenként: egyéni kerületek, aktív szavazás, kötelező kettős jelölés, a spontán jelöltek 1985-ös sikere és a négyigenes népszavazás." },
+  ellenzek:  { n: "Az ellenzék", d: "Az urbánus és a népi ellenzék szerveződése a Beszélőtől a monori találkozón át az új pártokig és a Nemzeti Kerekasztalig." },
+  otvenhat:  { n: "1956 árnyéka", d: "Az 1956-os forradalom megítélése: az ENSZ-vitától és a napirendről levételtől a betiltott megemlékezéseken át Nagy Imre újratemetéséig." },
+  egyhaz:    { n: "Egyház és állam", d: "Mindszenty, a Vatikán és a perek: a Részmegállapodás, Lénárd Ödön ügye, a bíboros távozása, Kádár római útja és a diplomáciai kapcsolat felvétele." },
+  helsinki:  { n: "Helsinki felé", d: "Az európai biztonsági értekezlet útja a bukaresti javaslattól a helsinki záródokumentumig, közben a nyugatnémet kapcsolatfelvétellel." },
+  hatar:     { n: "Határok és Erdély", d: "A trianoni határ megerősítésétől Erdély ügyéig: a béke, Kádár helsinki utalása, a romániai elzárkózás, a menekültek és az Erdély-tüntetés." },
+  szovjet:   { n: "A szovjet jelenlét", d: "A szovjet katonai és politikai jelenlét kiépülése 1947 után, a Varsói Szerződés, majd 1989-1990-ben a doktrína feladása és a csapatkivonásról szóló megállapodás." },
+  kreml:     { n: "Kádár és a Kreml", d: "Kádár viszonya a mindenkori szovjet vezetőhöz: Hruscsov leváltásától Zavidovón és a vétókon át Gorbacsov utódkereséséig." },
+  nyugat:    { n: "Nyitás nyugatra", d: "A nyugati kapcsolatok lépései a Mindszenty-per miatti jegyzékváltásoktól a magyar kérdés lezárásán, a követcserén és a Szent Koronán át 1989-ig: a vasfüggöny lebontása, Bush látogatása és a határnyitás." },
+  partallam: { n: "A pártállam vége", d: "A párt vezető szerepének alkotmányba írásától a jogalkotási törvényen, Kádár bukásán és a kerekasztalon át a köztársaság kikiáltásáig." }
+};
+var SYNC = [
+  [1968, "b-ugm", "k-bevonulas", "1968: elindul az ÚGM, ugyanabban az évben a magyar hadsereg is részt vesz a csehszlovákiai bevonulásban."],
+  [1972, "b-zavidovo", "k-bukarest72", "1972: a zavidovói találkozó és a reformok leállítása; közben megromlik a viszony Romániával."],
+  [1975, "b-xi", "k-helsinki", "1975: a XI. kongresszus a pangást hozza, Helsinkiben Kádár először említi Trianont."],
+  [1982, "b-ellenzek82", "k-imf", "1982: PB-határozat a népi ellenzékről, és a Szovjetunió ellenében megtett első külpolitikai lépés, az IMF-tagság."],
+  [1985, "b-monor", "k-gorbacsov", "1985: a monori találkozó és a spontán jelöltek választása; Gorbacsov ekkortól utal rá, hogy Kádárnak utódot kellene keresnie."],
+  [1989, "b-koztarsasag", "k-hatarnyitas", "1989: a kerekasztal, az újratemetés és a köztársaság kikiáltása, kívül a vasfüggöny lebontása és a határnyitás."]
+];
+var EV = [
+  /* ---- Külpolitika (09) ---- */
+  { id: "k-hatar45", s: "kul", y: 1945, m: 9, d: 20, t: "A magyar-román határ napirenden", src: ["09"], c: ["hatar"],
+    x: "Nagy-Britannia és az USA javaslatára a nagyhatalmak megvizsgálják a magyar-román határ ügyét. Az elképzelések eltértek: az USA 1941 óta etnikai határkiigazítást fontolgatott, a Szovjetunió a trianoni határ helyreállítását akarta, és a háború végén az az alapelv érvényesült, hogy vesztes ország győztestől nem kaphat területet." },
+  { id: "k-bekekonf", s: "kul", y: 1946, m: 7, d: 29, w: "1946. júl. 29.-okt. 15.", t: "A párizsi békekonferencia", src: ["09"], c: ["hatar"],
+    x: "A vesztesek is részt vehettek, de csak a plenáris üléseken, a bizottságok pedig a vesztes államok határait tárgyalták. Augusztus 14-én Gyöngyösi János külügyminiszter 22 ezer km²-t kért; Auer Pál augusztus 31-én már csak 4000 km²-t és székely autonómiát. Szeptember 5-én a román területi bizottság a trianoni határt fogadta el, ahogy a külügyminiszterek tanácsa már május 7-én, a diasor szerint szovjet követelésre." },
+  { id: "k-beke47", s: "kul", y: 1947, m: 2, d: 10, big: 1, t: "A párizsi béke", src: ["09"], c: ["hatar", "szovjet"],
+    x: "A trianoni határ marad, de három falut (43 km²) Csehszlovákiához csatolnak. Magyarország 300 millió dollár jóvátételt fizet, ebből 200 milliót a Szovjetuniónak, hadserege legfeljebb 65 ezer fő lehet, plusz 5 ezer fős légierő. A szövetséges seregek kivonulnak, de a szovjetek az osztrák megszállási zóna utánpótlása címén maradhatnak. A szerződés 1947. szeptember 15-én lépett hatályba, aznap oszlott fel a SZEB." },
+  { id: "k-kominform", s: "kul", y: 1947, m: 9, t: "Megalakul a Kominform", src: ["09"], c: ["szovjet"],
+    x: "A fokozódó hidegháborúban egyre erősebb Moszkva irányítása. A tömbön belüli ellentéteket, például a csehszlovák-magyar vitát, félre kell tenni, a Nyugattal fennálló gazdasági és külpolitikai kapcsolatok pedig megszakadnak." },
+  { id: "k-szerzodes48", s: "kul", y: 1948, m: 2, d: 18, t: "Barátsági szerződés a Szovjetunióval", src: ["09"], c: ["szovjet"],
+    x: "A barátsági, együttműködési és kölcsönös segélynyújtási egyezmények sora 1947 decemberétől 1949 áprilisáig tart, a szovjet szerződés 1948. február 18-i. Ezek lényegében Németország elleni katonai szövetségek. Sztálin nem akart többoldalú katonai szerződést a csatlósokkal, mert egy rivális közép-európai blokktól is tartott." },
+  { id: "k-mindszenty49", s: "kul", y: 1949, m: 4, w: "1949 tavasza", t: "Jegyzékváltások a Mindszenty-per miatt", src: ["09"], c: ["egyhaz", "nyugat"],
+    x: "A per miatt diplomáciai jegyzékek mennek Washington és Budapest között. Sík Endre követet kiutasítják Washingtonból, az amerikai követ is távozik Budapestről. Felmerült a diplomáciai viszony teljes megszakítása is, de októberben újra követcsere történt." },
+  { id: "k-vsz", s: "kul", y: 1955, m: 5, d: 14, big: 1, t: "A Varsói Szerződés", src: ["09"], c: ["szovjet"],
+    x: "Egy nappal az osztrák államszerződés előtt jön létre, amely után a Szovjetunió kivonul Ausztriából. A Varsói Szerződés révén viszont a szovjet csapatok Magyarországon maradhattak (Romániából 1958-ban kivonták őket), a blokk fegyveres ereje pedig szovjet főparancsnok irányítása alá került." },
+  { id: "k-canossa", s: "kul", y: 1955, m: 6, w: "1955. máj.-jún.", t: "Hruscsov Belgrádban", src: ["09"], c: ["otvenhat"],
+    x: "Hruscsov „Canossa-járása”: bocsánatot is kér, elismeri a be nem avatkozást, a nemzeti utat és a békés egymás mellett élést. A kibékülés és az osztrák semlegesség nagy hatással volt Nagy Imre terveire; 1956 novemberében ezért is látott esélyt Magyarország semlegességére." },
+  { id: "k-moszkva57", s: "kul", y: 1957, m: 3, d: 21, w: "1957. márc. 21-28.", t: "Kormány- és pártközi tárgyalások Moszkvában", src: ["09"], c: ["szovjet", "kreml", "otvenhat"],
+    x: "Kormányközi szinten kölcsönt és segélyt kap az ország, és elvben megegyeznek a szovjet csapatok itt-tartózkodásáról (a szerződést május 27-én írták alá Budapesten). Pártközi szinten megerősítik posztján Kádárt, Rákosi nem térhet haza, és eldől, hogy lesz Nagy Imre-per." },
+  { id: "k-ensz57", s: "kul", y: 1957, m: 9, d: 14, t: "Az ENSZ elfogadja a különbizottság jelentését", src: ["09"], c: ["otvenhat"],
+    x: "Mivel Kádár nem engedett be helyszíni vizsgálóbizottságot, 1957. január 10-én ötös különbizottság alakult. Jelentését a közgyűlés nagy többséggel fogadta el: Magyarországon spontán nemzeti felkelés zajlott le, a Szovjetunió agressziót követett el, ezért szabad választás és a szovjet csapatok kivonása kell." },
+  { id: "k-magyarkerdes", s: "kul", y: 1962, m: 12, big: 1, t: "Lekerül a napirendről a magyar kérdés", src: ["09"], c: ["otvenhat", "nyugat"],
+    x: "Az USA 1961 augusztusától javasolta, hogy általános amnesztiáért cserébe leveszik a magyar kérdést az ENSZ napirendjéről. A hosszas alkut Hruscsov 1962 novemberében engedélyezte, decemberben a magyar ügy véget ért. 1963-ban jött az általános amnesztia, U Thant ENSZ-főtitkár pedig Budapesten kijelentette, hogy az ország szuverén állam." },
+  { id: "k-reszmegallapodas", s: "kul", y: 1964, m: 9, d: 15, t: "Részmegállapodás a Vatikánnal", src: ["09"], c: ["egyhaz"],
+    x: "Casaroli érsek és Prantner József, az Állami Egyházügyi Hivatal elnöke írja alá. A Vatikán elismeri a Kádár-rendszert, az pedig a vallás létjogosultságát; a püspökök kinevezéséről előzetes megbeszéléssel döntenek. Mindszentyről, a hitoktatásról és a szerzetesrendekről nincs megegyezés, Mindszenty el is ítélte a megállapodást." },
+  { id: "k-hruscsov", s: "kul", y: 1964, m: 10, t: "Hruscsov leváltása", src: ["09"], c: ["kreml"],
+    x: "Kádár varsói gyárlátogatáson értesül róla. Hazatérve Hruscsov érdemeit méltatja, a KB levele is cáfolja, hogy személyi kultuszt épített volna ki, és Kádár Brezsnyevnek nem gratulál, novemberben Moszkvában sem. Brezsnyev ezt sosem bocsátotta meg neki, bár egyelőre szívélyes maradt." },
+  { id: "k-bukarest66", s: "kul", y: 1966, m: 7, w: "1966", t: "Bukarest: javaslat az európai biztonsági konferenciára", src: ["09"], c: ["helsinki"],
+    x: "A Varsói Szerződés Politikai Tanácskozó Testülete Bukarestben javasolja egy Európai Biztonsági Konferencia összehívását. Ez az első lépés a helsinki értekezlet felé." },
+  { id: "k-kovetcsere66", s: "kul", y: 1966, t: "Megegyezés az USA-val a követcseréről", src: ["09"], c: ["nyugat"],
+    x: "Johnson hídépítési politikája kedvezett a közeledésnek, de Mindszenty ügye, a pénzügyi viták és Vietnam is fékezte. 1966-ban sikerült megegyezni a követcseréről; a kijelölt első magyar nagykövet azonban menedékjogot kért." },
+  { id: "k-imf67", s: "kul", y: 1967, t: "Szovjet aggodalom: leállnak az IMF-tárgyalások", src: ["09", "07"], c: ["valsag", "kreml"],
+    x: "A Szovjetunió aggasztónak nevezi a magyar tárgyalásokat az IMF-fel és a Világbankkal, ezért azok leállnak. Szeptemberben Brezsnyev élesen bírálja Magyarországot a nyugatnémet gazdasági kapcsolatok miatt, és a gazdasági reform miatt is aggódik." },
+  { id: "k-drezda", s: "kul", y: 1968, m: 3, t: "Drezda: Kádár egyedül Dubček mellett", src: ["09"], c: ["prag"],
+    x: "Januárban és februárban Kádár és Dubček többször találkozik, kölcsönösen támogatják egymást. A drezdai találkozón, ahol Csehszlovákia az „Ötökkel” ül le (Szovjetunió, NDK, Lengyelország, Magyarország, Bulgária), egyedül Kádár szólal fel Dubček mellett. Március végén a Szovjetunió megkezdi a katonai támadás tervének kidolgozását." },
+  { id: "k-dubcek-bp", s: "kul", y: 1968, m: 6, d: 13, w: "1968. jún. 13-15.", t: "Dubček Budapesten", src: ["09"], c: ["prag"],
+    x: "Dubček 20 évre szóló barátsági egyezményt ír alá Budapesten. Június végén viszont már a bevonulás főpróbája zajlik Csehszlovákiában: Varsói Szerződés-hadgyakorlat, magyar részvétellel." },
+  { id: "k-varso68", s: "kul", y: 1968, m: 7, d: 14, w: "1968. júl. 14-15.", t: "Varsó: Kádár átáll", src: ["09"], c: ["prag"],
+    x: "Dubček nem megy el az Ötök újabb találkozójára. Kádár itt saját Politikai Bizottságát felülbírálva átáll és támogatja a szovjet ultimátumot, pedig a PB egyik tagja sem támogatott katonai akciót. Július 22-én hozzájárul a magyar haderő részvételéhez." },
+  { id: "k-bevonulas", s: "kul", y: 1968, m: 8, d: 21, big: 1, t: "Bevonulás Csehszlovákiába", src: ["09"], c: ["prag"],
+    x: "Augusztus elején Pozsonyban, majd 17-én Komáromban Kádár még figyelmezteti Dubčeket, hiába. Augusztus 21-én megindul az intervenció, és véget ér Kádár közvetítő szerepe. A magyar részvétel Kádár személyes döntése volt, a PB is csak előző nap tudta meg; októberben az ő javaslatára vonták ki a szovjeteken kívüli megszálló seregeket." },
+  { id: "k-doktrina", s: "kul", y: 1968, m: 9, t: "A Brezsnyev-doktrína", src: ["09"], c: ["prag", "szovjet"],
+    x: "A szovjet pártlap közli a doktrína szövegét: a kommunista pártok nemcsak saját népüknek, hanem az egész mozgalomnak is felelősséggel tartoznak, a szocialista vívmányok megvédése minden szocialista ország kötelessége. A reformok apálya az egész blokkra jellemző, nő a szovjet beavatkozás (Gomułka és Ulbricht leváltása, Kádár-ellenes puccs tervei is)." },
+  { id: "k-mindszenty71", s: "kul", y: 1971, m: 9, d: 28, t: "Mindszenty elhagyja az országot", src: ["09", "07"], c: ["egyhaz"],
+    x: "Megegyezés születik: Mindszenty bíboros elhagyja az amerikai nagykövetséget, ahol menedéket kapott, és az országot is; Rómába megy, majd Bécsben telepedik le. A belpolitikai diasor szerint távozása Kádár helyzetét is erősítette." },
+  { id: "k-bukarest72", s: "kul", y: 1972, t: "Kádár Bukarestben", src: ["09"], c: ["hatar"],
+    x: "Kádár Bukarestbe látogat, de Romániában az elzárkózás, a kisebbségek diszkriminációja és a személyi kultusz politikája kerekedik felül. Ekkor kezdődnek a feszültségek a magyar-román viszonyban." },
+  { id: "k-nszk73", s: "kul", y: 1973, m: 12, t: "Diplomáciai kapcsolat az NSZK-val", src: ["09"], c: ["helsinki"],
+    x: "Bonn már 1966 végén felajánlotta a kapcsolatfelvételt, de miután Románia élt vele, Lengyelország feltételekhez kötötte a többiek lépését („varsói diktátum”). Magyarországnak meg kellett várnia, amíg Lengyelország, az NDK és Csehszlovákia rendezi vitáit az NSZK-val." },
+  { id: "k-helsinki", s: "kul", y: 1975, m: 7, d: 31, big: 1, t: "Helsinki: Kádár beszéde, a záródokumentum", src: ["09"], c: ["helsinki", "hatar"],
+    x: "Az Európai Biztonsági és Együttműködési Értekezleten Kádár nagy feltűnést kelt beszédével: büszkén utal a magyar történelemre, és először említi Trianon kérdését. Az augusztus 1-jei záródokumentum rögzíti a határok erőszakos megváltoztatásának tilalmát, Magyarország örömére pedig a személyes és kulturális kötelékek erősítését is." },
+  { id: "k-vatikan77", s: "kul", y: 1977, m: 6, t: "Kádár a Vatikánban", src: ["09"], c: ["egyhaz"],
+    x: "VI. Pál pápa és Casaroli magánkihallgatáson fogadja Kádárt. Diplomáciai kapcsolatfelvételről nem tárgyalnak, ahhoz Moszkva engedélye kellett volna, de a templomi hitoktatásban megegyeznek, és Lénárd Ödönt kiengedik a fegyházból. A szerzetesrendek engedélyezését Kádár nem támogatja." },
+  { id: "k-korona", s: "kul", y: 1978, t: "Visszakapjuk a Szent Koronát", src: ["09"], c: ["nyugat"],
+    x: "Carter elnök döntését a magyar emigráció is támogatta. A korona visszaadását Magyarország már az 1960-as évek elején, a rendezés feltételei között kérte." },
+  { id: "k-imf", s: "kul", y: 1982, m: 5, w: "1982", big: 1, t: "Csatlakozás az IMF-hez és a Világbankhoz", src: ["09", "07"], c: ["valsag", "kreml"],
+    x: "A diasor szerint ez az első, a Szovjetunió ellenében megtett magyar külpolitikai lépés, amit a gazdasági reformok kudarcai és az eladósodás kényszerítettek ki. 1967-ben és 1973-ban szovjet nyomásra elmaradt, 1978-79-ben Brezsnyev vétózott; 1981-ben, amikor már nem jött szovjet gazdasági segítség, titkos tárgyalások indultak." },
+  { id: "k-gorbacsov", s: "kul", y: 1985, m: 6, w: "1985-től", t: "Gorbacsov: Kádárnak utód kellene", src: ["09"], c: ["kreml"],
+    x: "Gorbacsov reformjai, a peresztrojka és a glasznoszty, Kádárnak már nem tetszettek, bár a szovjet vezető nem akarta ráerőltetni őket a csatlósokra. 1985-től viszont utalt rá, hogy Kádárnak utódot kellene keresnie." },
+  { id: "k-grosz-nyugat", s: "kul", y: 1988, m: 3, w: "1988 első fele", t: "Grósz nyugati körútja", src: ["09"], c: ["valsag", "nyugat"],
+    x: "Grósz Károly Bonnba, Londonba és Washingtonba látogat, ősszel Bécsben, Madridban és Párizsban is fogadják. A nyugati hitelek feltétele a politikai reformok folytatása volt: a diasor szavával kényszerpálya." },
+  { id: "k-arad", s: "kul", y: 1988, m: 9, w: "1988", t: "Grósz és Ceauşescu Aradon", src: ["09"], c: ["hatar"],
+    x: "A háromkötetes Erdély története román tiltakozást váltott ki, a falurombolási terv miatt egyre több menekült érkezett. Grósz Károly Aradon tárgyal Ceauşescuval: súlyos kudarc és presztízsveszteség. Az erdélyi menekültek száma 1987-től nőtt; eleinte civilek és a népi ellenzék karolták fel őket, a párt csak fokozatosan." },
+  { id: "k-vasfuggony", s: "kul", y: 1989, m: 4, d: 20, w: "1989. ápr.", t: "Megkezdődik a vasfüggöny lebontása", src: ["09", "10"], c: ["nyugat"],
+    x: "Áprilisban megindul a vasfüggöny lebontása, az ikonikus fotó június végén készül. A lebontás nyomán egyre több keletnémet érkezik Magyarországra." },
+  { id: "k-bush", s: "kul", y: 1989, m: 7, d: 11, w: "1989. júl. 11-13.", t: "George Bush Budapesten", src: ["09", "10"], c: ["nyugat"],
+    x: "Az első amerikai elnök, aki Magyarországra látogat. A lelkes tömeg előtt spontán beszédet tart, találkozik az Ellenzéki Kerekasztal vezetőivel, és önmérsékletre inti őket. Jelentős gazdasági segítséget nem ajánl fel, pedig azt vártuk." },
+  { id: "k-doktrina-vege", s: "kul", y: 1989, m: 7, d: 25, w: "1989. júl.-tól", t: "A Brezsnyev-doktrína feladása", src: ["09"], c: ["prag", "szovjet"],
+    x: "Gorbacsov előbb lebegteti, majd feladja a doktrínát; felmerül a Varsói Szerződés politikai szervezetté alakítása. Sevardnadze külügyminiszter még a párt vezető szerepének megóvását kéri, a szovjet nagykövet viszont az Ellenzéki Kerekasztal ülésén Antall Józseffel tárgyal, és békés átmenetet ígér." },
+  { id: "k-hatarnyitas", s: "kul", y: 1989, m: 9, d: 11, big: 1, t: "Határnyitás a keletnémeteknek", src: ["09"], c: ["nyugat"],
+    x: "Augusztusban a soproni páneurópai piknik, szeptember 11-én a keletnémet menekültek kiengedése Nyugatra. A lépés konfliktust hozott az NDK-val." },
+  { id: "k-vatikan90", s: "kul", y: 1990, m: 2, d: 9, t: "Diplomáciai kapcsolat a Vatikánnal", src: ["09"], c: ["egyhaz"],
+    x: "Casaroli és Németh Miklós miniszterelnök megállapodása; az 1964-es részmegállapodás ezzel érvényét veszti." },
+  { id: "k-kivonulas", s: "kul", y: 1990, m: 3, w: "1990. febr.-márc.", t: "Megállapodás a szovjet csapatok kivonásáról", src: ["09"], c: ["szovjet"],
+    x: "Februárban és márciusban tárgyalnak a szovjet csapatok teljes kivonásáról; a határidő 1991. június 30. Már 1988-ban felmerült a kivonás terve, és 1989 júniusában Orbán Viktor is ezt követelte az újratemetésen." },
+
+  /* ---- Belpolitika (07, 10) ---- */
+  { id: "b-hollok", s: "bel", y: 1961, t: "A „Fekete Hollók” akció", src: ["07"], c: ["egyhaz"],
+    x: "Az állambiztonság az illegális szerzetesrendekre és egy papi szemináriumra sújt le. Három „szervezkedési” ügy követi: Tabódy István 12, Lénárd Ödön 7,5 évet kap, és lezajlik az első Regnum-per is." },
+  { id: "b-kb66", s: "bel", y: 1966, m: 5, d: 25, w: "1966. máj. 25-27.", t: "KB-határozat az ÚGM-ről", src: ["07"], c: ["reform"],
+    x: "Május 3-án a PB-ülésen Kádár jelzi: az anyag szakmailag jó, de politikailag problémás, ezért „fékeket” kell beépíteni. Nyers megdöbben, de enged, és megszületik a KB-határozat. A végleges jóváhagyás a IX. kongresszuson, 1966 végén történik." },
+  { id: "b-valasztojog66", s: "bel", y: 1966, m: 11, d: 13, t: "Választójogi reform", src: ["07"], c: ["valasztas"],
+    x: "Az 1966. évi III. törvény eltörli az 1945 óta fennálló listás szavazást, és tisztán egyéni választókerületeket vezet be, ahol több jelölt is indulhat. 1967-ben ez 340 körzetből csak 9-ben történt meg; a jelölésről végül a Népfront és a párt döntött." },
+  { id: "b-ugm", s: "bel", y: 1968, m: 1, d: 1, big: 1, t: "Elindul az Új Gazdasági Mechanizmus", src: ["07"], c: ["reform"],
+    x: "Csökken a központi tervezés, nő a vállalatok önállósága; az állam adókkal és hitelekkel próbálja befolyásolni a gazdaságot. Átalakul az árrendszer és a bérszabályozás. Közeledés a világpiachoz, minőség és gazdaságosság, a termelékenység ekkor nőtt a legjobban; a beépített fékek és a változatlan intézményi szerkezet miatt viszont a hiány nem szűnt meg." },
+  { id: "b-valasztojog70", s: "bel", y: 1970, m: 6, w: "1970", t: "Újabb választójogi reform", src: ["07"], c: ["valasztas"],
+    x: "Az 1970. évi III. törvény megszünteti a Népfront jelöltállítási monopóliumát, és bevezeti az aktív szavazást: két jelölt esetén az egyik nevet át kell húzni. Kettős jelölés 1971-ben 49, 1975-ben 34, 1980-ban 15 volt; az országgyűlés kirakatszerv maradt." },
+  { id: "b-tompe", s: "bel", y: 1971, m: 12, w: "1971 vége", t: "Tömpe András halála", src: ["07"], c: ["prag"],
+    x: "Az NDK-beli nagykövet a prágai bevonulás után tiltakozásul lemondott, és egy könyvkiadói egyesület élére került. Egy általa elbocsátott párttitkár ráállította a KEB-et és az állambiztonságot; 1971 végén agyonlőtte magát. Erdélyi Károly szintén 1971-es, a diasor szerint kérdéses öngyilkossága mellett ez is megrázta Kádárt." },
+  { id: "b-zavidovo", s: "bel", y: 1972, m: 2, big: 1, t: "A zavidovói találkozó", src: ["07", "09"], c: ["reform", "prag", "kreml"],
+    x: "Brezsnyev azt javasolja Kádárnak, hogy a párt jobban ellenőrizze a folyamatokat, és ideológiailag legyen szilárd. Az ezt követő PB-ülésen soha nem látott törés alakul ki a reformerek és elsősorban Komócsin között, aki személycserét követel. Kádár látszólag a balosok mellé áll, valójában szabotálja a követeléseiket." },
+  { id: "b-alkotmany72", s: "bel", y: 1972, m: 4, d: 19, t: "Alkotmánymódosítás", src: ["07"], c: ["partallam"],
+    x: "Az 1972. évi I. törvény szerint a munkásosztály marxista-leninista pártja a társadalom vezető ereje, Magyarország szocialista állam, a gazdaság alapja a tervgazdálkodás. Az alkotmány ugyanakkor az ezeréves magyar fejlődés betetőződéseként mutatja be magát, és a „munkások” szót legtöbb helyen az „állampolgárok” váltja fel." },
+  { id: "b-leallitas", s: "bel", y: 1972, m: 11, d: 14, w: "1972. nov. 14-15.", t: "A reformok leállítása", src: ["07"], c: ["reform"],
+    x: "A KB-ülés szerint „a határozatok jók, de a végrehajtásba hibák csúsztak”. Pullai és Biszku a munkások béremelését követeli, és bírálja a kispolgári szerzésvágyat és az értelmiséget. Gazdasági recentralizáció jön: 1973 júniusában létrejön az Állami Tervbizottság." },
+  { id: "b-olaj", s: "bel", y: 1973, m: 10, w: "1973-tól", t: "Olajár-robbanás és cserearány-romlás", src: ["07"], c: ["valsag"],
+    x: "Az energiaárak a világpiacon jelentősen emelkednek, és az ideológiai szólamok ellenére a válság Magyarországra is begyűrűzik. A gyengébb minőségű magyar ipari termékek leértékelődnek, az ipari szerkezetváltás elmarad." },
+  { id: "b-reformerek", s: "bel", y: 1974, m: 3, d: 19, w: "1974. márc. 19-20.", t: "A reformer vezetők eltávolítása", src: ["07"], c: ["reform"],
+    x: "A KB-ülés munkástoborzást hirdet és az ipari munkások jelentős béremelését is eléri. Fehér Lajos nyugdíjba megy, Nyers Rezső intézetigazgató lesz, Aczél György „felfelé bukik”; Fock és Nyers telefonját lehallgatják. Májusban meghal Komócsin Zoltán, az ellentábor vezetője." },
+  { id: "b-xi", s: "bel", y: 1975, m: 3, t: "XI. kongresszus és kormányváltás", src: ["07"], c: ["reform"],
+    x: "A kongresszus a fejlett szocialista társadalom felépítését hirdeti, és fokozott ideológiai harcot a kispolgári világnézetek ellen. Fehér és Nyers kimarad a PB-ből. Fock Jenő helyett május 15-én Lázár György lesz a miniszterelnök, egészen 1987-ig; a korszak jellemzője a változatlanság, a „pangás”. A dogmatikusok leváltása később jön: Pullait 1976-ban, Biszkut 1978-ban mentik fel." },
+  { id: "b-valsag77", s: "bel", y: 1977, m: 10, t: "A KB felismeri a gazdasági válságot", src: ["07"], c: ["valsag"],
+    x: "Újabb, tisztán gazdasági reformok indulnak: ismét nő a vállalati önállóság, szóba kerül a „szocialista vállalkozói szellem”, 1979-ben radikális árreform jön. Közben 1976 októberében Pullai Árpádot felmentik titkári megbízása alól." },
+  { id: "b-adossag", s: "bel", y: 1978, m: 7, w: "1978", t: "Törlesztés már csak új hitelből", src: ["07"], c: ["valsag"],
+    x: "Az adósság 1970-ben 800 millió dollár, 1980-ban már 9,1 milliárd. 1978-ban a törlesztést már csak újabb hitelből tudják fedezni, de az életszínvonalhoz nem mernek nyúlni. Ugyanebben az évben a PB dönt az IMF-csatlakozási tárgyalásról, de Brezsnyev 1978-79-ben ismét vétózik." },
+  { id: "b-masodik", s: "bel", y: 1980, m: 2, d: 19, t: "Legalizálják a „második gazdaságot”", src: ["07"], c: ["valsag"],
+    x: "1980 őszén a boltok és vendéglátóhelyek szerződéses üzemeltetését is engedélyezik, 1981. szeptember 9-én a gazdasági munkaközösségeket (gmk), majd megjelennek a kisvállalatok. 1982-ben indul a lakossági kötvények és vállalati részvények kibocsátása." },
+  { id: "b-beszelo", s: "bel", y: 1981, m: 10, t: "Megjelenik a Beszélő", src: ["10"], c: ["ellenzek"],
+    x: "A második nyilvánosság legsikeresebb szamizdatja Kis János, Haraszti Miklós és társai lapja: 1989-ig 27 szám, 1500-2000 példányban. A szamizdatokat a „Rajk-butikban”, ifjabb Rajk László lakásán terjesztették." },
+  { id: "b-ellenzek82", s: "bel", y: 1982, m: 3, t: "PB-határozat a népi ellenzékről", src: ["10", "07"], c: ["ellenzek"],
+    x: "A határozat a „nacionalista” ellenzék ellen szól; ugyanebben az évben a Tiszatáj a román nacionalizmust bíráló cikket közöl. A belpolitikai diasor szerint Kádárt a lengyel válság után dühíti az ellenzék megjelenése, és 1982-ben többször ideológiai szigort hirdet." },
+  { id: "b-kettos83", s: "bel", y: 1983, m: 12, d: 27, t: "Kötelező kettős jelölés", src: ["07"], c: ["valasztas"],
+    x: "Az 1983. évi III. törvény minden körzetben kötelezővé teszi a kettős jelölést, és bevezeti az országos listát, hogy a legfőbb vezetők biztosan bejussanak az országgyűlésbe." },
+  { id: "b-valasztas85", s: "bel", y: 1985, m: 6, d: 8, t: "Választás spontán jelöltekkel", src: ["10"], c: ["valasztas"],
+    x: "A jelölőgyűléseken 78 spontán jelöltet állítottak, közülük 41 lett képviselő, például Király Zoltán, aki Szegeden Komócsin Mihályt győzte le. A képviselők 63 százaléka kicserélődött, 1949 óta ez volt a legnagyobb személycsere, bár háromnegyedük párttag volt." },
+  { id: "b-monor", s: "bel", y: 1985, m: 6, d: 14, w: "1985. jún. 14-16.", big: 1, t: "A monori találkozó", src: ["10"], c: ["ellenzek"],
+    x: "Először ül össze a két ellenzéki tábor és a reformértelmiség: 45 résztvevő, Csurka, Csoóri, Bauer Tamás és Kis János vitaanyagával. Az állambiztonság előre tudott róla, hangfelvételt készített, de nem akadályozta meg. A cél a válságból való kilábalás volt, közös cselekvési programot a két csoport nem keresett." },
+  { id: "b-tiszataj", s: "bel", y: 1986, m: 7, d: 1, w: "1986 nyara", t: "A Tiszatáj-botrány", src: ["10"], c: ["otvenhat"],
+    x: "Ismét Nagy Gáspár verse, az 1956 harmincadik évfordulójára utaló A fiú naplójából okozza: a lapot felfüggesztik, a szerkesztők pártfegyelmit kapnak. A PB július 1-jei határozatában „gorombább” módszerek is felmerülnek az ellenzékkel szemben, de a nyugati hitelek miatt Kádár ezt nem vállalja." },
+  { id: "b-tarsszerz", s: "bel", y: 1987, m: 6, d: 10, t: "Társadalmi szerződés", src: ["10"], c: ["ellenzek", "partallam"],
+    x: "Kis János, Kőszeg Ferenc és Solt Ottília szamizdatja: Jalta felmondása nem lehetséges, de a Szovjetuniótól való függés csökkentése reális cél, a távlati cél a plurális demokrácia. Elsőként mondja ki, hogy a vezetés erre alkalmatlan, és Kádárnak mennie kell." },
+  { id: "b-mdf", s: "bel", y: 1987, m: 9, d: 27, big: 1, t: "Megalakul az MDF Lakiteleken", src: ["10"], c: ["ellenzek"],
+    x: "Lezsák Sándor házában mintegy 180-an gyűlnek össze, zömmel népi írók, és ott vannak reformkommunisták is (Pozsgay, Bihari). Megkezdődik a pártosodás, és a két ellenzéki irányzat útja is elválik. Az MDF a határon túli és a hazai magyarság védelmét tűzi ki célul, programot nem alkot, a válság elhárítására kér összefogást." },
+  { id: "b-jogalkotas", s: "bel", y: 1987, m: 12, d: 16, w: "1987. dec. 16-17.", t: "Törvény a jogalkotásról", src: ["10"], c: ["partallam"],
+    x: "Az 1987. évi XI. törvény jogi garanciákkal védi az országgyűlés hatáskörét, sok területen megtiltja a törvényerejű rendeleteket, és kötelezővé teszi a jogszabályok kihirdetését. Ezzel véget ér a titkos szabályok, a második normarendszer kora. 1987-ben 12, 1989-ben már 58 törvény születik." },
+  { id: "b-fidesz", s: "bel", y: 1988, m: 3, t: "Megalakul a Fidesz, majd az SZDSZ", src: ["10"], c: ["ellenzek"],
+    x: "A Fiatal Demokraták Szövetsége a Jogász (vagy Bibó) Szakkollégiumból nő ki, amely 1983 óta működött. Nem ijednek meg a rendőri zaklatásoktól, tudatosan élnek a jogaikkal. Novemberben a Szabad Kezdeményezések Hálózatából megalakul a Szabad Demokraták Szövetsége, az urbánus ellenzék pártja." },
+  { id: "b-partertekezlet", s: "bel", y: 1988, m: 5, d: 20, w: "1988. máj. 20-22.", big: 1, t: "Pártértekezlet: Kádár bukása", src: ["10"], c: ["partallam", "kreml"],
+    x: "Grósz főtitkár, Kádár pártelnök lesz. Mivel Kádár az értekezleten ismét tagadja a válságot, Grósz felrúgja az alkut: Kádár híveit törlik a KB-ból, a PB 60 százalékban megújul, bekerül Nyers, Pozsgay és Németh Miklós. A harcban a Szovjetunió is Grószt támogatta." },
+  { id: "b-erdely", s: "bel", y: 1988, m: 6, d: 27, t: "Az Erdély-tüntetés", src: ["10"], c: ["hatar"],
+    x: "1988 elejétől az MSZMP is felkarolja az erdélyi menekültek ügyét. A Hősök terén és a román nagykövetség előtt 80-100 ezer ember tüntet, ami az MDF erősödését hozza." },
+  { id: "b-pozsgay", s: "bel", y: 1989, m: 1, d: 28, t: "Pozsgay: 1956 népfelkelés volt", src: ["10"], c: ["otvenhat"],
+    x: "Pozsgay Imre egyeztetés nélkül jelenti be a rádióban a történelmi albizottság véleményét. Németh Miklós óvatosan, a külföldön lévő Grósz indulatosan reagál; a január 31-i rendkívüli PB-n Pozsgay megvédi magát, Nyers támogatja. Moszkva 1989 elején tudomásul vette 1956 átértékelését." },
+  { id: "b-tobbpart", s: "bel", y: 1989, m: 2, d: 10, w: "1989. febr. 10-11.", t: "A KB kimondja a többpártrendszert", src: ["10"], c: ["partallam"],
+    x: "Moszkva nem tiltakozott, február 7-én a PB a többpártrendszer engedélyezését javasolta. A KB Pozsgay mellé áll, kimondja a többpártrendszert, és a fokozatos átmenetet, a koalíciós kormányzást támogatja; a párt hatalmát egy új köztársasági elnöki poszttal is garantálni akarja." },
+  { id: "b-neka", s: "bel", y: 1989, m: 6, d: 13, t: "Elkezdődik a Nemzeti Kerekasztal", src: ["10"], c: ["ellenzek", "partallam"],
+    x: "Június 9-10-én aláírják az alapmegállapodást: békés átmenet, teljes rendszerváltozás. A tárgyalásoknak három oldala van, az EKA, az MSZMP és a társutas szervezetek; 6-6 albizottság tárgyalja a politikai és a gazdasági átmenetet. Az ellenzéki oldalt az 1989. március 22-én, 8 szervezetből megalakult Ellenzéki Kerekasztal adta." },
+  { id: "b-ujratemetes", s: "bel", y: 1989, m: 6, d: 16, big: 1, t: "Nagy Imre és mártírtársai újratemetése", src: ["10"], c: ["otvenhat"],
+    x: "A TIB szervezi, az MSZMP-t nem hívják meg, a kormányt igen: politikai demonstráció a Hősök terén és családi szertartás a 301-es parcellában, öt koporsó mellett egy jelképes hatodikkal. A legnagyobb hatást Orbán Viktor beszéde váltotta ki, aki az előzetes megállapodást felrúgva a szovjetek kivonulását követelte." },
+  { id: "b-kadar-halala", s: "bel", y: 1989, m: 7, d: 6, t: "Kádár János halála", src: ["10"], c: ["otvenhat"],
+    x: "Halála napján a Legfelsőbb Bíróság felmenti Nagy Imrét és társait. Áprilisban még hívatlanul megjelent a KB ülésén, és zavaros beszédében többször visszatért az „azóta elhunyt ember” ügyére. Július 14-i temetése újabb óriási, spontán tömeget mozgatott meg." },
+  { id: "b-koztarsasag", s: "bel", y: 1989, m: 10, d: 23, big: 1, t: "A köztársaság kikiáltása", src: ["10"], c: ["partallam"],
+    x: "Az 1989. évi XXXI. törvény papíron alkotmánymódosítás, valójában teljes átalakítás: benne van a többpártrendszer, kikerül belőle a marxista-leninista párt vezető szerepe. Október 23-án Szűrös Mátyás kikiáltja a köztársaságot, a pártállami rendszer véget ér. Két héttel korábban, október 7-én az MSZMP kongresszusa megalakította a Magyar Szocialista Pártot." },
+  { id: "b-nepszavazas", s: "bel", y: 1989, m: 11, d: 26, t: "A „négyigenes” népszavazás", src: ["10"], c: ["valasztas", "partallam"],
+    x: "Az SZDSZ és a Fidesz nem írta alá a kerekasztal zárónyilatkozatát, és népszavazást kezdeményezett; az igazi tét a köztársasági elnök megválasztásának módja volt. 58 százalékos részvétel mellett minden kérdésben az igen győzött, az elnökválasztásról szólóban 50,07 százalékkal. Pozsgay elnöki esélyei ezzel elszálltak." }
+];
+</script>
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var MON = ["jan.", "febr.", "márc.", "ápr.", "máj.", "jún.", "júl.", "aug.", "szept.", "okt.", "nov.", "dec."];
+  var W = 1500, H = 760, X0 = 60, X1 = W - 40;
+  var AXIS = 380, BEL = { top: 46, bottom: 350, mid: 215 }, KUL = { top: 410, bottom: 714, mid: 545 };
+  var byId = {}; EV.forEach(function (e) { byId[e.id] = e; });
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function h(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function rnd(seed) { var s = seed; return function () { s = (s * 16807) % 2147483647; return s / 2147483647; }; }
+  function when(e) { return e.w || (e.y + "." + (e.m ? " " + MON[e.m - 1] + (e.d ? " " + e.d + "." : "") : "")); }
+  function tOf(e) { return e.y + (e.m ? (e.m - 1 + (e.d ? (e.d - 1) / 31 : 0.5)) / 12 : 0.5); }
+  /* 1985 onwards is drawn at double scale: 40 + 6 * 2 = 52 units. */
+  function units(t) { return t < 1985 ? t - 1945 : 40 + (t - 1985) * 2; }
+  function X(t) { return X0 + units(t) / 52 * (X1 - X0); }
+  var LS = "tudastar-kadar-idovonal";
+  function load() { try { return JSON.parse(localStorage.getItem(LS) || "{}") || {}; } catch (e) { return {}; } }
+  function save(o) { try { localStorage.setItem(LS, JSON.stringify(o)); } catch (e) { /* convenience only */ } }
+
+  EV.forEach(function (e) { e._t = tOf(e); e._x = X(e._t); });
+  var ORDER = EV.slice().sort(function (a, b) { return a._t - b._t; });
+
+  /* ---- Lane layout: majors first on the mid line, then minors in alternating lanes ---- */
+  var LANES = [0, -1, 1, -2, 2, -3, 3, -4, 4, -5, 5], STEP = 26, GAP = 15;
+  ["bel", "kul"].forEach(function (s) {
+    var occ = {}, band = s === "bel" ? BEL : KUL;
+    function place(e) {
+      for (var i = 0; i < LANES.length; i++) {
+        var L = LANES[i], list = occ[L] || (occ[L] = []), need = e.big ? 30 : GAP;
+        var ok = list.every(function (o) { return Math.abs(o._x - e._x) >= Math.max(need, o.big ? 30 : GAP); });
+        if (ok) { list.push(e); e._y = band.mid + L * STEP; return; }
+      }
+      e._y = band.mid; list.push(e);
+    }
+    ORDER.filter(function (e) { return e.s === s && e.big; }).forEach(place);
+    ORDER.filter(function (e) { return e.s === s && !e.big; }).forEach(place);
+  });
+
+  var svg = document.getElementById("tl");
+  /* background stars */
+  (function () { var g = el("g", { "class": "stars", "aria-hidden": "true" }, svg), r = rnd(1956);
+    for (var i = 0; i < 230; i++) { var c = el("circle", { cx: (r() * W).toFixed(1), cy: (r() * H).toFixed(1), r: (0.4 + r() * 1.2).toFixed(2), opacity: (0.15 + r() * 0.5).toFixed(2) }, g); if (i % 5 === 0) { c.setAttribute("class", "tw"); c.style.animationDelay = (r() * 4).toFixed(1) + "s"; } } })();
+
+  /* era bands */
+  var eg = el("g", { "aria-hidden": "true" }, svg);
+  ["bel", "kul"].forEach(function (s) {
+    var band = s === "bel" ? BEL : KUL;
+    ERAS[s].forEach(function (er, i) {
+      var x1 = X(er[0]), x2 = X(Math.min(er[1], 1991));
+      el("rect", { "class": "era" + (i % 2 ? " alt" : ""), x: x1, y: band.top, width: x2 - x1, height: band.bottom - band.top }, eg);
+      var t = el("text", { "class": "era-label", x: x1 + 6, y: s === "bel" ? band.top + 18 : band.bottom - 8 }, eg); t.textContent = er[2];
+    });
+  });
+  var bl = el("text", { "class": "band-label", x: X0, y: 30 }, eg); bl.textContent = "BELPOLITIKA";
+  var kl = el("text", { "class": "band-label", x: X0, y: H - 22 }, eg); kl.textContent = "KÜLPOLITIKA";
+  var vd = el("text", { "class": "void", x: (X(1945) + X(1956)) / 2, y: BEL.mid, "text-anchor": "middle" }, eg);
+  vd.textContent = "A belpolitikai diasorok ezt a szakaszt nem tárgyalják";
+
+  /* axis */
+  var ax = el("g", { "class": "axis", "aria-hidden": "true" }, svg);
+  el("line", { x1: X0, y1: AXIS, x2: X1, y2: AXIS }, ax);
+  for (var y = 1945; y <= 1991; y++) {
+    var big5 = y % 5 === 0;
+    el("line", { "class": "tick", x1: X(y), y1: AXIS - (big5 ? 8 : 4), x2: X(y), y2: AXIS + (big5 ? 8 : 4) }, ax);
+    if (big5 || y >= 1985 && y <= 1990) { var tt = el("text", { x: X(y), y: AXIS + 26, "text-anchor": "middle" }, ax); tt.textContent = y; }
+  }
+  el("rect", { "class": "zoom", x: X(1985), y: AXIS - 14, width: X(1991) - X(1985), height: 46, rx: 6 }, ax);
+  var zt = el("text", { x: X(1985) + 6, y: AXIS - 20 }, ax); zt.textContent = "×2";
+
+  /* simultaneity lines */
+  var sg = el("g", {}, svg);
+  SYNC.forEach(function (sy) {
+    var a = byId[sy[1]], b = byId[sy[2]];
+    var ln = el("line", { "class": "sync", x1: a._x, y1: a._y, x2: b._x, y2: b._y, "data-a": a.id, "data-b": b.id }, sg);
+    var tl = el("title", {}, ln); tl.textContent = sy[3];
+  });
+
+  /* constellation edges: members joined in time order */
+  var cg = el("g", {}, svg);
+  Object.keys(CONS).forEach(function (c) {
+    var mem = ORDER.filter(function (e) { return e.c.indexOf(c) >= 0; });
+    CONS[c].members = mem;
+    for (var i = 1; i < mem.length; i++) {
+      var a = mem[i - 1], b = mem[i], bend = a.s === b.s ? 0.1 : 0.04;
+      var mx = (a._x + b._x) / 2 + bend * (b._y - a._y), my = (a._y + b._y) / 2 - bend * (b._x - a._x);
+      el("path", { "class": "edge", d: "M" + a._x.toFixed(1) + " " + a._y + " Q" + mx.toFixed(1) + " " + my.toFixed(1) + " " + b._x.toFixed(1) + " " + b._y, "data-c": c, "data-a": a.id, "data-b": b.id }, cg);
+    }
+  });
+
+  /* stars, in time order so Tab walks chronologically */
+  var ng = el("g", {}, svg), STAR = {};
+  ORDER.forEach(function (e) {
+    var g = el("g", { "class": "ev " + e.s + (e.big ? " big" : ""), tabindex: "0", role: "button", "data-id": e.id, transform: "translate(" + e._x.toFixed(1) + "," + e._y + ")",
+      "aria-label": when(e) + ": " + e.t + " (" + (e.s === "bel" ? "belpolitika" : "külpolitika") + ")" }, ng);
+    el("circle", { "class": "glow", r: e.big ? 17 : 8 }, g);
+    el("circle", { "class": "core", r: e.big ? 6.5 : 3.4 }, g);
+    STAR[e.id] = g;
+  });
+
+  /* labels for main events, stacked away from the axis when they would collide */
+  var lg = el("g", {}, svg), boxes = [], LAB = {};
+  ORDER.filter(function (e) { return e.big; }).forEach(function (e) {
+    var w = e.t.length * 8.6, dir = e.s === "bel" ? -1 : 1, yy = e._y + (dir < 0 ? -22 : 34), x1 = e._x - w / 2;
+    if (x1 < X0 - 30) x1 = X0 - 30; if (x1 + w > W - 6) x1 = W - 6 - w;
+    function hit() { return boxes.some(function (b) { return x1 < b[0] + b[2] + 8 && x1 + w + 8 > b[0] && yy - 16 < b[1] + 4 && yy + 4 > b[1] - 16; }); }
+    var guard = 0; while (hit() && guard++ < 8) yy += dir * 20;
+    boxes.push([x1, yy, w]);
+    var t = el("text", { "class": "lab " + e.s, x: (x1 + w / 2).toFixed(1), y: yy, "text-anchor": "middle", "aria-hidden": "true" }, lg); t.textContent = e.t;
+    LAB[e.id] = t;
+  });
+  var hov = el("text", { "class": "lab", id: "hov", "text-anchor": "middle", "aria-hidden": "true" }, svg);
+  hov.style.opacity = "0";
+
+  /* ---- Highlight ---- */
+  var state = load(), filter = state.f === "bel" || state.f === "kul" ? state.f : "mind", cons = CONS[state.c] ? state.c : "";
+  var readout = document.getElementById("readout");
+  function consNames(e) { return e.c.map(function (c) { return CONS[c].n; }).join(", "); }
+  function clearMarks() { svg.querySelectorAll(".on, .hl").forEach(function (x) { x.classList.remove("on", "hl"); }); }
+  function markCons(c) {
+    CONS[c].members.forEach(function (m) { STAR[m.id].classList.add("on"); if (LAB[m.id]) LAB[m.id].classList.add("on"); });
+    svg.querySelectorAll('.edge[data-c="' + c + '"]').forEach(function (p) { p.classList.add("on"); });
+  }
+  function showHover(e) {
+    hov.textContent = when(e) + " · " + e.t;
+    var w = hov.textContent.length * 8.8, x = Math.max(X0 + w / 2 - 30, Math.min(W - 10 - w / 2, e._x));
+    hov.setAttribute("x", x.toFixed(1)); hov.setAttribute("y", e.s === "bel" ? e._y - 18 : e._y + 32); hov.style.opacity = e.big ? "0" : "1";
+  }
+  function highlight(id) {
+    var e = byId[id]; svg.classList.add("dim"); clearMarks();
+    e.c.forEach(markCons);
+    SYNC.forEach(function (sy) { if (sy[1] === id || sy[2] === id) { STAR[sy[1]].classList.add("on"); STAR[sy[2]].classList.add("on"); } });
+    STAR[id].classList.add("on", "hl"); if (LAB[id]) LAB[id].classList.add("on");
+    showHover(e);
+    readout.replaceChildren();
+    readout.appendChild(document.createTextNode(when(e) + " · ")); readout.appendChild(h("b", null, e.t));
+    readout.appendChild(document.createTextNode(" · " + (e.s === "bel" ? "belpolitika" : "külpolitika") + (e.c.length ? " · csillagkép: " + consNames(e) : "")));
+  }
+  function rest() {
+    hov.style.opacity = "0"; clearMarks();
+    if (cons) { svg.classList.add("dim"); markCons(cons); } else svg.classList.remove("dim");
+  }
+
+  /* ---- Filters ---- */
+  var consBox = document.getElementById("cons"), consDesc = document.getElementById("cons-desc");
+  function applyFilter() {
+    document.querySelectorAll("[data-filter]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.filter === filter)); });
+    EV.forEach(function (e) {
+      var off = filter !== "mind" && e.s !== filter;
+      STAR[e.id].classList.toggle("off", off); STAR[e.id].setAttribute("tabindex", off ? "-1" : "0");
+      if (LAB[e.id]) LAB[e.id].classList.toggle("off", off);
+    });
+    svg.querySelectorAll(".edge, .sync").forEach(function (p) {
+      var a = byId[p.dataset.a], b = byId[p.dataset.b];
+      p.classList.toggle("off", filter !== "mind" && (a.s !== filter || b.s !== filter));
+    });
+    save({ f: filter, c: cons });
+  }
+  function applyCons() {
+    consBox.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.c === cons)); });
+    consDesc.textContent = cons ? CONS[cons].n + ": " + CONS[cons].d + " (" + CONS[cons].members.length + " esemény)" : "Válassz egy csillagképet, és tartósan kiemelve marad.";
+    rest(); save({ f: filter, c: cons });
+  }
+  function consButton(key, label) {
+    var b = h("button", null, label); b.type = "button"; b.dataset.c = key;
+    b.addEventListener("click", function () { cons = key; applyCons(); });
+    consBox.appendChild(b);
+  }
+  consButton("", "Nincs kiemelés");
+  Object.keys(CONS).forEach(function (c) { consButton(c, CONS[c].n); });
+  document.querySelectorAll("[data-filter]").forEach(function (b) { b.addEventListener("click", function () { filter = b.dataset.filter; applyFilter(); }); });
+
+  /* ---- Pointer and keyboard ---- */
+  svg.addEventListener("mouseover", function (ev) { var n = ev.target.closest(".ev"); if (n) highlight(n.dataset.id); });
+  svg.addEventListener("mouseleave", rest);
+  svg.addEventListener("focusin", function (ev) { var n = ev.target.closest(".ev"); if (n) highlight(n.dataset.id); });
+  svg.addEventListener("focusout", function (ev) { if (!ev.relatedTarget || !svg.contains(ev.relatedTarget)) rest(); });
+  svg.addEventListener("pointerup", function (ev) {
+    var n = ev.target.closest(".ev");
+    if (!n) { if (ev.pointerType === "touch") rest(); return; }
+    if (ev.pointerType === "touch" && !n.classList.contains("hl")) { highlight(n.dataset.id); return; }
+    open(n.dataset.id);
+  });
+  svg.addEventListener("keydown", function (ev) { var n = ev.target.closest(".ev"); if (n && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); open(n.dataset.id); } });
+
+  /* ---- Card ---- */
+  var veil = document.getElementById("veil"), panel = document.getElementById("panel"), lastFocus = null;
+  function open(id) {
+    var e = byId[id], idx = ORDER.indexOf(e);
+    if (!veil.hidden && lastFocus == null) lastFocus = STAR[id];
+    if (veil.hidden) lastFocus = document.activeElement && document.activeElement !== document.body ? document.activeElement : STAR[id];
+    panel.replaceChildren(); panel.className = "panel " + e.s;
+    var top = h("div", "top"), head = h("div"); head.style.display = "grid"; head.style.gap = "4px";
+    head.appendChild(h("span", "lbl " + (e.s === "bel" ? "lv4" : "lv1"), e.s === "bel" ? "Belpolitika" : "Külpolitika"));
+    var t = h("h2", null, e.t); t.id = "p-title"; head.appendChild(t);
+    head.appendChild(h("span", "when", when(e)));
+    var x = h("button", "close", "Bezárás"); x.type = "button"; x.addEventListener("click", close);
+    top.appendChild(head); top.appendChild(x); panel.appendChild(top);
+    panel.appendChild(h("p", null, e.x));
+    var sy = SYNC.filter(function (s) { return s[1] === id || s[2] === id; });
+    sy.forEach(function (s) { panel.appendChild(h("p", "note", "Egyidejűség, " + s[3])); });
+    if (e.c.length) {
+      panel.appendChild(h("h3", null, "Csillagkép"));
+      var row = h("div", "linkrow");
+      e.c.forEach(function (c) { var b = h("button", null, CONS[c].n); b.type = "button"; b.addEventListener("click", function () { cons = c; applyCons(); close(); }); row.appendChild(b); });
+      panel.appendChild(row);
+    }
+    panel.appendChild(h("p", "src", "Forrás: egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), " + e.src.map(function (s) { return SRC[s].n; }).join("; ") + ". Saját összefoglalás."));
+    var links = h("div", "linkrow");
+    e.src.forEach(function (s, i) { var a = h("a", i === 0 ? "btn" : "btn ghost", "Témaoldal: " + SRC[s].short); a.href = SRC[s].page; links.appendChild(a); });
+    panel.appendChild(links);
+    var nav = h("div", "nav"), pv = h("button", null, "‹ Előző esemény"), nx = h("button", null, "Következő esemény ›");
+    pv.type = nx.type = "button"; pv.disabled = idx === 0; nx.disabled = idx === ORDER.length - 1;
+    pv.addEventListener("click", function () { lastFocus = STAR[ORDER[idx - 1].id]; open(ORDER[idx - 1].id); });
+    nx.addEventListener("click", function () { lastFocus = STAR[ORDER[idx + 1].id]; open(ORDER[idx + 1].id); });
+    nav.appendChild(pv); nav.appendChild(nx); panel.appendChild(nav);
+    veil.hidden = false; x.focus();
+  }
+  function close() { veil.hidden = true; var f = lastFocus; lastFocus = null; if (f && f.focus) f.focus(); }
+  veil.addEventListener("click", function (ev) { if (ev.target === veil) close(); });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !veil.hidden) close(); });
+
+  /* ---- Era list and accessible event list ---- */
+  var erl = document.getElementById("era-list");
+  [["kul", "Külpolitika (a 9. tétel korszakai)"], ["bel", "Belpolitika (a 7. és a 10. tétel fejezetei)"]].forEach(function (p) {
+    erl.appendChild(h("h3", null, p[1]));
+    var ul = h("ul", "pts");
+    ERAS[p[0]].forEach(function (er) { var li = h("li"); li.appendChild(h("strong", null, er[0] + "-" + Math.min(er[1], 1990) + ": ")); li.appendChild(document.createTextNode(er[3])); ul.appendChild(li); });
+    erl.appendChild(ul);
+  });
+  var ol = document.getElementById("evlist");
+  ORDER.forEach(function (e) {
+    var li = h("li", e.s);
+    li.appendChild(h("span", "when", when(e) + " · " + (e.s === "bel" ? "belpolitika" : "külpolitika") + (e.big ? " · fő esemény" : "")));
+    li.appendChild(h("strong", null, e.t));
+    li.appendChild(h("span", null, e.x));
+    li.appendChild(h("span", "meta", "Forrás: " + e.src.map(function (s) { return SRC[s].n; }).join("; ") + (e.c.length ? " · Csillagkép: " + consNames(e) : "")));
+    ol.appendChild(li);
+  });
+  document.getElementById("list-sum").textContent = "Listanézet: mind a " + EV.length + " esemény időrendben";
+
+  applyFilter(); applyCons();
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

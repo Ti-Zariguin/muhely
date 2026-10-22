@@ -1,0 +1,505 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Kádár-korhoz</a><span>Tudástár</span></nav>
+<title>A rendszerváltozáshoz vezető út</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.rail .steps4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rail button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 4px 2px; min-width: 0; }
+.rail button i { display: block; height: 6px; border-radius: 2px; background: var(--rule); }
+.rail button.seen i { background: var(--lc); }
+.rail button span { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail button[aria-current="true"] span { color: var(--fg); }
+.rail button:focus-visible { outline: 2px solid var(--accent); }
+.rail .state { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+section.level { display: grid; gap: 16px; scroll-margin-top: 80px; }
+.lvhead { display: grid; gap: 6px; border-bottom: 2px solid var(--lc); padding-bottom: 10px; }
+.lvhead .t { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 4px 12px; }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--lc); line-height: 1.2; }
+.step > div { display: grid; gap: 8px; min-width: 0; }
+.deeper { justify-self: start; }
+.gloss dt { font-family: var(--font-display); font-weight: 700; }
+.gloss dd { margin: 0 0 10px; color: var(--fg); }
+.gloss dd .en { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 440px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0; } .step { grid-template-columns: 1.6rem minmax(0, 1fr); } }
+
+<main>
+details.ideo { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 12px 16px; border-top: 0; scroll-margin-top: 90px; }
+details.ideo > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; }
+details.ideo > summary::-webkit-details-marker { display: none; }
+details.ideo > summary .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.12rem; }
+details.ideo > summary .tg { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+details.ideo > summary .one { grid-column: 1 / -1; font-family: var(--font-body); font-weight: 400; color: var(--muted); font-size: 0.98rem; }
+details.ideo[open] > summary .one { color: var(--fg); }
+details.ideo > div { padding-top: 10px; display: grid; gap: 10px; }
+.blocks { display: grid; gap: 10px; }
+.path { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.path li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.path .d { font-family: var(--font-display); font-weight: 800; color: var(--lc); }
+@media (max-width: 560px) { .path li { grid-template-columns: 1fr; gap: 0; } }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · A Kádár-kor és a rendszerváltozás</span>
+    <h1>A rendszerváltozáshoz vezető út, 1985-1989</h1>
+    <p class="lede">Négy fokozat. Az első egy perc, a második öt. Ha érdekel, mehetsz tovább, ha nem, ott is abbahagyhatod.</p>
+  </header>
+
+  <nav class="rail" aria-label="Fokozatok">
+    <div class="steps4">
+      <button type="button" class="lv1" data-go="1"><i></i><span>1 Ízelítő</span></button>
+      <button type="button" class="lv2" data-go="2"><i></i><span>2 Kártya</span></button>
+      <button type="button" class="lv3" data-go="3"><i></i><span>3 Mélyfúrás</span></button>
+      <button type="button" class="lv4" data-go="4"><i></i><span>4 Műhely</span></button>
+    </div>
+    <span class="state">A téma állapota: mind a 4 fokozat kész · forrás: egyetemi előadás-diasor</span>
+  </nav>
+
+  <!-- 1 -->
+  <section class="level lv1" id="f1">
+    <div class="lvhead"><span class="lbl">1. fokozat · Ízelítő</span><span class="t">1 perc</span></div>
+    <div class="card">
+      <p class="quote">1989. június 16., Budapest, Hősök tere. Hat koporsó áll a téren: öt kivégzett politikusé és egy hatodik, jelképes. A kormányt meghívták, az állampártot nem.</p>
+      <p>Harmincegy évvel korábban végezték ki Nagy Imrét és társait. Most egy fiatal szónok a téren a szovjet csapatok kivonulását követeli. Hogyan jutott el ide egy ország négy év alatt, felkelés nélkül?</p>
+    </div>
+    <div class="card">
+      <span class="lbl">❓ Tippelj, mielőtt továbbmész</span>
+      <ol class="steps">
+        <li>Ki engedélyezte Nagy Imre újratemetését: az ellenzék harcolta ki egy tüntetéssel, vagy az állampárt vezetője adta meg?</li>
+        <li>Kádár János 1989. július 6-án halt meg. Mi történt ugyanazon a napon a Legfelsőbb Bíróságon?</li>
+      </ol>
+      <p class="note">Nem baj, ha tévedsz: a tévedés után kapott válasz jobban megmarad. A megoldás a következő fokozatban jön.</p>
+    </div>
+    <div class="card">
+      <span class="lbl">A lényeg egy mondatban</span>
+      <p class="quote">A pártállam nem utcai felkelésben bukott meg, hanem tárgyalóasztalnál: a megerősödő ellenzék és az MSZMP reformerei alkudták ki a békés átmenetet, ezért hívják „tárgyalásos forradalomnak”.</p>
+    </div>
+    <button type="button" class="btn deeper" data-go="2">Mélyebbre: a kártya, 5 perc</button>
+  </section>
+
+  <!-- 2 -->
+  <section class="level lv2" id="f2" hidden>
+    <div class="lvhead"><span class="lbl">2. fokozat · Kártya</span><span class="t">5 perc · az út hat lépésben</span></div>
+    <div class="card">
+      <div class="step"><span class="n">1</span><div><h3>Horog</h3><p>Hat koporsó a Hősök terén, és a két tipp. Az előbb ezt kaptad.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">2</span><div><h3>Célok</h3><p>A végére tudni fogod:</p>
+        <ul class="pts"><li><span class="chip">megérted</span> miért nem felkelés, hanem tárgyalás vitte végig a változást;</li>
+        <li><span class="chip">megjegyzed</span> az út hat állomását 1985 és 1989 között;</li>
+        <li><span class="chip">alkalmazod</span> meg tudod különböztetni a két ellenzéki tábort, és el tudod helyezni bennük a pártokat.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">3</span><div><h3>Mag</h3>
+        <p><strong>A tippek megoldása:</strong> az újratemetést 1988 végén maga Grósz Károly engedélyezte, kegyeleti okból, de 1989 nyarára politikai ügy lett belőle. Kádár halála napján a Legfelsőbb Bíróság felmentette Nagy Imrét és társait.</p>
+        <p><strong>Az út hat lépésben:</strong></p>
+        <ul class="path">
+          <li><span class="d">1985</span><span>Választás spontán jelöltekkel, és Monoron először ül le együtt a két ellenzéki tábor.</span></li>
+          <li><span class="d">1987</span><span>A Társadalmi szerződés kimondja, hogy Kádárnak mennie kell. Lakiteleken megalakul az MDF.</span></li>
+          <li><span class="d">1988 május</span><span>Pártértekezlet: Grósz Károly lesz a főtitkár, Kádár félreáll.</span></li>
+          <li><span class="d">1989 eleje</span><span>Pozsgay Imre: 1956 népfelkelés volt. A párt vezetése elfogadja a többpártrendszert.</span></li>
+          <li><span class="d">1989 nyara</span><span>Ellenzéki, majd Nemzeti Kerekasztal. Két temetés: Nagy Imréé és Kádáré.</span></li>
+          <li><span class="d">1989 ősze</span><span>Október 23-án kikiáltják a köztársaságot, az MSZMP-ből MSZP lesz, novemberben népszavazás.</span></li>
+        </ul>
+        <p><strong>A két ellenzék:</strong></p>
+        <div class="two">
+          <div><p><strong>Urbánus, demokratikus.</strong> Lukács György marxista iskolájából nőtt ki, és eltávolodott a marxizmustól. Szamizdat (Beszélő), repülőegyetem, szegénysegélyezés. Ebből lett az SZDSZ.</p></div>
+          <div><p><strong>Népi, nemzeti.</strong> Írók és irodalmi lapok köre. Fő témája a nemzet sorsa és a határon túli magyarok. Ebből lett az MDF.</p></div>
+        </div>
+        <p><strong>A kerekasztal lényege:</strong></p>
+        <ul class="pts">
+          <li><strong>Egységes ellenzék.</strong> Az ellenzéki pártok az Ellenzéki Kerekasztalba tömörültek, és közös álláspontot képviseltek, pedig az MSZMP meg akarta osztani őket.</li>
+          <li><strong>Előbb megállapodás, aztán törvény.</strong> Az MSZMP vállalta, hogy addig nem változtat a közjogi rendszeren.</li>
+          <li><strong>Erőszakmentesség.</strong> A cél a békés átmenet törvényi feltételeinek elfogadása volt.</li>
+        </ul></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">4</span><div><h3>Két példa</h3>
+        <div class="two"><div><p><strong>Ahol a tárgyalás működött.</strong> A Nemzeti Kerekasztal megállapodásait 1989 októberében törvénybe iktatták, és október 23-án vér nélkül véget ért a pártállam.</p></div>
+        <div><p><strong>Ahol a határa.</strong> A köztársasági elnök választásának módjában nem lett egyezség. Az SZDSZ és a Fidesz nem írta alá a záró megállapodást, és a kérdést népszavazás döntötte el.</p></div></div></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">5</span><div><h3>Kérdezz vissza</h3><p class="note">Előbb gondold végig a választ, csak utána nyisd le.</p>
+        <details><summary>Miért volt a válság ellenére olyan kevés sztrájk és tüntetés?</summary><div><p>A többség elégedetlen volt, de passzív maradt, és 1956 traumája óvatosságra intett. A megmozdulások ezért ünnepnapokhoz és évfordulókhoz kötődtek, és nem közvetlenül a vezetést támadták.</p></div></details>
+        <details><summary>Melyik ellenzéki táborból nőtt ki az MDF, és melyikből az SZDSZ?</summary><div><p>Az MDF a népi, nemzeti táborból (Lakitelek, 1987), az SZDSZ az urbánus, demokratikus ellenzékből (1988 novembere).</p></div></details>
+        <details><summary>Miért mondjuk, hogy a négyigenes népszavazáson igazán csak egy kérdés dőlt el?</summary><div><p>Mert a másik háromról (munkahelyi pártszervezetek, az MSZMP vagyona, a Munkásőrség) októberben már döntöttek. A tétje a köztársasági elnök választásának módja volt.</p></div></details></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">6</span><div><h3>Próbáld ki</h3>
+        <p><strong>10 perc:</strong> írd fel egy lapra a hat állomást, évszám nélkül, összekeverve, aztán rakd sorba fejből. Mindegyik mellé írj egy szereplőt.</p>
+        <p><strong>A héten:</strong> mondd el valakinek egy mondatban, miért „tárgyalásos” ez a forradalom.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="step"><span class="n">7</span><div><h3>Visszatérés</h3>
+        <p>A kérdések nem érnek véget az oldallal. Visszajönnek, a helyes válaszig: amit eltaláltál, ritkábban, amit elrontottál, hamarabb. Ha egy kérdésre többször egymás után jól felelsz, kiesik.</p>
+        <ul class="timeline">
+          <li><span class="d">ma</span><span>az oldal végén: 3 kérdés</span></li>
+          <li><span class="d">+2-3 nap</span><span>az elrontottak előre, a jók közül egy</span></li>
+          <li><span class="d">+1 hét</span><span>ami még nem ment, plusz egy korábbi témából</span></li>
+          <li><span class="d">+2-3 hét</span><span>rövid utóteszt: mi maradt meg</span></li>
+        </ul>
+        <p class="note">🔁 Ez az ütemezés példa. A kérdések kiküldése még nincs beállítva, addig tedd be a naptáradba.</p></div></div>
+    </div>
+    <button type="button" class="btn deeper" data-go="3">Mélyebbre: a mélyfúrás, 20-30 perc</button>
+  </section>
+
+  <!-- 3 -->
+  <section class="level lv3" id="f3" hidden>
+    <div class="lvhead"><span class="lbl">3. fokozat · Mélyfúrás</span><span class="t">20-30 perc · tíz lenyitható blokk, mindegyikben egy kérdés</span></div>
+    <p class="note">Nyisd le azt, ami érdekel, a sorrend időrendi. Jelölések: ❓ kérdés, mielőtt olvasol · 📖 a fogalom a fogalomtárban van · ✎ szerkesztői kiegészítés, nem a diasoré, a Műhelyben felsorolva.</p>
+
+    <div class="blocks">
+    <details class="ideo" id="d-okok"><summary><span class="nm">A válság okai</span><span class="tg">1980-1985</span><span class="one">Négy ok egyszerre: pénz, külső világ, új elit, belső harc.</span></summary><div>
+      <details><summary>❓ Ha egy rendszer válságban van, miért nem tüntetnek az emberek?</summary><div><p>A diasor szerint az életszínvonal-alku (📖) már nem tartotta össze a rendszert, mégsem volt sztrájk vagy tüntetés. A válság eleinte a bizalomban látszott, nem az utcán.</p></div></details>
+      <ul class="pts">
+        <li><strong>Gazdaság és bizalom.</strong> 1980 után a reálbérek, 1985-től a reáljövedelmek is csökkentek. Kádár hitelét reformellenessége és magas kora rontotta.</li>
+        <li><strong>A közvélemény fordulata.</strong> 1981-ben az emberek még jobbnak látták az ország helyzetét a Nyugatnál, 1986-ban már csak a kérdések felében, 1988-ra teljesen megfordult a kép.</li>
+        <li><strong>A külső háttér.</strong> Az elöregedett szovjet vezetés nem tudott válaszolni a kihívásokra. Carter emberi jogi politikája az ellenzéket segítette, Reagan fegyverkezési programja a szovjet gazdaságot merítette ki. Az új főtitkár, Gorbacsov, reformokat hirdetett.</li>
+        <li><strong>Új elit.</strong> A '70-es évek értelmisége már alig vagy egyáltalán nem marxista. Az európai liberalizmus vagy a nemzeti gondolat felől érkezik, és saját civil fórumokat épít.</li>
+        <li><strong>Harc a pártban.</strong> A csúcson Aczél Györgyön ✎ kívül csak Kádár emberei álltak. A második vonal fiatalabb és tanultabb volt, de megosztott: Berecz János Kádárt támogatta, Grósz Károly csak gazdasági reformot akart, Pozsgay Imre politikait is.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-ellenzek"><summary><span class="nm">Urbánus és népi ellenzék</span><span class="tg">1970-es évek-1985</span><span class="one">Két tábor, két eredet: egy filozófiai iskola és egy írói kör.</span></summary><div>
+      <details><summary>❓ Honnan jöhet egy rendszerellenes csoport egy marxista államban, ha nem kívülről?</summary><div><p>Belülről. Az urbánus ellenzék gyökere Lukács György marxista filozófiája volt: tanítványai a marxizmus sokszínűségét keresték, az ő tanítványaik pedig már el is távolodtak tőle.</p></div></details>
+      <div class="two">
+        <div><p><strong>Urbánus, demokratikus</strong></p><ul class="pts">
+          <li>„Lukács-unokák”: Kis János, Bence György, Solt Ottília, Kenedi János; 1973-ban kizárták őket.</li>
+          <li>Kéziratok és perek: Konrád-Szelényi-ügy és Haraszti Miklós Darabbér-pere (1974).</li>
+          <li>Szolidaritás a Charta '77 ✎ letartóztatottjaival (1977, 1979).</li>
+          <li>SZETA (📖), 1979, a hatalom által el nem ismert társadalmi gondokra.</li>
+          <li>Repülőegyetem (📖) 1978-tól; az állambiztonság beépülőkkel és rendőrhívással zavarta.</li>
+          <li>Szamizdat (📖): a Beszélő 1981 októberétől, 1989-ig 27 szám; Hírmondó, Demokrata; terjesztés a Rajk-butikban.</li></ul></div>
+        <div><p><strong>Népi, nemzeti</strong></p><ul class="pts">
+          <li>A „Nagy Népi Hurál” a '60-as évek végén: Csoóri Sándor, Für Lajos, Bíró Zoltán; később Csurka István. A dia szerint a legfőbb vezető Illyés Gyula.</li>
+          <li>Legális lapok: Tiszatáj, Forrás, Alföld; téma a nemzet sorsa és a határon túli magyarok.</li>
+          <li>Kapcsolat a vezetéssel Pozsgayn át, viták Aczéllal.</li>
+          <li>1979: első lakiteleki találkozó Lezsák Sándornál; a Hitel folyóirat engedélyét a hatalom elszabotálta.</li>
+          <li>Botrányok: írószövetségi közgyűlés (1981), PB-határozat a „nacionalista” ellenzékről (1982), Nagy Gáspár verse (1984).</li></ul></div>
+      </div>
+      <p><strong>Ahol összeértek:</strong> a Duray Miklós letartóztatása elleni tiltakozás, a közös Bibó-emlékkönyv (1979-80).</p>
+    </div></details>
+
+    <details class="ideo" id="d-1985"><summary><span class="nm">1985 júniusa</span><span class="tg">jún. 8. és 14-16.</span><span class="one">Egy választás, ami meglepett, és egy titkos találkozó, amiről a hatóság tudott.</span></summary><div>
+      <details><summary>❓ Mit ér egy választás, ahol a pártállam a jelöltek többségét állítja?</summary><div><p>Ennél többet, mint gondolnánk. A jelölőgyűléseken 78 spontán jelölt (📖) is indult, és 41 közülük bekerült a parlamentbe. A választók rájöttek, hogy a jelölés joga korlátozza a hatalmat.</p></div></details>
+      <ul class="pts">
+        <li><strong>A június 8-i választás.</strong> Több mint 700 jelölt, többségük a HNF ✎ jelöltje. Az ellenzék néhány tagjának (ifj. Rajk László, Tamás Gáspár Miklós, Bauer Tamás) indulását megakadályozták.</li>
+        <li><strong>Meglepetések.</strong> Szegeden Király Zoltán kiszorította Komócsin Mihályt. A képviselők 63%-a kicserélődött, 1949 óta ez volt a legnagyobb csere, de 75%-uk párttag maradt.</li>
+        <li><strong>Folytonosság.</strong> Lázár György ✎ maradt a kormányfő, a parlamentben szigorú pártfegyelem.</li>
+        <li><strong>Monor, június 14-16.</strong> Először ült le együtt a két tábor és a reformértelmiség, 45 fővel. Négy vitaanyag készült (Csurka, Csoóri, Bauer Tamás, Kis János). A főszervező Donáth Ferenc volt.</li>
+        <li><strong>Az állambiztonság</strong> előre tudott róla, nem akadályozta meg, de hangfelvételt készített, és szűkíteni próbálta a résztvevők körét.</li>
+        <li><strong>A cél</strong> a morális, gazdasági és politikai válságból való kilábalás volt, közös cselekvési programra azonban egyik tábor sem törekedett.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-1987"><summary><span class="nm">1987 és Kádár bukása</span><span class="tg">1986-1988. május</span><span class="one">Az ellenzék kimondja, hogy Kádárnak mennie kell, a párt egy év múlva meg is lépi.</span></summary><div>
+      <details><summary>❓ Mi gyengítette jobban Kádárt: az ellenzék nyomása, vagy a saját pártja?</summary><div><p>A diasor szerint a döntő lépés a párton belül történt. Grósz Károly titokban egyeztetett Aczéllal és Pozsgayval, és a Szovjetunió is őt támogatta.</p></div></details>
+      <ul class="pts">
+        <li><strong>1986, az előjáték.</strong> Lánchídi csata március 15-én, Tiszatáj-botrány. Egy júliusi PB-határozat felvetette a „gorombább” módszereket, de a nyugati hitelek miatt Kádár ezt nem vállalta. Ősszel jött a Fordulat és reform (📖).</li>
+        <li><strong>1987. március 15.</strong> Többszáz fős ellenzéki ünnep, a rendőrség nem avatkozott be. A hivatalos szónok, Pozsgay is a reformok szükségéről beszélt.</li>
+        <li><strong>Társadalmi szerződés, június 10.</strong> Kis János, Kőszeg Ferenc és Solt Ottília szerint a szovjet függés csökkenthető, a távlati cél a plurális demokrácia, és elsőként mondták ki: „Kádárnak mennie kell!”</li>
+        <li><strong>Grósz-kormány, június 25.</strong> Kádár irányíthatónak tartotta Grószt, és bűnbaknak is szánta. Grósz piaci reformokat indított: kétszintű bankrendszer, ÁFA és személyi jövedelemadó, vegyes vállalatok.</li>
+        <li><strong>Jogalkotási törvény, december.</strong> Nyilvános jogalkotás, véget ért a titkos szabályok „pszeudojoga” (📖). A parlament nőtt: 1987-ben 12, 1988-ban 26, 1989-ben 58 törvény.</li>
+        <li><strong>Pártértekezlet, 1988. május 20-22.</strong> Az alku szerint Grósz főtitkár, Kádár pártelnök lett volna befolyással. Kádár azonban ismét tagadta a válságot, ezért Grósz felrúgta az alkut: Kádár híveit kihagyták a KB-ból, a PB 60%-a megújult.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-partok"><summary><span class="nm">Pártosodás 1988-89</span><span class="tg">1987. szept.-1989. febr.</span><span class="one">Mozgalmakból pártok, az utcán egyre nagyobb tömegek.</span></summary><div>
+      <details><summary>❓ Mi lett előbb: a többpártrendszer engedélyezése, vagy maguk a pártok?</summary><div><p>A pártok. 1988-ban sorra alakultak, 1989 januárjában spontán pártosodás indult, és a KB csak 1989. február 10-11-én mondta ki a többpártrendszert.</p></div></details>
+      <ul class="pts">
+        <li><strong>MDF.</strong> 1987. szeptember 27., Lakitelek, kb. 180 fő, népi írók és reformkommunisták. Itt szakadt el egymástól a két ellenzék. 1988 szeptemberétől független szervezet, novemberben elindítja a Hitelt.</li>
+        <li><strong>Fidesz</strong> 1988 márciusában a Jogász Szakkollégiumból; <strong>SZDSZ</strong> 1988 novemberében, a Szabad Kezdeményezések Hálózatából.</li>
+        <li><strong>Történelmi pártok</strong> 1988 végén: kisgazdák, szociáldemokraták, kereszténydemokraták. Mellettük TIB (📖), Recski Szövetség, Független Jogász Fórum.</li>
+        <li><strong>Az MSZMP platformjai.</strong> Új Márciusi Front, reformkörök, Németh Miklós november 24-től miniszterelnök. A másik póluson Grósz november végi kemény beszéde.</li>
+        <li><strong>Az utca.</strong> Ünnepnapok és évfordulók: Bős-Nagymaros ✎ ellen 30-40 ezren (szeptember), az Erdély-tüntetésen 80-100 ezren (június 27.), augusztusban az első sztrájk évtizedek óta.</li>
+        <li><strong>1956 újraírása.</strong> Pozsgay 1989. január 28-án a rádióban, egyeztetés nélkül, egy történész albizottság véleményeként bejelentette: 1956 népfelkelés volt. Februárban Moszkva nem tiltakozott a többpártrendszer ellen.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-kerekasztal"><summary><span class="nm">EKA és Nemzeti Kerekasztal</span><span class="tg">1989. márc.-szept.</span><span class="one">Előbb az ellenzék fog össze, aztán három oldal ül le tárgyalni.</span></summary><div>
+      <details><summary>❓ Miért ragaszkodott az ellenzék ahhoz, hogy egy asztalnál, közösen tárgyaljon?</summary><div><p>Mert a lengyel mintájú kerekasztallal az MSZMP célja a diasor szerint az ellenzék megosztása volt. Az EKA célja ezért a közös ellenzéki álláspont kidolgozása lett, és minden tagnak vétójoga volt.</p></div></details>
+      <ul class="pts">
+        <li><strong>EKA, 1989. március 22.</strong> Nyolc szervezet (MDF, SZDSZ, Fidesz, FKGP és mások), konzultatív fórum, vétójoggal.</li>
+        <li><strong>Az MSZMP tervei.</strong> Alkotmány a párt vezető szerepe nélkül, de erős elnöki jogkörrel; választási rendszer, ahol a második fordulóba csak két jelölt jut. Az ellenzék élesen bírálta ezeket.</li>
+        <li><strong>Alapmegállapodás, június 9-10.</strong> Békés átmenet, teljes rendszerváltozás, a megállapodásig nincs közjogi változás.</li>
+        <li><strong>NEKA, június 13-tól.</strong> Három oldal: EKA, MSZMP és a „harmadik oldal” (📖). Hat politikai és hat gazdasági albizottság, határidő nélkül.</li>
+        <li><strong>Az alkotmányvita.</strong> Többpártrendszer, a párt vezető szerepe kikerült, sok elem az 1946. évi I. törvény ✎ elveit követte.</li>
+        <li><strong>A legvitásabb pont:</strong> az elnökválasztás. Az MSZMP korai, közvetlen választást akart, Pozsgay esélyeivel. Antall József kompromisszuma: első alkalommal a nép válasszon, de gyenge jogkörű elnököt. Az SZDSZ, a Fidesz és az FKGP nem írta alá a szeptember 18-i záró megállapodást.</li>
+        <li><strong>Megállapodás nélkül maradt:</strong> az állambiztonság és a Munkásőrség átszervezése, és a média felügyelete.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-temetes"><summary><span class="nm">Két temetés</span><span class="tg">1989. jún. 16. és júl. 14.</span><span class="one">Egy kivégzett miniszterelnök újratemetése, és annak a temetése, aki alatt kivégezték.</span></summary><div>
+      <details><summary>❓ Mit árul el, hogy Kádár temetésére is óriási tömeg ment el, néhány héttel Nagy Imréé után?</summary><div><p>A diasor szerint ez spontán megnyilvánulás volt. A dia két megítélést tesz egymás mellé: Kádár politikai eredményeit nyugati szociáldemokraták is méltatták, sokak szerint viszont igen ellentmondásosak voltak.</p></div></details>
+      <div class="two">
+        <div><p><strong>Nagy Imre ✎ és társai</strong></p><ul class="pts">
+          <li>Az exhumálás március végén kezdődött, elindult a bírósági rehabilitáció.</li>
+          <li>Szervező a TIB; a kormányt meghívták, az MSZMP-t nem.</li>
+          <li>Demonstráció a Hősök terén, családi szertartás a 301-es parcellában ✎.</li>
+          <li>Öt koporsó és egy jelképes hatodik.</li>
+          <li>Szónokok: Vásárhelyi Miklós, Rácz Sándor, Mécs Imre, Király Béla. A legnagyobb hatást Orbán Viktor váltotta ki: az előzetes megállapodástól eltérve politikai beszédet mondott, a szovjetek kivonulását követelte. Ezért ellenzéki oldalról is bírálták.</li></ul></div>
+        <div><p><strong>Kádár János</strong></p><ul class="pts">
+          <li>1988 májusa után visszavonultan élt, egyre betegebben.</li>
+          <li>1956 átértékelése után felmerült az ő felelőssége is.</li>
+          <li>1989. április 12-én hívatlanul megjelent a KB ülésén, és zavaros beszédében többször visszatért Nagy Imre ügyére.</li>
+          <li>Július 6-án halt meg; aznap mentette fel a Legfelsőbb Bíróság Nagy Imrét és társait.</li>
+          <li>Július 14-i temetése újabb nagy tömeget mozgatott meg. E napokban id. George Bush amerikai elnök Budapesten járt.</li></ul></div>
+      </div>
+    </div></details>
+
+    <details class="ideo" id="d-allampart"><summary><span class="nm">Az állampárt megszűnése</span><span class="tg">1989. okt. 6-9.</span><span class="one">Az MSZMP kongresszusán új párt születik: az MSZP.</span></summary><div>
+      <details><summary>❓ Az MSZP új párt volt, vagy a régi új néven?</summary><div><p>Mindkettő igaz egy kicsit. A diasor szerint új párt, a régi tagokat nem vette át automatikusan, és alig 5%-uk lépett be. Ugyanakkor jogutód (📖 utódpárt), a pártvagyon átmentésével.</p></div></details>
+      <ul class="pts">
+        <li><strong>Pártok sokasága.</strong> Száznál több párt jött létre, de a legnagyobbaknak is csak 20-30 ezer tagjuk volt. Az MDF élére Bíró Zoltán helyett Antall József került.</li>
+        <li><strong>Előzmény, június 23-24.</strong> Négytagú elnökség (Nyers, Grósz, Pozsgay, Németh), Pozsgay a párt elnökjelöltje, Grószt és Bereczet visszahívták a tárgyalódelegációból.</li>
+        <li><strong>A XIV. kongresszus.</strong> Platformszabadság, a legnagyobb a Reformszövetség (1200 küldöttből 700). Október 7-én döntés az MSZP létrehozásáról.</li>
+        <li><strong>Az MSZP programja.</strong> „Demokratikus szocializmus”, parlamentáris demokrácia, vegyes szociális piacgazdaság. Elnöke Nyers Rezső. A Munkásőrséget megszüntette, a munkahelyi pártszervezeteket nem.</li>
+        <li><strong>Csalódás.</strong> A reformkörök tagjai alig jutottak be a vezetésbe.</li>
+        <li><strong>Pártszakadás nincs,</strong> de decemberben a rendpártiak újjáalakították az MSZMP-t.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-koztarsasag"><summary><span class="nm">Sarkalatos törvények és a köztársaság</span><span class="tg">1989. október</span><span class="one">A kerekasztal alkuja törvény lesz, október 23-án új köztársaság.</span></summary><div>
+      <details><summary>❓ Egy alkotmány „módosítása” lehet valójában egy új alkotmány?</summary><div><p>Igen. Az 1989. évi XXXI. törvény a diasor szerint elvileg módosítás volt, valójában teljes átalakítás.</p></div></details>
+      <ul class="pts">
+        <li><strong>Az első csomag.</strong> Októberben törvénybe iktatták a Nemzeti Kerekasztal megállapodásait: büntetőjog, útlevél és kivándorlás, a Munkásőrség megszüntetése.</li>
+        <li><strong>Az alkotmány.</strong> Sok biztosíték, sok kétharmados törvény, és benne maradt több, az MSZMP által követelt régies elem is.</li>
+        <li><strong>Október 23.</strong> Szűrös Mátyás kikiáltotta a köztársaságot, a pártállami rendszer véget ért. Ez volt 1956 első szabad megünneplése is.</li>
+        <li><strong>Alkotmánybíróság</strong> (📖 AB). Elvileg 15 tag 9 évre, bárki fordulhat hozzá, bármely jogszabályt megsemmisíthet. Első elnöke Sólyom László, végül 11 fővel működött.</li>
+        <li><strong>Párttörvény.</strong> Munkahelyen tilos a pártszervezet, az új pártok állami támogatást kapnak, az MSZMP vagyonát el kell számolni.</li>
+        <li><strong>Választási törvény</strong> (1989. évi XXXIV.). Vegyes rendszer egyéni és listás helyekkel, 750 kopogtatócédula (📖), legalább három jelölt a második fordulóban, 4%-os küszöb.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-nepszavazas"><summary><span class="nm">Négyigenes népszavazás</span><span class="tg">1989. nov. 26.</span><span class="one">Négy kérdés, de igazán csak egy volt nyitott: ki és mikor választ elnököt.</span></summary><div>
+      <details><summary>❓ Mekkora különbség döntötte el, hogy az elnököt ne a nép válassza még a parlamenti választás előtt?</summary><div><p>Nagyon kicsi: az első kérdésben 50,07% szavazott igennel, a dia szerint 6100 vokssal. A másik három kérdésben 95% volt az igen.</p></div></details>
+      <ul class="pts">
+        <li><strong>A háttér.</strong> A diasor szerint az MSZMP a kerekasztalnál több ponton átmentette a hatalmát. Az SZDSZ és a Fidesz nem írta alá a zárónyilatkozatot, aláírást gyűjtöttek.</li>
+        <li><strong>A négy kérdés.</strong> Az elnökválasztás csak a parlamenti választás után legyen? Vonuljanak ki a pártszervezetek a munkahelyekről? Számoljon el az MSZMP a vagyonával? Oszlassák fel a Munkásőrséget?</li>
+        <li><strong>A valódi tét</strong> Pozsgay elnökségének megakadályozása volt. Az MDF bojkottra hívott, az SZDSZ azzal kampányolt, hogy aki távol marad, az a múltat választja.</li>
+        <li><strong>Az eredmény.</strong> 58%-os részvétel, mintegy 4,5 millió szavazó, minden kérdésben igen.</li>
+        <li><strong>A következmény.</strong> Elmaradt a korai, közvetlen elnökválasztás, Pozsgay esélyei elfogytak. Az MSZP támogatottsága 35-ről 16%-ra esett, az SZDSZ-é 6-ról 14%-ra nőtt, az MDF-é nem változott.</li>
+      </ul>
+    </div></details>
+
+    <details class="ideo" id="d-fogalom"><summary><span class="nm">📖 Fogalom- és rövidítéstár</span><span class="tg">22 tétel</span><span class="one">A rövidítések és a korszak kulcsszavai egy helyen.</span></summary><div>
+      <dl class="gloss">
+        <dt>MSZMP ✎</dt><dd>Magyar Szocialista Munkáspárt, az állampárt. Vezető testületei a KB (Központi Bizottság) és a PB (Politikai Bizottság) ✎.</dd>
+        <dt>HNF ✎</dt><dd>Hazafias Népfront. 1985-ben a jelöltek többsége az övé volt.</dd>
+        <dt>Spontán jelölt</dt><dd>1985-ben a jelölőgyűlésen nem a HNF által állított jelölt.</dd>
+        <dt>Életszínvonal-alku</dt><dd>A diasor szerint a rendszer legitimáló eszköze, amely a '80-as évek közepére megszűnt.</dd>
+        <dt>Szamizdat</dt><dd>A „második nyilvánosság” kiadványa: engedély nélkül, magánúton sokszorosítva ✎.</dd>
+        <dt>Repülőegyetem</dt><dd>Illegális, magánlakásokban tartott előadássorozat 1978-tól.</dd>
+        <dt>SZETA</dt><dd>Szegényeket Támogató Alap, Solt Ottília alapította 1979-ben.</dd>
+        <dt>Szilencium</dt><dd>Publikálási tilalom, a népi írók és lapjaik ellen is alkalmazták.</dd>
+        <dt>Fordulat és reform</dt><dd>Közgazdászok 1986-os javaslata: piaci és politikai reform egyszerre.</dd>
+        <dt>Pszeudojog</dt><dd>Titkos szabályok „második normarendszere”, amit az 1987-es jogalkotási törvény megszüntetett.</dd>
+        <dt>Platformosodás</dt><dd>Belső irányzatok megjelenése az MSZMP-ben (ÚMF, reformkörök, Reformszövetség).</dd>
+        <dt>ÚMF</dt><dd>Új Márciusi Front, Nyers Rezső kezdeményezése 1988 elején.</dd>
+        <dt>Modellváltás</dt><dd>Grósz célja: alternatív szervezetek, de megmaradó egypártrendszer.</dd>
+        <dt>MDF, Fidesz, SZDSZ</dt><dd>Magyar Demokrata Fórum; Fiatal Demokraták Szövetsége; Szabad Demokraták Szövetsége.</dd>
+        <dt>FKGP, MSZDP ✎</dt><dd>Független Kisgazdapárt; Magyarországi Szociáldemokrata Párt.</dd>
+        <dt>TIB</dt><dd>Történelmi Igazságtétel Bizottsága, Nagy Imre újratemetésének szervezője.</dd>
+        <dt>EKA</dt><dd>Ellenzéki Kerekasztal, 1989. március 22-től.</dd>
+        <dt>NEKA</dt><dd>Nemzeti Kerekasztal, az EKA, az MSZMP és a harmadik oldal tárgyalása.</dd>
+        <dt>Harmadik oldal</dt><dd>A NEKA-n az MSZMP-hez közeli társutas szervezetek.</dd>
+        <dt>AB</dt><dd>Alkotmánybíróság, első elnöke Sólyom László.</dd>
+        <dt>Kopogtatócédula</dt><dd>Ajánlás a jelöltséghez, 1989-ben 750 kellett.</dd>
+        <dt>Utódpárt</dt><dd>Új párt, amely a régi jogutódja; a diasor az MSZP-t így jellemzi.</dd>
+      </dl>
+    </div></details>
+    </div>
+    <button type="button" class="btn deeper" data-go="4">Tovább a műhelybe: hol tartunk</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="level lv4" id="f4" hidden>
+    <div class="lvhead"><span class="lbl">4. fokozat · Műhely</span><span class="t">honnan dolgozunk, mi nyitott, hogyan kapcsolódhatsz be</span></div>
+    <div class="card">
+      <h3>Honnan dolgozunk</h3>
+      <p>Az oldal egyetlen forrása egy egyetemi előadás-diasor (A jelenkori magyar történelem alapjai II.), „A rendszerváltozáshoz vezető út, 1985-1989” című előadás. Az előadó neve nem ismert.</p>
+      <p>A diák vázlatpontok és rövidítések. Az oldal szövege ezekből saját szavakkal összeállított összefoglalás. Ami nem a diákon áll, azt ✎ jelöli, és lent külön felsoroljuk.</p>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Kész</h3><ul class="pts">
+        <li>az Ízelítő a két tippel;</li><li>a Kártya hat lépéssel és a két ellenzékkel;</li><li>a Mélyfúrás tíz blokkal és fogalomtárral;</li><li>ez a Műhely.</li></ul></div>
+      <div class="card"><h3>Nyitott</h3><ul class="pts">
+        <li>az 1990-es választás és az első szabad kormány már nincs a diasorban;</li><li>a lengyel és más kelet-európai átmenetekkel való összevetés hiányzik;</li><li>a diák számadatait (például a spontán jelöltekét) más forrással nem vetettük össze;</li><li>a visszatérő kérdések kiküldése még nincs beállítva.</li></ul></div>
+    </div>
+    <div class="card">
+      <h3>A forrás pontatlanságai</h3>
+      <ul class="pts">
+        <li><strong>Grósz Károly 1988-as beszéde.</strong> A dia november 27-re teszi. Nem ellenőriztük, ezért az oldalon csak „november vége” áll.</li>
+        <li><strong>Illyés Gyula szerepe.</strong> A dián Csurka István csatlakozása és „a legfőbb vezető” megjelölés egy mondatban áll, ezért kétféleképpen olvasható. Mi úgy értjük, hogy a népi tábor vezetője Illyés volt, nem Csurka.</li>
+        <li><strong>A Lukács-tanítványok 1973-as kizárása.</strong> A dia nem mondja meg, honnan zárták ki a Lukács-tanítványokat, ezért az oldal sem részletezi.</li>
+        <li><strong>A népszavazás kérdései.</strong> A dia maga jelzi, hogy a négy kérdésből három októberben már megoldódott. Ez nem hiba, de könnyű elsiklani fölötte: a kampány tétje az első kérdés volt.</li>
+        <li><strong>A választási törvény.</strong> Az MSZMP júniusi terve két jelöltet engedett volna a második fordulóba, az elfogadott törvény legalább hármat. A dia két helyen két különböző állapotot ír le, nem ellentmondást.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Szerkesztői kiegészítések ✎</h3>
+      <p>Ezek nincsenek a diákon, közismert háttérként tettük hozzá, hogy a vázlatpontok érthetők legyenek:</p>
+      <ul class="pts">
+        <li>rövidítések kibontása: MSZMP, KB, PB, HNF, FKGP, MSZDP;</li>
+        <li>teljes név, ahol a dián csak vezetéknév áll: Aczél György, Lázár György;</li>
+        <li>a szamizdat szó jelentése: engedély nélkül, magánúton sokszorosított kiadvány;</li>
+        <li>Bős-Nagymaros: csehszlovák-magyar közös dunai vízlépcső-beruházás;</li>
+        <li>a Charta '77 csehszlovák ellenzéki mozgalom volt;</li>
+        <li>Nagy Imre 1956 miniszterelnöke volt;</li>
+        <li>a 301-es parcella a budapesti Rákoskeresztúri új köztemetőben van;</li>
+        <li>az 1946. évi I. törvény Magyarország államformájáról, a köztársaságról szólt.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kapcsolódik</h3>
+      <ul class="pts">
+        <li><a href="../puha-diktatura/">A puha diktatúra</a>: az a Kádár-kor, aminek a válsága itt kezdődik, és az életszínvonal-alku, ami megszűnt.</li>
+        <li><a href="../kulpolitika/">Külpolitika 1945-1990</a>: Gorbacsov, a szovjet háttér és a vasfüggöny lebontása.</li>
+        <li><a href="../idovonal/">Idővonal 1945-1990</a>: az 1985-1989-es események a többivel egy képen.</li>
+        <li><a href="../">A Kádár-kor és a rendszerváltozás áttekintése</a></li>
+      </ul>
+    </div>
+    <div class="card" id="vissza">
+      <h3>Szólj hozzá</h3>
+      <p>Hibát találtál, valami nem érthető, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+      <form class="fb" data-subject="[Tudástár] A rendszerváltozáshoz vezető út">
+        <label for="fb-tema">Téma<select id="fb-tema" data-field="Téma"><option selected>A rendszerváltozáshoz vezető út</option><option>Más téma</option></select></label>
+        <label for="fb-fok">Melyik fokozat?<select id="fb-fok" data-field="Fokozat" data-subject-part="1"><option>1. Ízelítő</option><option>2. Kártya</option><option selected>3. Mélyfúrás</option><option>4. Műhely</option></select></label>
+        <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+        <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+        <a class="btn send" href="#">Levél megnyitása</a>
+      </form>
+      <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+      <p class="note">Ha beszélgetnél is a témáról, a <a href="../../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="../">Vissza a Kádár-korhoz</a></p>
+  </footer>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "tudastar-kadar-rendszer-v1";
+  var max = 1;
+  try { max = Math.max(1, Math.min(4, +localStorage.getItem(KEY) || 1)); } catch (e) {}
+  var rail = document.querySelectorAll(".rail button");
+  function show(n, scroll) {
+    if (n > max) { max = n; try { localStorage.setItem(KEY, String(max)); } catch (e) {} }
+    for (var i = 1; i <= 4; i++) document.getElementById("f" + i).hidden = i > max;
+    rail.forEach(function (b) { var k = +b.dataset.go; b.classList.toggle("seen", k <= max); b.setAttribute("aria-current", String(k === n)); });
+    document.querySelectorAll(".deeper").forEach(function (b) { b.hidden = +b.dataset.go <= max; });
+    if (scroll) document.getElementById("f" + n).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go, true); });
+  var h = (location.hash || "").match(/^#f([1-4])$/);
+  show(h ? +h[1] : 1, !!h);
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>
