@@ -1,0 +1,379 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Tudástárba</a><span>Tudástár</span></nav>
+<title>Fogalomtérkép</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+/* Layout: a night-sky chart. Ideas are stars, links are faint constellation lines; hover brightens a star and its lines, click opens a card. Deliberately single dark theme. */
+html:root:not(.x1):not(.x2) {
+  --bg: #070b1a; --paper: #10173a; --sheet: #0c1230; --fg: #e9ecf8; --muted: #9aa3c7; --rule: #26305e;
+  --accent: #ffd27a; --star: #cfe0ff; --concept: #ffd27a; --line: #3a4a8c; --line-hi: #ffe2a3; --chip: #1b2452;
+  --l1: #8fd3e0; --l2: #9fb2ff; --l3: #d6a8ff; --l4: #ffd27a; --ok: #8fe0b0; --shadow: 0 0 0 1px #1d2650;
+  color-scheme: dark;
+}
+body { background: radial-gradient(120% 80% at 50% 0%, #121a44 0%, var(--bg) 60%) fixed, var(--bg); }
+main { max-width: 1100px; }
+.views { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; overflow: hidden; justify-self: start; }
+.views button { font: 700 0.9rem var(--font-display); color: var(--muted); background: transparent; border: 0; padding: 8px 16px; cursor: pointer; }
+.views button[aria-pressed="true"] { color: var(--bg); background: var(--accent); }
+.views button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sky { position: relative; border: 1px solid var(--rule); border-radius: 10px; background: radial-gradient(70% 60% at 50% 50%, #131c4a 0%, #080c20 100%); overflow: hidden; }
+.sky.scroll { overflow-x: auto; }
+.sky svg { display: block; width: 100%; height: auto; }
+.sky.scroll svg { min-width: 760px; }
+.stars circle { fill: #fff; }
+@media (prefers-reduced-motion: no-preference) { .stars .tw { animation: tw 4s ease-in-out infinite alternate; } }
+@keyframes tw { from { opacity: 0.25; } to { opacity: 0.9; } }
+.edge { fill: none; stroke: var(--line); stroke-width: 1.4; opacity: 0.75; transition: opacity 0.2s, stroke 0.2s; }
+.edge.dash { stroke-dasharray: 5 6; }
+.edge.react { stroke-dasharray: 2 6; stroke: #b36b7c; }
+.node { cursor: pointer; outline: none; }
+.node circle { transition: r 0.2s, opacity 0.2s; }
+.node .glow { fill: var(--star); opacity: 0.18; }
+.node .core { fill: var(--star); }
+.node.concept .glow { fill: var(--concept); opacity: 0.22; }
+.node.concept .core { fill: var(--concept); }
+.node.interp .core { fill: none; stroke: var(--star); stroke-width: 1.5; }
+.node.root .core { fill: var(--muted); }
+.node text { fill: var(--fg); font-family: var(--font-display); font-weight: 700; font-size: 20px; paint-order: stroke; stroke: #070b1a; stroke-width: 5px; stroke-linejoin: round;
+  transform-box: fill-box; transform-origin: center; transition: transform 0.2s ease, fill 0.2s; }
+.node.concept text { fill: var(--concept); font-size: 24px; }
+.node .yr { font-family: var(--font-mono); font-weight: 400; font-size: 13px; fill: var(--muted); }
+.node:hover text:not(.yr), .node:focus-visible text:not(.yr), .node.hl text:not(.yr) { transform: scale(1.4); fill: #fff; }
+.node:focus-visible .glow { opacity: 0.5; }
+svg.dim .edge { opacity: 0.12; }
+svg.dim .node { opacity: 0.35; }
+svg.dim .edge.on { opacity: 1; stroke: var(--line-hi); stroke-width: 2.2; }
+svg.dim .node.on { opacity: 1; }
+.era-band { fill: #ffffff; opacity: 0.025; }
+.era-label { fill: var(--muted); font-family: var(--font-mono); font-size: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.85rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 22px; height: 0; border-top: 2px solid var(--line); }
+.legend i.d { border-top-style: dashed; } .legend i.r { border-top: 2px dotted #b36b7c; }
+.legend b { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--concept); }
+.legend b.s { background: var(--star); } .legend b.o { background: transparent; border: 1.5px solid var(--star); }
+/* Card */
+.veil { position: fixed; inset: 0; z-index: 20; background: rgba(3, 5, 15, 0.6); display: grid; place-items: center; overflow-y: auto;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); }
+.panel { width: 100%; max-width: 640px; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; box-shadow: 0 0 40px rgba(120, 150, 255, 0.15); padding: 18px 20px 22px; display: grid; gap: 12px; }
+.panel .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.panel h2 { color: var(--accent); }
+.panel .close { font: 700 0.85rem var(--font-display); color: var(--fg); background: transparent; border: 1px solid var(--rule); border-radius: 6px; padding: 5px 12px; cursor: pointer; flex: none; }
+.views-list { display: grid; gap: 10px; }
+.views-list .v { display: grid; gap: 2px; border-left: 3px solid var(--line); padding-left: 10px; }
+.views-list .v b { font-family: var(--font-display); }
+.linkrow { display: flex; flex-wrap: wrap; gap: 8px; }
+.linkrow button { font: 600 0.85rem var(--font-display); color: var(--fg); background: var(--chip); border: 0; border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+</style>
+
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Fogalomtérkép</span>
+    <h1>Fogalomtérkép</h1>
+    <p class="lede">Az eszmék csillagtérképe. Vidd az egeret egy csillag fölé, és kirajzolódnak a kapcsolatai. Kattints rá, és kinyílik a hozzá tartozó kártya. Telefonon az első koppintás kiemel, a második nyit.</p>
+    <p class="note">Téma: Politikai ideológiák. Később a többi Tudástár-téma is kap saját térképet.</p>
+  </header>
+
+  <div class="views" role="group" aria-label="Nézet">
+    <button type="button" data-view="halo" aria-pressed="true">Fogalomháló</button>
+    <button type="button" data-view="fa" aria-pressed="false">Időrendi családfa</button>
+  </div>
+
+  <section id="v-halo" style="display:grid;gap:10px">
+    <p class="note">Középen négy fogalom, körülöttük az ideológiák. Egy vonal azt jelenti: Heywood leírja, mit gondol arról a fogalomról az adott ideológia. Forrás: a „Perspectives on…” keretek, Political Ideologies, 3. kiadás, 6-9. fejezet.</p>
+    <div class="sky"><svg id="svg-halo" viewBox="0 0 1000 1000" role="img" aria-label="Fogalomháló: állam, tekintély, nemek, természet és nyolc ideológia"></svg></div>
+    <div class="legend"><span><b></b>fogalom</span><span><b class="s"></b>ideológia</span><span><i></i>van róla nézete</span></div>
+  </section>
+
+  <section id="v-fa" style="display:grid;gap:10px" hidden>
+    <p class="note">Balról jobbra az idő. A vonalak azt mutatják, melyik eszme melyikből nőtt ki. Kattintásra a kártyán az is látszik, honnan tudjuk.</p>
+    <div class="sky scroll"><svg id="svg-fa" viewBox="0 0 1200 800" role="img" aria-label="Az ideológiák időrendi családfája"></svg></div>
+    <div class="legend"><span><i></i>kinőtt belőle</span><span><i class="d"></i>hatott rá, irányzata ered belőle</span><span><i class="r"></i>ellenreakció</span><span><b class="o"></b>a sorozat szerzőjének értelmezése</span></div>
+  </section>
+
+  <footer>
+    <p><a href="../ideologiak/">A Politikai ideológiák gyűjtőoldala</a> · <a href="../">Vissza a Tudástárba</a></p>
+    <p>Heywood szövegét saját szavainkkal foglaltuk össze. Ha hibát látsz, a gyűjtőoldal alján szólhatsz.</p>
+  </footer>
+</main>
+
+<div class="veil" id="veil" hidden><div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="p-title"></div></div>
+
+<script type="application/json" id="data">
+{
+ "ideo": {
+  "lib": {"n":"Liberalizmus","one":"Az egyén szabadsága az első: ész, esélyegyenlőség, korlátozott hatalom.","link":"../ideologiak/#i-liberalizmus","year":1789,"y":170,"parents":[["felv","solid","A felvilágosodás talaján, az abszolút uralkodói hatalommal szemben (a sorozat szerint)."]]},
+  "konz":{"n":"Konzervativizmus","one":"A hagyomány bizonyított tudás, a társadalom élő szervezet.","link":"../ideologiak/#i-konzervativizmus","year":1790,"y":360,"parents":[["felv","react","Ellenreakció a francia forradalom radikalizmusára, Burke nyomán (a sorozat szerint)."]]},
+  "nac": {"n":"Nacionalizmus","one":"A világ természetesen nemzetekre oszlik, és a nemzet a politika alapja.","link":"../ideologiak/#i-nacionalizmus","year":1805,"y":560,"parents":[["felv","solid","A felvilágosodással párhuzamosan alakult ki, a napóleoni háborúk idején erősödött meg (a sorozat szerint)."]]},
+  "szoc":{"n":"Szocializmus","one":"Az ember társas lény: együttműködés, egyenlőség, közös tulajdon.","link":"../ideologiak/#i-szocializmus","year":1848,"y":290,"parents":[["felv","solid","Az ipari forradalom kora hívta életre; Marx és Engels 1848-ban rendszerezte (a sorozat szerint)."]]},
+  "anar":{"n":"Anarchizmus","one":"Az állam nemcsak rossz, hanem fölösleges is: a rend kényszer nélkül is kialakul.","link":"../ideologiak/anarchizmus/","year":1840,"y":450,"parents":[["szoc","solid","Kollektivista ága a szocializmus rokona (Heywood, 6. fejezet)."],["lib","solid","Individualista ága a liberalizmus végletekig vitele (Heywood, 6. fejezet)."]]},
+  "fem": {"n":"Feminizmus","one":"A nők hátránya társadalmi eredetű, ezért megszüntethető.","link":"../ideologiak/feminizmus/","year":1848,"y":70,"parents":[["lib","solid","A liberális feminizmus a jogegyenlőségből indul; Wollstonecraft műve 1792-es, Seneca Falls 1848 (Heywood, 8. fejezet)."],["szoc","dash","A szocialista feminizmus a nők helyzetét a gazdasági viszonyokhoz köti (Heywood, 8. fejezet)."]]},
+  "fasz":{"n":"Fasizmus","one":"Lázadás a felvilágosodás ellen: harc, vezér, szerves nemzeti közösség.","link":"../ideologiak/fasizmus/","year":1919,"y":640,"parents":[["nac","solid","Az ultranacionalizmus a fasizmus egyik alaptémája (Heywood, 7. fejezet)."],["felv","react","Heywood szerint lázadás a felvilágosodás értékei ellen (7. fejezet)."]]},
+  "kd":  {"n":"Kereszténydemokrácia","one":"Konzervatív értékrend szociális védőhálóval, 1945 után.","link":"../ideologiak/#i-kereszten","year":1945,"y":440,"parents":[["konz","solid","Megőrizte a konzervatív értékrendet (a sorozat szerint)."],["szoc","dash","Beépítette a szociális védőhálót (a sorozat szerint)."]]},
+  "okol":{"n":"Ökologizmus","one":"Az ember a természet része, nem az ura.","link":"../ideologiak/okologizmus/","year":1962,"y":740,"parents":[["konz","dash","Az ökokonzervativizmus a vidéki élet romantikus féltése (Heywood, 9. fejezet)."],["szoc","dash","Az ökoszocializmus a környezetrombolást a kapitalizmushoz köti (Heywood, 9. fejezet)."],["anar","dash","Az ökoanarchizmus a társadalmi ökológia felé vezet (Heywood, 9. fejezet)."]]},
+  "libt":{"n":"Libertarianizmus","one":"Teljes egyéni autonómia, az állam felesleges korlát.","link":"../ideologiak/#i-libertarianizmus","year":1965,"y":130,"parents":[["lib","solid","A klasszikus liberalizmus radikális folytatása (a sorozat szerint)."]]},
+  "neol":{"n":"Neoliberalizmus","one":"A piac hatékonyabb az államnál: kevesebb szabályozás, kisebb állam.","link":"../ideologiak/#i-neoliberalizmus","year":1978,"y":240,"parents":[["lib","solid","A klasszikus liberalizmus piacpártiságára épül (szerkesztői kiegészítés)."],["konz","dash","Heywood az új jobboldal részeként, a konzervatívok között említi: az állam „visszaszorítása” (6. fejezet, Perspectives on the state)."]]},
+  "posz":{"n":"Posztmodernizmus","one":"Minden igazság nézőpont kérdése.","link":"../ideologiak/#i-posztmodern","year":1985,"y":360,"parents":[]},
+  "pop": {"n":"Populizmus","one":"A nép nevében az elit ellen, amikor túl nagy köztük a távolság.","link":"../ideologiak/#i-populizmus","year":1995,"y":560,"interp":true,"parents":[]},
+  "fund":{"n":"Vallási fundamentalizmus","one":"Heywood kereteiben: a vallási tekintély mint a politikai rend alapja. Külön fejezete még nincs feldolgozva.","link":"","tree":false}
+ },
+ "felv": {"n":"Felvilágosodás","one":"Nem ideológia, hanem a kiindulópont: ész, egyén, haladás. A 19. század nagy eszméi ebből nőttek ki, vagy ellene fordultak.","year":1750,"y":400},
+ "concepts": {
+  "allam":{"n":"Állam","src":"Heywood, 6. fejezet, PDF 4. o.","views":{
+   "lib":"Semleges döntőbíró a versengő érdekek között, a rend biztosítéka. A klasszikus liberálisoknak szükséges rossz (minimális, „éjjeliőr” állam), a modern liberálisoknak a szabadság és az esélyegyenlőség eszköze.",
+   "konz":"Tekintélyt és fegyelmet ad, megvéd a káosztól, ezért hagyományosan erős államot akar. A hagyományos konzervatívok egyensúlyt keresnek, az újabb, neoliberális jobboldal viszont visszaszorítaná, mert szerinte gátolja a gazdaságot és a bürokrácia saját érdekét szolgálja.",
+   "szoc":"Kétféle kép. A marxisták szerint az osztályuralom eszköze, vagy az osztályfeszültség tompítója. Más szocialisták a közjó megtestesítőjének látják, és helyeslik a beavatkozást, szociáldemokrata vagy államkollektivista formában.",
+   "anar":"Elutasítja: fölösleges rossz. A szuverén, kötelező és kényszerítő tekintély törvényesített elnyomás a hatalmasok és kiváltságosok javára, és ebben minden állam egyforma.",
+   "fasz":"Az olasz hagyományban legfőbb erkölcsi eszmény, a nemzeti közösség egységes érdeke, innen a totalitarizmus. A nácik inkább a faj vagy a nemzet edényének, eszközének látták.",
+   "fem":"A férfihatalom eszköze: a patriarchális állam kizárja vagy alárendeli a nőket a közéletben. A liberális feministák szerint mégis a reform eszköze lehet, mert enged a választói nyomásnak.",
+   "fund":"Alapvetően pozitív: a társadalmi, erkölcsi és kulturális megújulás eszköze, a vallási tekintély politikai megjelenése."}},
+  "tekintely":{"n":"Tekintély","src":"Heywood, 7. fejezet, PDF 8. o.","views":{
+   "lib":"Alulról fakad, a kormányzottak beleegyezéséből. Szükséges, de észszerű, célhoz kötött és korlátozott: jogi alapú, elszámoltatható tekintély.",
+   "konz":"Természetes szükségszerűség, felülről gyakorolják, mert a tapasztalat, a helyzet és a bölcsesség egyenlőtlenül oszlik el. Hasznos is: tiszteletet, hűséget és összetartást teremt.",
+   "szoc":"Gyanakvó vele szemben, elnyomónak és a kiváltságosok érdekének látja. A szocialista társadalmak mégis elfogadták a közösség tekintélyét az önzés és a kapzsiság ellensúlyaként.",
+   "anar":"Minden tekintély fölösleges és romboló, egyenlő az elnyomással és a kizsákmányolással. Nincs különbség tekintély és puszta hatalom között, ezért minden fék és elszámoltathatóság látszat.",
+   "fasz":"A személyes vezetés, a karizma megnyilvánulása, kivételes egyéneké. Ez a tekintély abszolút és megkérdőjelezhetetlen, vagyis totalitárius jellegű.",
+   "fund":"A vallási bölcsességhez való egyenlőtlen hozzáférés tükre, erkölcsi minőség. Karizmatikus jellege miatt nehezen kérdőjelezhető meg, és nehezen fér össze az alkotmányossággal."}},
+  "nemek":{"n":"Nemek","src":"Heywood, 8. fejezet, PDF 8. o.","views":{
+   "lib":"Hagyományosan magánügy. A közéletben mindenki egyén, a nem éppoly közömbös, mint a származás vagy az osztály: az individualizmus ebben az értelemben „nemvak”.",
+   "konz":"A nemek közti munkamegosztás természetes és elkerülhetetlen. A nem a társadalom szerves és hierarchikus jellegének egyik forrása.",
+   "szoc":"Ritkán tartotta politikai kategóriának. Ha a nemi különbség számít, az a mélyebb gazdasági és osztályegyenlőtlenség tükre.",
+   "fasz":"Az emberiség alapvető megosztottsága: a vezetés és a döntés a férfiaké, a nő szerepe otthoni, támogató és alárendelt.",
+   "fem":"Kulturális vagy politikai megkülönböztetés, szemben a biológiai különbségekkel, ezért a férfihatalom megnyilvánulása. A különbség-feministák szerint viszont lehet mögötte valódi lelki-biológiai eltérés.",
+   "fund":"Istentől rendelt megosztottság, a társadalmi rend kulcsa. A patriarchális szerkezet és a férfivezetés természetesnek és kívánatosnak számít."}},
+  "termeszet":{"n":"Természet","src":"Heywood, 9. fejezet, PDF 4. o.","views":{
+   "lib":"Erőforrás az emberi szükségletekre. Önmagában nincs értéke, csak ha emberi munka alakítja vagy emberi célt szolgál.",
+   "konz":"Fenyegető, akár kegyetlen, az erkölcs nélküli küzdelem tere. Az ember a „lét nagy láncának” része, de a természet gondnokaként felette áll.",
+   "szoc":"A liberálisokhoz hasonlóan főleg erőforrás. Egy romantikus, pásztori hagyomány viszont dicséri a szépségét, és a hozzá való közelségben látja az ember kiteljesedését.",
+   "anar":"Szabályozatlan harmónia és növekedés: az egyszerűség és az egyensúly mintája, amit a társadalomszervezésben is követni kellene (társadalmi ökológia).",
+   "fasz":"Sötét, misztikus kép: az ösztön és az ősi életerő hatalma, ami megtisztít a „dekadens” intellektualizmustól. Brutális küzdelem és körforgásszerű megújulás.",
+   "fem":"Teremtő és jóindulatú. A nők termékenységük és gondoskodásuk révén közel állnak hozzá, a férfiak, a kultúra teremtményei, szembekerülnek vele.",
+   "okol":"Összefüggő egész: ember, nem ember és élettelen világ együtt. A tudás és a helyes élet forrása; a kiteljesedés a tiszteletből jön, nem az uralomból.",
+   "fund":"Az isteni teremtés kifejeződése, ami „természetes”, az Istentől rendelt. Ez tiszteletet is jelenthet, de azt is, hogy az ember szükségleteire teremtetett."}}
+ }
+}
+</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("data").textContent);
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function h(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function rnd(seed) { var s = seed; return function () { s = (s * 16807) % 2147483647; return s / 2147483647; }; }
+  function stars(svg, w, hgt, n) {
+    var g = el("g", { "class": "stars", "aria-hidden": "true" }, svg), r = rnd(42);
+    for (var i = 0; i < n; i++) { var c = el("circle", { cx: (r() * w).toFixed(1), cy: (r() * hgt).toFixed(1), r: (0.4 + r() * 1.3).toFixed(2), opacity: (0.2 + r() * 0.6).toFixed(2) }, g); if (i % 5 === 0) { c.setAttribute("class", "tw"); c.style.animationDelay = (r() * 4).toFixed(1) + "s"; } }
+  }
+  function node(svg, key, x, y, label, cls, size, year) {
+    var g = el("g", { "class": "node " + cls, tabindex: "0", role: "button", "aria-label": label, "data-key": key, transform: "translate(" + x + "," + y + ")" }, svg);
+    el("circle", { "class": "glow", r: size * 2.6 }, g); el("circle", { "class": "core", r: size }, g);
+    var t = el("text", { y: -size - 10, "text-anchor": "middle" }, g); t.textContent = label;
+    if (year) { var yt = el("text", { "class": "yr", y: size + 20, "text-anchor": "middle" }, g); yt.textContent = year; }
+    return g;
+  }
+  function edge(svg, x1, y1, x2, y2, cls, a, b, bend) {
+    var mx = (x1 + x2) / 2 + (bend || 0) * (y2 - y1), my = (y1 + y2) / 2 - (bend || 0) * (x2 - x1);
+    return el("path", { "class": "edge " + (cls || ""), d: "M" + x1 + " " + y1 + " Q" + mx.toFixed(1) + " " + my.toFixed(1) + " " + x2 + " " + y2, "data-a": a, "data-b": b }, svg);
+  }
+
+  // ---- Concept web ----
+  var halo = document.getElementById("svg-halo");
+  stars(halo, 1000, 1000, 170);
+  var CP = { allam: [500, 370], tekintely: [630, 500], nemek: [500, 630], termeszet: [370, 500] };
+  var ORDER = ["lib", "konz", "szoc", "anar", "fasz", "fem", "okol", "fund"], IP = {};
+  ORDER.forEach(function (k, i) { var a = -Math.PI / 2 + i * 2 * Math.PI / ORDER.length; IP[k] = [Math.round(500 + 390 * Math.cos(a)), Math.round(500 + 390 * Math.sin(a))]; });
+  var eg = el("g", {}, halo);
+  Object.keys(D.concepts).forEach(function (c) { Object.keys(D.concepts[c].views).forEach(function (i) { edge(eg, CP[c][0], CP[c][1], IP[i][0], IP[i][1], "", c, i, 0.08); }); });
+  Object.keys(CP).forEach(function (c) { node(halo, c, CP[c][0], CP[c][1], D.concepts[c].n, "concept", 9); });
+  ORDER.forEach(function (k) { node(halo, k, IP[k][0], IP[k][1], D.ideo[k].n, "", 6); });
+
+  // ---- Family tree ----
+  var fa = document.getElementById("svg-fa");
+  stars(fa, 1200, 800, 190);
+  function X(year) { return Math.round(110 + (year - 1740) / (2010 - 1740) * 1030); }
+  [[1740, 1800, "18. század"], [1800, 1900, "19. század"], [1900, 2000, "20. század"], [2000, 2010, "21."]].forEach(function (e, i) {
+    if (i % 2 === 0) el("rect", { "class": "era-band", x: X(e[0]), y: 0, width: X(e[1]) - X(e[0]), height: 800 }, fa);
+    var t = el("text", { "class": "era-label", x: X(e[0]) + 8, y: 790 }, fa); t.textContent = e[2];
+  });
+  var l68 = el("line", { x1: X(1968), y1: 20, x2: X(1968), y2: 770, stroke: "#5a3f6b", "stroke-dasharray": "3 5" }, fa);
+  var t68 = el("text", { "class": "era-label", x: X(1968) + 6, y: 36 }, fa); t68.textContent = "1968";
+  var TP = { felv: [X(D.felv.year), D.felv.y] };
+  Object.keys(D.ideo).forEach(function (k) { var o = D.ideo[k]; if (o.tree === false) return; TP[k] = [X(o.year), o.y]; });
+  var fg = el("g", {}, fa);
+  Object.keys(D.ideo).forEach(function (k) {
+    var o = D.ideo[k]; if (o.tree === false) return;
+    o.parents.forEach(function (p) { var a = TP[p[0]], b = TP[k]; edge(fg, a[0], a[1], b[0], b[1], p[1] === "dash" ? "dash" : p[1] === "react" ? "react" : "", p[0], k, 0.12); });
+  });
+  node(fa, "felv", TP.felv[0], TP.felv[1], D.felv.n, "root", 7, D.felv.year);
+  Object.keys(TP).forEach(function (k) { if (k === "felv") return; var o = D.ideo[k]; node(fa, k, TP[k][0], TP[k][1], o.n, o.interp ? "interp" : "", 6, o.year); });
+
+  // ---- Highlight ----
+  function highlight(svg, key) {
+    svg.classList.add("dim");
+    svg.querySelectorAll(".on, .hl").forEach(function (e) { e.classList.remove("on", "hl"); });
+    svg.querySelectorAll(".edge").forEach(function (e) {
+      if (e.dataset.a === key || e.dataset.b === key) { e.classList.add("on"); var other = e.dataset.a === key ? e.dataset.b : e.dataset.a; var n = svg.querySelector('.node[data-key="' + other + '"]'); if (n) n.classList.add("on"); }
+    });
+    var me = svg.querySelector('.node[data-key="' + key + '"]'); if (me) me.classList.add("on", "hl");
+  }
+  function clear(svg) { svg.classList.remove("dim"); svg.querySelectorAll(".on, .hl").forEach(function (e) { e.classList.remove("on", "hl"); }); }
+  [halo, fa].forEach(function (svg) {
+    svg.addEventListener("mouseover", function (e) { var n = e.target.closest(".node"); if (n) highlight(svg, n.dataset.key); });
+    svg.addEventListener("mouseleave", function () { clear(svg); });
+    svg.addEventListener("focusin", function (e) { var n = e.target.closest(".node"); if (n) highlight(svg, n.dataset.key); });
+    svg.addEventListener("pointerup", function (e) {
+      var n = e.target.closest(".node");
+      if (!n) { if (e.pointerType === "touch") clear(svg); return; }
+      if (e.pointerType === "touch" && !n.classList.contains("hl")) { highlight(svg, n.dataset.key); return; }
+      open(n.dataset.key, svg === fa ? "fa" : "halo");
+    });
+    svg.addEventListener("keydown", function (e) { var n = e.target.closest(".node"); if (n && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); open(n.dataset.key, svg === fa ? "fa" : "halo"); } });
+  });
+
+  // ---- Card ----
+  var veil = document.getElementById("veil"), panel = document.getElementById("panel"), lastFocus = null;
+  function name(k) { return k === "felv" ? D.felv.n : D.ideo[k].n; }
+  function open(key, view) {
+    lastFocus = document.activeElement; panel.replaceChildren();
+    var top = h("div", "top"), head = h("div"); head.style.display = "grid"; head.style.gap = "4px";
+    var c = D.concepts[key], o = D.ideo[key];
+    head.appendChild(h("span", "lbl", c ? "Fogalom" : key === "felv" ? "Kiindulópont" : "Ideológia"));
+    var t = h("h2", null, c ? c.n : name(key)); t.id = "p-title"; head.appendChild(t);
+    var x = h("button", "close", "Bezárás"); x.type = "button"; x.addEventListener("click", close);
+    top.appendChild(head); top.appendChild(x); panel.appendChild(top);
+    if (c) {
+      panel.appendChild(h("p", "note", "Mit gondolnak az ideológiák erről: " + c.n.toLowerCase() + "?"));
+      var list = h("div", "views-list");
+      ORDER.forEach(function (i) { if (!c.views[i]) return; var v = h("div", "v"); v.appendChild(h("b", null, D.ideo[i].n)); v.appendChild(h("span", null, c.views[i])); list.appendChild(v); });
+      panel.appendChild(list); panel.appendChild(h("p", "src", "Forrás: " + c.src + ", saját összefoglalás."));
+    } else if (key === "felv") {
+      panel.appendChild(h("p", null, D.felv.one));
+    } else {
+      panel.appendChild(h("p", "quote", o.one));
+      if (o.year && view === "fa") panel.appendChild(h("p", "note", "Megjelenése a térképen: " + o.year + " körül" + (o.interp ? ". A sorozat szerzője reakcióként, nem klasszikus ideológiaként írja le." : ".")));
+      if (o.parents && o.parents.length) {
+        panel.appendChild(h("h3", null, "Honnan nőtt ki"));
+        var ul = h("ul", "pts"); o.parents.forEach(function (p) { var li = h("li"); li.appendChild(h("strong", null, name(p[0]) + ": ")); li.appendChild(document.createTextNode(p[1] === "react" ? "ellenreakció. " + p[2] : p[2])); ul.appendChild(li); });
+        panel.appendChild(ul);
+      }
+      var cs = Object.keys(D.concepts).filter(function (k) { return D.concepts[k].views[key]; });
+      if (cs.length) {
+        panel.appendChild(h("h3", null, "Mit mond a fogalmakról"));
+        var row = h("div", "linkrow"); cs.forEach(function (k) { var b = h("button", null, D.concepts[k].n); b.type = "button"; b.addEventListener("click", function () { open(k, "halo"); }); row.appendChild(b); });
+        panel.appendChild(row);
+      }
+      if (o.link) { var a = h("a", "btn", o.link.indexOf("#") >= 0 ? "Bővebben a gyűjtőoldalon" : "Mélyfúrás: " + o.n); a.href = o.link; panel.appendChild(a); }
+    }
+    veil.hidden = false; x.focus();
+  }
+  function close() { veil.hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  veil.addEventListener("click", function (e) { if (e.target === veil) close(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !veil.hidden) close(); });
+
+  // ---- Views ----
+  document.querySelectorAll("[data-view]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("[data-view]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      document.getElementById("v-halo").hidden = b.dataset.view !== "halo";
+      document.getElementById("v-fa").hidden = b.dataset.view !== "fa";
+    });
+  });
+  if (location.hash === "#fa") document.querySelector('[data-view="fa"]').click();
+})();
+</script>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>

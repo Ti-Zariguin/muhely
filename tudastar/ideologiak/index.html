@@ -156,7 +156,7 @@ details.part { border-top: 0; padding-top: 0; }
   <!-- 2 -->
   <section class="level lv2" id="f2" hidden>
     <div class="lvhead"><span class="lbl">2. fokozat · Térkép</span><span class="t">3 perc · három korszak, egy-egy mondatban</span></div>
-    <p class="note">Koppints egy irányzatra, és a következő fokozatban kinyílik. A › jel azt jelenti, hogy van hozzá külön mélyfúrás, a szaggatott keret pedig a szerző saját értelmezését jelöli.</p>
+    <p class="note">Rajzosan is megnézheted: <a href="../fogalomterkep/">Fogalomtérkép</a>, fogalomhálóval és időrendi családfával. Koppints egy irányzatra, és a következő fokozatban kinyílik. A › jel azt jelenti, hogy van hozzá külön mélyfúrás, a szaggatott keret pedig a szerző saját értelmezését jelöli.</p>
     <div class="card era">
       <h3>A nagy rendszerindítás <span class="yr">18-19. század</span></h3>
       <p>A felvilágosodás és az ipari forradalom korában íródtak meg az alapok: az uralkodó iránti hűség helyett rendszerszintű eszmék.</p>
@@ -400,8 +400,9 @@ details.part { border-top: 0; padding-top: 0; }
     var o = e.target.closest("[data-open]");
     if (o) { show(3, false); var d = document.getElementById("i-" + o.dataset.open); if (d) { d.open = true; d.scrollIntoView({ behavior: calm }); } }
   });
-  var h = (location.hash || "").match(/^#f([1-4])$/);
-  show(h ? +h[1] : 1, !!h);
+  var h = (location.hash || "").match(/^#f([1-4])$/), ih = (location.hash || "").match(/^#i-([a-z0-9]+)$/);
+  if (ih && document.getElementById("i-" + ih[1])) { show(3, false); var d = document.getElementById("i-" + ih[1]); d.open = true; setTimeout(function () { d.scrollIntoView({ behavior: "auto" }); }, 50); }
+  else show(h ? +h[1] : 1, !!h);
 })();
 </script>
 <script>
