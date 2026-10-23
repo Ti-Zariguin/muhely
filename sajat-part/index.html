@@ -1,0 +1,895 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a műhelybe</a><span>Zariguin műhelye</span></nav>
+<title>Saját párt</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Eszmetörténeti döntéses játék Andrew Heywood Political Ideologies című könyve alapján: pártot alapítasz, hét tanácsadó vitázik, a végén csillagtérkép mutatja, hová került a pártod.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a night sky, like the Tudástár star maps. Sticky top band with the party badge and seven advisor meters,
+   one card per screen in a single column, the main action in a bar at the bottom. Deliberately a single dark theme. */
+:root {
+  --bg: #070b1a; --paper: #10173a; --sheet: #0c1230; --fg: #e9ecf8; --muted: #9aa3c7; --rule: #26305e;
+  --accent: #ffd27a; --star: #cfe0ff; --line: #3a4a8c; --chip: #1b2452; --bad: #ff8a7a; --good: #8fe0b0;
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #070b1a; --paper: #10173a; --fg: #e9ecf8; } }
+:root[data-theme="dark"] { --bg: #070b1a; --paper: #10173a; --fg: #e9ecf8; }
+
+html, body { overflow-x: clip; }
+body { background-color: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  background-image:
+    radial-gradient(1.2px 1.2px at 23px 41px, #ffffffb0, transparent), radial-gradient(1px 1px at 141px 97px, #ffffff80, transparent),
+    radial-gradient(1.4px 1.4px at 211px 173px, #cfe0ffc0, transparent), radial-gradient(1px 1px at 77px 211px, #ffffff70, transparent),
+    radial-gradient(1px 1px at 183px 23px, #ffffff90, transparent), radial-gradient(0.8px 0.8px at 109px 149px, #ffffff60, transparent),
+    radial-gradient(120% 70% at 50% 0%, #121a44 0%, transparent 65%);
+  background-size: 240px 240px, 240px 240px, 240px 240px, 240px 240px, 240px 240px, 240px 240px, 100% 100%;
+  background-attachment: fixed;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 calc(100px + env(safe-area-inset-bottom, 0px)); -webkit-tap-highlight-color: transparent; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--sheet); }
+.wrap { max-width: 680px; margin: 0 auto; display: grid; gap: 16px; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); text-wrap: balance; }
+h1 { font-weight: 800; font-size: clamp(1.7rem, 6.5vw, 2.4rem); line-height: 1.05; letter-spacing: -0.02em; }
+h2 { font-weight: 800; font-size: 1.25rem; line-height: 1.15; }
+h3 { font-weight: 700; font-size: 1rem; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--muted); }
+.fine { font-size: 0.86rem; color: var(--muted); }
+
+/* Top band */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(12, 18, 48, 0.94); border: 1px solid var(--rule); border-top: 0;
+  border-radius: 0 0 10px 10px; padding: 8px 12px 10px; display: grid; gap: 8px; backdrop-filter: blur(6px); }
+.top .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-width: 0; }
+.badge { display: inline-flex; align-items: center; gap: 8px; min-width: 0; font-family: var(--font-display); font-weight: 800; font-size: 1rem; }
+.badge span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.badge svg { width: 22px; height: 22px; flex: none; }
+.prog { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+.meters { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.m { display: grid; gap: 3px; justify-items: center; min-width: 0; font-family: var(--font-display); font-size: 0.68rem; color: var(--muted); }
+.m .n { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.m .bar { position: relative; width: 100%; height: 6px; border-radius: 3px; background: var(--chip); overflow: hidden; }
+.m .bar i { position: absolute; inset: 0 auto 0 0; background: var(--c); border-radius: 3px; transition: width 0.5s ease; }
+.m.ally .n { color: var(--accent); }
+.m.ally .n::before { content: "★ "; }
+.m.gone { opacity: 0.4; } .m.gone .n { text-decoration: line-through; }
+.m.edge .bar i { background: var(--bad); }
+
+/* Cards */
+.card { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px 18px 22px; display: grid; gap: 14px; min-width: 0;
+  box-shadow: 0 0 40px rgba(120, 150, 255, 0.08); }
+.lede { color: var(--muted); font-size: 1.02rem; }
+.theme { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.sit { font-size: 1.04rem; }
+.ask { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; border-top: 1px dashed var(--rule); padding-top: 12px; }
+
+/* Advisors */
+.av { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; flex: none; font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
+  color: #070b1a; background: var(--c); box-shadow: 0 0 14px color-mix(in srgb, var(--c) 45%, transparent); }
+.voices { display: grid; gap: 12px; }
+.voice { display: grid; grid-template-columns: 38px 1fr; gap: 10px; align-items: start; }
+.voice .who { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; font-family: var(--font-display); }
+.voice .who b { font-weight: 700; }
+.voice .who .id { font-size: 0.78rem; color: var(--c); }
+.voice .who .to { font-size: 0.78rem; color: var(--muted); }
+.voice p { margin-top: 2px; border-left: 2px solid color-mix(in srgb, var(--c) 55%, transparent); padding-left: 10px; }
+.empty { font-size: 0.88rem; color: var(--muted); font-style: italic; }
+.team { display: grid; gap: 12px; }
+.member { display: grid; grid-template-columns: 38px 1fr; gap: 10px; align-items: start; border-top: 1px solid var(--rule); padding-top: 12px; }
+.member:first-child { border-top: 0; padding-top: 0; }
+.member .who { font-family: var(--font-display); display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; }
+.member .who .id { font-size: 0.8rem; color: var(--c); }
+.member .role { font-size: 0.86rem; color: var(--muted); }
+.member q, .quote { display: block; font-style: italic; margin-top: 6px; }
+q::before { content: "„"; } q::after { content: "”"; }
+
+/* Options */
+.opts { display: grid; gap: 10px; }
+.opt { display: grid; grid-template-columns: 2em 1fr; gap: 10px; align-items: start; text-align: left; background: var(--sheet); border: 1px solid var(--line);
+  border-radius: 8px; padding: 13px 14px 13px 10px; cursor: pointer; min-height: 56px; transition: border-color 0.15s, background 0.15s; }
+.opt:hover { border-color: var(--accent); background: #141d4a; }
+.opt:active { transform: translateY(1px); }
+.opt .key { font-family: var(--font-mono); font-weight: 600; color: var(--accent); font-size: 1.05rem; text-align: center; padding-top: 1px; }
+.opt .s { font-family: var(--font-display); font-weight: 700; display: block; }
+.opt .t { display: block; font-size: 0.95rem; color: var(--muted); margin-top: 2px; }
+.opt .by { display: inline-block; margin-top: 6px; font-family: var(--font-display); font-size: 0.74rem; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 50%, transparent); border-radius: 999px; padding: 0 8px; }
+
+/* Result */
+.progline { border-left: 3px solid var(--accent); padding-left: 12px; display: grid; gap: 4px; }
+.progline .lab { font-family: var(--font-display); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.reacts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+.re { display: grid; grid-template-columns: 1fr auto; gap: 6px; align-items: baseline; font-family: var(--font-display); font-size: 0.88rem; min-width: 0; }
+.re .nm { color: var(--c); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.re .st { grid-column: 1 / -1; font-size: 0.74rem; color: var(--muted); margin-top: -4px; }
+.d { font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+.d.up { color: var(--good); } .d.down { color: var(--bad); } .d.zero { color: var(--muted); }
+.ev { border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px; display: grid; gap: 6px; background: var(--sheet); }
+.ev.leave { border-color: color-mix(in srgb, var(--bad) 60%, transparent); }
+.ev.leave h3 { color: var(--bad); }
+.ev.ally { border-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+.ev.ally h3 { color: var(--accent); }
+
+/* Founding */
+.field { display: grid; gap: 8px; }
+.field label, .field .lab { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; }
+.txt { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-family: var(--font-display); font-size: 1.05rem; width: 100%; box-sizing: border-box; }
+.swatches, .syms { display: flex; flex-wrap: wrap; gap: 8px; }
+.sw { width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent; background: var(--c); cursor: pointer; box-shadow: inset 0 0 0 3px var(--paper); }
+.sw[aria-pressed="true"] { border-color: var(--fg); }
+.sy { width: 48px; height: 48px; border-radius: 10px; border: 1px solid var(--line); background: var(--sheet); cursor: pointer; display: grid; place-items: center; color: var(--pc); }
+.sy svg { width: 28px; height: 28px; }
+.sy[aria-pressed="true"] { border-color: var(--pc); box-shadow: 0 0 12px color-mix(in srgb, var(--pc) 40%, transparent); }
+.preview { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px dashed var(--rule); border-radius: 10px; }
+.preview svg { width: 44px; height: 44px; flex: none; filter: drop-shadow(0 0 8px var(--pc)); }
+.preview b { font-family: var(--font-display); font-size: 1.2rem; }
+
+/* Ending */
+.plist { margin: 0; padding-left: 1.6em; display: grid; gap: 8px; }
+.plist li::marker { font-family: var(--font-mono); color: var(--accent); }
+.plist .tt { font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; color: var(--muted); display: block; }
+.groups { display: grid; gap: 14px; }
+.groups h3 { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.sky { border: 1px solid var(--rule); border-radius: 10px; background: radial-gradient(70% 60% at 50% 50%, #131c4a 0%, #080c20 100%); overflow: hidden; }
+.sky svg { display: block; width: 100%; height: auto; }
+.sky .bg circle { fill: #fff; }
+@media (prefers-reduced-motion: no-preference) { .sky .tw { animation: tw 4s ease-in-out infinite alternate; } .sky .me { animation: pulse 2.6s ease-in-out infinite alternate; } }
+@keyframes tw { from { opacity: 0.25; } to { opacity: 0.9; } }
+@keyframes pulse { from { opacity: 0.35; } to { opacity: 0.8; } }
+.sky .axis { stroke: #2a3670; stroke-width: 1; stroke-dasharray: 3 6; }
+.sky .axl { fill: var(--muted); font-family: var(--font-mono); font-size: 16px; }
+.sky .lbl { fill: var(--fg); font-family: var(--font-display); font-weight: 700; font-size: 21px; paint-order: stroke; stroke: #070b1a; stroke-width: 4px; stroke-linejoin: round; }
+.sky .faint .lbl { fill: var(--muted); font-weight: 500; font-size: 18px; }
+.sky .link { stroke-width: 1.6; opacity: 0.85; }
+.sky a:focus-visible .core { stroke: #fff; stroke-width: 2; }
+.near { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.near li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.near .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); transform: translateY(1px); }
+.axes { display: grid; gap: 12px; }
+.ax { display: grid; gap: 4px; }
+.ax .nm { font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; }
+.ax .track { position: relative; height: 14px; }
+.ax .track::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 2px; background: var(--rule); border-radius: 1px; }
+.ax .track::after { content: ""; position: absolute; left: 50%; top: 2px; width: 1px; height: 10px; background: var(--line); }
+.ax .pt { position: absolute; top: 1px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--c); }
+.ax .pt.me { box-shadow: 0 0 10px var(--c); z-index: 1; }
+.ax .pt.id { width: 8px; height: 8px; margin-left: -4px; top: 3px; background: transparent; border: 2px solid var(--c); }
+.ax .ends { display: flex; justify-content: space-between; gap: 10px; font-size: 0.76rem; color: var(--muted); font-family: var(--font-mono); }
+.ax .ends span:last-child { text-align: right; }
+.faintcard { border-left: 3px solid #6f6a66; padding-left: 12px; display: grid; gap: 6px; }
+.reset { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; font-family: var(--font-display); font-size: 0.85rem; }
+.lnk { background: none; border: 0; padding: 6px 2px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; color: var(--muted); }
+.lnk.danger { color: var(--bad); }
+
+/* Bottom action bar */
+.act { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: rgba(12, 18, 48, 0.96); border-top: 1px solid var(--rule);
+  padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.act .in { max-width: 680px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
+.act .hint { font-family: var(--font-display); font-size: 0.9rem; color: var(--muted); flex: 1; }
+.prim { flex: 1; min-height: 52px; background: var(--accent); color: #070b1a; border: 0; border-radius: 8px; font-family: var(--font-display); font-weight: 800;
+  font-size: 1.05rem; cursor: pointer; padding: 10px 16px; }
+.prim:active { transform: translateY(1px); }
+
+@media (max-width: 440px) {
+  .card { padding: 16px 14px 18px; }
+  .meters { gap: 4px; }
+  .m { font-size: 0.6rem; }
+  .reacts { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .m .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="top" id="top"></header>
+  <main id="view" aria-live="polite"></main>
+</div>
+<div class="act" id="act"></div>
+
+<script>
+// Saját párt: pure game logic and content (no DOM).
+// Ideology content follows the lebontás notes on Heywood, Political Ideologies (3rd ed.), chapters 1-10
+// (store/konyvtar/heywood-politikai-ideologiak/lebontas-01..10). The town, the advisors and every situation are invented.
+// The numeric positions of the ideologies on the seven axes are a game-design reading of those notes, not Heywood's numbers.
+var SIM = (function () {
+  "use strict";
+
+  // Axes: 1-2 (merged), 3, 4, 5, 7 of lebontas-01 section 12(b); axis 6 ("új politika") is split into two (F, Z),
+  // because feminism and ecologism would otherwise share a single direction.
+  var AX = [
+    { k: "B", name: "Egyenlőség és gazdaság", lo: "egyenlőség, közösségi gazdaság", hi: "piac, a különbségek elfogadása" },
+    { k: "T", name: "Tekintély", lo: "részvételi, „lágy”", hi: "tekintélyelvű, „kemény”" },
+    { k: "V", name: "Változás", lo: "megőrzés", hi: "gyökeres változás" },
+    { k: "A", name: "Az állam szerepe", lo: "kevés vagy semmi állam", hi: "erős, kiterjedt állam" },
+    { k: "N", name: "Nemzeti és globális", lo: "határtalan világ", hi: "nemzeti önrendelkezés" },
+    { k: "F", name: "Nemek", lo: "hagyományos szerepek, magánügy", hi: "a személyes politikai" },
+    { k: "Z", name: "Természet", lo: "ember és növekedés előbb", hi: "a természet előbb" }
+  ];
+  var DIMS = AX.map(function (a) { return a.k; });
+
+  var TT = "https://ti-zariguin.github.io/muhely/tudastar/ideologiak/";
+
+  // Ideology stars. pos: seven-axis position (-1..1). The map shows B (x) and T (y), after Eysenck's two-dimensional
+  // spectrum (lebontas-01, 12(c)). faint: shown on the final map only, no advisor.
+  var IDEO = [
+    { k: "lib", name: "Liberalizmus", color: "#ffd27a", link: TT, pos: { B: 0.3, T: -0.45, V: 0.2, A: -0.2, N: -0.4, F: 0.2, Z: -0.1 } },
+    { k: "kon", name: "Konzervativizmus", color: "#8fa8ff", link: TT, pos: { B: 0.4, T: 0.45, V: -0.75, A: 0.2, N: 0.5, F: -0.6, Z: 0.1 } },
+    { k: "szoc", name: "Szocializmus", color: "#ff7a6b", link: TT, pos: { B: -0.7, T: -0.05, V: 0.4, A: 0.7, N: -0.3, F: 0.3, Z: -0.3 } },
+    { k: "nac", name: "Nacionalizmus", color: "#e8b070", link: TT, pos: { B: 0.15, T: 0.4, V: -0.2, A: 0.4, N: 0.9, F: -0.45, Z: 0 } },
+    { k: "ana", name: "Anarchizmus", color: "#d5dbea", link: TT + "anarchizmus/", pos: { B: -0.55, T: -0.9, V: 0.8, A: -1, N: -0.8, F: 0.3, Z: 0.3 } },
+    { k: "fem", name: "Feminizmus", color: "#d6a8ff", link: TT + "feminizmus/", pos: { B: -0.45, T: -0.3, V: 0.6, A: 0.3, N: -0.4, F: 1, Z: 0.2 } },
+    { k: "oko", name: "Ökologizmus", color: "#7ee0a0", link: TT + "okologizmus/", pos: { B: -0.15, T: -0.55, V: 0.7, A: 0, N: -0.2, F: 0.2, Z: 1 } },
+    { k: "fas", name: "Fasizmus", color: "#9c8f88", faint: true, link: TT + "fasizmus/", pos: { B: 0.75, T: 0.95, V: 0.7, A: 1, N: 1, F: -0.9, Z: -0.2 } },
+    { k: "fund", name: "Vallási fundamentalizmus", color: "#a49d86", faint: true, link: TT, pos: { B: 0.35, T: 0.8, V: 0.4, A: 0.5, N: 0.2, F: -0.7, Z: 0 } }
+  ];
+  var IDX = {}; IDEO.forEach(function (d) { IDX[d.k] = d; });
+
+  // Why the two faint stars have no advisor (lebontas-02 12(a) Democracy; lebontas-07 3-4; lebontas-10 2, 4, 12).
+  var FAINT = [
+    { k: "fas", title: "Fasizmus: miért nincs a tanácsadók között?",
+      t: [
+        "Mert a fasizmus elutasítja azt, amire ez a játék épül: a pártok versenyét. Heywood szerint a fasizmus „totalitárius demokráciát” vall, amelyben egyedül a vezér fejezi ki a nép valódi akaratát, a párt- és választási versenyt pedig romlottnak tartja. Olaszországban 1926-ra egypártállam épült.",
+        "A mai, választásokon induló szélsőjobboldali pártokat Heywood külön, „neofasiszta” címkével tárgyalja, és nyitott kérdésnek tartja, hogy náluk a demokrácia elfogadása valódi-e, vagy csak taktika."
+      ] },
+    { k: "fund", title: "Vallási fundamentalizmus: miért nincs a tanácsadók között?",
+      t: [
+        "Nem azért, mert elvből elutasítaná a pártversenyt: Heywood bemutat olyan irányzatokat, amelyek alkotmányos, többpárti keretben, választásokon dolgoznak.",
+        "Hanem azért, mert ez a játék világi programkérdéseken méri a pártodat, a fundamentalizmus magja pedig éppen a politika vallási alapja: elutasítja a vallás és a politika szétválasztását. Heywood szerint inkább gondolkodási stílus, mint tartalom: bizonyos elveket megkérdőjelezhetetlen igazságnak tekint, és a politikai konfliktust gyakran a jó és a rossz harcának látja. Ez feszültségben áll azzal, amit a játék tőled kér: hogy minden kérdést mérlegelj, és alkudj."
+      ] }
+  ];
+
+  // Advisors. Speaking styles and stances are drawn from the "tanácsadó hangja" sections (01-05) and, for anarchism,
+  // feminism and ecologism, from the body of lebontas-06, -08, -09.
+  var ADV = [
+    { k: "lib", hoz: "Ádámhoz", name: "Vértes Ádám", short: "Ádám", ideo: "liberális", age: 41, role: "ügyvéd",
+      bio: "Pontos, szálkás ember. Mindig feltételes módban beszél, és minden javaslatnál azt keresi, hol a hatalom korlátja.",
+      join: "Belépek. Feltéve, hogy lesz írott alapszabály, és benne az is, hogyan lehet engem leváltani.",
+      pos: ["Ez jó. Nem tökéletes, de korlátozza a hatalmat, és nekem ez elég.", "Ezt aláírom. Mindenki a maga útját járhatja, és senki nem tapossa el a másikat.",
+        "Az esélyek lettek egyenlők, nem az eredmények. Pontosan így.", "Ebben a döntésben van valami ritka: bizalom az emberek eszében."],
+      neg: ["Rossz érzésem van. Olyan hatalmat adtunk ki a kezünkből, amit nehéz lesz visszavenni.", "A többség döntött, rendben. De a többség nem tévedhetetlen.",
+        "Ezt jegyzőkönyvbe kérem: nem értek egyet.", "Megint arról döntöttünk, hogyan éljenek mások. Ez nem a mi dolgunk."],
+      ally: "Ritkán látok pártot, amely ennyire komolyan veszi a saját korlátait. Számíthatsz rám.",
+      leave: "Kilépek. Nem haragból: egyszerűen nem tudok olyan pártban ülni, ahol a szabadság csak akkor számít, amikor kényelmes. A kulcsot a titkárnál hagyom." },
+    { k: "kon", hoz: "Gáspárhoz", name: "Hollós Gáspár", short: "Gáspár", ideo: "konzervatív", age: 68, role: "nyugalmazott levéltáros",
+      bio: "Lassan beszél, kerti hasonlatokkal. Nem a változással van baja, hanem a tervrajzzal, és azt mondja, a bölcs ember könnyű csomaggal utazik.",
+      join: "Nem a programotok miatt jövök. Hanem hogy legyen a teremben valaki, aki emlékszik, miért épült ez a város úgy, ahogy.",
+      pos: ["Ezt az unokáim is megköszönik. Vagy legalábbis nem fogják átkozni.", "Lassan, óvatosan, a meglévőre építve. Ez a helyes út.",
+        "Ebben a döntésben több tapasztalat van, mint amennyit bármelyikünk egy élet alatt összegyűjt.", "Ez rendet tart, és nem bont le semmit, amit nem értünk."],
+      neg: ["Tervrajzból akarunk várost építeni. Az ilyesmi ritkán végződik jól.", "Egy fát gyorsan ki lehet vágni. Megnőni lassan nő.",
+        "Nem a változással van bajom, hanem a sietséggel.", "A gyógymód rosszabb lesz a betegségnél, meglátjátok."],
+      ally: "Nem gondoltam volna, hogy egy új párt ennyire tiszteli, amit örököl. Melletted maradok.",
+      leave: "Öreg vagyok ahhoz, hogy mindent újrakezdjek, ti pedig mindent újra akartok kezdeni. Visszamegyek a levéltárba. Ott legalább a papírok tudják, honnan jöttek." },
+    { k: "szoc", hoz: "Marikához", name: "Bodnár Marika", short: "Marika", ideo: "szocialista", age: 52, role: "varrónő, szakszervezeti bizalmi",
+      bio: "Harminc éve dolgozik a cipőgyárban. Nem elvekről beszél, hanem emberekről, név szerint. Kedvenc mondása, hogy a piac jó szolga, de rossz úr.",
+      join: "Engem a gyáriak küldtek. Ha ez a párt nekik is szól, maradok.",
+      pos: ["Na, ezt el tudom mondani a gyári öltözőben is, és nem fognak kinevetni.", "Végre nem a leggyengébbek fizetik a számlát.",
+        "Ezt hívom én közös munkának, közös hozammal.", "Ettől valakinek ma este több lesz a tányérján. Ez számít."],
+      neg: ["Ezt majd magyarázd el Kovácséknak, akiknél két gyerek van és egy fizetés.", "A piacra bíztuk. A piac nem fog ránk vigyázni.",
+        "Szép elv, de ebből nem lesz kenyér.", "Akinek eddig is volt, annak most több lesz. Akinek nem, annak most sem."],
+      ally: "A gyáriak azt kérdezték, megbízhatunk-e bennetek. Azt mondtam nekik: igen.",
+      leave: "Visszaadom a tagkönyvem. A gyáriaknak megígértem, hogy nem ülök olyan asztalnál, ahol rólunk nélkülünk döntenek. Ti így döntöttetek." },
+    { k: "nac", hoz: "Leventéhez", name: "Rigó Levente", short: "Levente", ideo: "nacionalista", age: 45, role: "történelemtanár, a népdalkör vezetője",
+      bio: "Közös emlékezésről, nyelvről, ünnepről beszél. Azt vallja, hogy minden nemzetnek egyenlő joga van az önrendelkezéshez, a szomszédnak is, és hogy az erős nemzeti öntudatnak nincs szüksége ellenségre.",
+      join: "Egy párt akkor ér valamit, ha tudja, kiknek a nevében beszél. Én segítek emlékezni rá.",
+      pos: ["Erre a döntésre húsz év múlva is büszkén emlékszik majd a város.", "Itt, a mi intézményeinkben, a mi asztalunknál született. Így kell.",
+        "Ez összeköt. Azokat is, akik soha nem fognak személyesen találkozni.", "Közösségként döntöttünk, nem egyének halmazaként. Jó."],
+      neg: ["Mintha nem is lenne itt közösség, csak eladók és vevők.", "Ezzel elengedtük azt, ami összetart minket.",
+        "Ezt valahol máshol döntötték el helyettünk, és mi csak bólintottunk.", "A gyökereket nem lehet utólag visszaültetni."],
+      ally: "Most már tudom, kiknek a nevében beszél ez a párt. Az enyém is.",
+      leave: "Nem maradhatok. Egy pártnak tudnia kell, kiknek a nevében beszél, és ti ezt nem tudjátok, vagy nem is akarjátok tudni. A népdalkör szerdán próbál, oda mindig visszavárnak." },
+    { k: "ana", hoz: "Borihoz", name: "Kökény Bori", short: "Bori", ideo: "anarchista", age: 29, role: "kerékpárszerelő, a lépcsőházi kaláka szervezője",
+      bio: "Minden javaslatnál ugyanazt kérdezi: miért kell ehhez főnök? Szerinte a rend magától is kialakul, ha a kényszer megszűnik, és bármilyen hatalom megront, a jó szándékú is.",
+      join: "Egy anarchista egy pártban. Tudom, tudom, ez önmagában vicc. Azért jövök, hogy legyen itt valaki, aki minden alkalommal megkérdezi: miért kell ehhez főnök?",
+      pos: ["Na látod. Senkinek nem kellett megparancsolnia.", "Ez az első döntés, amire nem szégyellek emlékezni.",
+        "Az emberek ezt maguktól is megoldották volna. Most legalább nem álltunk az útjukba.", "Kölcsönös segítség, nem alamizsna. Jó."],
+      neg: ["Még egy szabály, még egy hivatal, még egy aláírás. Nem ezért jöttem.", "Megint felülről. Mindig felülről.",
+        "A hatalom mindenkit megront, azt is, aki jó szándékkal gyakorolja. Ma minket.", "Ez nem rend, csak engedelmesség."],
+      ally: "Még mindig gyanús nekem, hogy pártban ülök. De ebben a pártban legalább lehet kérdezni. Maradok.",
+      leave: "Mondtam, hogy egy párt nekem eleve gyanús. Most bebizonyítottátok. Ha kell valaki a kerékpártárolóhoz, a kertben megtaláltok. Ott nincs elnök." },
+    { k: "fem", hoz: "Judithoz", name: "Halmi Judit", short: "Judit", ideo: "feminista", age: 38, role: "családsegítő, egy női kör szervezője",
+      bio: "Mindig megszámolja, ki ül a teremben és ki hiányzik. Azt kérdezi, ki végzi el otthon a fizetetlen munkát, és nem fogadja el, hogy a család magánügy, ahol nincs hatalom.",
+      join: "Megszámoltam: hét tanácsadóból három nő. A városi testületben tizenötből kettő. Kezdjük innen.",
+      pos: ["Végre valaki megkérdezte, ki végzi el otthon azt a munkát, amit senki nem fizet.", "Ez a döntés átlépett a konyhaküszöbön. Ott kezdődik a politika.",
+        "Az egyenlőség nem a rendeletben kezdődik, de ott is el kell kezdődnie.", "Ezt a döntést egy nő is meghozhatta volna. Sőt, talán meg is hozta."],
+      neg: ["Megint úgy döntöttünk, mintha a családon belül nem lenne hatalom.", "Ezt a terhet is a nők fogják cipelni, csak most nem lesz rajta a nevük.",
+        "Ugyanaz a régi asztal, ugyanazokkal körülötte.", "Magánügy, mondjátok. A magánügy mindig annak kényelmes, akinek a hatalom jut."],
+      ally: "Ebben a pártban nem kell minden alkalommal elmondanom, hogy a fele város nő. Ez sokat ér.",
+      leave: "Kilépek. Nem azért, mert nem hallgattatok meg. Meghallgattatok, aztán úgy döntöttetek, mintha a fele város nem létezne. A női kör csütörtökönként találkozik, ha egyszer kíváncsiak lesztek." },
+    { k: "oko", hoz: "Áronhoz", name: "Bükki Áron", short: "Áron", ideo: "ökologista", age: 57, role: "erdész és méhész",
+      bio: "Évtizedekben és nemzedékekben számol. Az embert a természet részének tartja, nem urának, és minden döntésnél azt kérdezi: mennyi elég?",
+      join: "A tó nem szavaz, a fák sem, és a még meg nem született gyerekek sem. Valakinek az ő nevükben is szólnia kell.",
+      pos: ["A tó ezt megköszönné, ha tudna beszélni. Szerintem tud.", "Ez az első lépés a „mennyi elég?” kérdés felé.",
+        "Kevesebb, de tartósabb. Ez a jó irány.", "Most először úgy döntöttünk, mintha a város egy háló része volna, nem a közepe."],
+      neg: ["Megint gyorsabbat, nagyobbat, többet. A Föld nem nő velünk együtt.", "Ezt a számlát az unokáink fizetik, akiket meg sem kérdeztünk.",
+        "Ez a döntés úgy beszél a természetről, mintha raktár volna.", "A növekedés nem válasz. Legfeljebb halasztás."],
+      ally: "Ez a párt száz évben is tud gondolkodni. Ritka az ilyen. Veletek vagyok.",
+      leave: "Elmegyek. Ti egy gyorsabb várost akartok, én egy olyat, amely száz év múlva is megvan. Ez a kettő most nem fér el egy pártban. Ha kell méz, tudjátok, hol lakom." }
+  ];
+  var AIDX = {}; ADV.forEach(function (a, n) { AIDX[a.k] = n; a.color = IDX[a.k].color; });
+
+  // Situations. voices: {a, t, to}; opts: {s (short), t (text), by (proposer), v (axis values), prog (programme line)}.
+  var SIT = [
+    { id: "gyar", title: "Bezár a cipőgyár", theme: "gazdaság, az állam szerepe",
+      text: "Malomvölgy cipőgyára hetven éve ad munkát. A külföldi tulajdonos bejelentette, hogy fél év múlva bezár, mert máshol olcsóbb a termelés. Négyszáz ember, a város minden ötödik családja érintett. A piacon már a pártot kérdezik: mit tenne?",
+      voices: [
+        { a: "szoc", t: "Négyszáz embert nem lehet a piac kénye-kedvére hagyni. A városnak és az államnak most kell beavatkoznia: vegye át a város a gyárat, és senkit ne küldjenek el, amíg nincs új munka." },
+        { a: "lib", t: "Egy veszteséges gyárat adópénzből életben tartani csak a halált halasztja. Az embereknek új esély kell: ingyenes átképzés, kedvezmény az új vállalkozásoknak. Ne a gyár legyen közös, hanem a rajtvonal." },
+        { a: "ana", to: "szoc", t: "Marika, miért a városnak kellene átvennie? A gépeket ti ismeritek, nem a polgármester. Vegyék át a dolgozók szövetkezetként, és döntsenek maguk." },
+        { a: "nac", t: "A sorsunkról egy olyan igazgatóságon döntöttek, ahol senki nem tudja, hol van Malomvölgy. A gyár kerüljön hazai kézbe: keressünk hazai tulajdonost, és ha kell, szálljon be az állam is. Itt, nálunk döntsenek róla." }
+      ],
+      q: "Mit ír a programba a párt?",
+      opts: [
+        { s: "Városi mentőcsomag", t: "A város állami segítséggel átveszi a gyárat, elbocsátás nélkül.", by: "szoc", v: { B: -0.7, A: 0.8, V: 0.3 }, prog: "A bezáró gyárat a város veszi át állami segítséggel, elbocsátás nélkül." },
+        { s: "Átképzés, új vállalkozások", t: "A gyár bezárhat, a pénz az emberekre megy: ingyenes átképzés, kedvezmény az új vállalkozásoknak.", by: "lib", v: { B: 0.5, A: -0.3, V: 0.2 }, prog: "A gyár bezárhat, a város az átképzést és az új vállalkozásokat támogatja." },
+        { s: "A dolgozók szövetkezete", t: "A dolgozók szövetkezetként veszik át a gyárat, a város csak a hitelhez vállal kezességet.", by: "ana", v: { B: -0.6, A: -0.6, T: -0.6, V: 0.7 }, prog: "A gyárat a dolgozók szövetkezete veszi át, a város kezességet vállal a hitelre." },
+        { s: "Hazai kézben", t: "Hazai befektető veszi át, és ha kell, az állam is beszáll.", by: "nac", v: { B: 0.1, N: 0.9, A: 0.5, V: -0.1 }, prog: "A gyár hazai kézbe kerül, szükség esetén állami résztulajdonnal." }
+      ] },
+    { id: "autopalya", title: "Autópálya a Bükkösön át", theme: "természet, növekedés",
+      text: "Az új autópálya nyomvonala átvágná a Bükköst, a város fölötti öreg erdőt, ahol a tó forrásai erednek. Az út gyorsabb szállítást és munkahelyeket ígér, a környező falvak egy órával közelebb kerülnének a megyeszékhelyhez. Van egy kerülő nyomvonal is, de az harmadával drágább.",
+      voices: [
+        { a: "oko", t: "Ezt a bükköst nem mi ültettük, és nem is mi fogjuk újranöveszteni. A forrásokból iszik a tó, a tóból a város. Ne autópályát építsünk, hanem a vasutat tegyük rendbe, és tanuljunk meg kevesebbet utazni." },
+        { a: "szoc", to: "oko", t: "Áron, a gyár bezár. Az emberek munkát keresnek, és a megyeszékhelyen van munka. Nekik nem tájkép kell, hanem busz, ami időben odaér." },
+        { a: "kon", t: "Letéteményesei vagyunk annak, amit ránk hagytak, és az erdő a még meg nem születetteké is. Fizessük meg a kerülő utat. Drágább, de nem bont le semmit, amit később megbánnánk." },
+        { a: "ana", t: "És ki kérdezte meg a falvakat? Ezt egy minisztériumi asztalon rajzolták. Döntsenek a környékbeliek, helyi szavazáson." }
+      ],
+      q: "Mi legyen a párt álláspontja?",
+      opts: [
+        { s: "Épüljön az eredeti nyomvonalon", t: "Gyorsabb, olcsóbb, munkát hoz. A kivágott erdőt máshol telepítéssel pótolják.", by: "szoc", v: { Z: -0.8, A: 0.4, B: -0.2 }, prog: "Az autópálya az eredeti nyomvonalon épül, a kivágott erdőt telepítéssel pótolják." },
+        { s: "Kerülő nyomvonal, drágábban", t: "Az út megépül, de kikerüli a Bükköst. A többletköltséget vállaljuk.", by: "kon", v: { Z: 0.4, V: -0.6, A: 0.2, B: 0.2 }, prog: "Az autópálya kerülő nyomvonalon épül, a Bükkös érintetlen marad." },
+        { s: "Vasút autópálya helyett", t: "Ne épüljön autópálya: a vasútvonal felújítása és védett erdő.", by: "oko", v: { Z: 1, V: 0.6, B: -0.2 }, prog: "Autópálya helyett a vasútvonal felújítása, a Bükkös védett terület lesz." },
+        { s: "Döntsenek a falvak", t: "Helyi népszavazás a környező falvakban, és azt képviseljük, amit ők döntenek.", by: "ana", v: { T: -0.8, A: -0.5, V: 0.3 }, prog: "Az autópályáról a környező falvak helyi népszavazáson döntenek." }
+      ] },
+    { id: "tanterv", title: "Ki írja a helytörténet-órát?", theme: "hagyomány, tekintély, nemzet",
+      text: "A város iskolái új tantárgyat kapnak, helytörténetet és állampolgári ismereteket, heti egy órában. A tankönyv még nincs megírva. A kérdés az, ki döntsön a tartalmáról, és mi kerüljön bele.",
+      voices: [
+        { a: "nac", t: "Húsz éve tanítok. A gyerekek tudják, mennyi adat fér a telefonjukra, de azt nem, ki építette a malmot, amelyről a város a nevét kapta. Legyen benne a nyelvünk, a történelmünk, a dalaink. Ez tart össze minket." },
+        { a: "lib", to: "nac", t: "Levente, a tény legyen benne, de a kérdés is. Az iskola dolga nem az, hogy megmondja, mit gondoljanak, hanem hogy megtanítsa őket gondolkodni. Az állam adjon keretet, a tartalomról döntsenek az iskolák." },
+        { a: "fem", t: "Belenéztem a tervezetbe. Huszonhárom név szerepel benne, mind férfi. A város asszonyai, akik a háború után újjáépítették a malmot, egy mondatot sem kaptak." },
+        { a: "oko", t: "A helytörténet nem csak az emberek története. Tanítsák meg a gyerekeknek, honnan jön a víz, mi él a tóban, miért áll ott a Bükkös. Amit ismerünk, arra vigyázunk." }
+      ],
+      q: "Mit javasol a párt?",
+      opts: [
+        { s: "Egységes nemzeti tananyag", t: "Nyelv, történelem, hagyomány, a város szakértői testületének jóváhagyásával.", by: "nac", v: { N: 0.9, T: 0.4, V: -0.3 }, prog: "Egységes nemzeti és helytörténeti tananyag, szakértői jóváhagyással." },
+        { s: "Keret és iskolai szabadság", t: "Az állam csak keretet ad, az iskolák maguk döntenek, a kritikus gondolkodás tanítása kötelező.", by: "lib", v: { T: -0.4, A: -0.3, N: -0.4, V: 0.2 }, prog: "Az iskolák maguk döntenek a tananyagról, a kritikus gondolkodás tanítása kötelező." },
+        { s: "A város asszonyai is", t: "A malom újjáépítőitől a gyári varrónőkig: nők és férfiak története.", by: "fem", v: { F: 1, V: 0.5, B: -0.3 }, prog: "A helytörténetben a város asszonyainak története is helyet kap." },
+        { s: "A város és a táj története", t: "Forrás, tó, erdő, és hogyan él velük az ember.", by: "oko", v: { Z: 0.9, V: 0.4, N: -0.1 }, prog: "A helytörténet-óra a táj és az ember közös történetével kezdődik." }
+      ] },
+    { id: "idosek", title: "Ki gondozza az időseket?", theme: "jólét, adó, nemek",
+      text: "Malomvölgyben minden harmadik ember hatvan fölött van. Az idősotthonba három év a várólista. A házi gondozást ma főleg a lányok és a menyek végzik, munka mellett, fizetség nélkül. A városnak döntenie kell, honnan legyen pénz, és ki végezze a munkát.",
+      voices: [
+        { a: "szoc", t: "Emeljük meg a helyi adót azoknak, akiknek több van, és építsen a város rendes idősotthont fizetett ápolókkal. A gondoskodás nem alamizsna, hanem a közös munka közös hozama." },
+        { a: "lib", t: "Az adóemeléssel óvatos vagyok. Adjunk gondozási utalványt a családoknak, és válasszák ki ők, melyik szolgáltatót kérik. A választás joga az övék, nem a hivatalé." },
+        { a: "kon", t: "Az idős ember nem ügyfél. Régen a család, a szomszéd és az egyházközség vigyázott rájuk. Ezt kell megerősíteni, nem kiváltani egy hivatallal." },
+        { a: "fem", to: "kon", t: "Gáspár bácsi, a „család” ebben a mondatban azt jelenti: a lányok. Senki nem fizeti őket, és közben elveszítik a saját állásukat. Ha a családra bízzuk, legyen fizetett munka, és vegyék ki a részüket a fiúk is." }
+      ],
+      q: "Melyik megoldás kerül a programba?",
+      opts: [
+        { s: "Progresszív adó, városi otthon", t: "Aki többet keres, többet fizet, és a város saját idősotthont épít fizetett ápolókkal.", by: "szoc", v: { B: -0.8, A: 0.8 }, prog: "Progresszív helyi adóból városi idősotthon, fizetett ápolókkal." },
+        { s: "Gondozási utalvány", t: "Adóemelés nélkül: a családok utalványt kapnak, és maguk választanak szolgáltatót.", by: "lib", v: { B: 0.5, A: -0.3, F: 0.1 }, prog: "Gondozási utalvány a családoknak, szabad szolgáltatóválasztással, adóemelés nélkül." },
+        { s: "Család és gyülekezet", t: "A város kisebb összeggel támogatja a családokat és a gyülekezeti segítőköröket, új intézmény nélkül.", by: "kon", v: { B: 0.3, A: -0.2, V: -0.7, F: -0.6 }, prog: "Az idősgondozás a családok és a gyülekezeti segítőkörök dolga marad, kis városi támogatással." },
+        { s: "Fizetett otthoni ápolás", t: "Fizetés és nyugdíjjog az otthon ápolóknak, gondozási szabadság a férfiaknak is.", by: "fem", v: { F: 1, B: -0.5, A: 0.4, V: 0.4 }, prog: "Aki otthon ápol, fizetést és nyugdíjjogot kap, a gondozási szabadság a férfiaknak is jár." }
+      ] },
+    { id: "kamerak", title: "Kamerák a főtéren", theme: "szabadság és rend",
+      text: "Egy hónapja kirabolták a főtéri patikát, azóta este kevesebben járnak ki. A rendőrkapitány arcfelismerő kamerákat szerelne a főtérre és a buszállomásra, és több járőrt kér. Az ára a városi kassza tizedrésze.",
+      voices: [
+        { a: "kon", t: "Az emberben ott a rossz, bennem is, benned is. Csak a következetesen betartatott törvény tartja vissza. Kell a kamera, és kell a rendőr. Rend nélkül szabadság sincs." },
+        { a: "lib", to: "kon", t: "Gáspár, minden kormány lehetséges zsarnok, a jó szándékú is. Egy arcfelismerő kamera nemcsak a tolvajt látja, hanem azt is, ki megy be a szakszervezetbe vagy az orvoshoz. Ha kamera, akkor bírói engedéllyel, és harminc nap után töröljék a felvételt." },
+        { a: "ana", t: "Kamera nélkül is tudjuk, ki lakik a téren. Szervezzünk esti szomszédsági sétákat, és nyissuk ki újra az ifjúsági klubot. A biztonság nem a rendőrtől jön, hanem attól, hogy ismerjük egymást." },
+        { a: "fem", t: "Kérdezzétek meg a nőket, miért nem járnak ki este. Nem a patika miatt, hanem a sötét buszmegálló és a kivilágítatlan aluljáró miatt. Kezdjük a lámpákkal." }
+      ],
+      q: "Mit képvisel a párt a testületben?",
+      opts: [
+        { s: "Kamerák és több rendőr", t: "Arcfelismerő kamerák a főtéren és a buszállomáson, több esti járőr.", by: "kon", v: { T: 0.8, A: 0.6, V: -0.3 }, prog: "Arcfelismerő kamerák a főtéren és több esti járőr." },
+        { s: "Kamera szigorú korlátokkal", t: "Csak bírói engedéllyel, harminc nap után törölt felvételekkel.", by: "lib", v: { T: -0.3, A: -0.1 }, prog: "Kamerák csak bírói engedéllyel, a felvételek harminc nap után törlődnek." },
+        { s: "Szomszédság és ifjúsági klub", t: "Kamerák helyett esti szomszédsági séták és nyitott ifjúsági klub, a lakók szervezésében.", by: "ana", v: { T: -0.9, A: -0.8, V: 0.5 }, prog: "Kamerák helyett szomszédsági esti séták és nyitott ifjúsági klub." },
+        { s: "Világítás, éjszakai busz", t: "A kamerapénzből kivilágított megállók és aluljárók, éjszakai buszjárat, a nők javaslatai alapján.", by: "fem", v: { F: 0.9, T: -0.3, A: 0.3 }, prog: "A kamerapénzből kivilágított megállók és éjszakai busz, a nők javaslatai alapján." }
+      ] },
+    { id: "szobor", title: "Szobor a főtérre", theme: "nemzet, hagyomány, emlékezet",
+      text: "A nemzeti ünnepre a város lovas szobrot állítana a főtérre, a város szülöttének, egy szabadságharcban elesett huszártisztnek. A szoborra gyűjtés is indult. Közben a játszótéren két éve nincs hinta, mert nem jut rá pénz.",
+      voices: [
+        { a: "nac", t: "Az ünnep, a zászló, a közös emlékezés nem díszlet. Ezek tartják össze azokat, akik soha nem fognak személyesen találkozni. Álljon a szobor, és az ünnepen legyen ott az egész város." },
+        { a: "kon", t: "Emlékezni kell, de ne mi találjuk ki újra az ünnepet. Legyen olyan, amilyen a nagyapáink idejében volt: koszorú, ének, a régi emléktábla rendbe téve. A hagyomány nem attól erős, hogy nagy." },
+        { a: "fem", t: "Megszámoltam: a városban kilenc szobor áll, mind férfit ábrázol. Ha már szobor, legyen a malmot újjáépítő asszonyoké." },
+        { a: "ana", to: "nac", t: "Levente, egy bronzló nem tart össze senkit. Egy hinta igen, azon a gyerekek együtt ülnek. Legyen az ünnep a lakóké: közös főzés a téren, a pénz pedig menjen a játszótérre." }
+      ],
+      q: "Mit javasol a párt?",
+      opts: [
+        { s: "Lovas szobor, nagy ünnep", t: "Álljon a lovas szobor, és a város nagy nemzeti ünnepséget rendez.", by: "nac", v: { N: 0.9, T: 0.3, V: -0.2 }, prog: "Lovas szobor a főtéren és nagy nemzeti ünnepség." },
+        { s: "A régi szokás szerint", t: "Szobor helyett a régi emléktábla felújítása, koszorú és ének, ahogy mindig.", by: "kon", v: { N: 0.5, V: -0.9 }, prog: "Az ünnep a régi szokás szerint: koszorú, ének, felújított emléktábla." },
+        { s: "Szobor a város asszonyainak", t: "A főtéri szobor a malmot újjáépítő malomvölgyi asszonyoknak állít emléket.", by: "fem", v: { F: 1, N: 0.2, V: 0.5 }, prog: "A főtéri szobor a malmot újjáépítő malomvölgyi asszonyoknak állít emléket." },
+        { s: "Közös főzés, hinta", t: "Szobor helyett közös ünnepi főzés a téren, a gyűjtött pénz a játszótérre megy.", by: "ana", v: { N: -0.6, T: -0.6, V: 0.4, B: -0.4 }, prog: "Szobor helyett közös ünnepi főzés, a gyűjtött pénz a játszótérre megy." }
+      ] },
+    { id: "ber", title: "Egyenlő bér a városi cégeknél", theme: "nemek, munka, család",
+      text: "Kiszivárgott a városi vízmű és a távfűtő cég bérlistája. Ugyanabban a munkakörben a nők átlagosan tizenöt százalékkal kevesebbet keresnek. A cégvezetők szerint ez nem szándékos: a férfiak többet túlóráznak, a nők gyakrabban mennek el korábban a gyerekért.",
+      voices: [
+        { a: "fem", t: "„Nem szándékos.” Persze. A nő azért megy el a gyerekért, mert valakinek el kell mennie, és ezt soha senki nem kérdezte meg a férfiaktól. Ez nem magánügy. A személyes politikai." },
+        { a: "lib", t: "Ugyanazért a munkáért ugyanaz a bér, ez nem vita tárgya. Legyen nyilvános a bértábla, és akit hátrány ér, perelhessen. A törvény előtt nincs nő és férfi." },
+        { a: "szoc", to: "lib", t: "Ádám, a bértábla nem viszi el a gyereket a bölcsődébe. Legyen ingyenes városi bölcsőde és apaszabadság, ami elvész, ha az apa nem veszi ki. Akkor a túlórát is meg lehet osztani." },
+        { a: "kon", t: "Vannak, akik dolgozni járnak, és vannak, akik otthon nevelik a gyereket. Nem minden család akarja ugyanazt. Ne a hivatal döntse el, ki menjen a gyerekért." }
+      ],
+      q: "Melyik javaslat mellé áll a párt?",
+      opts: [
+        { s: "Nyilvános bértábla", t: "A városi cégek bértáblája nyilvános, a nemen alapuló bérkülönbség perelhető.", by: "lib", v: { F: 0.6, A: -0.1, B: 0.3 }, prog: "Nyilvános bértábla a városi cégeknél, a bérdiszkrimináció perelhető." },
+        { s: "Bölcsőde és apaszabadság", t: "Ingyenes városi bölcsőde, és apaszabadság, ami elvész, ha nem veszik ki.", by: "szoc", v: { F: 0.7, B: -0.7, A: 0.7 }, prog: "Ingyenes városi bölcsőde és apaszabadság, amely elvész, ha nem veszik ki." },
+        { s: "Kvóta és a láthatatlan munka", t: "A vezetés fele nő, és a város méri a fizetetlen otthoni munkát is.", by: "fem", v: { F: 1, V: 0.7, A: 0.3 }, prog: "Nemi kvóta a városi cégek vezetésében, a fizetetlen otthoni munka is bekerül a városi statisztikába." },
+        { s: "A családokra bízzuk", t: "A bér a cégek dolga, az otthon maradó szülő pótlékot kap.", by: "kon", v: { F: -0.7, V: -0.6, B: 0.4 }, prog: "A bér a cégek dolga, az otthon maradó szülő városi pótlékot kap." }
+      ] },
+    { id: "gunydal", title: "Gúnydal a városnapon", theme: "szólásszabadság",
+      text: "A városnapon egy helyi zenekar gúnydalt énekelt a polgármesterről, a templomról és a hősi emlékműről. A felvétel bejárta a várost. Sokan nevettek, sokan sértőnek tartják, és többen azt követelik, hogy a zenekart tiltsák ki a jövő évi rendezvényekről.",
+      voices: [
+        { a: "lib", t: "Én is utálhatom a dalukat, de a jogukat, hogy elénekeljék, megvédem. A rossz gondolatot vitában kell legyőzni, nem hallgatással. A tiltás egy olyan út első lépése, amelyről nehéz visszafordulni." },
+        { a: "kon", t: "Szabadság van, persze. De a városi ünnep nem kocsma. A közös ünnep a közös tiszteleten áll, és aki ezt gúnyolja, a saját közösségét gúnyolja. A városi színpadra legyen szabály." },
+        { a: "nac", to: "lib", t: "Ádám, a hősi emlékmű nem a polgármesteré. Azoké, akiknek a neve rajta van. Gúnyolják a hatalmat, rendben, de a halottakat hagyják békén." },
+        { a: "ana", t: "Egy jó gúnydal a legjobb dolog, ami egy hatalommal történhet. Ha a hatalom kitilthatja azt, aki kineveti, akkor legközelebb nem nevetni fogunk, hanem suttogni." }
+      ],
+      q: "Mi a párt álláspontja?",
+      opts: [
+        { s: "Szóljon a dal, utána vita", t: "Nincs tartalmi tiltás a városi színpadon. Vitás ügyben a város nyilvános vitaestet tart.", by: "lib", v: { T: -0.6, A: -0.3, V: 0.2 }, prog: "A városi színpadon nincs tartalmi tiltás, vitás ügyben nyilvános vitaest." },
+        { s: "Szabály a városi színpadra", t: "Tilos a vallási és hősi jelképek gúnyolása, a zenekar jövőre nem léphet fel.", by: "kon", v: { T: 0.6, V: -0.6, N: 0.5 }, prog: "A városi rendezvényeken tilos a vallási és hősi jelképek gúnyolása." },
+        { s: "A hatalom igen, a halottak nem", t: "A zenekar felléphet, de az emlékművet érintő részt nem játszhatja a városi színpadon.", by: "nac", v: { T: 0.2, N: 0.7 }, prog: "A hatalmat szabad gúnyolni, a hősi emlékművet a városi színpadon nem." },
+        { s: "Nyílt színpad mindenkinek", t: "A városnapon legyen nyílt színpad, ahol bárki felléphet, előzetes engedély nélkül.", by: "ana", v: { T: -1, A: -0.6, V: 0.6 }, prog: "A városnapon nyílt színpad, ahol bárki engedély nélkül felléphet." }
+      ] },
+    { id: "munkasok", title: "Új munkások érkeznek", theme: "nemzet, identitás, munka",
+      text: "A város szélén megnyílt egy csomagolóüzem. A munkások egy része messziről, más országokból érkezik, mert a helyiek közül kevesen jelentkeztek. Lakást keresnek, a gyerekeik iskolába mennének, és a piacon már más nyelven is alkudnak.",
+      voices: [
+        { a: "nac", t: "Szívesen látom őket. De aki itt él, tanulja meg a nyelvünket, és ismerje meg a szokásainkat. A beilleszkedés nem kegy, hanem a közös élet feltétele. A felvételnél pedig a helyiek kapjanak elsőbbséget." },
+        { a: "lib", t: "Minden ember önmagában cél, nem eszköz. Aki itt dolgozik és adót fizet, annak ugyanazok a jogai, mint nekem. Ingyenes nyelvtanfolyam, igen, de lehetőségként, nem feltételként." },
+        { a: "szoc", t: "Engem az érdekel, mennyit fizetnek nekik. Ha kevesebbet, mint a helyieknek, akkor mindenki bérét lenyomják. Ugyanaz a bér, és jöjjenek be a szakszervezetbe, velünk együtt." },
+        { a: "ana", to: "nac", t: "Levente, a határt is valaki húzta meg, valamikor, valakik fölött. Akik itt laknak, azok itt laknak. Hívjuk meg őket a kertbe, a többit megoldjuk együtt." }
+      ],
+      q: "Mit képvisel a párt?",
+      opts: [
+        { s: "Beilleszkedés, helyi elsőbbség", t: "A helyiek elsőbbséget kapnak a felvételnél, az újonnan érkezőktől nyelvtanulást és beilleszkedést várunk.", by: "nac", v: { N: 0.9, V: -0.3, T: 0.3 }, prog: "Helyi elsőbbség a felvételnél, az újonnan érkezőktől nyelvtanulást és beilleszkedést várunk." },
+        { s: "Egyenlő jogok, nyelvtanfolyam", t: "Az új munkásoknak ugyanazok a jogaik, mint bárkinek, ingyenes, önkéntes nyelvtanfolyammal.", by: "lib", v: { N: -0.6, T: -0.4, B: 0.2 }, prog: "Az új munkásoknak egyenlő jogok, ingyenes, önkéntes nyelvtanfolyam." },
+        { s: "Egyenlő bér, közös szakszervezet", t: "Ugyanaz a bér, mint a helyieknek, közös szakszervezet, városi ellenőrzéssel.", by: "szoc", v: { B: -0.8, N: -0.3, A: 0.5 }, prog: "Egyenlő bér az új munkásoknak, közös szakszervezetben a helyiekkel." },
+        { s: "Nyitott város, közös kert", t: "Nincs külön szabály: a lakók és az újonnan érkezők maguk szerveződnek.", by: "ana", v: { N: -1, A: -0.7, T: -0.7 }, prog: "Nincs külön szabály az újonnan érkezőkre, a város a lakók önszerveződését segíti." }
+      ] },
+    { id: "iskola", title: "Bezárnák a falusi iskolát", theme: "helyi közösség és központi állam",
+      text: "A minisztérium összevonná a kistérség iskoláit. A szomszédos Kisberek iskolája bezárna, és a negyven gyerek naponta harminc kilométert buszozna Malomvölgybe. A minisztérium szerint így jobb tanárokat és laborokat kapnak. A falu szerint a szívét veszíti el.",
+      voices: [
+        { a: "nac", t: "Egy falu iskola nélkül csak alvóhely. Nem kell mindent a fővárosban eldönteni. A falu tarthassa meg az iskoláját, és a fenntartás kerüljön vissza a településhez." },
+        { a: "szoc", t: "A labor és a jó tanár annak a gyereknek kell a legjobban, akinek otthon nincs. Ha a központi pénz egyenlővé teszi az esélyeket, legyen összevonás, de a busz legyen ingyenes, és a kisberekiek is ugyanazt kapják." },
+        { a: "oko", to: "szoc", t: "Marika, napi hatvan kilométer egy hétévesnek, minden nap, évtizedekig. Kis léptékű, közeli iskola kell, ami a környékre épít. Ami kicsi, az nem elmaradott." },
+        { a: "ana", t: "Tartsák fenn a szülők, a tanárok és a falu közösen, ha kell, szövetkezetben. Nem kell ehhez minisztériumi engedély, csak az, hogy ne álljanak az útjukba." }
+      ],
+      q: "Mit javasol a párt?",
+      opts: [
+        { s: "Összevonás ingyenes busszal", t: "Összevonás, ingyenes iskolabusz, egyenlő felszereltség mindkét településnek.", by: "szoc", v: { A: 0.7, B: -0.5, T: 0.2, Z: -0.3 }, prog: "Az iskolák összevonása, ingyenes iskolabusszal és egyenlő felszereltséggel." },
+        { s: "Helyi fenntartás", t: "A falusi iskola marad, a fenntartása visszakerül a településhez.", by: "nac", v: { N: 0.7, A: -0.1, V: -0.3 }, prog: "A falusi iskola marad, a fenntartás visszakerül a településhez." },
+        { s: "Kis iskola a táj közepén", t: "Kis osztályok, az erdőre és a kertre épülő tanítás, a buszpénz ide megy.", by: "oko", v: { Z: 0.8, V: 0.5, A: -0.2 }, prog: "A kis falusi iskola megmarad, a természetre épülő tanítással." },
+        { s: "Szülői szövetkezet", t: "A falusi iskolát a szülők, a tanárok és a lakók szövetkezete tartja fenn.", by: "ana", v: { A: -0.9, T: -0.8, V: 0.6 }, prog: "A falusi iskolát a szülők, tanárok és lakók szövetkezete tartja fenn." }
+      ] },
+    { id: "aruhaz", title: "Áruház a gyümölcsös helyén", theme: "növekedés, piac, természet",
+      text: "Egy áruházlánc nagy bevásárlóközpontot építene a város szélén, a régi gyümölcsös helyén. Kétszáz munkahely, olcsóbb árak, ingyenes parkoló. A belvárosi boltosok és a piaci termelők attól félnek, hogy be kell zárniuk.",
+      voices: [
+        { a: "lib", t: "Az emberek maguk döntsék el, hol vásárolnak. Ha az áruház olcsóbb, az a szegényebb családoknak jó. Nem az én dolgom eldönteni, hogy valaki a piacon vegye-e a paradicsomot." },
+        { a: "oko", t: "Kétszáz munkahely, és ezer autó minden szombaton. A gyümölcsös élő rendszer, az áruház fogyasztó gép. A kérdés nem az, mennyivel olcsóbb, hanem az, mennyi elég. A piac és a helyi termelők kapjanak támogatást." },
+        { a: "kon", t: "A piacon száz éve ugyanott áll Szabó néni standja. Nem vagyok a fejlődés ellen, de a belvárost nem lehet pótolni. Épülhet áruház, de kisebb, és a belvárosi boltok kapjanak védelmet." },
+        { a: "szoc", to: "lib", t: "Ádám, az olcsó ár valahonnan jön, általában a pénztárosok béréből. Ha épül, akkor csak kollektív szerződéssel, és a város kösse ki a tisztességes bért." }
+      ],
+      q: "Mi kerül a programba?",
+      opts: [
+        { s: "Épüljön, a vevők döntenek", t: "Az áruház szabadon épülhet, a többit a verseny eldönti.", by: "lib", v: { B: 0.8, A: -0.6, Z: -0.7 }, prog: "A bevásárlóközpont szabadon épülhet, a többit a verseny dönti el." },
+        { s: "Marad a gyümölcsös", t: "Az áruház nem épül meg. A város a piacot és a helyi termelőket támogatja.", by: "oko", v: { Z: 0.9, V: 0.5, B: -0.3 }, prog: "A gyümölcsös megmarad, a város a piacot és a helyi termelőket támogatja." },
+        { s: "Kisebb, a belváros védelmével", t: "Kisebb áruház épülhet, a belvárosi boltok és a piac védelmével.", by: "kon", v: { V: -0.7, B: 0.4, Z: 0.1 }, prog: "Kisebb áruház épülhet, a belvárosi boltok és a piac védelmével." },
+        { s: "Csak tisztességes bérrel", t: "Az áruház csak kollektív szerződéssel és városi bérgaranciával épülhet meg.", by: "szoc", v: { B: -0.6, A: 0.6, Z: -0.3 }, prog: "Az áruház csak kollektív szerződéssel és városi bérgaranciával épülhet." }
+      ] },
+    { id: "alapszabaly", title: "Ki dönt a pártban?", theme: "tekintély, demokrácia",
+      text: "A választás előtti utolsó héten a tagság összegyűlik, hogy elfogadja az alapszabályt. A kérdés egyszerű, a vita nem az: ki dönt a pártban, és hogyan?",
+      voices: [
+        { a: "kon", t: "Egy hajónak kormányos kell. Legyen egy elnök, akit tisztelnek, és aki felel a döntésekért. A tekintély nem zsarnokság, ha felelősség jár vele." },
+        { a: "lib", t: "Írott alapszabály, titkos szavazással választott vezetőség, két ciklus után kötelező váltás. És legyen benne, hogyan lehet engem is leváltani." },
+        { a: "ana", to: "kon", t: "Gáspár, nincs elnök. Minden fontos kérdésről a közgyűlés dönt, a szóvivők havonta váltják egymást. Ha egy párt hierarchia, akkor ugyanaz lesz belőle, ami ellen létrejött." },
+        { a: "fem", t: "Akármelyik változat legyen, a vezetésben fele-fele arányban legyenek nők és férfiak. És ne este kilenckor tartsuk a gyűlést, amikor a tagság fele a gyereket fekteti." }
+      ],
+      q: "Milyen alapszabályt fogad el a párt?",
+      opts: [
+        { s: "Egy elnök, aki felel", t: "A párt élén egy elnök áll, aki a döntésekért személyesen felel.", by: "kon", v: { T: 0.8, V: -0.4 }, prog: "A párt élén egy elnök áll, aki a döntésekért személyesen felel." },
+        { s: "Választott vezetőség", t: "Titkosan választott vezetőség, írott alapszabály, két ciklus után kötelező váltás.", by: "lib", v: { T: -0.4, V: 0.1 }, prog: "Titkosan választott vezetőség, két ciklus után kötelező váltás." },
+        { s: "Közgyűlés, forgó szóvivők", t: "Nincs elnök: minden fontos kérdésben a közgyűlés dönt, a szóvivők havonta váltják egymást.", by: "ana", v: { T: -1, A: -0.8, V: 0.8 }, prog: "Nincs elnök: a közgyűlés dönt, a szóvivők havonta váltják egymást." },
+        { s: "Kettős vezetés", t: "Két társelnök, egy nő és egy férfi, paritásos vezetőség, kora esti gyűlések gyerekfelügyelettel.", by: "fem", v: { F: 1, T: -0.3, V: 0.5 }, prog: "Két társelnök, egy nő és egy férfi, paritásos vezetőség, gyerekfelügyelet a gyűléseken." }
+      ] }
+  ];
+
+  // Party look.
+  var COLORS = [
+    { name: "borostyán", c: "#ffc857" }, { name: "korall", c: "#ff7a59" }, { name: "rózsa", c: "#ff8fc6" }, { name: "ibolya", c: "#b79cff" },
+    { name: "égkék", c: "#6fc3ff" }, { name: "türkiz", c: "#4fe0d0" }, { name: "menta", c: "#8ee88a" }, { name: "holdfény", c: "#eef1ff" }
+  ];
+  // Symbols as SVG path data in a 24x24 box (drawn with stroke).
+  var SYMS = [
+    { name: "csillag", d: "M12 2.5l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8 6.2 20l1.4-6.4L2.7 9.2l6.5-.7z" },
+    { name: "nap", d: "M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" },
+    { name: "hold", d: "M15.5 3.5a8.5 8.5 0 1 0 5 13.6A7 7 0 0 1 15.5 3.5z" },
+    { name: "hullám", d: "M2 9c2.5-3 5-3 7.5 0s5 3 7.5 0 3.5-2 5-1M2 15c2.5-3 5-3 7.5 0s5 3 7.5 0 3.5-2 5-1" },
+    { name: "levél", d: "M5 19C5 10 10 4.5 20 4c-.5 10-6 15-15 15zM5 19l8-8" },
+    { name: "híd", d: "M2 17h20M3 17c2-6 5.5-9 9-9s7 3 9 9M7 17v-4.5M12 17V8M17 17v-4.5" },
+    { name: "madár", d: "M2 10c3-1 6 0 10 4 4-4 7-5 10-4M12 14l-1 5" },
+    { name: "hegy", d: "M2 20l7-12 4 6 3-4 6 10z" }
+  ];
+
+  // Tuning (see balance.cjs). Reaction to an option: K * (C - mean axis distance), plus a bonus for the proposer.
+  var START_REL = 50, LEAVE = 20, ALLY = 90, UNALLY = 76, K = 32, C = 0, BON = 2, PS = 0.7, NS = 1.5, DMIN = -10, DMAX = 10;
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function start() {
+    var rel = {}; ADV.forEach(function (a) { rel[a.k] = START_REL; });
+    return { v: 1, phase: "intro", i: 0, party: { name: "", color: 0, sym: 0 }, rel: rel, gone: {}, ally: {}, picks: [] };
+  }
+  function toFound(S) { if (S.phase === "intro") S.phase = "found"; }
+  function setParty(S, name, color, sym) {
+    if (typeof name === "string") S.party.name = name.replace(/\s+/g, " ").slice(0, 40);
+    if (color != null && color >= 0 && color < COLORS.length) S.party.color = color;
+    if (sym != null && sym >= 0 && sym < SYMS.length) S.party.sym = sym;
+  }
+  function partyName(S) { var n = (S.party.name || "").trim(); return n || "Malomvölgyi Új Párt"; }
+  function found(S) { if (S.phase === "found") { S.party.name = partyName(S); S.phase = "meet"; } }
+  function begin(S) { if (S.phase === "meet") { S.phase = "q"; S.i = 0; } }
+  function present(S, k) { return !(k in S.gone); }
+
+  function meanDist(v, pos) {
+    var s = 0, n = 0;
+    for (var d in v) { s += Math.abs(v[d] - pos[d]); n++; }
+    return n ? s / n : 0;
+  }
+  // Centred per situation: an advisor's reaction is measured against how far, on average, that situation's options
+  // are from them, so a random programme does not drift towards any one advisor. C shifts everyone a little.
+  function reaction(o, k, sit) {
+    sit = sit || SIT.filter(function (s) { return s.opts.indexOf(o) >= 0; })[0];
+    var pos = IDX[k].pos, mu = 0;
+    sit.opts.forEach(function (x) { mu += meanDist(x.v, pos); });
+    mu /= sit.opts.length;
+    var x = K * (mu - meanDist(o.v, pos));
+    // Slights weigh more than favours.
+    var r = Math.round((x > 0 ? x * PS : x * NS) + C) + (o.by === k ? BON : 0);
+    return clamp(r, DMIN, DMAX);
+  }
+  function choose(S, k) {
+    if (S.phase !== "q") return null;
+    var sit = SIT[S.i], o = sit.opts[k];
+    if (!o) return null;
+    var d = {}, ev = [];
+    ADV.forEach(function (a) {
+      if (!present(S, a.k)) return;
+      var x = reaction(o, a.k, sit);
+      d[a.k] = x;
+      S.rel[a.k] = clamp(S.rel[a.k] + x, 0, 100);
+      if (S.rel[a.k] <= LEAVE) { S.gone[a.k] = S.i; if (S.ally[a.k]) delete S.ally[a.k]; ev.push({ t: "leave", a: a.k }); }
+      else if (!S.ally[a.k] && S.rel[a.k] >= ALLY) { S.ally[a.k] = true; ev.push({ t: "ally", a: a.k }); }
+      else if (S.ally[a.k] && S.rel[a.k] < UNALLY) { delete S.ally[a.k]; ev.push({ t: "unally", a: a.k }); }
+    });
+    var p = { k: k, d: d, ev: ev };
+    S.picks.push(p);
+    S.phase = "res";
+    return p;
+  }
+  function next(S) { if (S.phase !== "res") return; S.i++; S.phase = S.i >= SIT.length ? "end" : "q"; }
+
+  // Party position: mean of the chosen options' values on each axis (axes no decision touched stay at 0).
+  function position(S) {
+    var sum = {}, cnt = {}, p = {};
+    DIMS.forEach(function (d) { sum[d] = 0; cnt[d] = 0; });
+    S.picks.forEach(function (pk, i) {
+      var v = SIT[i].opts[pk.k].v;
+      for (var d in v) { sum[d] += v[d]; cnt[d]++; }
+    });
+    DIMS.forEach(function (d) { p[d] = cnt[d] ? sum[d] / cnt[d] : 0; });
+    return p;
+  }
+  function dist(p, q) { var s = 0; DIMS.forEach(function (d) { s += (p[d] - q[d]) * (p[d] - q[d]); }); return Math.sqrt(s / DIMS.length); }
+  function nearest(p, withFaint) {
+    return IDEO.filter(function (d) { return withFaint || !d.faint; })
+      .map(function (d) { return { k: d.k, d: dist(p, d.pos) }; })
+      .sort(function (a, b) { return a.d - b.d; });
+  }
+  function status(S, k) {
+    if (!present(S, k)) return "gone";
+    if (S.ally[k]) return "ally";
+    var r = S.rel[k];
+    return r >= 64 ? "good" : r >= 40 ? "mid" : r >= 30 ? "tense" : "edge";
+  }
+  // Short in-character reaction line, deterministic per decision.
+  function line(k, delta, i) {
+    var a = ADV[AIDX[k]], bank = delta > 0 ? a.pos : a.neg;
+    return bank[(i + AIDX[k]) % bank.length];
+  }
+
+  var api = { AX: AX, DIMS: DIMS, IDEO: IDEO, IDX: IDX, FAINT: FAINT, ADV: ADV, AIDX: AIDX, SIT: SIT, COLORS: COLORS, SYMS: SYMS, TT: TT,
+    START_REL: START_REL, LEAVE: LEAVE, ALLY: ALLY, UNALLY: UNALLY,
+    start: start, toFound: toFound, setParty: setParty, partyName: partyName, found: found, begin: begin, present: present,
+    reaction: reaction, choose: choose, next: next, position: position, dist: dist, nearest: nearest, status: status, line: line,
+    tune: function (o) { if (o.K != null) K = o.K; if (o.C != null) C = o.C; if (o.BON != null) BON = o.BON; if (o.PS != null) PS = o.PS; if (o.NS != null) NS = o.NS; if (o.LEAVE != null) LEAVE = api.LEAVE = o.LEAVE; if (o.ALLY != null) ALLY = api.ALLY = o.ALLY; if (o.UNALLY != null) UNALLY = api.UNALLY = o.UNALLY; } };
+  return api;
+})();
+
+(function () {
+  "use strict";
+  var KEY = "sajat-part-v1";
+  var S = null, confirmReset = false;
+  var SIT = SIM.SIT, ADV = SIM.ADV, LET = ["A", "B", "C", "D"];
+  var PHASES = { intro: 1, found: 1, meet: 1, q: 1, res: 1, end: 1 };
+  var STATUS = { ally: "szövetséges", good: "jóban vagytok", mid: "semleges", tense: "feszült", edge: "a kilépés szélén", gone: "kilépett" };
+
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function adv(k) { return ADV[SIM.AIDX[k]]; }
+  function valid(s) {
+    if (!s || s.v !== 1 || !PHASES[s.phase] || typeof s.i !== "number" || !Array.isArray(s.picks) || !s.rel || !s.gone || !s.ally || !s.party) return false;
+    if (!ADV.every(function (a) { return typeof s.rel[a.k] === "number" && s.rel[a.k] >= 0 && s.rel[a.k] <= 100; })) return false;
+    var n = SIT.length, want = { intro: 0, found: 0, meet: 0, q: s.i, res: s.i + 1, end: n }[s.phase];
+    if (s.picks.length !== want) return false;
+    if (s.phase === "end" ? s.i !== n : (s.i < 0 || s.i >= n)) return false;
+    if (!s.picks.every(function (p, i) { return p && typeof p.k === "number" && SIT[i] && SIT[i].opts[p.k] && p.d && Array.isArray(p.ev); })) return false;
+    var c = s.party.color, y = s.party.sym;
+    return typeof s.party.name === "string" && c >= 0 && c < SIM.COLORS.length && y >= 0 && y < SIM.SYMS.length;
+  }
+  function load() { try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); if (valid(s)) return s; } } catch (e) {} return null; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function pcol() { return SIM.COLORS[S.party.color].c; }
+  function symSvg(n, color, extra) {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="' + color + '" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"' + (extra || "") + '><path d="' + SIM.SYMS[n].d + '"/></svg>';
+  }
+  function signed(v) { return v > 0 ? "+" + v : v < 0 ? "−" + Math.abs(v) : "±0"; }
+  function avatar(a) { return '<span class="av" style="--c:' + a.color + '">' + esc(a.short.slice(0, 2)) + "</span>"; }
+
+  function renderTop() {
+    var h = '<div class="row">';
+    if (S.phase === "intro" || S.phase === "found") h += '<span class="badge"><span>SAJÁT PÁRT</span></span><span class="prog">Malomvölgy</span></div>';
+    else {
+      var pr = S.phase === "meet" ? "a tanácsadók" : S.phase === "end" ? "a program kész" : (S.i + 1) + "/" + SIT.length;
+      h += '<span class="badge" style="color:' + pcol() + '">' + symSvg(S.party.sym, pcol()) + '<span style="color:var(--fg)">' + esc(SIM.partyName(S)) + '</span></span><span class="prog">' + esc(pr) + "</span></div>";
+      h += '<div class="meters">';
+      ADV.forEach(function (a) {
+        var st = SIM.status(S, a.k), v = S.rel[a.k];
+        h += '<div class="m ' + st + '" style="--c:' + a.color + '" title="' + esc(a.name + ": " + STATUS[st]) + '"><span class="n">' + esc(a.short) + '</span><span class="bar" role="meter" aria-label="' +
+          esc(a.name + ", viszony") + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + v + '"><i style="width:' + (st === "gone" ? 0 : v) + '%"></i></span></div>';
+      });
+      h += "</div>";
+    }
+    $("top").innerHTML = h;
+  }
+
+  function viewIntro() {
+    return '<article class="card"><span class="kicker">Eszmék csillagtérképe · játék</span><h1>Saját párt</h1>' +
+      '<p class="lede">Malomvölgy kisváros, fél év múlva választás. Pártot alapítasz.</p>' +
+      "<p>Hét tanácsadó jelentkezik. Mindegyik egy-egy nagy politikai eszmerendszer hangján beszél: liberális, konzervatív, szocialista, nacionalista, anarchista, feminista és ökologista. Tizenkét helyzetben kell állást foglalnod, a bezáró gyártól a pártod alapszabályáig.</p>" +
+      "<p>Minden helyzetben néhányan elmondják, mit tennének és miért, néha egymással is összevesznek. A döntés a tiéd. Akivel sokszor ütközöl, kilép a pártból. Akivel egy húron pendülsz, szövetségesed lesz.</p>" +
+      "<p>A végén megkapod a pártod programját, és egy csillagtérképet: hová került a pártod csillaga az eszmék égboltján, és melyik csillagokhoz van a legközelebb. Nincs pontszám és nincs ítélet, csak tükör.</p>" +
+      '<p class="fine">Az eszmék leírása Andrew Heywood Political Ideologies (3. kiadás) című könyvét követi. A város, a tanácsadók és a helyzetek kitaláltak, valós mai pártok és politikusok nem szerepelnek. Játékidő: kb. 15-25 perc. Az állás ebben a böngészőben mentődik.</p></article>';
+  }
+
+  function viewFound() {
+    var c = pcol(), h = '<article class="card"><span class="kicker">Alapítás</span><h1>Milyen legyen a párt?</h1>' +
+      '<div class="field"><label for="pname">A párt neve</label><input class="txt" id="pname" type="text" maxlength="40" autocomplete="off" placeholder="Malomvölgyi Új Párt" value="' + esc(S.party.name) + '"></div>' +
+      '<div class="field"><span class="lab">Színe</span><div class="swatches" role="group" aria-label="Szín">';
+    SIM.COLORS.forEach(function (col, n) {
+      h += '<button class="sw" type="button" id="col-' + n + '" data-act="color" data-k="' + n + '" style="--c:' + col.c + '" aria-pressed="' + (n === S.party.color) + '" aria-label="' + esc(col.name) + '" title="' + esc(col.name) + '"></button>';
+    });
+    h += '</div></div><div class="field"><span class="lab">Jelképe</span><div class="syms" role="group" aria-label="Jelkép" style="--pc:' + c + '">';
+    SIM.SYMS.forEach(function (sy, n) {
+      h += '<button class="sy" type="button" id="sym-' + n + '" data-act="sym" data-k="' + n + '" aria-pressed="' + (n === S.party.sym) + '" aria-label="' + esc(sy.name) + '" title="' + esc(sy.name) + '">' + symSvg(n, c) + "</button>";
+    });
+    h += '</div></div><div class="preview" style="--pc:' + c + '">' + symSvg(S.party.sym, c) + "<div><b>" + esc(SIM.partyName(S)) + '</b><p class="fine">' +
+      esc(SIM.COLORS[S.party.color].name) + ", " + esc(SIM.SYMS[S.party.sym].name) + "</p></div></div></article>";
+    return h;
+  }
+
+  function viewMeet() {
+    var h = '<article class="card"><span class="kicker">Az első gyűlés</span><h1>Hét tanácsadó</h1><p class="lede">' + (/^[aáeéiíoóöőuúüű]/i.test(SIM.partyName(S)) ? "Az " : "A ") + esc(SIM.partyName(S)) + " első gyűlésén hét ember ül az asztalnál. Mindenki elmondja, miért jött.</p><div class=\"team\">";
+    ADV.forEach(function (a) {
+      h += '<div class="member" style="--c:' + a.color + '">' + avatar(a) + '<div><div class="who"><b>' + esc(a.name) + '</b><span class="id">' + esc(a.ideo) + '</span></div><p class="role">' +
+        esc(a.age + " éves, " + a.role) + "</p><p>" + esc(a.bio) + "</p><q>" + esc(a.join) + "</q></div></div>";
+    });
+    return h + '</div><p class="fine">A felső sávban látod, hogyan állsz velük. Ha valakivel túl sokszor ütközöl, kilép. Ha nagyon jól kijöttök, szövetségesed lesz.</p></article>';
+  }
+
+  function viewQ() {
+    var sit = SIT[S.i], h = '<article class="card"><span class="kicker">' + (S.i + 1) + ". kérdés</span><h1>" + esc(sit.title) + '</h1><span class="theme">' + esc(sit.theme) + '</span><p class="sit">' + esc(sit.text) + '</p><div class="voices">';
+    var empty = [];
+    sit.voices.forEach(function (v) {
+      var a = adv(v.a);
+      if (!SIM.present(S, v.a)) { empty.push(a.name); return; }
+      var to = "";
+      if (v.to) to = '<span class="to">' + (SIM.present(S, v.to) ? esc(adv(v.to).hoz) + " fordul" : esc(adv(v.to).short) + " üres székéhez fordul") + "</span>";
+      h += '<div class="voice" style="--c:' + a.color + '">' + avatar(a) + '<div><div class="who"><b>' + esc(a.name) + '</b><span class="id">' + esc(a.ideo) + "</span>" + to + "</div><p>" + esc(v.t) + "</p></div></div>";
+    });
+    if (empty.length) h += '<p class="empty">Üres szék: ' + esc(empty.join(", ")) + (empty.length > 1 ? ". Ők már nem szólnak hozzá.</p>" : ". Ő már nem szól hozzá.</p>");
+    h += '</div><p class="ask">' + esc(sit.q) + '</p><div class="opts">';
+    sit.opts.forEach(function (o, k) {
+      var a = o.by ? adv(o.by) : null, by = a && SIM.present(S, o.by) ? '<span class="by" style="--c:' + a.color + '">' + esc(a.name) + " javaslata</span>" : "";
+      h += '<button class="opt" type="button" id="opt-' + k + '" data-act="pick" data-k="' + k + '"><span class="key">' + LET[k] + '</span><span><span class="s">' + esc(o.s) + '</span><span class="t">' + esc(o.t) + "</span>" + by + "</span></button>";
+    });
+    return h + "</div>" + resetRow() + "</article>";
+  }
+
+  function viewRes() {
+    var sit = SIT[S.i], p = S.picks[S.i], o = sit.opts[p.k];
+    var h = '<article class="card"><span class="kicker">' + (S.i + 1) + ". kérdés · döntés</span><h1>" + esc(sit.title) + '</h1><div class="progline"><span class="lab">A programba került</span><span>' + esc(o.prog) + "</span></div>";
+    var keys = Object.keys(p.d);
+    // The two strongest reactions speak.
+    var loud = keys.filter(function (k) { return Math.abs(p.d[k]) >= 4; }).sort(function (a, b) { return Math.abs(p.d[b]) - Math.abs(p.d[a]); }).slice(0, 2);
+    var leaving = p.ev.filter(function (e) { return e.t === "leave"; }).map(function (e) { return e.a; });
+    loud = loud.filter(function (k) { return leaving.indexOf(k) < 0; });
+    if (loud.length) {
+      h += '<div class="voices">';
+      loud.forEach(function (k) {
+        var a = adv(k);
+        h += '<div class="voice" style="--c:' + a.color + '">' + avatar(a) + '<div><div class="who"><b>' + esc(a.name) + '</b><span class="d ' + (p.d[k] > 0 ? "up" : "down") + '">' + signed(p.d[k]) + "</span></div><p>" + esc(SIM.line(k, p.d[k], S.i)) + "</p></div></div>";
+      });
+      h += "</div>";
+    }
+    p.ev.forEach(function (e) {
+      var a = adv(e.a);
+      if (e.t === "leave") h += '<section class="ev leave"><h3>' + esc(a.name) + " kilépett a pártból</h3><q>" + esc(a.leave) + "</q></section>";
+      else if (e.t === "ally") h += '<section class="ev ally"><h3>' + esc(a.name) + " a szövetségesed lett</h3><q>" + esc(a.ally) + "</q></section>";
+      else h += '<section class="ev"><h3>' + esc(a.name) + ' már nem szövetséges</h3><p class="fine">A párttagság marad, de a bizalom megkopott.</p></section>';
+    });
+    h += '<h3>Hogyan fogadták</h3><div class="reacts">';
+    ADV.forEach(function (a) {
+      if (!(a.k in p.d)) return;
+      var v = p.d[a.k], st = SIM.status(S, a.k);
+      h += '<div class="re" style="--c:' + a.color + '"><span class="nm">' + esc(a.name) + '</span><span class="d ' + (v > 0 ? "up" : v < 0 ? "down" : "zero") + '">' + signed(v) + '</span><span class="st">' + esc(STATUS[st]) + "</span></div>";
+    });
+    return h + "</div>" + resetRow() + "</article>";
+  }
+
+  // ---- Ending ----
+  function rnd(seed) { var s = seed; return function () { s = (s * 16807) % 2147483647; return s / 2147483647; }; }
+  var W = 600, MID = 300, SC = 250;
+  function mx(b) { return MID + b * SC; }
+  function my(t) { return MID - t * SC; }
+  var LBL = { lib: [14, 7, "start"], kon: [0, -18], szoc: [0, 34], nac: [0, 36], ana: [0, 34], fem: [0, 34], oko: [0, 34], fas: [0, -14], fund: [0, -14] };
+  function starMap(pos, near) {
+    var r = rnd(1848), h = '<svg viewBox="0 0 ' + W + " " + W + '" role="img" aria-label="Csillagtérkép: az ideológiák és a pártod helye"><g class="bg" aria-hidden="true">';
+    for (var n = 0; n < 140; n++) h += '<circle cx="' + (r() * W).toFixed(1) + '" cy="' + (r() * W).toFixed(1) + '" r="' + (0.4 + r() * 1.2).toFixed(2) + '" opacity="' + (0.2 + r() * 0.5).toFixed(2) + '"' + (n % 6 === 0 ? ' class="tw"' : "") + "/>";
+    h += '</g><line class="axis" x1="20" y1="300" x2="580" y2="300"/><line class="axis" x1="300" y1="10" x2="300" y2="590"/>' +
+      '<text class="axl" x="34" y="290">← egyenlőség</text><text class="axl" x="566" y="290" text-anchor="end">piac →</text>' +
+      '<text class="axl" x="308" y="24">↑ tekintélyelvű</text><text class="axl" x="308" y="590">↓ részvételi</text>';
+    var me = { x: mx(pos.B), y: my(pos.T) };
+    near.slice(0, 3).forEach(function (nn, j) {
+      var d = SIM.IDX[nn.k];
+      h += '<line class="link" x1="' + me.x.toFixed(1) + '" y1="' + me.y.toFixed(1) + '" x2="' + mx(d.pos.B).toFixed(1) + '" y2="' + my(d.pos.T).toFixed(1) + '" stroke="' + d.color + '" stroke-width="' + (2.4 - j * 0.6) + '" stroke-dasharray="' + (j ? "4 5" : "none") + '"/>';
+    });
+    SIM.IDEO.forEach(function (d) {
+      var x = mx(d.pos.B), y = my(d.pos.T), o = LBL[d.k], sz = d.faint ? 4 : 6;
+      h += '<a href="' + d.link + '" target="_blank" rel="noopener" class="' + (d.faint ? "faint" : "") + '" aria-label="' + esc(d.name) + ', a Tudástárban"><g transform="translate(' + x.toFixed(1) + "," + y.toFixed(1) + ')">' +
+        '<circle r="' + sz * 2.8 + '" fill="' + d.color + '" opacity="' + (d.faint ? 0.08 : 0.18) + '"/><circle class="core" r="' + sz + '" fill="' + (d.faint ? "none" : d.color) + '" stroke="' + d.color + '" stroke-width="1.5"' + (d.faint ? ' stroke-dasharray="2 2"' : "") + "/>" +
+        '<text class="lbl" x="' + o[0] + '" y="' + o[1] + '" text-anchor="' + (o[2] || "middle") + '">' + esc(d.name) + "</text></g></a>";
+    });
+    var c = pcol();
+    h += '<g transform="translate(' + me.x.toFixed(1) + "," + me.y.toFixed(1) + ')"><circle class="me" r="26" fill="' + c + '" opacity="0.5"/><circle r="17" fill="#070b1a" stroke="' + c + '" stroke-width="2"/>' +
+      '<g transform="translate(-11,-11) scale(0.92)"><path d="' + SIM.SYMS[S.party.sym].d + '" fill="none" stroke="' + c + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></g></g>';
+    return h + "</svg>";
+  }
+  function closeness(d) { return d < 0.25 ? "nagyon közel" : d < 0.4 ? "közel" : d < 0.55 ? "a szomszédságban" : "messzebb"; }
+
+  function viewEnd() {
+    var pos = SIM.position(S), near = SIM.nearest(pos), c = pcol();
+    var h = '<article class="card"><span class="kicker">A választás előtti este</span><div class="preview" style="--pc:' + c + '">' + symSvg(S.party.sym, c) + "<div><h1>" + esc(SIM.partyName(S)) + '</h1><p class="fine">Választási program tizenkét pontban, Malomvölgy</p></div></div>';
+    h += '<h2>A program</h2><ol class="plist">';
+    SIT.forEach(function (sit, i) { h += '<li><span class="tt">' + esc(sit.title) + "</span>" + esc(sit.opts[S.picks[i].k].prog) + "</li>"; });
+    h += "</ol></article>";
+
+    var al = ADV.filter(function (a) { return SIM.status(S, a.k) === "ally"; });
+    var stay = ADV.filter(function (a) { var s = SIM.status(S, a.k); return s !== "ally" && s !== "gone"; });
+    var gone = ADV.filter(function (a) { return !SIM.present(S, a.k); });
+    h += '<article class="card"><h2>Kivel jutottál dűlőre</h2><div class="groups">';
+    if (al.length) {
+      h += "<div><h3>Szövetségesek</h3><div class=\"team\">";
+      al.forEach(function (a) { h += '<div class="member" style="--c:' + a.color + '">' + avatar(a) + '<div><div class="who"><b>' + esc(a.name) + '</b><span class="id">' + esc(a.ideo) + "</span></div><q>" + esc(a.ally) + "</q></div></div>"; });
+      h += "</div></div>";
+    }
+    if (stay.length) {
+      h += "<div><h3>A pártban maradtak</h3><div class=\"team\">";
+      stay.forEach(function (a) { h += '<div class="member" style="--c:' + a.color + '">' + avatar(a) + '<div><div class="who"><b>' + esc(a.name) + '</b><span class="id">' + esc(a.ideo) + '</span></div><p class="role">' + esc(STATUS[SIM.status(S, a.k)]) + "</p></div></div>"; });
+      h += "</div></div>";
+    }
+    if (gone.length) {
+      h += "<div><h3>Kiléptek</h3><div class=\"team\">";
+      gone.forEach(function (a) { h += '<div class="member" style="--c:' + a.color + '">' + avatar(a) + '<div><div class="who"><b>' + esc(a.name) + '</b><span class="id">' + esc(a.ideo) + '</span></div><p class="role">a ' + (S.gone[a.k] + 1) + ". kérdésnél (" + esc(SIT[S.gone[a.k]].title) + ")</p><q>" + esc(a.leave) + "</q></div></div>"; });
+      h += "</div></div>";
+    }
+    if (!gone.length) h += '<p class="fine">Senki nem lépett ki. Mind a heten ott ülnek a választás estéjén.</p>';
+    h += "</div></article>";
+
+    h += '<article class="card"><h2>A pártod csillaga</h2><p>A térkép két tengelye Heywood bevezető fejezetéből jön, Eysenck kétdimenziós spektruma nyomán: vízszintesen az egyenlőség és a gazdaság, függőlegesen a tekintély. A pártod csillagát a döntéseid helyezik el. A vonalak a három legközelebbi eszme felé mutatnak.</p>' +
+      '<div class="sky">' + starMap(pos, near) + '</div><p class="fine">A csillagokra kattintva a Tudástár oldalai nyílnak meg. A halvány csillagok mögött nincs tanácsadó, lásd lent.</p><h3>Legközelebb</h3><ul class="near">';
+    near.slice(0, 3).forEach(function (nn) {
+      var d = SIM.IDX[nn.k];
+      h += '<li style="--c:' + d.color + '"><span class="dot"></span><span><b>' + esc(d.name) + "</b>, " + closeness(nn.d) + ' · <a href="' + d.link + '" target="_blank" rel="noopener">Tudástár</a></span></li>';
+    });
+    h += '</ul><p class="fine">A távolságot hét tengelyen méri a játék, a térkép ebből kettőt mutat. Ezért egy csillag lehet közelebb is, mint amilyennek a két tengelyes képen látszik. Az alábbi sávokon mind a hét látszik: a nagy pont a pártod, a karika a legközelebbi eszme.</p><div class="axes">';
+    var top = SIM.IDX[near[0].k];
+    SIM.AX.forEach(function (ax) {
+      var pv = (pos[ax.k] + 1) * 50, iv = (top.pos[ax.k] + 1) * 50;
+      h += '<div class="ax"><span class="nm">' + esc(ax.name) + '</span><div class="track"><span class="pt id" style="--c:' + top.color + ";left:" + iv.toFixed(1) + '%"></span><span class="pt me" style="--c:' + c + ";left:" + pv.toFixed(1) + '%"></span></div><div class="ends"><span>' +
+        esc(ax.lo) + "</span><span>" + esc(ax.hi) + "</span></div></div>";
+    });
+    h += '</div><p class="fine">Heywood maga figyelmeztet: minden ilyen spektrum leegyszerűsít, legfeljebb gyorsírás. Egy párt akkor is egy eszmecsaládhoz tartozhat, ha egy-egy elemét elhagyja. A térkép tehát tükör, nem ítélet. Az eszmék helye a tengelyeken a játék saját olvasata Heywood leírásaiból, nem a könyv számai.</p></article>';
+
+    h += '<article class="card"><h2>A két halvány csillag</h2>';
+    SIM.FAINT.forEach(function (f) {
+      var d = SIM.IDX[f.k];
+      h += '<div class="faintcard"><h3>' + esc(f.title) + "</h3>";
+      f.t.forEach(function (t) { h += "<p>" + esc(t) + "</p>"; });
+      h += '<p class="fine"><a href="' + d.link + '" target="_blank" rel="noopener">Tovább a Tudástárba</a></p></div>';
+    });
+    h += '</article><article class="card"><h2>Tovább olvasva</h2><p><a href="' + SIM.TT + '" target="_blank" rel="noopener">Politikai ideológiák a Tudástárban</a>, és külön oldalon az <a href="' + SIM.TT + 'anarchizmus/" target="_blank" rel="noopener">anarchizmus</a>, a <a href="' + SIM.TT +
+      'fasizmus/" target="_blank" rel="noopener">fasizmus</a>, a <a href="' + SIM.TT + 'feminizmus/" target="_blank" rel="noopener">feminizmus</a> és az <a href="' + SIM.TT + 'okologizmus/" target="_blank" rel="noopener">ökologizmus</a>.</p>' +
+      '<p class="fine">Forrás: Andrew Heywood, Political Ideologies: An Introduction, 3. kiadás, 1-10. fejezet, magyar feldolgozásban. Malomvölgy, a tanácsadók és a helyzetek kitaláltak.</p></article>';
+    return h;
+  }
+
+  function resetRow() {
+    return '<div class="reset">' + (confirmReset
+      ? '<span>Az eddigi döntések törlődnek.</span><button class="lnk danger" type="button" id="reset-yes" data-act="reset-yes">Igen, új párt</button><button class="lnk" type="button" id="reset-no" data-act="reset-no">Mégsem</button>'
+      : '<button class="lnk" type="button" id="reset-ask" data-act="reset-ask">Új párt alapítása</button>') + "</div>";
+  }
+
+  function renderAct() {
+    var h = '<div class="in">';
+    if (S.phase === "intro") h += '<button class="prim" type="button" id="act-start" data-act="tofound">Pártot alapítok</button>';
+    else if (S.phase === "found") h += '<button class="prim" type="button" id="act-found" data-act="found">Megalapítom</button>';
+    else if (S.phase === "meet") h += '<button class="prim" type="button" id="act-begin" data-act="begin">Jöjjön az első kérdés</button>';
+    else if (S.phase === "q") h += '<span class="hint">Válassz egy javaslatot (A-' + LET[SIT[S.i].opts.length - 1] + ").</span>";
+    else if (S.phase === "res") h += '<button class="prim" type="button" id="act-next" data-act="next">' + (S.i + 1 < SIT.length ? "Tovább: " + esc(SIT[S.i + 1].title) : "A program és a csillagtérkép") + "</button>";
+    else h += confirmReset
+      ? '<button class="prim" type="button" id="act-reset-yes" data-act="reset-yes">Igen, új párt</button><button class="lnk" type="button" id="act-reset-no" data-act="reset-no">Mégsem</button>'
+      : '<button class="prim" type="button" id="act-reset" data-act="reset-ask">Új párt alapítása</button>';
+    $("act").innerHTML = h + "</div>";
+  }
+
+  function render(top) {
+    renderTop();
+    var v = { intro: viewIntro, found: viewFound, meet: viewMeet, q: viewQ, res: viewRes, end: viewEnd }[S.phase];
+    $("view").innerHTML = v();
+    renderAct();
+    if (top) { try { window.scrollTo(0, 0); } catch (e) {} }
+  }
+
+  function readName() {
+    var inp = S.phase === "found" ? $("pname") : null;
+    if (inp && typeof inp.value === "string") SIM.setParty(S, inp.value);
+  }
+
+  document.addEventListener("click", function (ev) {
+    var b = ev.target && ev.target.closest ? ev.target.closest("[data-act]") : null;
+    if (!b) return;
+    var a = b.dataset.act, top = true;
+    readName();
+    if (a === "tofound") SIM.toFound(S);
+    else if (a === "color") { SIM.setParty(S, null, +b.dataset.k, null); top = false; }
+    else if (a === "sym") { SIM.setParty(S, null, null, +b.dataset.k); top = false; }
+    else if (a === "found") SIM.found(S);
+    else if (a === "begin") SIM.begin(S);
+    else if (a === "pick") SIM.choose(S, +b.dataset.k);
+    else if (a === "next") SIM.next(S);
+    else if (a === "reset-ask") { confirmReset = true; top = false; }
+    else if (a === "reset-no") { confirmReset = false; top = false; }
+    else if (a === "reset-yes") { confirmReset = false; S = SIM.start(); }
+    else return;
+    if (a !== "reset-ask" && a !== "reset-no") confirmReset = false;
+    save(); render(top);
+  });
+  // Keep the typed party name across reloads; the preview updates on the next render.
+  document.addEventListener("input", function (ev) {
+    if (S.phase === "found" && ev.target && ev.target.id === "pname") { SIM.setParty(S, ev.target.value); save(); }
+  });
+
+  function start(data) {
+    S = data && valid(data.S) ? data.S : (load() || SIM.start());
+    render(false);
+  }
+  var hot = window.claude && window.claude.hot;
+  if (hot && hot.snapshot) { try { hot.snapshot(function () { return { S: S }; }); } catch (e) {} }
+  if (hot && hot.ready) hot.ready(start); else start(hot && hot.data ? hot.data : {});
+})();
+</script>
+
+</body></html>
