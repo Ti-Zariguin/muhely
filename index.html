@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="hu">
+<html lang="hu" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -7,86 +7,501 @@
 <meta name="description" content="Kísérleti oldalak, szakmai segédletek és vadhajtások egy helyen.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Spectral:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a workshop pegboard. Header, then a grid of labelled tags, one per page, newest first. */
+/* Home page: the workshop as a night-sky scriptorium. Each card rests as a small drawing and opens on hover, focus or tap. */
 :root {
-  --bg: #E9EBE8; --board: #F5F6F3; --feat: #DCD5EC; --stripe2: #3F8C93; --ink: #1F2328; --muted: #5E656C; --line: #CDD1CC; --acc: #C9551E;
-  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --bg: #F3EDDD; --bg2: #E8DFC8; --star: rgba(70, 55, 25, .22); --ink: #1F1D2B; --muted: #5A5468; --card: #FBF7EC; --card-hi: #FFFDF6; --line: #D9CDB1;
+  --gold: #9C7219; --feat: #ECE2F6; --acc: #A5462A;
+  --k-jatek: #A63F22; --k-tananyag: #1F6688; --k-utmutato: #2F6E2C; --k-kronika: #7D5A0C; --k-kreativ: #8E347F; --k-kiserlet: #5B47A8;
+  --art-line: #2B2840; --art-paper: #FFFAF0; --art-night: #D8D2E8; --art-gold: #E2B84F; --art-rust: #D36C4C; --art-teal: #5BA69D;
+  --art-lav: #AB9CD8; --art-green: #80AF6B; --art-brown: #93623C; --art-orange: #EA974B; --art-white: #FFFFFF; --px-k: #1B1A2A;
+  --f-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --f-body: Spectral, Georgia, serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.2, .75, .2, 1);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #15181B; --board: #1E2226; --feat: #2C2840; --stripe2: #5FB3BA; --ink: #ECEEEB; --muted: #A2A9AF; --line: #343A40; --acc: #F08A4B; color-scheme: dark; }
+  :root:not([data-theme="light"]) {
+    --bg: #0B1026; --bg2: #151C40; --star: rgba(255, 244, 214, .8); --ink: #ECE6D6; --muted: #ABA5BE; --card: #121935; --card-hi: #18204A; --line: #2A3360;
+    --gold: #D9B45A; --feat: #261E4C; --acc: #E0895A;
+    --k-jatek: #F29A72; --k-tananyag: #7CC4E6; --k-utmutato: #93CF85; --k-kronika: #E6C56F; --k-kreativ: #EBA0DD; --k-kiserlet: #B4A8F5;
+    --art-line: #EADFBF; --art-paper: #243063; --art-night: #161D44; --art-gold: #D9B45A; --art-rust: #C4603F; --art-teal: #4E9A92;
+    --art-lav: #7D6DB5; --art-green: #4F8A4A; --art-brown: #8A5A36; --art-orange: #E08A3E; --art-white: #E9E4F5; --px-k: #03051A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+    --bg: #0B1026; --bg2: #151C40; --star: rgba(255, 244, 214, .8); --ink: #ECE6D6; --muted: #ABA5BE; --card: #121935; --card-hi: #18204A; --line: #2A3360;
+    --gold: #D9B45A; --feat: #261E4C; --acc: #E0895A;
+    --k-jatek: #F29A72; --k-tananyag: #7CC4E6; --k-utmutato: #93CF85; --k-kronika: #E6C56F; --k-kreativ: #EBA0DD; --k-kiserlet: #B4A8F5;
+    --art-line: #EADFBF; --art-paper: #243063; --art-night: #161D44; --art-gold: #D9B45A; --art-rust: #C4603F; --art-teal: #4E9A92;
+    --art-lav: #7D6DB5; --art-green: #4F8A4A; --art-brown: #8A5A36; --art-orange: #E08A3E; --art-white: #E9E4F5; --px-k: #03051A;
+    color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body {
-  margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--f-body);
-  background-image: radial-gradient(var(--line) 1.2px, transparent 1.3px); background-size: 22px 22px;
+  margin: 0; min-height: 100vh; color: var(--ink); font: 17px/1.55 var(--f-body);
+  background-color: var(--bg);
+  background-image: radial-gradient(120% 70% at 50% -10%, var(--bg2), transparent 70%);
+  background-repeat: no-repeat;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 0 64px;
+  padding-block: 0 64px; overflow-x: hidden;
 }
-.wrap { max-width: 980px; margin: 0 auto; }
-header { padding-block: 64px 36px; display: grid; gap: 12px; }
-.eyebrow { font: 500 12.5px/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
-h1 { font: 700 clamp(40px, 9vw, 76px)/1 var(--f-display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
-.lede { margin: 0; max-width: 56ch; color: var(--muted); }
-.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
-.tag { position: relative; display: grid; align-content: start; gap: 8px; height: 100%;
-  background: var(--board); border: 1px solid var(--line); border-radius: 6px 6px 6px 22px; padding: 22px 20px 18px;
-  color: inherit; text-decoration: none; transition: transform .18s, border-color .18s; }
-.tag::before { content: ""; position: absolute; top: 12px; right: 14px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--line); background: var(--bg); }
-.tag:hover { transform: rotate(-.6deg) translateY(-2px); border-color: var(--acc); }
-.tag:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
-.no { font: 500 12px/1 var(--f-mono); color: var(--muted); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
-.tag h2 { font: 700 24px/1.15 var(--f-display); margin: 0; text-wrap: balance; }
-.tag p { margin: 0; color: var(--muted); font-size: 15.5px; }
-.meta { align-self: end; display: flex; justify-content: space-between; gap: 10px; font: 500 12px/1 var(--f-mono); color: var(--muted); padding-top: 10px; border-top: 1px dashed var(--line); }
-.meta b { color: var(--acc); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
-footer { margin-top: 48px; display: grid; gap: 10px; font: 400 13px/1.5 var(--f-mono); color: var(--muted); }
-footer p { margin: 0; max-width: 70ch; }
-/* Featured card = the newest page (first in the list), same size as the rest: own card colour, a slowly turning gradient frame, a faint breathing glow. */
+/* Star field: two fixed layers of tiled dots; the second one twinkles slowly. */
+body::before, body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+body::before {
+  background:
+    radial-gradient(1.3px 1.3px at 18px 26px, var(--star), transparent 100%) 0 0 / 230px 190px,
+    radial-gradient(1px 1px at 140px 80px, var(--star), transparent 100%) 0 0 / 230px 190px,
+    radial-gradient(1.6px 1.6px at 90px 160px, var(--star), transparent 100%) 0 0 / 230px 190px,
+    radial-gradient(1px 1px at 300px 40px, var(--star), transparent 100%) 0 0 / 410px 330px,
+    radial-gradient(1.2px 1.2px at 60px 250px, var(--star), transparent 100%) 0 0 / 410px 330px;
+  opacity: .7;
+}
+body::after {
+  background:
+    radial-gradient(1.8px 1.8px at 200px 120px, var(--star), transparent 100%) 0 0 / 370px 290px,
+    radial-gradient(1.4px 1.4px at 40px 60px, var(--star), transparent 100%) 0 0 / 520px 410px,
+    radial-gradient(2px 2px at 330px 300px, var(--star), transparent 100%) 0 0 / 520px 410px;
+  animation: twinkle 7s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: .25; } to { opacity: .95; } }
+
+.wrap { max-width: 1040px; margin: 0 auto; }
+header { padding-block: 56px 28px; display: grid; gap: 14px; }
+.eyebrow { font: 500 12.5px/1 var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+h1 { font: 700 clamp(44px, 10vw, 84px)/.95 var(--f-display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.lede { margin: 0; max-width: 58ch; color: var(--muted); }
+.rule { position: relative; height: 1px; margin: 8px 0 4px; background: linear-gradient(90deg, var(--gold), color-mix(in srgb, var(--gold) 30%, transparent) 60%, transparent); }
+.rule::after { content: ""; position: absolute; left: 0; top: -4px; width: 7px; height: 7px; background: var(--bg); border: 1px solid var(--gold); transform: rotate(45deg); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.seg { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--card) 80%, transparent); }
+.seg-l { font: 500 11.5px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 0 8px 0 10px; }
+.seg button { font: 500 13px/1 var(--f-mono); color: var(--ink); background: transparent; border: 0; border-radius: 999px; padding: 9px 14px; cursor: pointer; min-height: 36px; }
+.seg button[aria-pressed="true"] { background: var(--gold); color: var(--bg); }
+.seg button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.hint { margin: 0; font: 400 13px/1.5 var(--f-mono); color: var(--muted); }
+
+/* Card grid */
+.grid { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 18px; }
+.grid > li { display: flex; }
+.card {
+  position: relative; flex: 1; display: flex; flex-direction: column; min-height: 310px; overflow: hidden; cursor: pointer; isolation: isolate;
+  background: var(--card); border: 1px solid var(--line); border-radius: 6px 6px 6px 24px;
+  transition: background-color .35s var(--ease), border-color .35s, transform .35s var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.card::before { /* thin inner gold frame, the scriptorium margin line */
+  content: ""; position: absolute; inset: 7px; z-index: 0; pointer-events: none;
+  border: 1px solid color-mix(in srgb, var(--gold) 32%, transparent); border-radius: 3px 3px 3px 19px;
+}
+.art {
+  position: absolute; z-index: 2; top: 50%; left: 50%; width: min(80%, 290px); aspect-ratio: 4 / 3;
+  transform: translate(-50%, -50%); transition: top .5s var(--ease), left .5s var(--ease), width .5s var(--ease), transform .5s var(--ease), opacity .4s;
+}
+.art svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.info {
+  position: relative; z-index: 1; display: flex; flex-direction: column; gap: 10px; padding: 24px 22px 22px; flex: 1;
+  opacity: 0; transform: translateY(16px); pointer-events: none;
+  transition: opacity .35s var(--ease) .05s, transform .45s var(--ease) .05s;
+}
+.meta { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; padding-right: 92px; font: 500 12px/1.3 var(--f-mono); color: var(--muted); }
+.kind { color: var(--gold); text-transform: uppercase; letter-spacing: .1em; }
+.card h2 { margin: 0; padding-right: 92px; font: 700 28px/1.08 var(--f-display); text-wrap: balance; }
+.desc { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.5; }
+.open {
+  margin-top: auto; align-self: flex-start; display: inline-flex; gap: 8px; align-items: center;
+  font: 500 14px/1 var(--f-mono); color: var(--ink); text-decoration: none;
+  padding: 11px 16px; border: 1px solid var(--gold); border-radius: 999px; background: color-mix(in srgb, var(--gold) 12%, transparent);
+}
+.open:hover { background: var(--gold); color: var(--bg); }
+.open:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* Revealed state: hover (real pointers only), keyboard focus, or .is-open after a tap. */
+.card:focus-within, .card.is-open { background: var(--card-hi); border-color: color-mix(in srgb, var(--gold) 70%, transparent); }
+.card:focus-within .art, .card.is-open .art { top: 14px; left: calc(100% - 14px); width: 84px; transform: translate(-100%, 0); }
+.card:focus-within .info, .card.is-open .info { opacity: 1; transform: none; pointer-events: auto; }
+@media (hover: hover) {
+  .card:hover { background: var(--card-hi); border-color: color-mix(in srgb, var(--gold) 70%, transparent); transform: translateY(-2px); }
+  .card:hover .art { top: 14px; left: calc(100% - 14px); width: 84px; transform: translate(-100%, 0); }
+  .card:hover .info { opacity: 1; transform: none; pointer-events: auto; }
+}
+
+/* Featured = newest page, same size: own colour, faint glow, slowly turning gradient border. No label. */
 @property --spin { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.tag.featured { border: 3px solid transparent; border-radius: 6px 6px 6px 30px;
+.card.featured, .card.featured:hover, .card.featured:focus-within, .card.featured.is-open {
+  border: 2px solid transparent;
   background: linear-gradient(var(--feat), var(--feat)) padding-box,
-              conic-gradient(from var(--spin), var(--acc), #7B6AA8, #3F8C93, #C4875A, var(--acc)) border-box;
-  box-shadow: 0 18px 40px -24px var(--acc); animation: spin 8s linear infinite; overflow: hidden; }
-.tag.featured > * { position: relative; z-index: 1; }
-.tag.featured::after { content: ""; position: absolute; inset: -20%; z-index: 0; pointer-events: none;
-  background: radial-gradient(40% 55% at 22% 40%, color-mix(in srgb, var(--acc) 22%, transparent), transparent 70%),
-              radial-gradient(38% 60% at 78% 65%, color-mix(in srgb, var(--stripe2) 22%, transparent), transparent 70%);
-  animation: glow 9s ease-in-out infinite alternate; }
-@keyframes glow { from { transform: translate(-3%, 0) scale(1); opacity: .75; } to { transform: translate(3%, 2%) scale(1.08); opacity: 1; } }
-.tag.featured .meta { border-top-color: color-mix(in srgb, var(--ink) 25%, transparent); }
+              conic-gradient(from var(--spin), var(--gold), #7B6AA8, #3F8C93, var(--acc), var(--gold)) border-box;
+  box-shadow: 0 0 34px -12px color-mix(in srgb, var(--gold) 70%, transparent);
+  animation: spin 9s linear infinite;
+}
+.card.featured::after {
+  content: ""; position: absolute; inset: -20%; z-index: -1; pointer-events: none;
+  background: radial-gradient(40% 50% at 30% 40%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 70%),
+              radial-gradient(38% 55% at 75% 70%, color-mix(in srgb, #7B6AA8 20%, transparent), transparent 70%);
+  animation: glow 9s ease-in-out infinite alternate;
+}
 @keyframes spin { to { --spin: 360deg; } }
-footer a { color: var(--ink); }
-@media (prefers-reduced-motion: reduce) { .tag { transition: none; } .tag.featured, .tag.featured::after { animation: none; } }
+@keyframes glow { from { transform: translate(-3%, 0) scale(1); opacity: .7; } to { transform: translate(3%, 2%) scale(1.08); opacity: 1; } }
+
+/* Vector art: one line weight, palette from tokens */
+.ln { fill: none; stroke: var(--art-line); stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+.thin { stroke-width: 1.4; } .thick { stroke-width: 3.5; } .gold { stroke: var(--art-gold); }
+.fg { fill: var(--art-gold); } .fr { fill: var(--art-rust); } .ft { fill: var(--art-teal); } .fl { fill: var(--art-lav); }
+.fp { fill: var(--art-paper); } .fn { fill: var(--art-night); } .fw { fill: var(--art-white); } .fe { fill: var(--art-green); }
+.fbr { fill: var(--art-brown); } .fo { fill: var(--art-orange); }
+.nostroke { stroke: none; }
+.lbl { fill: var(--art-line); stroke: none; font: 600 9px var(--f-mono); }
+.lbl.big { font-size: 10.5px; }
+.zz { fill: var(--art-gold); stroke: none; font: italic 700 15px var(--f-display); }
+.z2 { font-size: 18px; } .z3 { font-size: 22px; }
+.route { stroke: var(--art-gold); stroke-dasharray: 2 6; }
+.dots { stroke-dasharray: .5 6; }
+.arc { stroke: var(--art-gold); stroke-dasharray: 5 6; }
+.stitch { stroke: var(--art-white); stroke-width: 1.6; stroke-dasharray: 4 4; }
+.stitch.off { stroke-dashoffset: 4; }
+.thread { stroke: var(--art-rust); stroke-width: 1.4; }
+
+/* Idle animations, gentle and slow */
+.pop, .wobble, .nod, .sway, .flame, .smoke circle { transform-box: fill-box; transform-origin: center; }
+.pop { animation: pop 7s ease-in-out infinite; animation-delay: calc(var(--i) * 1s); }
+@keyframes pop { 0%, 8%, 100% { transform: scale(1); } 4% { transform: scale(1.18); } }
+.tw { animation: tw 3.2s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * .4s); }
+.tw.d2 { animation-delay: 1.4s; }
+@keyframes tw { from { opacity: 1; } to { opacity: .35; } }
+.flame { transform-origin: 50% 100%; animation: flame 1.6s ease-in-out infinite alternate; }
+@keyframes flame { from { transform: scale(1, 1) rotate(-3deg); } to { transform: scale(.9, 1.08) rotate(3deg); } }
+.wobble { transform-origin: 50% 100%; animation: wobble 4s ease-in-out infinite; }
+@keyframes wobble { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(6deg); } }
+.smoke circle { animation: smoke 5s ease-in-out infinite; }
+.smoke circle:nth-child(2) { animation-delay: .8s; } .smoke circle:nth-child(3) { animation-delay: 1.6s; }
+@keyframes smoke { 0%, 100% { transform: translate(0, 0); opacity: .9; } 50% { transform: translate(3px, -3px); opacity: .4; } }
+.nod { transform-origin: 50% 100%; animation: nod 6s ease-in-out infinite; }
+@keyframes nod { 0%, 60%, 100% { transform: rotate(0); } 75% { transform: rotate(4deg) translateY(2px); } }
+.blink { animation: blink 3s steps(1) infinite; }
+@keyframes blink { 0%, 70% { opacity: 1; } 71%, 100% { opacity: .25; } }
+.zz { animation: zz 4.5s ease-in-out infinite; }
+.zz.z2 { animation-delay: .6s; } .zz.z3 { animation-delay: 1.2s; }
+@keyframes zz { 0%, 100% { opacity: .2; transform: translateY(3px); } 50% { opacity: 1; transform: translateY(-3px); } }
+.art-v .swing { transform-box: view-box; transform-origin: 119px 36px; animation: swing 5s ease-in-out infinite; }
+@keyframes swing { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+.sway { transform-origin: 50% 100%; animation: sway 6s ease-in-out infinite; }
+@keyframes sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+.arc { animation: march 6s linear infinite; }
+@keyframes march { to { stroke-dashoffset: -44; } }
+
+/* Categories: each one has its own colour token (--k) and a line mark */
+[data-kind="jatek"] { --k: var(--k-jatek); }
+[data-kind="tananyag"] { --k: var(--k-tananyag); }
+[data-kind="utmutato"] { --k: var(--k-utmutato); }
+[data-kind="kronika"] { --k: var(--k-kronika); }
+[data-kind="kreativ"] { --k: var(--k-kreativ); }
+[data-kind="kiserlet"] { --k: var(--k-kiserlet); }
+.mark { width: 13px; height: 13px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.mark .m-dot { fill: currentColor; stroke: none; }
+.kind { display: inline-flex; align-items: center; gap: 6px; color: var(--k, var(--gold)); }
+/* Resting corner chip: names the category while the card is only a drawing; fades out when the details show. */
+.chip {
+  position: absolute; z-index: 3; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 9px 5px 7px; border-radius: 999px; pointer-events: none;
+  font: 500 11px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--k);
+  border: 1px solid color-mix(in srgb, var(--k) 38%, transparent); background: color-mix(in srgb, var(--card) 82%, transparent);
+  transition: opacity .25s var(--ease);
+}
+.chip .mark { width: 12px; height: 12px; }
+.card:focus-within .chip, .card.is-open .chip { opacity: 0; }
+@media (hover: hover) { .card:hover .chip { opacity: 0; } }
+
+/* Filter bar above the grid */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 0; }
+.filters button {
+  display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 8px 14px 8px 12px; cursor: pointer;
+  font: 500 13px/1 var(--f-mono); color: var(--ink); border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--k, var(--gold)) 50%, transparent); background: color-mix(in srgb, var(--card) 80%, transparent);
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.filters button .mark { color: var(--k); }
+.filters .n { font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.filters button:hover { border-color: var(--k, var(--gold)); }
+.filters button[aria-pressed="true"] { background: var(--k, var(--gold)); border-color: var(--k, var(--gold)); color: var(--bg); }
+.filters button[aria-pressed="true"] .mark, .filters button[aria-pressed="true"] .n { color: var(--bg); }
+.filters button:focus-visible { outline: 2px solid var(--k, var(--gold)); outline-offset: 2px; }
+.grid > li[hidden] { display: none; }
+
+footer { margin-top: 52px; display: grid; gap: 10px; font: 400 13px/1.55 var(--f-mono); color: var(--muted); }
+footer p { margin: 0; max-width: 72ch; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 480px) {
+  header { padding-block: 40px 22px; }
+  .card { min-height: 300px; }
+  .card h2 { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <span class="eyebrow">Ti-Zariguin / műhely</span>
+    <span class="eyebrow">A műhely polcai</span>
     <h1>Zariguin műhelye</h1>
     <p class="lede">Kísérletek, szakmai segédletek és vadhajtások egy helyen. Ami itt van, az működik. Hogy mennyire, az oldalról oldalra változik.</p>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Égbolt">
+        <span class="seg-l" aria-hidden="true">Égbolt</span>
+        <button type="button" data-set-theme="dark" aria-pressed="true">Éjjel</button>
+        <button type="button" data-set-theme="light" aria-pressed="false">Nappal</button>
+      </div>
+    </div>
+    <p class="hint">Vidd az egeret egy rajz fölé, vagy koppints rá: előbújnak a részletek. Második koppintásra nyílik az oldal.</p>
   </header>
+  <div class="filters" role="group" aria-label="Szűrés kategória szerint">
+      <button type="button" data-filter="mind" aria-pressed="true"><span>Mind</span><span class="n" aria-hidden="true">8</span><span class="sr">, 8 oldal</span></button>
+      <button type="button" data-filter="jatek" aria-pressed="false" data-kind="jatek"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg><span>Játék</span><span class="n" aria-hidden="true">3</span><span class="sr">, 3 oldal</span></button>
+      <button type="button" data-filter="tananyag" aria-pressed="false" data-kind="tananyag"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg><span>Tananyag</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
+      <button type="button" data-filter="utmutato" aria-pressed="false" data-kind="utmutato"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg><span>Útmutató</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
+      <button type="button" data-filter="kronika" aria-pressed="false" data-kind="kronika"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 2.5H13V11.5C13 12.6 12.1 13.5 11 13.5H4C2.9 13.5 2 12.6 2 11.5V10.5H10V11.5C10 12.6 10.9 13.5 12 13.5"/><path d="M5 2.5V10.5M7.2 5.3H10.8M7.2 7.8H10.8"/></svg><span>Krónika</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
+      <button type="button" data-filter="kreativ" aria-pressed="false" data-kind="kreativ"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.8L9.5 6.5L14.2 8L9.5 9.5L8 14.2L6.5 9.5L1.8 8L6.5 6.5Z"/></svg><span>Kreatív</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
+      <button type="button" data-filter="kiserlet" aria-pressed="false" data-kind="kiserlet"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.8 2.5H10.2M6.8 2.5V6.4L3 12.4C2.6 13.1 3.1 14 3.9 14H12.1C12.9 14 13.4 13.1 13 12.4L9.2 6.4V2.5M4.6 10H11.4"/></svg><span>Kísérlet</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
+  </div>
+  <p class="sr" id="filter-status" aria-live="polite"></p>
   <ul class="grid">
-    <li class="featured"><a class="tag featured" href="sajat-part/"><h2>Saját párt</h2><p>Pártot alapítasz egy kisvárosban, hét tanácsadó vitatkozik körülötted 12 helyzetben. A végén csillagtérkép mutatja, melyik eszmékhez kerültél közel. Heywood Political Ideologies könyve alapján, kb. 25 perc.</p><span class="meta"><b>Játék</b><span>2026-10-23</span></span></a></li>
-    <li><a class="tag" href="tudastar/"><h2>Tudástár</h2><p>Témák négy fokozatban: egyperces ízelítő, ötperces kártya, mélyfúrás és műhely arról, hol tartunk. Az első téma: hogyan adj át tudást, hogy meg is maradjon.</p><span class="meta"><b>Tudás</b><span>2026-10-22</span></span></a></li>
-    <li><a class="tag" href="mozgaster/"><h2>Mozgástér</h2><p>Döntéses történelmi játék 1963 és 1989 között: tanácsadóként javasolsz, aztán kiderül, mit lépett valójában a magyar vezetés, és miért. Kb. 20 perc.</p><span class="meta"><b>Játék</b><span>2026-10-22</span></span></a></li>
-    <li><a class="tag" href="harsfalva/"><h2>Hársfalva krónikája</h2><p>Körökre osztott, régi típusú fantasy RPG menükkel: favágás, bányászat, kovácsolás, főzés, harc, hat tudás saját szinttel. Kb. egy óra.</p><span class="meta"><b>Játék</b><span>2026-10-22</span></span></a></li>
-    <li><a class="tag" href="faradt-robot/"><h2>A fáradt robot estéje</h2><p>Egy fásult robot hét jelenetben próbál lenyűgözni. Közben kiderül, mire képes a CSS, az SVG és a JavaScript.</p><span class="meta"><b>Szórakoztató</b><span>2026-10-20</span></span></a></li>
-    <li><a class="tag" href="https://ti-zariguin.github.io/epitesi-hirfal/"><h2>Építési hírfal</h2><p>Szegedi, megyei és országos építési hírek. 2026. október 18-án indult, azóta minden reggel frissül.</p><span class="meta"><b>Hírek</b><span>2026-10-18</span></span></a></li>
-    <li><a class="tag" href="meselesi-modszer/"><h2>Mesélési módszer</h2><p>Hat eszköz, amitől egy szakmai fejezetet végig is olvasnak: kíváncsiság-rés, konfliktus, fordulat, jelenet, tét, nyitott hurok.</p><span class="meta"><b>Tanulás</b><span>2026-10-18</span></span></a></li>
-    <li><a class="tag" href="stilusmintazo/"><h2>Stílusmintázó</h2><p>Ugyanaz a 11 építési hír öt elrendezésben és hét anyagban: papír, folyóirat, tervlap, letisztult, éjszakai, játékos, hivatalos.</p><span class="meta"><b>Kísérlet</b><span>2026-10-17</span></span></a></li>
+    <li data-kind="jatek"><div class="card featured" data-slug="sajat-part">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
+<path class="fp" d="M28 102H132V108H28Z"/><path class="fp" d="M34 96H126V102H34Z"/>
+<path class="fg" d="M38 58L80 38L122 58Z"/><path class="fp" d="M38 58H122V66H38Z"/>
+<rect class="fp" x="46" y="66" width="7" height="30"/><rect class="fp" x="60" y="66" width="7" height="30"/>
+<rect class="fp" x="93" y="66" width="7" height="30"/><rect class="fp" x="107" y="66" width="7" height="30"/>
+<path class="fn" d="M72 96V82Q80 74 88 82V96"/>
+<path class="fw tw" d="M80 45.5L81.4 49.1L85.2 49.3L82.3 51.7L83.2 55.4L80 53.4L76.8 55.4L77.7 51.7L74.8 49.3L78.6 49.1Z"/>
+<g transform="translate(25.9 55.5)"><g class="pop" style="--i:0"><rect class="fg" x="-8" y="-6" width="16" height="11" rx="4"/><path class="fp" d="M-3 5L-5 9L2 5"/><path d="M-4 -0.5H4"/></g></g><g transform="translate(37.1 34)"><g class="pop" style="--i:1"><rect class="ft" x="-8" y="-6" width="16" height="11" rx="4"/><path class="fp" d="M-3 5L-5 9L2 5"/><path d="M-4 -0.5H4"/></g></g><g transform="translate(56.3 19.2)"><g class="pop" style="--i:2"><rect class="fr" x="-8" y="-6" width="16" height="11" rx="4"/><path class="fp" d="M-3 5L-5 9L2 5"/><path d="M-4 -0.5H4"/></g></g><g transform="translate(80 14)"><g class="pop" style="--i:3"><rect class="fl" x="-8" y="-6" width="16" height="11" rx="4"/><path class="fp" d="M-3 5L-5 9L2 5"/><path d="M-4 -0.5H4"/></g></g><g transform="translate(103.7 19.2)"><g class="pop" style="--i:4"><rect class="fg" x="-8" y="-6" width="16" height="11" rx="4"/><path class="fp" d="M-3 5L-5 9L2 5"/><path d="M-4 -0.5H4"/></g></g><g transform="translate(122.9 34)"><g class="pop" style="--i:5"><rect class="ft" x="-8" y="-6" width="16" height="11" rx="4"/><path class="fp" d="M-3 5L-5 9L2 5"/><path d="M-4 -0.5H4"/></g></g><g transform="translate(134.1 55.5)"><g class="pop" style="--i:6"><rect class="fr" x="-8" y="-6" width="16" height="11" rx="4"/><path class="fp" d="M-3 5L-5 9L2 5"/><path d="M-4 -0.5H4"/></g></g></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span><time datetime="2026-10-23">2026. október 23.</time></p>
+        <h2>Saját párt</h2>
+        <p class="desc">Pártot alapítasz egy kisvárosban, hét tanácsadó vitatkozik körülötted 12 helyzetben. A végén csillagtérkép mutatja, melyik eszmékhez kerültél közel. Heywood Political Ideologies könyve alapján, kb. 25 perc.</p>
+        <a class="open" href="sajat-part/" aria-label="Saját párt megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="tananyag"><div class="card" data-slug="tudastar">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg>Tananyag</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln"><rect class="fr" x="20" y="92" width="120" height="14" rx="2"/><path d="M30 92V106"/><rect class="fp" x="127" y="95" width="10" height="8" rx="1"/><path d="M129 99H135"/><text class="lbl" x="37" y="102.5">1</text><rect class="ft" x="40" y="78" width="100" height="14" rx="2"/><path d="M50 78V92"/><rect class="fp" x="127" y="81" width="10" height="8" rx="1"/><path d="M129 85H135"/><text class="lbl" x="57" y="88.5">2</text><rect class="fl" x="60" y="64" width="80" height="14" rx="2"/><path d="M70 64V78"/><rect class="fp" x="127" y="67" width="10" height="8" rx="1"/><path d="M129 71H135"/><text class="lbl" x="77" y="74.5">3</text><rect class="fg" x="80" y="50" width="60" height="14" rx="2"/><path d="M90 50V64"/><rect class="fp" x="127" y="53" width="10" height="8" rx="1"/><path d="M129 57H135"/><text class="lbl" x="97" y="60.5">4</text>
+<rect class="fp" x="100" y="31" width="10" height="19" rx="1.5"/><path d="M105 31V27"/>
+<path class="fo flame" d="M105 27Q99 21 105 12Q111 21 105 27Z"/>
+<path class="tw" d="M30 40V48M26 44H34"/><path class="tw d2" d="M56 22V28M53 25H59"/></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg>Tananyag</span><time datetime="2026-10-22">2026. október 22.</time></p>
+        <h2>Tudástár</h2>
+        <p class="desc">Témák négy fokozatban: egyperces ízelítő, ötperces kártya, mélyfúrás és műhely arról, hol tartunk. Az első téma: hogyan adj át tudást, hogy meg is maradjon.</p>
+        <a class="open" href="tudastar/" aria-label="Tudástár megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="jatek"><div class="card" data-slug="mozgaster">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln thin"><path class="fp" d="M44 58L58.4 58L55.2 66.6L38.6 66.6Z"/><path class="fn" d="M58.4 58L72.8 58L71.7 66.6L55.2 66.6Z"/><path class="fp" d="M72.8 58L87.2 58L88.3 66.6L71.7 66.6Z"/><path class="fn" d="M87.2 58L101.6 58L104.8 66.6L88.3 66.6Z"/><path class="fp" d="M101.6 58L116 58L121.4 66.6L104.8 66.6Z"/><path class="fn" d="M38.6 66.6L55.2 66.6L51.2 77.2L32 77.2Z"/><path class="fp" d="M55.2 66.6L71.7 66.6L70.4 77.2L51.2 77.2Z"/><path class="fn" d="M71.7 66.6L88.3 66.6L89.6 77.2L70.4 77.2Z"/><path class="fp" d="M88.3 66.6L104.8 66.6L108.8 77.2L89.6 77.2Z"/><path class="fn" d="M104.8 66.6L121.4 66.6L128 77.2L108.8 77.2Z"/><path class="fp" d="M32 77.2L51.2 77.2L46.2 90.6L23.6 90.6Z"/><path class="fn" d="M51.2 77.2L70.4 77.2L68.7 90.6L46.2 90.6Z"/><path class="fp" d="M70.4 77.2L89.6 77.2L91.3 90.6L68.7 90.6Z"/><path class="fn" d="M89.6 77.2L108.8 77.2L113.8 90.6L91.3 90.6Z"/><path class="fp" d="M108.8 77.2L128 77.2L136.4 90.6L113.8 90.6Z"/><path class="fn" d="M23.6 90.6L46.2 90.6L40.4 106L14 106Z"/><path class="fp" d="M46.2 90.6L68.7 90.6L66.8 106L40.4 106Z"/><path class="fn" d="M68.7 90.6L91.3 90.6L93.2 106L66.8 106Z"/><path class="fp" d="M91.3 90.6L113.8 90.6L119.6 106L93.2 106Z"/><path class="fn" d="M113.8 90.6L136.4 90.6L146 106L119.6 106Z"/></g><g class="ln">
+<path class="route" d="M26 100C50 88 62 100 86 88"/>
+<rect class="fp" x="10" y="12" width="36" height="30" rx="3"/><path class="fr" d="M10 21V15Q10 12 13 12H43Q46 12 46 15V21Z"/><path d="M20 9V16M36 9V16"/><text class="lbl big" x="28" y="35" text-anchor="middle">1963</text><rect class="fp" x="114" y="12" width="36" height="30" rx="3"/><path class="fr" d="M114 21V15Q114 12 117 12H147Q150 12 150 15V21Z"/><path d="M124 9V16M140 9V16"/><text class="lbl big" x="132" y="35" text-anchor="middle">1989</text>
+<path class="dots" d="M50 22Q80 2 110 22"/><path d="M103 15L110 22L101 23"/>
+<g transform="translate(98 90) rotate(-14)"><g class="wobble">
+<ellipse class="fn" cx="0" cy="0" rx="12" ry="3.5"/>
+<path class="fw" d="M-10 0H10Q9 -6 4 -9Q6 -18 3 -22H-3Q-6 -18 -4 -9Q-9 -6 -10 0Z"/>
+<ellipse class="fw" cx="0" cy="-22" rx="7" ry="2.5"/><circle class="fw" cx="0" cy="-30" r="6.5"/></g></g></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span><time datetime="2026-10-22">2026. október 22.</time></p>
+        <h2>Mozgástér</h2>
+        <p class="desc">Döntéses történelmi játék 1963 és 1989 között: tanácsadóként javasolsz, aztán kiderül, mit lépett valójában a magyar vezetés, és miért. Kb. 20 perc.</p>
+        <a class="open" href="mozgaster/" aria-label="Mozgástér megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="jatek"><div class="card" data-slug="harsfalva">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
+<path class="fn" d="M140 9A10 10 0 1 0 150 24A8 8 0 1 1 140 9Z"/>
+<path class="fe" d="M0 104Q40 92 80 98T160 96V120H0Z"/>
+<rect class="fp" x="46" y="58" width="5" height="10"/>
+<g class="smoke"><circle cx="48.5" cy="50" r="2.5"/><circle cx="52" cy="42" r="3.5"/><circle cx="49" cy="32" r="3"/></g>
+<rect class="fp" x="22" y="72" width="32" height="26"/><path class="fr" d="M17 74L38 56L59 74Z"/>
+<rect class="fn" x="34" y="84" width="8" height="14"/><rect class="fg" x="25" y="79" width="6" height="6"/>
+<rect class="fbr" x="77" y="78" width="6" height="22"/><circle class="fe" cx="80" cy="70" r="14"/>
+<path d="M72 68Q76 64 80 68M82 75Q86 71 90 75"/>
+<rect class="fp" x="104" y="76" width="30" height="22"/><path class="fl" d="M99 78L119 62L139 78Z"/>
+<rect class="fg" x="110" y="82" width="6" height="6"/><rect class="fn" x="122" y="84" width="7" height="14"/>
+<g transform="rotate(40 80 31)"><path class="fw" d="M80 8L84 14V40H76V14Z"/><rect class="fg" x="70" y="40" width="20" height="4" rx="1"/><rect class="fbr" x="78" y="44" width="4" height="8"/><circle class="fg" cx="80" cy="55" r="3"/></g>
+<g transform="rotate(-40 80 31)"><rect class="fbr" x="78" y="10" width="4" height="46" rx="1"/><path class="fw" d="M82 12Q97 9 99 22Q97 34 82 30Z"/></g></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span><time datetime="2026-10-22">2026. október 22.</time></p>
+        <h2>Hársfalva krónikája</h2>
+        <p class="desc">Körökre osztott, régi típusú fantasy RPG menükkel: favágás, bányászat, kovácsolás, főzés, harc, hat tudás saját szinttel. Kb. egy óra.</p>
+        <a class="open" href="harsfalva/" aria-label="Hársfalva krónikája megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="kreativ"><div class="card" data-slug="faradt-robot">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.8L9.5 6.5L14.2 8L9.5 9.5L8 14.2L6.5 9.5L1.8 8L6.5 6.5Z"/></svg>Kreatív</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
+<path d="M58 88Q46 96 48 108M102 88Q114 96 112 108"/>
+<rect class="fl" x="58" y="82" width="44" height="24" rx="6"/><circle class="fg" cx="70" cy="93" r="2.5"/><circle class="fr" cx="79" cy="93" r="2.5"/><path d="M88 91H96M88 96H94"/>
+<rect class="fp" x="74" y="77" width="12" height="5"/>
+<g class="nod"><path d="M80 30V19"/><circle class="fr blink" cx="80" cy="15" r="4"/>
+<rect class="fl" x="42" y="46" width="6" height="16" rx="2"/><rect class="fl" x="112" y="46" width="6" height="16" rx="2"/>
+<rect class="fp" x="48" y="30" width="64" height="48" rx="10"/><rect class="fn" x="56" y="38" width="48" height="31" rx="6"/>
+<circle class="ft" cx="70" cy="53" r="6.5"/><circle class="ft" cx="90" cy="53" r="6.5"/>
+<path class="fn nostroke" d="M62.5 54A7.5 7.5 0 0 1 77.5 54ZM82.5 54A7.5 7.5 0 0 1 97.5 54Z"/>
+<path d="M62 54H78M82 54H98"/><path d="M72 63Q76 61.5 80 63T88 63"/></g>
+<text class="zz" x="118" y="34">z</text><text class="zz z2" x="128" y="23">z</text><text class="zz z3" x="139" y="11">z</text></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.8L9.5 6.5L14.2 8L9.5 9.5L8 14.2L6.5 9.5L1.8 8L6.5 6.5Z"/></svg>Kreatív</span><time datetime="2026-10-20">2026. október 20.</time></p>
+        <h2>A fáradt robot estéje</h2>
+        <p class="desc">Egy fásult robot hét jelenetben próbál lenyűgözni. Közben kiderül, mire képes a CSS, az SVG és a JavaScript.</p>
+        <a class="open" href="faradt-robot/" aria-label="A fáradt robot estéje megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="kronika"><div class="card" data-slug="epitesi-hirfal">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 2.5H13V11.5C13 12.6 12.1 13.5 11 13.5H4C2.9 13.5 2 12.6 2 11.5V10.5H10V11.5C10 12.6 10.9 13.5 12 13.5"/><path d="M5 2.5V10.5M7.2 5.3H10.8M7.2 7.8H10.8"/></svg>Krónika</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
+<path d="M8 110H152"/><path class="gold" d="M40 110V26M50 110V26M40 108L50 98L40 88L50 78L40 68L50 58L40 48L50 38"/>
+<path class="gold" d="M20 26H148M20 32H148"/><path class="gold thin" d="M20 32L28 26L36 32L44 26L52 32L60 26L68 32L76 26L84 32L92 26L100 32L108 26L116 32L124 26L132 32L140 26L148 32"/>
+<path class="thin" d="M45 26V10L148 26M45 10L22 26"/>
+<rect class="fn" x="18" y="32" width="16" height="12"/><rect class="fp" x="51" y="32" width="12" height="10" rx="1"/>
+<rect class="fp" x="114" y="32" width="10" height="4"/>
+<g class="swing"><path d="M119 36V62M119 62Q119 68 114 68"/>
+<g transform="rotate(-4 119 82)"><rect class="fw" x="96" y="66" width="46" height="34" rx="1"/>
+<path class="thick" d="M101 73H137"/><path d="M101 81H117M101 87H117M101 93H112"/><rect class="fg" x="121" y="80" width="16" height="14"/></g></g></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 2.5H13V11.5C13 12.6 12.1 13.5 11 13.5H4C2.9 13.5 2 12.6 2 11.5V10.5H10V11.5C10 12.6 10.9 13.5 12 13.5"/><path d="M5 2.5V10.5M7.2 5.3H10.8M7.2 7.8H10.8"/></svg>Krónika</span><time datetime="2026-10-18">2026. október 18.</time></p>
+        <h2>Építési hírfal</h2>
+        <p class="desc">Szegedi, megyei és országos építési hírek. 2026. október 18-án indult, azóta minden reggel frissül.</p>
+        <a class="open" href="https://ti-zariguin.github.io/epitesi-hirfal/" aria-label="Építési hírfal megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="utmutato"><div class="card" data-slug="meselesi-modszer">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg>Útmutató</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
+<path class="fr" d="M18 98Q56 92 80 104Q104 92 142 98V103Q104 97 80 109Q56 97 18 103Z"/>
+<path class="fp" d="M80 100Q56 90 22 96V70Q56 64 80 74Z"/><path class="fp" d="M80 100Q104 90 138 96V70Q104 64 80 74Z"/>
+<path d="M80 74V100"/><path class="thin" d="M30 78Q52 73 72 80M30 85Q52 80 72 87M88 80Q108 73 130 78M88 87Q108 80 130 85"/>
+<path class="arc" d="M16 66C58 62 76 -8 144 46"/>
+<circle class="fg tw" style="--i:0" cx="28" cy="63" r="2.6"/><circle class="fg tw" style="--i:1" cx="43.1" cy="54.3" r="2.6"/><circle class="fg tw" style="--i:2" cx="57.5" cy="43.3" r="2.6"/><circle class="fg tw" style="--i:3" cx="108.6" cy="27" r="2.6"/><circle class="fg tw" style="--i:4" cx="125" cy="33.3" r="2.6"/><circle class="fg tw" style="--i:5" cx="140" cy="42.9" r="2.6"/><path class="fg tw d2" d="M97.7 18.6L99.5 23.2L104.4 23.4L100.6 26.5L101.8 31.3L97.7 28.6L93.6 31.3L94.8 26.5L91 23.4L95.9 23.2Z"/></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg>Útmutató</span><time datetime="2026-10-18">2026. október 18.</time></p>
+        <h2>Mesélési módszer</h2>
+        <p class="desc">Hat eszköz, amitől egy szakmai fejezetet végig is olvasnak: kíváncsiság-rés, konfliktus, fordulat, jelenet, tét, nyitott hurok.</p>
+        <a class="open" href="meselesi-modszer/" aria-label="Mesélési módszer megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="kiserlet"><div class="card" data-slug="stilusmintazo">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.8 2.5H10.2M6.8 2.5V6.4L3 12.4C2.6 13.1 3.1 14 3.9 14H12.1C12.9 14 13.4 13.1 13 12.4L9.2 6.4V2.5M4.6 10H11.4"/></svg>Kísérlet</span>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln"><path class="fl" d="M96 40H146V90L141 95L136 90L131 95L126 90L121 95L116 90L111 95L106 90L101 95L96 90L96 90Z"/><path class="stitch" d="M101 50H141"/><path class="stitch off" d="M101 60H141"/><path class="stitch" d="M101 70H141"/><path class="stitch off" d="M101 80H141"/>
+<path d="M132 18L152 36"/><ellipse class="fw" cx="133" cy="19" rx="3" ry="1.6" transform="rotate(42 133 19)"/>
+<path class="thread" d="M131 20Q118 22 124 32T122 40"/>
+<g class="sway"><g transform="rotate(-30 54 100)"><rect class="fr" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(-15 54 100)"><rect class="fo" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(0 54 100)"><rect class="fg" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(15 54 100)"><rect class="fe" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(30 54 100)"><rect class="ft" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><circle class="fw" cx="54" cy="100" r="4"/></g></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.8 2.5H10.2M6.8 2.5V6.4L3 12.4C2.6 13.1 3.1 14 3.9 14H12.1C12.9 14 13.4 13.1 13 12.4L9.2 6.4V2.5M4.6 10H11.4"/></svg>Kísérlet</span><time datetime="2026-10-17">2026. október 17.</time></p>
+        <h2>Stílusmintázó</h2>
+        <p class="desc">Ugyanaz a 11 építési hír öt elrendezésben és hét anyagban: papír, folyóirat, tervlap, letisztult, éjszakai, játékos, hivatalos.</p>
+        <a class="open" href="stilusmintazo/" aria-label="Stílusmintázó megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
   </ul>
   <footer>
     <p>A kártyákon a dátum az oldal indulását jelöli, nem az utolsó módosítást.</p>
     <p>Az oldalak tartalma bármikor, előzetes bejelentés nélkül változhat: javulhat, bővülhet, átalakulhat, vagy csendben eltűnhet. Ez nem hanyagság, hanem műhely. Amit ma itt látsz, az a mai állapot, és nem ígéret a holnapira.</p>
-    <p>8 oldal. Utolsó frissítés: 2026-10-23. Ne ess pánikba.</p>
+    <p>8 oldal. Utolsó frissítés: 2026. október 23. Ne ess pánikba.</p>
   </footer>
 </div>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var KEY_THEME = "muhely-egbolt", KEY_FILTER = "muhely-szuro";
+  function load(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
+  function save(k, v) { try { window.localStorage.setItem(k, v); } catch (e) { /* storage blocked: keep the in-page choice only */ } }
+  function press(attr, value) {
+    var bs = document.querySelectorAll("[" + attr + "]");
+    for (var i = 0; i < bs.length; i++) bs[i].setAttribute("aria-pressed", String(bs[i].getAttribute(attr) === value));
+  }
+  function setTheme(v, persist) {
+    v = v === "light" ? "light" : "dark";
+    root.setAttribute("data-theme", v); press("data-set-theme", v);
+    if (persist) save(KEY_THEME, v);
+  }
+  setTheme(load(KEY_THEME), false);
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-set-theme]") : null;
+    if (b) setTheme(b.getAttribute("data-set-theme"), true);
+  });
+
+  // Cards: mouse hover reveals via CSS; a touch or pen tap reveals first, the next tap opens.
+  var canHover = window.matchMedia ? window.matchMedia("(hover: hover)").matches : true;
+  var lastPointer = "mouse";
+  document.addEventListener("pointerdown", function (e) { lastPointer = e.pointerType || "mouse"; }, true);
+  var cards = document.querySelectorAll(".card");
+  function closeAll(except) {
+    for (var i = 0; i < cards.length; i++) if (cards[i] !== except) cards[i].classList.remove("is-open");
+  }
+  Array.prototype.forEach.call(cards, function (card) {
+    var link = card.querySelector("a.open");
+    card.addEventListener("click", function (e) {
+      var touchy = lastPointer === "touch" || lastPointer === "pen" || !canHover;
+      if (touchy && !card.classList.contains("is-open")) {
+        e.preventDefault(); closeAll(card); card.classList.add("is-open"); return;
+      }
+      if (e.target.closest && e.target.closest("a")) return; // the link navigates on its own
+      if (link) link.click();
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!(e.target.closest && e.target.closest(".card"))) closeAll(null);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closeAll(null);
+      var a = document.activeElement;
+      if (a && a.classList && a.classList.contains("open")) a.blur();
+    }
+  });
+
+  // Category filter: "mind" or a category token; from the #hash first, then localStorage.
+  var items = document.querySelectorAll(".grid > li");
+  var fbtns = document.querySelectorAll("[data-filter]");
+  var status = document.getElementById("filter-status");
+  var known = {};
+  for (var i = 0; i < fbtns.length; i++) known[fbtns[i].getAttribute("data-filter")] = fbtns[i];
+  function valid(v) { return v && Object.prototype.hasOwnProperty.call(known, v) ? v : null; }
+  function fromHash() { return valid(decodeURIComponent((window.location.hash || "").replace(/^#/, "")).toLowerCase()); }
+  function setFilter(v, how) {
+    v = valid(v) || "mind";
+    var shown = 0;
+    for (var i = 0; i < items.length; i++) {
+      var on = v === "mind" || items[i].getAttribute("data-kind") === v;
+      items[i].hidden = !on;
+      if (on) shown++;
+    }
+    press("data-filter", v);
+    closeAll(null);
+    if (how === "click") {
+      save(KEY_FILTER, v);
+      try { // keep the address shareable; a sandboxed frame may refuse, which is fine
+        var base = window.location.pathname + window.location.search;
+        window.history.replaceState(null, "", v === "mind" ? base : base + "#" + v);
+      } catch (e) { /* ignore */ }
+      if (status) status.textContent = shown + " oldal látszik" + (v === "mind" ? "." : ": " + known[v].querySelector("span").textContent + ".");
+    }
+  }
+  setFilter(fromHash() || valid(load(KEY_FILTER)) || "mind", "load");
+  window.addEventListener("hashchange", function () { var h = fromHash(); if (h) setFilter(h, "hash"); });
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-filter]") : null;
+    if (b) setFilter(b.getAttribute("data-filter"), "click");
+  });
+})();
+</script>
 </body>
 </html>
