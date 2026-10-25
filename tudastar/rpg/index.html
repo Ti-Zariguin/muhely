@@ -1,0 +1,576 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Tudástárba</a><span>Tudástár</span></nav>
+<title>Az RPG-műfaj sorozata</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+section.resz { scroll-margin-top: 16px; }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 440px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+sup.fn { font-size: 0.72em; color: var(--muted); }
+.urls a, .urls .u { overflow-wrap: anywhere; }
+.blk { display: grid; gap: 12px; }
+@media print {
+  section.resz, section#idovonal { break-before: page; }
+  section.resz, section#idovonal, .card { margin-bottom: 0; padding-bottom: 0; }
+  section.resz > :last-child, .card > :last-child { margin-bottom: 0; padding-bottom: 0; }
+  .urls, .urls li { font-size: 8.5pt; line-height: 1.3; }
+  .card { background: none; box-shadow: none; border-radius: 0; padding: 0; }
+  .tbl { overflow: visible; }
+  table { min-width: 0; font-size: 9pt; }
+  th, td { padding: 4pt 5pt; }
+  .timeline li { grid-template-columns: 5rem minmax(0, 1fr); }
+  .timeline .d, sup.fn, th { color: #000; }
+  /* print: block flow instead of grid (page breaks), list bullets via list-style so the unit checker markers can use ::before */
+  .card { display: block; }
+  .card > * + * { margin-top: 9pt; }
+  ul.pts { display: block; list-style: square; padding-left: 1.1em; }
+  ul.pts > li { padding-left: 0; margin-top: 4pt; }
+  ol.steps { display: block; }
+  ol.steps > li { margin-top: 4pt; }
+  .blk { display: block; break-inside: avoid; page-break-inside: avoid; }
+  .blk > * + * { margin-top: 9pt; }
+  .card ul.pts, .card ol.steps { break-inside: auto; page-break-inside: auto; }  /* the items (li) stay whole, the list may flow over pages */
+  .ct-leaves { white-space: normal; overflow: visible; text-overflow: clip; }
+  .timeline { display: block; }
+  .timeline li { margin-top: 5pt; }
+}
+</style>
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Játékok</span>
+    <h1>Az RPG-műfaj sorozata</h1>
+    <p class="lede">Hat rövid rész arról, hogyan lett az asztali kockajátékból számítógépes szerepjáték, és mit tanulhatunk belőle egy saját, tanulós játékhoz.</p>
+  </header>
+  <!--CIKK-TERKEP-->
+<style>.ct { --ct-fg: var(--fg, #1d1f21); --ct-muted: var(--muted, #5f6368); --ct-rule: var(--rule, #d9d6cc);
+  --ct-accent: var(--accent, #c4561a); --ct-card: var(--surface, #faf6e8); --ct-bg: var(--bg, #f4f3ef);
+  /* full-bleed band: breaks out of the article column to the viewport edges */
+  margin: 0 calc(50% - 50vw); padding: 18px max(16px, env(safe-area-inset-right, 0px)) 18px max(16px, env(safe-area-inset-left, 0px));
+  background: var(--ct-card); border-block: 1px solid var(--ct-rule); }
+.ct-in { max-width: 1200px; margin: 0 auto; display: grid; gap: 12px; }
+.ct-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.ct-head { font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ct-accent); }
+.ct-root { background: var(--ct-fg); color: var(--ct-bg); border-radius: 6px; padding: 4px 12px; font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.9rem; }
+.ct-intro { margin: 0; flex: 1 1 22rem; font-size: 0.92rem; color: var(--ct-muted); }
+.ct-branches { list-style: none; margin: 0; padding: 12px 0 0; border-top: 2px solid var(--ct-accent);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: 10px; }
+.ct-branches > li { position: relative; background: var(--ct-bg); border-radius: 6px; padding: 9px 11px; display: grid; gap: 3px; align-content: start; min-width: 0; }
+.ct-branches > li::before { content: ""; position: absolute; left: 16px; top: -14px; height: 12px; border-left: 2px solid var(--ct-accent); }
+.ct-h { display: flex; align-items: baseline; gap: 7px; }
+.ct-n { font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.74rem; color: var(--ct-muted); }
+.ct-b { font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.92rem; line-height: 1.2; color: var(--ct-fg); }
+a.ct-b { text-decoration: underline; text-decoration-color: var(--ct-accent); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a.ct-b:hover { color: var(--ct-accent); }
+a.ct-b:focus-visible { outline: 2px solid var(--ct-accent); outline-offset: 2px; }
+.ct-desc { margin: 0; font-size: 0.84rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.ct-leaves { font-family: var(--font-display, system-ui, sans-serif); font-size: 0.72rem; color: var(--ct-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 520px) { .ct-branches { grid-template-columns: 1fr 1fr; } .ct-desc { -webkit-line-clamp: 4; } .ct-leaves { display: none; } }</style>
+<nav class="ct" aria-label="A cikk térképe"><div class="ct-in">
+<div class="ct-top">
+<span class="ct-head">Miről lesz szó</span>
+<span class="ct-root">Az RPG-műfaj sorozata</span>
+</div>
+<ol class="ct-branches">
+<li><div class="ct-h"><span class="ct-n">01</span><a class="ct-b" href="#resz1">Gyökerek</a></div><p class="ct-desc">A Dungeons &amp; Dragons, a tapasztalati pont eredete és négy típusa, a dnd és a pedit5 az egyetemi nagygépeken.</p><div class="ct-leaves">D&amp;D · tapasztalati pont · dnd · pedit5</div></li>
+<li><div class="ct-h"><span class="ct-n">02</span><a class="ct-b" href="#resz2">Nyugati sorozatok</a></div><p class="ct-desc">Ultima, Wizardry, Might and Magic, The Bard&#x27;s Tale.</p><div class="ct-leaves">Ultima · Wizardry · Might and Magic · Bard&#x27;s Tale</div></li>
+<li><div class="ct-h"><span class="ct-n">03</span><a class="ct-b" href="#resz3">A japán szerepjáték</a></div><p class="ct-desc">Dragon Quest, Final Fantasy, az Active Time Battle, és mit mond a forrás a JRPG fogalmáról.</p><div class="ct-leaves">Dragon Quest · Final Fantasy · ATB · JRPG</div></li>
+<li><div class="ct-h"><span class="ct-n">04</span><a class="ct-b" href="#resz4">Az izometrikus reneszánsz</a></div><p class="ct-desc">Baldur&#x27;s Gate, Fallout, Planescape: Torment és a párbeszédfa.</p><div class="ct-leaves">Baldur&#x27;s Gate · Fallout · Torment · párbeszédfa</div></li>
+<li><div class="ct-h"><span class="ct-n">05</span><a class="ct-b" href="#resz5">Nyílt világ és akció-RPG</a></div><p class="ct-desc">Diablo, The Elder Scrolls, Mass Effect, Dark Souls.</p><div class="ct-leaves">Diablo · Elder Scrolls · Mass Effect · Dark Souls</div></li>
+<li><div class="ct-h"><span class="ct-n">06</span><a class="ct-b" href="#resz6">A mai RPG</a></div><p class="ct-desc">Disco Elysium, Baldur&#x27;s Gate 3, Stardew Valley, Undertale.</p><div class="ct-leaves">Disco Elysium · Baldur&#x27;s Gate 3 · Stardew Valley · Undertale</div></li>
+</ol>
+</div></nav>
+<!--/CIKK-TERKEP-->
+  <section class="card" id="bevezeto">
+    <h2>Bevezető</h2>
+    <p>A sorozat a szerepjátékot (RPG) járja körül az asztali Dungeons &amp; Dragons (1974) és az első egyetemi nagygépes játékok felől a japán sorozatokon, az izometrikus döntésjátékokon és az akció-RPG-ken át a mai, párbeszéd- és életszimulációs játékokig. Minden rész néhány perc olvasás, átfutható: a fontos rész vastagon áll, a "Mit vihetünk át belőle egy tanulós játékba" szakasz ötleteket ad egy falusi, gyűjtögetős, kovácsolós, küldetéses és döntési pontokkal teli játékhoz, a végén térkép-táblázat (műfaj, játék, mechanika, évszám, forrás) és forráslista következik. A mechanika oszlop a tapasztalati pontot és szintlépést, a képességfát és képességeket, a leltárt, a párbeszédfát, a döntést és következményt, a társat, a hírnevet és a harcrendszer típusát követi. A források a Wikipedia angol nyelvű kiadásának oldalai (elérés: 2026-10-25), a részeket a források gépi összefoglalójából írtuk, így a számok és évek a források állításai, nem független ellenőrzés eredményei. Ahol a források ellentmondtak, vagy valami bizonytalan volt, azt a szöveg jelzi, vagy kimaradt.</p>
+    <div class="blk">
+    <h3>A részek</h3>
+    <ol class="steps">
+      <li><a href="#resz1"><strong>01 Gyökerek: az asztali szerepjáték és az első számítógépes RPG-k</strong></a>: a Dungeons &amp; Dragons, a tapasztalati pont eredete és négy típusa, a dnd és a pedit5 az egyetemi nagygépeken.</li>
+      <li><a href="#resz2"><strong>02 A nagy nyugati sorozatok kora</strong></a>: Ultima, Wizardry, Might and Magic, The Bard's Tale.</li>
+      <li><a href="#resz3"><strong>03 A japán szerepjáték</strong></a>: Dragon Quest, Final Fantasy, az Active Time Battle, és mit mond a forrás a "JRPG" fogalmáról.</li>
+      <li><a href="#resz4"><strong>04 Az izometrikus reneszánsz és a döntések játéka</strong></a>: Baldur's Gate, Fallout, Planescape: Torment, a párbeszédfa.</li>
+      <li><a href="#resz5"><strong>05 A nyílt világ és az akció-RPG</strong></a>: Diablo, The Elder Scrolls, Mass Effect, Dark Souls.</li>
+      <li><a href="#resz6"><strong>06 A mai RPG és újdonságai</strong></a>: Disco Elysium, Baldur's Gate 3, Stardew Valley, Undertale.</li>
+    </ol>
+    </div>
+    <div class="blk">
+    <h3>Hogyan használható</h3>
+    <ul class="pts"><li><strong>A forrás-hivatkozások részenként számozottak.</strong> A <code>[1]</code>, <code>[2]</code> jelzés mindig az adott rész forráslistájára utal.</li></ul>
+    </div>
+  </section>
+  <section class="card resz" id="resz1">
+    <span class="kicker">1. rész</span>
+    <h2>Gyökerek: az asztali szerepjáték és az első számítógépes RPG-k</h2>
+    <p class="lede">Az RPG-sorozat első része. Honnan jön a szerepjáték: a hadijátékoktól a Dungeons &amp; Dragonsig, onnan az egyetemi nagygépekre.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A szerepjáték hadijátékból nőtt ki.</strong> A Wikipedia szerint az asztali szerepjáték hadijátékokból fejlődött: a Chainmail nevű miniatűr-hadijáték 1971-ben jelent meg, David Wesely Braunstein nevű játékai pedig a közvetlen előzmények közé tartoznak <sup class="fn">[1][2]</sup>. A Tabletop role-playing game oldal a Braunsteint "az első asztali szerepjátéknak" nevezi, dátumot és elsődleges forrást nem közöl hozzá <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Dungeons &amp; Dragons 1974-ben jelent meg.</strong> Gary Gygax és Dave Arneson alkotta, a TSR adta ki <sup class="fn">[1]</sup>. A Wikipedia szerint Arneson a Braunstein egy középkori változatát vitte tovább, ahol a játékosok egyéneket irányítottak, és ő adta hozzá a karakterosztályokat, a tapasztalati pontot, a szintlépést és a páncélosztályt <sup class="fn">[1]</sup>. A szabályszöveget Gygax írta meg <sup class="fn">[1]</sup>.</li>
+      <li><strong>A D&amp;D-ben egy játékos a játékmester.</strong> Ő a bíró, a mesélő és a nem játékos szereplők hangja, a többiek egy-egy szereplőt irányítanak, és együtt "csapatot" alkotnak <sup class="fn">[1]</sup>. A szereplőnek hat képességértéke van (erő, ügyesség, szívósság, értelem, bölcsesség, karizma), a kockázatos cselekvéseket sokoldalú kockákkal döntik el, a támadás sikerét jellemzően egy húszoldalú kocka mutatja <sup class="fn">[1]</sup>. A játékmester szerepét a számítógépes RPG-kben maga a gép veszi át <sup class="fn">[6]</sup>.</li>
+      <li><strong>Eleinte szűk rétegnek szánták.</strong> Az első kiadás egy kis doboz volt három füzettel, a Wikipedia szerint az első évben nagyjából ezer példány fogyott <sup class="fn">[1]</sup>. Az első nyomtatás még szűk körű hadijátékként került forgalomba, Gygax mintegy ötvenezer példányra számított a hobbisták között <sup class="fn">[2]</sup>.</li>
+      <li><strong>A tapasztalati pont a D&amp;D öröksége.</strong> A Wikipedia szerint a kifejezést Gygax és Arneson vezette be a D&amp;D megalkotásakor <sup class="fn">[5]</sup>. Az "EP" rövidítés már foglalt volt az elektrum érmékre, ezért a TSR munkatársa, Lawrence Schick javasolta az "XP"-t <sup class="fn">[5]</sup>. A források eltérnek abban, hogy ő javasolta vagy ő találta ki a kifejezést <sup class="fn">[5]</sup>. A tapasztalati pont általában célok, akadályok és ellenfelek leküzdéséért jár, elég pont egy új szintet ad, ami jellemzően növeli az életerőt, a varázserőt és az erőt <sup class="fn">[5]</sup>.</li>
+      <li><strong>A fejlődésnek négy fő típusa van.</strong> A szintalapú rendszerben a pontok a karakterosztályhoz kötött szintet emelik <sup class="fn">[5]</sup>. A tevékenység-alapú rendszerben a képességek használat közben nőnek, ilyen például a <em>The Elder Scrolls</em> és a <em>Dungeon Master</em> <sup class="fn">[5]</sup>. A szabad rendszerben a játékos megszabott áron költ pontot képességre (a <em>GURPS</em> például így működik), a beváltós rendszerben pedig a költött pont elfogy <sup class="fn">[5]</sup>. Sok játék kevert.</li>
+      <li><strong>Az első számítógépes szerepjátékok egyetemi nagygépeken születtek.</strong> A Wikipedia összefoglalója szerint az első számítógépes RPG-k az 1970-es évek közepén jelentek meg, amikor fejlesztők a D&amp;D-t egyetemi nagygépekre próbálták átültetni <sup class="fn">[6]</sup>. A <em>Dungeon</em>, a <em>pedit5</em> és a <em>dnd</em> nevű játék is ezek közé tartozik <sup class="fn">[6]</sup>.</li>
+      <li><strong>A pedit5 egyszemélyes tömlöcjáték volt, és egy véletlen névből kapta a nevét.</strong> Rusty Rutherford tervezte az Illinois-i Egyetemen (Urbana-Champaign), a PLATO hálózatra, 1975 végén, négy-hat hét alatt, miután addig a D&amp;D-vel játszott <sup class="fn">[4]</sup>. A pálya egyetlen szint, rögzített elrendezéssel, legfeljebb 40-50 szobával, felülnézetes képpel; az ellenfelek és a kincsek véletlenszerűen generálódnak, amikor új szereplő készül, és a szereplővel együtt mentődnek <sup class="fn">[4]</sup>. A játékos harcolhat, varázsolhat vagy futhat, ha pedig az ellenfelet nem győzi le vagy nem menekül el azonnal, a harc a játékos beavatkozása nélkül dől el <sup class="fn">[4]</sup>. A játék a D&amp;D-ből az életerőt, a szinteket, valamint a kincs- és tapasztalat-jutalmat vette át <sup class="fn">[4]</sup>. A név onnan van, hogy az egyetem egyik csoportjának pedit1-től pedit5-ig számozott programhelyei voltak, és az ötödik volt szabad <sup class="fn">[4]</sup>. A Wikipedia szerint a pedit5-öt "az első dungeon crawl videojátéknak és az első számítógépes szerepjátékok egyikének tekintik" <sup class="fn">[4]</sup>. Ugyanaz az oldal hozzáteszi, hogy a pedit5, a <em>dnd</em> és a <em>Dungeon</em> mind 1975 körül készült, és egy 1974-es, gyorsan törölt program (<em>m199h</em>) megelőzhette őket <sup class="fn">[4]</sup>.</li>
+      <li><strong>A dnd többjátékos ígérettel indult, és felülnézetes labirintus volt.</strong> Gary Whisenhunt és Ray Wood írta TUTOR nyelven a PLATO rendszerre a Southern Illinois Egyetemen 1974-ben és 1975-ben, a név a fájlnévből jön <sup class="fn">[3]</sup>. A Wikipedia 1975-öt ad meg kiadási évnek, de az oldalon hivatkozott egyik könyv 1979-et mond, az ellentmondást az oldal nem oldja fel <sup class="fn">[3]</sup>. A játékos a Whisenwood nevű, többszintes, labirintusszerű tömlöcben két "végső kincset" (a grált és az orbot) keresi; a szintek teljesítése új varázslatokat, fegyvereket és tárgyakat ad, a szintek végén erős szörnyek állnak, az egyik egy aranysárkány az orbot őrzi <sup class="fn">[3]</sup>. A tömlöcből ki lehet lépni, pihenni, és később visszatérni <sup class="fn">[3]</sup>. A Wikipedia szerint ez volt az "első interaktív játék, amely a később főellenségnek nevezett szörnyet bemutatta" <sup class="fn">[3]</sup>. Ezt az oldal két forrásra hivatkozva állítja, független ellenőrzés nélkül <sup class="fn">[3]</sup>.</li>
+      <li><strong>Hamarosan mikroszámítógépekre is eljutott.</strong> A Wikipedia összefoglalója Peter Trefonas <em>Dungeon n Dragons</em> című játékát (CLOAD, 1980, TRS-80 Model 1) a legkorábbi mikroszámítógépes RPG-k egyikének nevezi, és megjegyzi, hogy a <em>Rogue</em> (1980) a roguelike-ok ősének számít <sup class="fn">[6]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A játékmester feladatát a gépnek kell átvennie.</strong> Az asztali játékban az ember dönti el, mi történik, ha a szabály nem mond semmit <sup class="fn">[1]</sup>. A Hársfalva-féle játékban ezt a szerepet a küldetésrendszer és a párbeszédek veszik át, tehát ott kell előre elgondolni, mi történik, ha a játékos valami váratlant tesz.</li>
+      <li><strong>A tevékenység-alapú fejlődés természetes a kovácsoláshoz és a gyűjtéshez.</strong> A forrás szerint a képességek használat közben nőnek (<em>The Elder Scrolls</em>, <em>Dungeon Master</em>) <sup class="fn">[5]</sup>. Egy kovácsolós, gyűjtögetős játékban ez érthetőbb, mint külön pontgyűjtés: aki sokat kovácsol, jobban kovácsol.</li>
+      <li><strong>A szint és a tapasztalati pont könnyen érthető jutalom.</strong> A D&amp;D-ből ered, és a forrás szerint a legtöbb szerepjátékos videojáték szintalapú rendszert használ <sup class="fn">[5]</sup>. A gyors, látható szintlépés jó indulás egy tanulós játékban.</li>
+      <li><strong>Kis, rögzített pálya is játék.</strong> A pedit5 egyetlen, legfeljebb 40-50 szobás szintje mutatja, hogy a kezdéshez nem kell nagy világ <sup class="fn">[4]</sup>.</li>
+      <li><strong>A mentett szereplő összeköti a játékalkalmakat.</strong> A pedit5-ben a szereplő és a hozzá generált ellenfelek, kincsek mentődtek <sup class="fn">[4]</sup>; a Hársfalván ugyanez adhat folytonosságot a napról napra játszó tanulónak.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Asztali szerepjáték</td><td>Dungeons &amp; Dragons</td><td>játékmester, hat képességérték, húszoldalú kocka, életerő, tapasztalati pont és szintlépés, karakterosztály, páncélosztály, csapat</td><td>1974</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Tapasztalatipont-rendszer</td><td>szintalapú (D&amp;D)</td><td>pont célokért és ellenfelekért, szintlépés emeli az életerőt, varázserőt, erőt</td><td>1974 (D&amp;D)</td><td><sup class="fn">[1][5]</sup></td></tr>
+        <tr><td>Tapasztalatipont-rendszer</td><td>tevékenység-alapú (pl. The Elder Scrolls, Dungeon Master)</td><td>a képesség használat közben nő</td><td>a forrás nem közöl évet</td><td><sup class="fn">[5]</sup></td></tr>
+        <tr><td>Nagygépes számítógépes RPG</td><td>dnd</td><td>felülnézet, többszintes labirintus, szintek feloldása, varázslat, fegyver, tárgy, főellenség (aranysárkány), kilépés és pihenés</td><td>1975 (egy hivatkozott forrás szerint 1979)</td><td><sup class="fn">[3]</sup></td></tr>
+        <tr><td>Nagygépes számítógépes RPG</td><td>pedit5</td><td>egyetlen szint (40-50 szoba), életerő, szint, tapasztalat és kincs, harc/varázslat/futás, véletlen ellenfél és kincs, mentett szereplő</td><td>1975</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Mikroszámítógépes RPG</td><td>Dungeon n Dragons (Trefonas)</td><td>az RPG első mikroszámítógépes példái közé tartozik (TRS-80)</td><td>1980</td><td><sup class="fn">[6]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Dungeons &amp; Dragons: <a href="https://en.wikipedia.org/wiki/Dungeons_%26_Dragons">https://en.wikipedia.org/wiki/Dungeons_%26_Dragons</a></li>
+      <li>Tabletop role-playing game: <a href="https://en.wikipedia.org/wiki/Tabletop_role-playing_game">https://en.wikipedia.org/wiki/Tabletop_role-playing_game</a></li>
+      <li>Dnd (video game): <a href="https://en.wikipedia.org/wiki/Dnd_(video_game)">https://en.wikipedia.org/wiki/Dnd_(video_game)</a></li>
+      <li>Pedit5: <a href="https://en.wikipedia.org/wiki/Pedit5">https://en.wikipedia.org/wiki/Pedit5</a></li>
+      <li>Experience point: <a href="https://en.wikipedia.org/wiki/Experience_point">https://en.wikipedia.org/wiki/Experience_point</a></li>
+      <li>Computer role-playing game: <a href="https://en.wikipedia.org/wiki/Computer_role-playing_game">https://en.wikipedia.org/wiki/Computer_role-playing_game</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz2">
+    <span class="kicker">2. rész</span>
+    <h2>A nagy nyugati sorozatok kora</h2>
+    <p class="lede">Az RPG-sorozat második része. Az Ultima, a Wizardry, a Might and Magic és a Bard's Tale: hogyan lett a szerepjátékból otthoni számítógépes műfaj az 1980-as években.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>Három alapstílus született a korai években.</strong> A Wikipedia összefoglalója szerint a számítógépes szerepjátékokban három eredeti irány alakult ki: a roguelike (<em>Rogue</em>, 1980, generált labirintusok), a tömlöcjáró (<em>Wizardry</em>, 1981, egy vagy néhány tömlöc) és a nyílt világ (<em>Ultima</em>, 1981, bejárható térkép) <sup class="fn">[6]</sup>. Az oldal szerint az <em>Ultima</em> és a <em>Wizardry</em> az asztali D&amp;D lazább átdolgozása volt <sup class="fn">[6]</sup>.</li>
+      <li><strong>Az Ultima egy egyetemista munkája volt.</strong> Az <em>Ultima</em> (később <em>Ultima I: The First Age of Darkness</em>) alkotója Richard Garriott, a szerzői jogi bejegyzés 1980. szeptember 2-án történt, hivatalosan 1981 júniusában jelent meg az Apple II-re, a kiadó a California Pacific Computer Company volt <sup class="fn">[7]</sup>. A Wikipedia szerint Garriott az egyetem első évében, Kenneth W. Arnolddal együtt készítette, egy évnél rövidebb idő alatt <sup class="fn">[7]</sup>. A grafikus rendszer csempe-alapú, ezt az oldal "az első ilyen játéknak a műfajban" mondja egy Gamasutra-történet nyomán <sup class="fn">[7]</sup>.</li>
+      <li><strong>Az Ultima I egyetlen hőst vezet, a harc véletlenszerű.</strong> A játékos pontokat oszt szét az értékek között (erő, karizma, ügyesség), négy fajból (ember, tünde, törpe, bobbit) és négy osztályból (harcos, pap, varázsló, tolvaj) választ <sup class="fn">[7]</sup>. A térkép felülnézetes, a tömlöcök belső nézetűek; az étel két lépésenként fogy, és ha elfogy, a hős meghal; minden új szinthez 1000 tapasztalati pont kell <sup class="fn">[7]</sup>. A játékban egy valós idejű, űrhajós lövöldözős betét is van, amelyet Garriott szerint a fennmaradt lemezhely kitöltésére tett bele <sup class="fn">[7]</sup>.</li>
+      <li><strong>Az Ultima IV-ben a döntés lett a téma.</strong> A Wikipedia szerint a sorozat harmadik része (<em>Ultima III: Exodus</em>, 1983) az első, amelyben csapatrendszer volt, a negyedik (1985) pedig bevezette a nyolc erényen (becsületesség, együttérzés, vitézség, igazságosság, áldozat, tisztesség, lelkiség, alázat) alapuló erkölcsi rendszert <sup class="fn">[1]</sup>. Mindegyik erény egy csapattaghoz, egy városhoz és egy bolygóhoz kapcsolódik <sup class="fn">[1]</sup>. A hős innentől "Avatar" <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Wizardry a tömlöcjárást alapozta meg.</strong> A <em>Wizardry: Proving Grounds of the Mad Overlord</em> 1981 szeptemberében jelent meg az Apple II-re; tervezői Andrew C. Greenberg és Robert Woodhead, mindketten Cornell-hallgatók, a kiadó a Sir-Tech <sup class="fn">[2][3]</sup>. A fejlesztés 1978-ban kezdődött, és a korábbi PLATO-játékok hatottak rá, különösen az 1977-es <em>Oubliette</em> <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Wizardry csapata hat fős volt, a tömlöc tíz szintes.</strong> A játékos legfeljebb hat szereplőt hoz létre ötféle fajból és négy alap osztályból (harcos, pap, varázsló, tolvaj); a haladással négy elit osztály nyílik: a püspök, a szamuráj, a lord és a nindzsa <sup class="fn">[3]</sup>. A tömlöc tíz szint, szintenként 20x20-as rács, belső nézettel és vonalgrafikával; a harc körökre osztott, a szörny képe veszi át a térkép helyét <sup class="fn">[3]</sup>. A Wikipedia szerint nincs automatikus térkép, a doboz grafikus papírt tartalmazott a rajzoláshoz, a tömlöcben pedig nem lehet menteni <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Wizardry gyorsan kereskedelmi siker lett.</strong> A Wikipedia szerint 1982. június 30-ig 24 000 példányt adtak el belőle, három év alatt 200 000-et <sup class="fn">[3]</sup>. Egy forrás szerint ez "az első igazán csapatalapú szerepjáték" volt, ez egy hivatkozott könyv megítélése <sup class="fn">[3]</sup>. Az Ultima-oldal szerint a csapatalapú harc a <em>Wizardry</em>-ból ered <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Might and Magic belső nézetű, csapatos sorozat.</strong> Alkotója és producere Jon Van Caneghem, a fejlesztő a New World Computing, az első rész (<em>Book One: The Secret of the Inner Sanctum</em>) 1986-ban jelent meg <sup class="fn">[4]</sup>. A játékos különböző karakterosztályú szereplőkből álló csapatot irányít, a harc körökre osztott (a későbbi részekben választható a valós idejű mód), és a korai játékok kezelőfelülete a <em>Bard's Tale</em>-ére hasonlít <sup class="fn">[4]</sup>. A Wikipedia szerint a sorozat az <em>Ultima</em>, a <em>Wizardry</em> és a <em>Bard's Tale</em> mellett a korai RPG-k meghatározói közé tartozik <sup class="fn">[4]</sup>.</li>
+      <li><strong>A Bard's Tale a város és a dalok játéka volt.</strong> Michael Cranford tervezte és programozta az Interplay Productions számára, 1985 decemberében jelent meg Észak-Amerikában, az Electronic Arts kiadásában; a helyszín Skara Brae városa, az ellenfél Mangar, a sötét varázsló <sup class="fn">[5]</sup>. A csapat legfeljebb hat főből áll, nyolc alap osztállyal (köztük a bárd, aki dalokkal támogatja a csapatot) <sup class="fn">[5]</sup>. A harc körökre osztott és szöveges, a legtöbb találkozás véletlen, a nyeremény és a tapasztalat egyenlően oszlik a túlélők között <sup class="fn">[5]</sup>. Szintet csak egy rejtett épületben, a Review Boardnál lehet lépni <sup class="fn">[5]</sup>. A Wikipedia szerint a játékban 85 mágus-varázslat van, a dalok hosszan tartó varázslatként hatnak a csapatra (a dalok pontos hatásaira az oldalon hiányzik a forrás) <sup class="fn">[5]</sup>.</li>
+      <li><strong>Karaktereket át lehetett vinni játékból játékba.</strong> A <em>Bard's Tale</em>-ben egyes platformokon a <em>Wizardry</em> és az <em>Ultima III</em> karakterei is behozhatók, amit a Wikipedia "némileg forradalminak" nevez <sup class="fn">[5]</sup>. A <em>Wizardry</em>-ban a megnyert csapat a következő részbe vihető <sup class="fn">[3]</sup>.</li>
+      <li><strong>A harcrendszerek különböztek.</strong> A korai <em>Ultima</em> hivatalosan körökre osztott volt, de ha a játékos nagyjából egy másodpercnél tovább várt, "passz" parancs ment <sup class="fn">[6]</sup>. A legtöbb <em>Ultima</em> miniatűr-hadijáték-szerű arénát használt, ahol a szereplők mozognak és a közeli ellenfeleket támadják <sup class="fn">[6]</sup>. A <em>Wizardry</em>-ban a szörnyek és a csapat sorokba rendeződnek, és csak az első sor tud közelharcot vívni <sup class="fn">[6]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A bejárható térkép jutalom a kíváncsiságnak.</strong> Az <em>Ultima</em> nyílt világa, felülnézettel és bejárható helyszínekkel <sup class="fn">[6][7]</sup>, jól illik egy falus játékhoz: a Hársfalva és környéke lehet a térkép.</li>
+      <li><strong>A szereplő értékei kevés számmal is működnek.</strong> Az <em>Ultima I</em> az erő, a karizma és az ügyesség között osztott pontokat <sup class="fn">[7]</sup>; a Hársfalván három-négy érték elég, és minden értéknek legyen látható hatása.</li>
+      <li><strong>Az étel mint erőforrás.</strong> Az <em>Ultima I</em>-ben a hős meghal, ha elfogy az étele <sup class="fn">[7]</sup>. Egy tanulós játékban az étel legyen szelídebb: hiány esetén lassulás vagy kisebb erő jár, nem halál.</li>
+      <li><strong>A szintet egy helyen lehet lépni.</strong> A <em>Bard's Tale</em>-ben a szintlépéshez a Review Boardhoz kell menni <sup class="fn">[5]</sup>. A Hársfalván ez lehet egy mester vagy a kovács műhelye, ahol a tanuló "vizsgázik".</li>
+      <li><strong>A dal mint tartós támogatás.</strong> A bárd hosszan tartó varázsló-hatást ad a csapatnak <sup class="fn">[5]</sup>; egy tanulós játékban egy segítő társ vagy egy étel adhat ideiglenes bónuszt.</li>
+      <li><strong>Mentés ott, ahol a tanuló abbahagyja.</strong> A <em>Wizardry</em> nem engedett a tömlöcben menteni <sup class="fn">[3]</sup>, ami tanuláshoz nem illik; egy falusi játék mentsen bármikor.</li>
+      <li><strong>Az erkölcsi rendszer alkalmas a döntésekhez.</strong> Az <em>Ultima IV</em> erényrendszere a játékos tettei szerint ítél <sup class="fn">[1]</sup>; a Hársfalván a döntési pontok hasonlóan a falu megítélését alakíthatják.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Nyílt világú CRPG</td><td>Ultima I</td><td>egyetlen hős, négy faj és négy osztály, pontelosztás, felülnézetes térkép és belső nézetű tömlöc, véletlen harc, étel fogy két lépésenként, 1000 tapasztalati pont szintenként, csempe-alapú grafika, űrharc</td><td>1981</td><td><sup class="fn">[7]</sup></td></tr>
+        <tr><td>Nyílt világú CRPG</td><td>Ultima III: Exodus</td><td>csapatrendszer (a sorozatban először)</td><td>1983</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Nyílt világú CRPG</td><td>Ultima IV: Quest of the Avatar</td><td>nyolc erényen alapuló erkölcsi rendszer, erényenként egy csapattag, város és bolygó; döntés és következmény</td><td>1985</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Tömlöcjáró CRPG</td><td>Wizardry: Proving Grounds of the Mad Overlord</td><td>hat fős csapat, öt faj, négy alap és négy elit osztály, tíz szint 20x20-as rácson, belső nézet, körökre osztott harc, sorrend (első sor közelharc), rajzolt térkép, nincs mentés a tömlöcben</td><td>1981</td><td><sup class="fn">[3][6]</sup></td></tr>
+        <tr><td>Tömlöcjáró CRPG, csapatos</td><td>Might and Magic: Book One</td><td>csapat különböző osztályokkal, belső nézet, körökre osztott harc (a későbbi részekben választható valós idejű mód), a Bard's Tale-éhez hasonló kezelőfelület</td><td>1986</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Városi és tömlöcjáró CRPG</td><td>The Bard's Tale</td><td>hat fős csapat, nyolc alap osztály, bárd-dalok, 85 varázslat, szöveges körökre osztott harc, szintlépés csak a Review Boardnál, karakterimport más játékokból</td><td>1985</td><td><sup class="fn">[5]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Ultima (series): <a href="https://en.wikipedia.org/wiki/Ultima_(series)">https://en.wikipedia.org/wiki/Ultima_(series)</a></li>
+      <li>Wizardry (video game series): <a href="https://en.wikipedia.org/wiki/Wizardry_(video_game_series)">https://en.wikipedia.org/wiki/Wizardry_(video_game_series)</a></li>
+      <li>Wizardry: Proving Grounds of the Mad Overlord: <a href="https://en.wikipedia.org/wiki/Wizardry:_Proving_Grounds_of_the_Mad_Overlord">https://en.wikipedia.org/wiki/Wizardry:_Proving_Grounds_of_the_Mad_Overlord</a></li>
+      <li>Might and Magic: <a href="https://en.wikipedia.org/wiki/Might_and_Magic">https://en.wikipedia.org/wiki/Might_and_Magic</a></li>
+      <li>The Bard's Tale (1985 video game): <a href="https://en.wikipedia.org/wiki/The_Bard%27s_Tale_(1985_video_game)">https://en.wikipedia.org/wiki/The_Bard%27s_Tale_(1985_video_game)</a></li>
+      <li>Computer role-playing game: <a href="https://en.wikipedia.org/wiki/Computer_role-playing_game">https://en.wikipedia.org/wiki/Computer_role-playing_game</a></li>
+      <li>Ultima I: The First Age of Darkness: <a href="https://en.wikipedia.org/wiki/Ultima_I:_The_First_Age_of_Darkness">https://en.wikipedia.org/wiki/Ultima_I:_The_First_Age_of_Darkness</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz3">
+    <span class="kicker">3. rész</span>
+    <h2>A japán szerepjáték</h2>
+    <p class="lede">Az RPG-sorozat harmadik része. A Dragon Quest és a Final Fantasy, a harc időzítője, és az, hogy mit jelent valójában a "JRPG" szó.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A Dragon Quest két nyugati sorozat összeolvasztásából született.</strong> A Wikipedia szerint a csapat a <em>Wizardry</em> és az <em>Ultima</em> elemeit akarta egyesíteni: Yuji Horii az <em>Ultima</em> teljes képernyős térképét és a <em>Wizardry</em> harci és statisztikai képernyőit vette át <sup class="fn">[1]</sup>. A Wizardryvel Horii az 1983-as AppleFesten, San Franciscóban ismerkedett meg, egy Enix által szponzorált programozóverseny díjaként <sup class="fn">[1]</sup>.</li>
+      <li><strong>Az első rész a nagyközönségnek szólt.</strong> Az eredeti <em>Dragon Quest</em> 1986. május 27-én jelent meg Japánban a Famicomra <sup class="fn">[1]</sup>. Horii a Famicomot részben azért választotta, mert a játékautomatákkal ellentétben a vesztés nem kerül pénzbe, és a játékos mentési ponttól folytathatja <sup class="fn">[1]</sup>. A Wikipedia szerint sokan kételkedtek abban, hogy Japánban sikeres lehet a kardokkal és tömlöcökkel teli fantasy a tudományos-fantasztikus háttér helyett <sup class="fn">[1]</sup>.</li>
+      <li><strong>Egyetlen hős indul útnak, a harc körökre osztott.</strong> Az eredeti játékban csak egy szereplő sétál a térképen (a csapat későbbi fejlesztés), a harcok véletlen találkozásokkal indulnak, és menüvezérelt, körökre osztott nézetre váltanak <sup class="fn">[1]</sup>. A játékos tapasztalati pontot és aranyat kap, a szintlépés javítja a tulajdonságokat: korai szinteken több életerő jön, később lassul a növekedés <sup class="fn">[1]</sup>. Ha a csapat meghal, az arany felét elveszíti, és a legközelebbi mentési helyre kerül vissza <sup class="fn">[1]</sup>. A hős Erdrick leszármazottja, aki a Sárkányúr kastélyába tart <sup class="fn">[1]</sup>.</li>
+      <li><strong>A kép és a zene külön alkotók munkája.</strong> Akira Toriyama rajzolta a szereplőket és a szörnyeket (köztük a Slime-ot, a sorozat kabaláját), Koichi Sugiyama szerezte a zenét <sup class="fn">[1]</sup>. Észak-Amerikában a játék 1989 augusztusában <em>Dragon Warrior</em> néven jelent meg, mert a <em>DragonQuest</em> nevű, független asztali játékkal védjegyütközés volt <sup class="fn">[1]</sup>.</li>
+      <li><strong>Az "első konzolos RPG" cím vitatott.</strong> A Wikipedia szerint a Dragon Questet gyakran nevezik az első konzolos RPG-nek, de ezt nem tekinti eldöntöttnek <sup class="fn">[1]</sup>. A japán szerepjátékokról szóló oldal az Atari 2600-ra 1982-ben megjelent <em>Dragonstoppert</em> nevezi a legkorábbi konzolos RPG-nek, a <em>Dragon Questet</em> pedig az első, Észak-Amerikában megjelent NES-es RPG-nek <sup class="fn">[3]</sup>. A GameSpot szerint a játék minden idők legnagyobb hatású szerepjátéka volt, és szinte minden későbbi japán RPG merített a játékmenetéből <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Final Fantasy a Dragon Quest árnyékában indult.</strong> A sorozatot Hironobu Sakaguchi alkotta, az első rész 1987. december 18-án jelent meg Japánban, a NES-re <sup class="fn">[2]</sup>. A Wikipedia szerint inspirációja a <em>Dragon Quest</em>, a <em>The Legend of Zelda</em> és az <em>Ultima</em> volt <sup class="fn">[2]</sup>. A játék sokszor a Square csődközeli helyzetéhez kötődik: Sakaguchi állítása szerint ez volt a személyes végső próbálkozása, és ha elbukik, otthagyta volna a céget és visszamegy az egyetemre <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Final Fantasy a sorozat első részétől karakterosztályokkal indult.</strong> A karakterosztályok ("job-ok") ebben az első játékban jelentek meg a sorozatban <sup class="fn">[2]</sup>. A játékos csapatot irányít menükből (harc, varázslat, tárgy) és tapasztalati szinteken keresztül, a harcok többnyire véletlen találkozások <sup class="fn">[2]</sup>. A név eredetileg <em>Fighting Fantasy</em> lett volna, de egy azonos című gamekönyv-sorozat miatt védjegyaggály merült fel <sup class="fn">[2]</sup>. A sorozat antológia: a számozott részek általában önálló történetek, közös elemekkel (Cid, chocobók, moogle-ök) <sup class="fn">[2]</sup>.</li>
+      <li><strong>Az aktív idejű harc a negyedik résznél jelent meg.</strong> Az Active Time Battle (ATB) rendszert Hiroyuki Ito találta ki, először a <em>Final Fantasy IV</em>-ben (1991) szerepelt <sup class="fn">[4]</sup>. Itt minden szereplőnek és ellenségnek saját órája van: a csapattagok és az ellenfelek a saját ütemük szerint cselekszenek, akkor is, ha a játékos épp a menüben választ <sup class="fn">[4]</sup>. Ito és Sakaguchi 1995-ben szabadalmaztatta, a Wikipedia szerint a szabadalom 2010-ben lejárt <sup class="fn">[4]</sup>. Takashi Tokita szerint az utolsó ötletet Ito egy Formula 1-es közvetítés nézése közben kapta <sup class="fn">[4]</sup>.</li>
+      <li><strong>A "JRPG" szó körül nincs éles definíció.</strong> A japán szerepjátékokról szóló Wikipedia-oldal nem ad formális meghatározást, a csapat, a körökre osztott harc és a szereplőközpontú történet csak példákként szerepel <sup class="fn">[3]</sup>. A lineáris történet mint JRPG-jellemző nem támasztható alá az oldallal: a <em>Dragon Questet</em> nagyrészt nem lineárisnak írja le, a <em>Dragon Quest III</em>-at (1988) pedig nyílt világúnak <sup class="fn">[3]</sup>. Ugyanez az oldal sok 1980-as évekbeli japán akció-RPG-t valós idejűnek mond, tehát a körökre osztott harc sem általános <sup class="fn">[3]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>Egy hős is elég a kezdéshez.</strong> Az első <em>Dragon Quest</em> egyetlen szereplővel, menüből vezérelt harccal tanította meg a műfajt <sup class="fn">[1]</sup>. A Hársfalva egyszerű indulása is lehet egyetlen szereplő, kevés választási lehetőséggel.</li>
+      <li><strong>A vesztésnek lehet enyhe ára.</strong> A <em>Dragon Quest</em>ben a csapat halálakor az arany fele elvész, és egy mentési helyről indul újra <sup class="fn">[1]</sup>. Egy tanulós játékban a hibának hasonlóan kisebb, helyrehozható ára lehet.</li>
+      <li><strong>A szintlépés lassuló görbéje érthető jutalom.</strong> A forrás szerint az első szinteken több életerő jön, később kevesebb <sup class="fn">[1]</sup>. Egy falusi játékban a korai gyors fejlődés motiváló, a későbbi lassabb fejlődés pedig lehetőséget ad más jutalmakra.</li>
+      <li><strong>Az időzítő harc nem kell, hogy gyors legyen.</strong> Az ATB lényege, hogy a szereplők saját órája szerint cselekszenek <sup class="fn">[4]</sup>. Egy tanulós játékban ugyanez türelmesebben, lassú órával is működhet, ha a játékos időt kap a döntésre.</li>
+      <li><strong>A kasztok szerepet adnak.</strong> A <em>Final Fantasy</em> sorozat első része már karakterosztályokkal indult <sup class="fn">[2]</sup>, a <em>Dragon Quest III</em> az osztályváltást és a csapattagok szabad cserélését <sup class="fn">[3]</sup>. A Hársfalván ez lehet a kovács, a gyűjtögető és a harcos szerep.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Japán RPG, konzolos</td><td>Dragon Quest</td><td>egy hős, véletlen harcok, menüvezérelt körökre osztott harc, tapasztalati pont és szintlépés (lassuló életerő-növekedés), arany, mentési pont, halálkor az arany fele elvész</td><td>1986</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Japán RPG, csapatos</td><td>Final Fantasy</td><td>karakterosztályok (job-ok), csapat menüből irányítva (harc, varázslat, tárgy), tapasztalati szintek, véletlen harcok, körökre osztott harc</td><td>1987</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>Japán RPG, osztályváltós</td><td>Dragon Quest III</td><td>osztályváltás, szabad csapatcsere, nappal és éjszaka váltakozása</td><td>1988</td><td><sup class="fn">[3]</sup></td></tr>
+        <tr><td>Japán RPG, aktív idejű harc</td><td>Final Fantasy IV</td><td>Active Time Battle: szereplőnkénti óra, a harc a menüválasztás közben is megy, kész szereplőnevek, osztályok és életrajzok</td><td>1991</td><td><sup class="fn">[4]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Dragon Quest: <a href="https://en.wikipedia.org/wiki/Dragon_Quest">https://en.wikipedia.org/wiki/Dragon_Quest</a></li>
+      <li>Final Fantasy: <a href="https://en.wikipedia.org/wiki/Final_Fantasy">https://en.wikipedia.org/wiki/Final_Fantasy</a></li>
+      <li>Japanese role-playing game: <a href="https://en.wikipedia.org/wiki/Japanese_role-playing_game">https://en.wikipedia.org/wiki/Japanese_role-playing_game</a></li>
+      <li>Active Time Battle: <a href="https://en.wikipedia.org/wiki/Active_Time_Battle">https://en.wikipedia.org/wiki/Active_Time_Battle</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz4">
+    <span class="kicker">4. rész</span>
+    <h2>Az izometrikus reneszánsz és a döntések játéka</h2>
+    <p class="lede">Az RPG-sorozat negyedik része. A Baldur's Gate, a Fallout és a Planescape: Torment: hogyan lett a csapat, a hírnév és a párbeszéd a játék fő eszköze az 1990-es évek végén.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A Baldur's Gate egy motorral kezdődött.</strong> A BioWare az Infinity Enginet eredetileg egy valós idejű stratégiai játék prototípusához, a <em>Battleground: Infinity</em>-hez kezdte építeni, majd ezt alakította át a <em>Baldur's Gate</em>-té, a motor neve is a törölt játékról maradt <sup class="fn">[3]</sup>. A Wikipedia szerint a <em>Baldur's Gate</em> (1998) volt az első játék az Infinity Engine-en, ezt egy 2020-as BioWare-könyvre hivatkozva közli <sup class="fn">[3]</sup>. A motor 2D, előre rajzolt, görgethető hátterekkel és sprite-ként megjelenő szereplőkkel dolgozik, és a D&amp;D szabályrendszerét alkalmazza <sup class="fn">[3]</sup>.</li>
+      <li><strong>A játék 1998. december 21-én jelent meg Észak-Amerikában.</strong> A fejlesztő a BioWare volt, a kiadó körül a Black Isle Studios és az Interplay neve szerepel, Japánban a Sega adta ki <sup class="fn">[1]</sup>. A látvány felülnézetes, izometrikus, előre rajzolt helyszínekkel, a játékos csapatot irányít <sup class="fn">[1]</sup>.</li>
+      <li><strong>A harc valós idejű, de bármikor megállítható.</strong> A Wikipedia szerint a játék valós időben fut, de a játékos bármikor szüneteltetheti, szünet közben utasításokat adhat, és automatikus szüneteket is beállíthat a harc bizonyos pontjaira <sup class="fn">[1]</sup>. A szabályok a módosított AD&amp;D 2. kiadásra épülnek, a gép automatikusan követi az értékeket és dob <sup class="fn">[1]</sup>.</li>
+      <li><strong>A hírnév a világ reakcióját változtatja.</strong> A <em>Baldur's Gate</em>-ben az erkölcsi megítélés rendszere hatással van a boltok áraira, a városi támadásokra, a társak hűségére és néhány mellékküldetésre <sup class="fn">[1]</sup>. A karakter az előző játékmenetekből át is importálható <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Wikipedia szerint a játék élesztette újra a műfajt.</strong> Az oldal szerint a <em>Baldur's Gate</em> hozzájárult a számítógépes szerepjátékok újjáéledéséhez, és mércét állított a BioWare és a Black Isle későbbi AD&amp;D-játékainak (köztük a <em>Planescape: Torment</em> és az <em>Icewind Dale</em>) <sup class="fn">[1]</sup>. Az Infinity Engine játékai közé tartozik még a <em>Baldur's Gate II</em> (2000) és az <em>Icewind Dale II</em> (2002), utóbbi a D&amp;D 3. kiadását használja <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Fallout egy másik szabályrendszert épített.</strong> Az Interplay <em>Fallout</em>ja 1997-ben jelent meg, producere Tim Cain volt, és egy nukleáris háború utáni, retro-futurisztikus pusztaságban játszódik <sup class="fn">[2]</sup>. A fejlesztés a GURPS asztali szabályrendszerre épülő motorként indult, de 1997 márciusában az Interplay elvetette a GURPS-t, és a saját SPECIAL rendszerre cserélte <sup class="fn">[2]</sup>. A látvány ferde, az oldal szerint trimetrikus nézet <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Fallout rendszere: hét érték, tizennyolc képesség, perkek.</strong> A játékosnak hét alapértéke van (erő, észlelés, állóképesség, karizma, értelem, ügyesség, szerencse), egyenként 1 és 10 között, összesen 40-ig, tizennyolc képességgel és legfeljebb két tulajdonsággal tizenhatból; háromszintenként perk jár, amelyekből a Wikipedia 48-at sorol fel <sup class="fn">[2]</sup>. A harc körökre osztott, cselekvéspontokkal és célzott testrész-támadásokkal <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Fallout döntései és időkerete.</strong> A fő küldetések közül az elsőnek 150 napos határideje van, ennek lejártakor a játék véget ér <sup class="fn">[2]</sup>. Sok küldetés több módon megoldható: diplomáciával, harccal vagy lopakodással <sup class="fn">[2]</sup>. A hírnév pontokat a játékos tettei adják vagy veszik el, és befolyásolják, hogyan bánnak vele mások <sup class="fn">[2]</sup>. Négy társ toborozható, de közvetlenül nem irányíthatók, ezt a kritikusok az egyik leggyakoribb hibaként említették <sup class="fn">[2]</sup>. A záró összecsapás is eldönthető meggyőzéssel, harccal vagy a katedrális elpusztításával <sup class="fn">[2]</sup>. Rowan Kaiser (Engadget) a játékot "az első modern szerepjátéknak" nevezte, ez egy kritikus véleménye, nem általános megállapítás <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Planescape: Torment a beszélgetésre épít.</strong> A Black Isle Studios fejlesztette, az Interplay adta ki, 1999. december 10-én jelent meg Észak-Amerikában, főtervezője és írója Chris Avellone volt, a motor a módosított Infinity Engine <sup class="fn">[4]</sup>. A Wikipedia szerint a harc mellékes: a legtöbb összecsapás elkerülhető vagy párbeszéddel, lopakodással megoldható, a főhős halhatatlan, ezért a halál általában kisebb visszalépés <sup class="fn">[4]</sup>. A hozzávaló szöveg mintegy 800 000 szó <sup class="fn">[4]</sup>.</li>
+      <li><strong>Az erkölcs itt tengely, nem pont.</strong> A játék a D&amp;D jó-gonosz és rend-káosz tengelyét használja: a főhős kezdetben "igazán semleges", és a tettei lassan eltolják, az NPC-k reakciója ennek megfelelően változik <sup class="fn">[4]</sup>. A zárás három módon alakulhat (a Transzcendens legyőzése, rávétele a visszatérésre, vagy öngyilkosság egy különleges fegyverrel), mindegyik véget vet a halhatatlanságnak <sup class="fn">[4]</sup>. Hét társ csatlakozhat, a csapat legfeljebb öt fős lehet, és a tagok egymással is beszélgetnek <sup class="fn">[4]</sup>. Egyes késői párbeszédekért tapasztalati pont jár <sup class="fn">[4]</sup>.</li>
+      <li><strong>A párbeszédfa az alapszerkezet.</strong> A Wikipedia szerint a játékos előre megírt mondatok közül választ, és addig választ, amíg a beszélgetés véget ér <sup class="fn">[5]</sup>. Az oldal szerint az ilyen fák nem igazi fa adatszerkezetek, mert vannak köreik: vissza lehet térni korábbi pontra <sup class="fn">[5]</sup>. RPG-kben külső tényezők, például a karizma, megváltoztathatják az NPC válaszát vagy új lehetőséget nyithatnak, a beszélgetésnek pedig tartós következménye lehet, például az NPC elárul egy titkot <sup class="fn">[5]</sup>. A párbeszédfa lehetővé teszi, hogy a tervezők interaktív beszélgetést kínáljanak anélkül, hogy a természetes nyelv feldolgozását meg kellene oldaniuk <sup class="fn">[5]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A megállítható valós idő a türelmes tanulónak való.</strong> A <em>Baldur's Gate</em> szüneteltethető harca lehetővé teszi a gondolkodást <sup class="fn">[1]</sup>. A Hársfalván a harc vagy a nehéz döntés kaphat hasonló "megállíthatom" gombot.</li>
+      <li><strong>A hírnév a falu reakciója.</strong> A <em>Baldur's Gate</em> hírneve áraktól társi hűségig mindenre hat <sup class="fn">[1]</sup>. Egy falusi játékban ugyanez lehet a falu megítélése: a segítőkész játékos olcsóbban vásárol, a kapkodó vagy ártó kevésbé számíthat másokra.</li>
+      <li><strong>Egy küldetésnek több megoldása is lehet.</strong> A <em>Fallout</em> sok küldetése diplomáciával, harccal vagy lopakodással is megoldható <sup class="fn">[2]</sup>. A Hársfalva-féle játékban egy feladatnak lehet "beszélgetős", "kovácsolós" és "gyűjtögetős" útja.</li>
+      <li><strong>A határidő feszültséget ad, de elveszi a nyugalmat.</strong> A <em>Fallout</em> 150 napos határideje a játék végét jelenti <sup class="fn">[2]</sup>. Tanulós játékban puhább, nem végleges határidő ajánlott.</li>
+      <li><strong>A párbeszédfa és a döntési pont ugyanaz az eszköz.</strong> A karizma vagy egy korábbi döntés új párbeszéd-lehetőséget nyithat <sup class="fn">[5]</sup>, a Hársfalván a döntési pontok erre építhetők.</li>
+      <li><strong>A társ lehet irányítható is.</strong> A <em>Fallout</em> társai nem irányíthatók közvetlenül, amit a kritikusok hibaként emlegettek <sup class="fn">[2]</sup>; a <em>Planescape: Torment</em> társai egymással is beszélgetnek <sup class="fn">[4]</sup>. Ezek közül a második jobban illik egy történetközpontú tanulós játékhoz.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>CRPG, csapatos, megállítható valós idejű</td><td>Baldur's Gate</td><td>módosított AD&amp;D 2. kiadás, valós idejű harc szüneteltethetően, csapat, erkölcsi hírnév (árak, társi hűség, mellékküldetések), mentett karakter importálása</td><td>1998</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>CRPG-motor</td><td>Infinity Engine</td><td>2D előre rajzolt izometrikus háttér, sprite-ok, D&amp;D szabályrendszer, több játék közös alapja</td><td>1998</td><td><sup class="fn">[3]</sup></td></tr>
+        <tr><td>CRPG, körökre osztott</td><td>Fallout</td><td>hét alapérték, 18 képesség, tulajdonságok, perkek háromszintenként, cselekvéspontos harc, célzott támadás, hírnév, több megoldású küldetés, 150 napos határidő, négy társ</td><td>1997</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>CRPG, beszélgetés-központú</td><td>Planescape: Torment</td><td>a harc mellékes, halhatatlan főhős, jó-gonosz és rend-káosz tengely, hét társ (legfeljebb öt fős csapat), három befejezés, mintegy 800 000 szó, tapasztalati pont párbeszédért</td><td>1999</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Játékmechanika</td><td>Párbeszédfa</td><td>előre megírt válaszok, körös szerkezet, karizma vagy korábbi döntés új opciót nyit, tartós következmény</td><td>a forrás nem közöl évet</td><td><sup class="fn">[5]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Baldur's Gate (video game): <a href="https://en.wikipedia.org/wiki/Baldur%27s_Gate_(video_game)">https://en.wikipedia.org/wiki/Baldur%27s_Gate_(video_game)</a></li>
+      <li>Fallout (video game): <a href="https://en.wikipedia.org/wiki/Fallout_(video_game)">https://en.wikipedia.org/wiki/Fallout_(video_game)</a></li>
+      <li>Infinity Engine: <a href="https://en.wikipedia.org/wiki/Infinity_Engine">https://en.wikipedia.org/wiki/Infinity_Engine</a></li>
+      <li>Planescape: Torment: <a href="https://en.wikipedia.org/wiki/Planescape:_Torment">https://en.wikipedia.org/wiki/Planescape:_Torment</a></li>
+      <li>Dialogue tree: <a href="https://en.wikipedia.org/wiki/Dialogue_tree">https://en.wikipedia.org/wiki/Dialogue_tree</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz5">
+    <span class="kicker">5. rész</span>
+    <h2>A nyílt világ és az akció-RPG</h2>
+    <p class="lede">Az RPG-sorozat ötödik része. A Diablo, a The Elder Scrolls, a Mass Effect és a Dark Souls: amikor a harc valós idejű lett, a világ pedig szabadon bejárható.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>Az akció-RPG a valós idejű harcot és a szerepjátékos fejlődést egyesíti.</strong> A Wikipedia szerint az akció-RPG (ARPG) harca valós idejű, és fizikai összehangolást vagy reakcióidőt tesz próbára, ellentétben a körökre osztott vagy menüalapú harccal <sup class="fn">[5]</sup>. Az akció-kalandjátéktól az különbözteti meg, hogy van saját karakter, fejlődési döntés, képességfa és testre szabható csapat <sup class="fn">[5]</sup>. A karakter értékei szint szerint nőnek <sup class="fn">[5]</sup>.</li>
+      <li><strong>Az első akció-RPG kérdésében nincs egyetértés.</strong> Az oldal szerint Szczepaniak úgy látja, hogy a <em>Hydlide</em>, a <em>Courageous Perseus</em> és a <em>Dragon Slayer</em> egyaránt a műfaj elődjének jár, így nincs egyetlen elfogadott első <sup class="fn">[5]</sup>. A GameSetWatch a <em>Dragon Slayert</em> (Falcom, 1984) "az első akció-RPG-nek" nevezi <sup class="fn">[5]</sup>. A <em>Zelda II</em> (1987) tapasztalati pontot és szinteket adott a formához <sup class="fn">[5]</sup>.</li>
+      <li><strong>A Diablo a roguelike és a D&amp;D keveréke volt.</strong> David Brevik ötlete volt, aki a <em>Dungeons &amp; Dragons</em> és az <em>Angband</em>-féle roguelike-ok elemeit egyesítette <sup class="fn">[1]</sup>. A játékot a Blizzard North fejlesztette, a Blizzard Entertainment adta ki Windowsra, hivatalos észak-amerikai megjelenése 1997. január 3., a boltokba 1996 decemberében is eljutott <sup class="fn">[1]</sup>. A Wikipedia szerint az első prototípus körökre osztott volt, de Brevik órák alatt valós idejűvé alakította, miután a csapat megszavazta <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Diablo véletlenszerűen generált tömlöcökben játszódik.</strong> A játékos Tristram városa alatt tizenhat véletlenszerűen generált szinten harcol a Pokol Ura ellen <sup class="fn">[1]</sup>. Három osztály közül választ (a harcos, a távolsági harcos "Rogue", aki csapdákat is hatástalanít, és a varázsló), a mozgás és a kapcsolódás főként egérrel történik <sup class="fn">[1]</sup>. Brevik gyors belépést akart, előre választott osztályokkal a hosszú karakteralkotás helyett <sup class="fn">[1]</sup>.</li>
+      <li><strong>A zsákmány a Diablo fő jutalma.</strong> A tárgyak lehetnek közönségesek (fehér), varázslatosak (kék, legfeljebb két hatással) vagy egyediek (arany, legfeljebb hat hatással); az ismeretlen tárgyakat azonosítani kell, a tárgyak kopnak, és nulla tartósságnál eltörnek <sup class="fn">[1]</sup>. A játék legfeljebb négy játékossal játszható többjátékos módban, a Battle.net-en át <sup class="fn">[1]</sup>. Az oldal szerint 1997 késő novemberéig világszerte egymillió példány fogyott <sup class="fn">[1]</sup>. A Men's Journal 2026-os cikke szerint a <em>Diablo</em> "széles körben elfogadott" mint az ARPG-ket népszerűvé tevő cím, ez sajtómegítélés, nem eldöntött tény <sup class="fn">[1]</sup>.</li>
+      <li><strong>A The Elder Scrolls a szabad játékmenetre épít.</strong> A sorozat fejlesztője főként a Bethesda Game Studios, kiadója a Bethesda Softworks; az első rész, az <em>Arena</em>, 1994. március 25-én jelent meg, a <em>Daggerfall</em> 1996 szeptemberében, a <em>Morrowind</em> 2002-ben, az <em>Oblivion</em> 2006-ban, a <em>Skyrim</em> 2011. november 11-én <sup class="fn">[2]</sup>. Az oldal szerint a sorozat szabad, nyílt világú játékmenetre épít <sup class="fn">[2]</sup>.</li>
+      <li><strong>A fejlődés rendszere sorozatrészenként változott.</strong> Az <em>Arenában</em> a játékos szörnyek legyőzésével szerzett tapasztalati pontot, és egy előre megadott küszöbnél lépett szintet <sup class="fn">[2]</sup>. A <em>Daggerfallban</em> a tapasztalati pont rendszert a szerepjátékos tettek jutalmazása váltotta fel, és megjelent a GURPS által is befolyásolt karakteralkotás <sup class="fn">[2]</sup>. A <em>Daggerfall</em>, a <em>Morrowind</em> és az <em>Oblivion</em> képességalapú: a képességek használat közben fejlődnek, és a játékos akkor lép szintet, ha egy meghatározott képességcsoportot fejlesztett <sup class="fn">[2]</sup>. A <em>Skyrimben</em> minél magasabbra emelkedik egy képesség, annál jobban segíti a szintlépést <sup class="fn">[2]</sup>. A Wikipedia szerint ez a hangsúlyt a karakteralkotásról a karakterfejlesztésre helyezte <sup class="fn">[2]</sup>.</li>
+      <li><strong>A világ mérete is a tervezés tárgya.</strong> A <em>Daggerfall</em> világa az oldal leírása szerint Nagy-Britannia méretű, 15 000 várossal és 750 000 lakossal <sup class="fn">[2]</sup>. A <em>Morrowind</em> ehhez képest Vvardenfell szigetére szűkült, kézzel készített tárgyakkal, és mintegy 100 emberévnyi munka után készült el <sup class="fn">[2]</sup>. Az <em>Oblivion</em> a terepet eljárási eszközökkel generálta <sup class="fn">[2]</sup>. Az <em>Elder Scrolls</em> Construction Set a modolást tette lehetővé <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Mass Effect a döntésekre és a csapatra épít.</strong> A BioWare 2007. november 20-án adta ki az Xbox 360-ra; a Wikipedia szerint minden rész harmadik személyű lövöldözős játék szerepjátékos elemekkel <sup class="fn">[3]</sup>. A játékos hat osztály egyikét választja, a szintek egy képességfát táplálnak, és legfeljebb két társ kíséri a bolygókutatásokon, akik önállóan cselekszenek, de parancsokat elfogadnak <sup class="fn">[3]</sup>.</li>
+      <li><strong>A párbeszédkerék a beszélgetés kezelőfelülete.</strong> A Mass Effectben a válaszok kör alakban jelennek meg, az első három részben a Paragon és a Renegade lehetőséget szín és hely jelzi, a második résztől a játékos félbe is szakíthatja a másikat <sup class="fn">[3]</sup>. Az oldal bevezetője szerint a sorozat hozta létre a párbeszédkereket, ami a párbeszédfához hasonló, és azóta sok RPG használja <sup class="fn">[3]</sup>. Egy 2007-es BioWare-szabadalmat 2011-ben ítélték oda az EA International Studio and Publishing Ltd.-nek <sup class="fn">[3]</sup>.</li>
+      <li><strong>A korábbi döntések átkerülnek a következő részbe.</strong> Az előző két játék döntéseit rendszeresen importálták a harmadikba, a Paragon és Renegade döntések pedig befolyásolták a történetet, azt, hogy mely szövetségeseket lehet toborozni, és hozzáférést a felszereléshez <sup class="fn">[3]</sup>. A <em>Mass Effect: Andromeda</em> a kétpólusú rendszert négy eszményre cserélte, John Ebenger 2020-as közlése szerint a játékosok mintegy 8 százaléka választotta a Renegade utat <sup class="fn">[3]</sup>. Románc-lehetőségek is voltak <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Dark Souls a nehézséget és a halált tette a középpontba.</strong> A FromSoftware fejlesztette, a Bandai Namco adta ki, a sorozat alkotója Hidetaka Miyazaki, az első rész 2011. szeptember 22-én jelent meg <sup class="fn">[4]</sup>. A "lelkek" egyszerre jelentik a tapasztalatot és a pénzt <sup class="fn">[4]</sup>. A tűzrakóhelyek ellenőrzőpontok, amelyek visszaadják az életerőt, de a legtöbb ellenséget feltámasztják <sup class="fn">[4]</sup>.</li>
+      <li><strong>A halál ára a Dark Soulsban a lelkek elvesztése.</strong> Haláláskor a játékos elveszíti a lelkeit, és az utolsó tűzrakóhelyre kerül vissza; a lelkeket a vérfoltnál visszaszerezheti, de ha elérése előtt újra meghal, végleg elvesznek <sup class="fn">[4]</sup>. Az online elemek az egyjátékos módba épülnek: mások szellemei, vérfoltok, üzenetek, beavatkozás más játékába, közös játék és "szövetségek" <sup class="fn">[4]</sup>. A Wikipedia szerint a nehézség a sorozat legtöbbet tárgyalt vonásai közé tartozik, és a Souls-szerű alműfaj a sorozatból nőtt ki <sup class="fn">[4]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A használat-alapú fejlődés a kovácsoláshoz illik.</strong> A <em>Morrowind</em> és az <em>Oblivion</em> képességei használat közben nőnek <sup class="fn">[2]</sup>. A Hársfalván a kovácsolás, a gyűjtés és a harc külön képességként fejlődhet attól függően, hogy a játékos mit csinál.</li>
+      <li><strong>A zsákmány ritkasága könnyen érthető.</strong> A <em>Diablo</em> fehér, kék és arany tárgyai színnel jelzik az értéket <sup class="fn">[1]</sup>. A gyűjtögetős játékban a ritka alapanyagok vagy kovácsolt tárgyak is jelölhetők színnel.</li>
+      <li><strong>A halál lehet tanulságos, nem büntető.</strong> A <em>Dark Souls</em> a lelkeket a vérfoltnál adja vissza <sup class="fn">[4]</sup>; a Hársfalván a hiba után a játékos visszaszerezheti, amit elveszített, ha visszamegy a helyre.</li>
+      <li><strong>A tűzrakóhely mint ellenőrzőpont.</strong> A <em>Dark Souls</em> tűzrakóhelyei visszaadják az életerőt <sup class="fn">[4]</sup>. Egy falusi játékban a pihenőhely vagy a kovácsműhely lehet ilyen, és a tanuló oda mindig visszatérhet.</li>
+      <li><strong>A párbeszédkerék kevés szóval jelzi a hangnemet.</strong> A <em>Mass Effect</em> kerekén a válasz színe és helye jelzi a lehetséges hangot <sup class="fn">[3]</sup>. A Hársfalván döntési ponton ugyanez lehet "barátságos", "óvatos" vagy "határozott".</li>
+      <li><strong>A társ saját tetteit is hozza.</strong> A <em>Mass Effect</em> társai önállóan cselekszenek, de parancsot fogadnak <sup class="fn">[3]</sup>; egy tanulós játékban ez a mérték kevesebb frusztrációt jelent, mint a teljes irányítás vagy a teljes önállóság.</li>
+      <li><strong>A korábbi döntés láthatóan hasson.</strong> A <em>Mass Effect</em> mentése átviszi a döntéseket a következő részbe <sup class="fn">[3]</sup>; a Hársfalván egy korábbi küldetés eredménye (például egy megjavított híd) a falu későbbi életében is látszódjon.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Akció-RPG, tömlöcjáró</td><td>Diablo</td><td>valós idejű egérvezérlés, három osztály, 16 generált szint, zsákmány (fehér, kék, arany), azonosítás, tárgykopás, többjátékos mód (4 fő, Battle.net)</td><td>1997</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Nyílt világú akció-RPG</td><td>The Elder Scrolls: Arena</td><td>szörnylegyőzésért járó tapasztalati pont, küszöb szerinti szintlépés</td><td>1994</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>Nyílt világú akció-RPG</td><td>The Elder Scrolls: Daggerfall, Morrowind, Oblivion</td><td>használat-alapú képességfejlődés, szintlépés a képességcsoportok fejlesztésével, nyílt világ, modolhatóság</td><td>1996, 2002, 2006</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>Nyílt világú akció-RPG</td><td>The Elder Scrolls: Skyrim</td><td>a magasabb képesség jobban segíti a szintlépést, nyílt világ</td><td>2011</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>Akció-RPG, lövöldözős, döntésközpontú</td><td>Mass Effect</td><td>hat osztály, tapasztalati szint és képességfa, legfeljebb két társ (önállóan cselekszik, parancsot fogad), párbeszédkerék, Paragon és Renegade, döntések átvitele a következő részbe, románc</td><td>2007</td><td><sup class="fn">[3]</sup></td></tr>
+        <tr><td>Akció-RPG, "Souls-szerű"</td><td>Dark Souls</td><td>lelkek mint tapasztalat és pénz, tűzrakóhely-ellenőrzőpont (az ellenségek feltámadnak), halálkor a lelkek elvesztése és visszaszerzése, online szellemek és üzenetek, szövetségek</td><td>2011</td><td><sup class="fn">[4]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Diablo (video game): <a href="https://en.wikipedia.org/wiki/Diablo_(video_game)">https://en.wikipedia.org/wiki/Diablo_(video_game)</a></li>
+      <li>The Elder Scrolls: <a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls">https://en.wikipedia.org/wiki/The_Elder_Scrolls</a></li>
+      <li>Mass Effect: <a href="https://en.wikipedia.org/wiki/Mass_Effect">https://en.wikipedia.org/wiki/Mass_Effect</a></li>
+      <li>Dark Souls: <a href="https://en.wikipedia.org/wiki/Dark_Souls">https://en.wikipedia.org/wiki/Dark_Souls</a></li>
+      <li>Action role-playing game: <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">https://en.wikipedia.org/wiki/Action_role-playing_game</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz6">
+    <span class="kicker">6. rész</span>
+    <h2>A mai RPG és újdonságai</h2>
+    <p class="lede">Az RPG-sorozat hatodik része. A Disco Elysium, a Baldur's Gate 3 és a kis indie-játékok, a Stardew Valley és az Undertale: mit tettek másképp az újabb szerepjátékok.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A Disco Elysiumban a képességek beszélnek.</strong> A ZA/UM 2019. október 15-én adta ki Windowsra, a játékot Robert Kurvitz észt író vezette csapata tervezte és írta <sup class="fn">[1]</sup>. A Wikipedia szerint izometrikus, párbeszédközpontú, nyílt világú szerepjáték, alig hagyományos harccal <sup class="fn">[1]</sup>. Az eseményeket képességpróbák (két hatoldalú kocka) és párbeszédfák döntik el <sup class="fn">[1]</sup>.</li>
+      <li><strong>Négy tulajdonság, huszonnégy képesség, mindegyik hang.</strong> A négy tulajdonság (értelem, lélek, test, mozgás) mindegyike hat képességet fog össze, így összesen 24 van, és a képességek belső hangokként szólnak a játékoshoz <sup class="fn">[1]</sup>. A Wikipedia szerint a magas képességeknek hátrányai is lehetnek, ami az oldal szerint visszatartja a pontok maximalizálását <sup class="fn">[1]</sup>. A Thought Cabinet nevű rendszerben a játékos a játékidő során gondolatokat "emészt meg", amiért előnyt kap, néha negatív mellékhatással <sup class="fn">[1]</sup>.</li>
+      <li><strong>A kis döntések is számítanak.</strong> A tervezők célja a "mikroreaktivitás" volt, vagyis a kis döntések következményekkel járnak <sup class="fn">[1]</sup>. Hatásként a <em>Planescape: Torment</em>, a <em>The Wire</em>, Émile Zola és a <em>Fallout</em> szerepel <sup class="fn">[1]</sup>. A főhős amnéziás nyomozó, korai társa Kim Kitsuragi <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Disco Elysium sikerét díjak jelzik.</strong> A The Game Awards 2019-en négy díjat nyert (legjobb elbeszélés, legjobb független játék, legjobb szerepjáték, Fresh Indie Game), a Wikipedia szerint ez volt a legtöbb díj az eseményen <sup class="fn">[1]</sup>. A játékból 2025 szeptemberéig több mint ötmillió példány fogyott <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Baldur's Gate 3 a D&amp;D szabályait vitte át.</strong> A Larian Studios 2023. augusztus 3-án adta ki Windowsra, a D&amp;D 5. kiadására és a Forgotten Realms világára épül, egyjátékosként és többjátékos módban is játszható <sup class="fn">[2]</sup>. A legtöbb kimenetelt húszoldalú kocka dönti el, előnnyel és hátránnyal; az alapértelmezett "karmikus kocka" a szerencse- vagy balszerencse-sorozatokat korlátozza <sup class="fn">[2]</sup>.</li>
+      <li><strong>A BG3 felépítése: valós idejű felfedezés, körökre osztott harc.</strong> Tizenkét osztály, tizenegy faj és tizenegy háttér közül lehet választani, a legmagasabb szint a 12 (az asztali játékban 20), a többosztályos fejlődés megengedett <sup class="fn">[2]</sup>. A harc körökre osztott, kezdeményezéssel, cselekvésekkel, bónusz-cselekvésekkel és mozgással, a sebzéstípusok hatnak egymásra (például a tűz megolvasztja a jeget) <sup class="fn">[2]</sup>. A párbeszédekben képességpróba van, a játékos a beszélgetéssel el is kerülheti a harcot vagy el is indíthatja <sup class="fn">[2]</sup>.</li>
+      <li><strong>A BG3 sokféle utat kínál.</strong> A Wikipedia szerint 288 küldetés van, némelyik kizárja a másikat, tíz társ csatlakozhat (hat "származás-karakter", akik játékosként is választhatók), tizenhárom románc-lehetőség van, és több mint 170 befejezés-változat <sup class="fn">[2]</sup>. Többjátékos módban legfeljebb négyen játszhatnak, ott a házigazda hozza a fő történet párbeszéd-döntéseit <sup class="fn">[2]</sup>.</li>
+      <li><strong>A BG3 elismerése.</strong> Az oldal szerint 2024 áprilisában ez lett az első játék, amely mind az öt nagy díjátadón elnyerte az Év Játéka díjat vagy annak megfelelő kategóriát (Golden Joystick, Game Developers Choice, D.I.C.E., BAFTA, The Game Awards) <sup class="fn">[2]</sup>. A Larian Studios munkatársa 2024 februárjában azt közölte, hogy több mint tízmillióan játszottak vele; pontos hivatalos eladási számot a cég nem tett közzé <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Stardew Valley egyetlen ember műve volt.</strong> Eric Barone ("ConcernedApe") nagyrészt egyedül készítette, mintegy öt év alatt: ő programozott, rajzolt, zenét és hangeffektusokat írt <sup class="fn">[3]</sup>. A Windows-verzió 2016. február 26-án jelent meg <sup class="fn">[3]</sup>. A játék felülnézetes farmszimuláció, amelyben a játékos otthagyja vállalati munkáját, hogy örökölt, lepusztult farmját rendbe hozza és újraélessze Pelican Town életét <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Stardew Valley napi ritmusa az évszakokból áll.</strong> A négy évszak mindegyike 28 napos, a növények évszakhoz kötöttek és napi öntözést igényelnek, az állatok tojást, tejet és hasonlókat adnak <sup class="fn">[3]</sup>. A közösségi központnak szánt "csomagok" begyűjtése új területeket nyit, a képességek közé a földművelés, a gyűjtögetés, a horgászat, a bányászat és a harc tartozik <sup class="fn">[3]</sup>. A játékos a barátságot ajándékokkal és beszélgetéssel építi, tizenkét házasulandó szereplő közül választhat nemtől függetlenül, a napi energiasáv evéssel pótolható, a bányában csákányt és kardot kell váltogatni a mélyebb szinteken <sup class="fn">[3]</sup>.</li>
+      <li><strong>Az inspiráció a Harvest Moon volt, de a Stardew nyitottabb.</strong> A Wikipedia szerint Barone azt akarta, hogy a játék a <em>Harvest Moon</em> utáni sorozat-részek modern, rajongói alternatívája legyen; a játék nyitott végű, a főzés szándékosan nem hoz profitot (képességbónuszt ad), és az állatok húsvágása kimaradt <sup class="fn">[3]</sup>. Az oldal a játékot a "társas szimuláció" kategóriába sorolja, a farmszimulátorok mellé <sup class="fn">[5]</sup>. A Stardew Valley 2026 februárjáig több mint 50 millió példányban kelt el <sup class="fn">[3]</sup>.</li>
+      <li><strong>Az Undertale-ben a harc beszélgetés is lehet.</strong> Toby Fox készítette, 2015. szeptember 15-én jelent meg OS X-re és Windowsra, a Kickstarteren 5000 dolláros célra 51 124 dollárt gyűjtött 2398 támogatótól <sup class="fn">[4]</sup>. A harc körökre osztott menüt és golyózáporos kitérést ötvöz: támadás, ACT (cselekvések ellenségenként eltérnek), tárgy vagy kímélés <sup class="fn">[4]</sup>.</li>
+      <li><strong>Az Undertale útvonalai a döntések következményei.</strong> Ellenség megölése tapasztalati pontot és aranyat ad, az EXP a LOVE értéket emeli <sup class="fn">[4]</sup>. Három fő útvonal van: semleges (néhány vagy semennyi szörnyet ölt meg), békés (senkit sem öl meg) és "irgalom nélküli" (minden szörnyet megöl), a békés útvonalon a szörnyek újra egyesíthetők, az irgalom nélkülin keményebb a befejezés <sup class="fn">[4]</sup>. A Wikipedia szerint egyes főellenségek békésen is lezárhatók, ha a játékos túléli, amíg a főellenség befejezi a beszédet <sup class="fn">[4]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A képességek hangja karakterességet ad.</strong> A <em>Disco Elysium</em> képességei belső hangokként szólalnak meg <sup class="fn">[1]</sup>. A Hársfalván a "kovács", a "gyűjtő" és a "harcos" képesség is szólhatna a játékoshoz egy-egy mondattal.</li>
+      <li><strong>Lehet harc nélküli út is.</strong> A <em>Disco Elysium</em> alig tartalmaz hagyományos harcot <sup class="fn">[1]</sup>, a <em>Baldur's Gate 3</em> a harcot beszélgetéssel elkerülhetővé teszi <sup class="fn">[2]</sup>, az <em>Undertale</em> a kímélést választható cselekvéssé teszi <sup class="fn">[4]</sup>. A Hársfalván minden harci helyzetnek legyen beszélgetős vagy kovácsolós alternatívája.</li>
+      <li><strong>A képességpróba a párbeszédben is dolgozik.</strong> A <em>Baldur's Gate 3</em> párbeszédeiben képességpróba van <sup class="fn">[2]</sup>; a Hársfalván a döntési pont jobb, ha a tanult képesség adja a kimenetelt.</li>
+      <li><strong>A "karmikus kocka" védi a játékost a rossz szériától.</strong> A BG3 alapértelmezett beállítása korlátozza a hosszú balszerencse-sorozatokat <sup class="fn">[2]</sup>; egy tanulós játékban a véletlen is igazságosabb lehet.</li>
+      <li><strong>Az évszak és a napi energia természetes időkeret.</strong> A <em>Stardew Valley</em> 28 napos évszakai és napi energiasávja adják a ritmust <sup class="fn">[3]</sup>; a Hársfalván a gyűjtés és a kovácsolás is kaphat évszakos és napi keretet.</li>
+      <li><strong>A "csomag" mint gyűjtési cél.</strong> A <em>Stardew</em> közösségi központjának csomagjai új területeket nyitnak <sup class="fn">[3]</sup>, a Hársfalván egy begyűjtési cél a falu újjáéledését jelezheti. A Wikipedia-oldal formális küldetésrendszert nem ír le, ezért ez csak gyűjtési célként használható példa <sup class="fn">[3]</sup>.</li>
+      <li><strong>A kapcsolatok építése is játékmechanika.</strong> A <em>Stardew</em>ban ajándékkal és beszélgetéssel nő a barátság <sup class="fn">[3]</sup>; a Hársfalván a faluval való kapcsolat hírnévként jelenhet meg.</li>
+      <li><strong>A társ lehet saját karakter.</strong> A BG3 hat társa játékosként is választható származás-karakter <sup class="fn">[2]</sup>; a Hársfalván egy-egy társ háttértörténete adhat további küldetést.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Párbeszédközpontú RPG</td><td>Disco Elysium</td><td>4 tulajdonság és 24 képesség mint belső hang, kockadobásos képességpróba (2d6), párbeszédfa, Thought Cabinet, alig harc, mikroreaktivitás</td><td>2019</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>CRPG, D&amp;D 5e</td><td>Baldur's Gate 3</td><td>húszoldalú kocka előnnyel és hátránnyal, karmikus kocka, 12 osztály és 11 faj, szint 12-ig, többosztályos fejlődés, valós idejű felfedezés és körökre osztott harc (kezdeményezés, cselekvések), képességpróba a párbeszédben, 288 küldetés (egy részük kizárja egymást), tíz társ, 13 románc, 170+ befejezés-változat, többjátékos</td><td>2023</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>Életszimuláció, farm</td><td>Stardew Valley</td><td>négy 28 napos évszak, napi energiasáv, növények és állatok, csomagok a közösségi központnak, ötféle képesség (földművelés, gyűjtögetés, horgászat, bányászat, harc), kapcsolatépítés ajándékkal, házasság, bányák és harc</td><td>2016</td><td><sup class="fn">[3][5]</sup></td></tr>
+        <tr><td>Indie RPG, kímélés</td><td>Undertale</td><td>körökre osztott menü és golyózáporos kitérés, ACT és kímélés, EXP és LOVE, három útvonal (semleges, békés, irgalom nélküli)</td><td>2015</td><td><sup class="fn">[4]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Disco Elysium: <a href="https://en.wikipedia.org/wiki/Disco_Elysium">https://en.wikipedia.org/wiki/Disco_Elysium</a></li>
+      <li>Baldur's Gate 3: <a href="https://en.wikipedia.org/wiki/Baldur%27s_Gate_3">https://en.wikipedia.org/wiki/Baldur%27s_Gate_3</a></li>
+      <li>Stardew Valley: <a href="https://en.wikipedia.org/wiki/Stardew_Valley">https://en.wikipedia.org/wiki/Stardew_Valley</a></li>
+      <li>Undertale: <a href="https://en.wikipedia.org/wiki/Undertale">https://en.wikipedia.org/wiki/Undertale</a></li>
+      <li>Life simulation game: <a href="https://en.wikipedia.org/wiki/Life_simulation_game">https://en.wikipedia.org/wiki/Life_simulation_game</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card" id="idovonal">
+    <h2>Idővonal 1974-től</h2>
+    <p class="note">A részek térkép-soraiban szereplő évszámokból.</p>
+    <ul class="timeline">
+      <li><span class="d">1974</span><span><a href="#resz1"><strong>Dungeons &amp; Dragons</strong></a> (asztali szerepjáték, 1. rész)</span></li>
+      <li><span class="d">1975</span><span><a href="#resz1"><strong>dnd</strong></a> (nagygépes számítógépes RPG, 1. rész, egy hivatkozott forrás szerint 1979); <a href="#resz1"><strong>pedit5</strong></a> (nagygépes számítógépes RPG, 1. rész)</span></li>
+      <li><span class="d">1980</span><span><a href="#resz1"><strong>Dungeon n Dragons (Trefonas)</strong></a> (mikroszámítógépes RPG, 1. rész)</span></li>
+      <li><span class="d">1981</span><span><a href="#resz2"><strong>Ultima I</strong></a> (nyílt világú CRPG, 2. rész); <a href="#resz2"><strong>Wizardry: Proving Grounds of the Mad Overlord</strong></a> (tömlöcjáró CRPG, 2. rész)</span></li>
+      <li><span class="d">1983</span><span><a href="#resz2"><strong>Ultima III: Exodus</strong></a> (nyílt világú CRPG, 2. rész)</span></li>
+      <li><span class="d">1985</span><span><a href="#resz2"><strong>Ultima IV: Quest of the Avatar</strong></a> (nyílt világú CRPG, 2. rész); <a href="#resz2"><strong>The Bard's Tale</strong></a> (városi és tömlöcjáró CRPG, 2. rész)</span></li>
+      <li><span class="d">1986</span><span><a href="#resz2"><strong>Might and Magic: Book One</strong></a> (tömlöcjáró CRPG, csapatos, 2. rész); <a href="#resz3"><strong>Dragon Quest</strong></a> (japán RPG, konzolos, 3. rész)</span></li>
+      <li><span class="d">1987</span><span><a href="#resz3"><strong>Final Fantasy</strong></a> (japán RPG, csapatos, 3. rész)</span></li>
+      <li><span class="d">1988</span><span><a href="#resz3"><strong>Dragon Quest III</strong></a> (japán RPG, osztályváltós, 3. rész)</span></li>
+      <li><span class="d">1991</span><span><a href="#resz3"><strong>Final Fantasy IV</strong></a> (japán RPG, aktív idejű harc, 3. rész)</span></li>
+      <li><span class="d">1994</span><span><a href="#resz5"><strong>The Elder Scrolls: Arena</strong></a> (nyílt világú akció-RPG, 5. rész)</span></li>
+      <li><span class="d">1996</span><span><a href="#resz5"><strong>The Elder Scrolls: Daggerfall</strong></a> (nyílt világú akció-RPG, 5. rész)</span></li>
+      <li><span class="d">1997</span><span><a href="#resz4"><strong>Fallout</strong></a> (CRPG, körökre osztott, 4. rész); <a href="#resz5"><strong>Diablo</strong></a> (akció-RPG, tömlöcjáró, 5. rész)</span></li>
+      <li><span class="d">1998</span><span><a href="#resz4"><strong>Baldur's Gate</strong></a> (CRPG, csapatos, megállítható valós idejű, 4. rész); <a href="#resz4"><strong>Infinity Engine</strong></a> (CRPG-motor, 4. rész)</span></li>
+      <li><span class="d">1999</span><span><a href="#resz4"><strong>Planescape: Torment</strong></a> (CRPG, beszélgetés-központú, 4. rész)</span></li>
+      <li><span class="d">2002</span><span><a href="#resz5"><strong>The Elder Scrolls: Morrowind</strong></a> (nyílt világú akció-RPG, 5. rész)</span></li>
+      <li><span class="d">2006</span><span><a href="#resz5"><strong>The Elder Scrolls: Oblivion</strong></a> (nyílt világú akció-RPG, 5. rész)</span></li>
+      <li><span class="d">2007</span><span><a href="#resz5"><strong>Mass Effect</strong></a> (akció-RPG, lövöldözős, döntésközpontú, 5. rész)</span></li>
+      <li><span class="d">2011</span><span><a href="#resz5"><strong>The Elder Scrolls: Skyrim</strong></a> (nyílt világú akció-RPG, 5. rész); <a href="#resz5"><strong>Dark Souls</strong></a> (akció-RPG, "Souls-szerű", 5. rész)</span></li>
+      <li><span class="d">2015</span><span><a href="#resz6"><strong>Undertale</strong></a> (indie RPG, kímélés, 6. rész)</span></li>
+      <li><span class="d">2016</span><span><a href="#resz6"><strong>Stardew Valley</strong></a> (életszimuláció, farm, 6. rész)</span></li>
+      <li><span class="d">2019</span><span><a href="#resz6"><strong>Disco Elysium</strong></a> (párbeszédközpontú RPG, 6. rész)</span></li>
+      <li><span class="d">2023</span><span><a href="#resz6"><strong>Baldur's Gate 3</strong></a> (CRPG, D&amp;D 5e, 6. rész)</span></li>
+    </ul>
+  </section>
+  <div class="card no-print" id="vissza">
+    <h3>Szólj hozzá</h3>
+    <p>Hibát találtál, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+    <form class="fb" data-subject="[Tudástár] Az RPG-műfaj sorozata">
+      <label for="fb-resz">Melyik rész?<select id="fb-resz" data-field="Rész" data-subject-part="1"><option>Bevezető</option><option>1. rész</option><option>2. rész</option><option>3. rész</option><option>4. rész</option><option>5. rész</option><option>6. rész</option><option>Idővonal</option><option>Általános</option></select></label>
+      <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+      <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+      <a class="btn send" href="#">Levél megnyitása</a>
+    </form>
+    <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+    <p class="note">Ha beszélgetnél is a témáról, a <a href="../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+  </div>
+  <footer class="no-print">
+    <p><a href="../">Vissza a Tudástárba</a></p>
+  </footer>
+</main>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>
