@@ -1,0 +1,502 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a Tudástárba</a><span>Tudástár</span></nav>
+<title>A roguelike-műfaj sorozata</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a study notebook. Soft paper cards on a warm desk, one colour square per level, a sticky level rail on topic pages. */
+:root {
+  --bg: #efeee8; --paper: #f8f1db; --sheet: #fbf8ee; --fg: #1f2124; --muted: #5d6166; --rule: #d8d3c4;
+  --accent: #b4561a; --l1: #3f7f8c; --l2: #3a4f9a; --l3: #7a4a9a; --l4: #8a6a1f; --ok: #2f7a54; --chip: #ece3c6;
+  --shadow: 0 1px 2px rgba(40, 30, 0, 0.10);
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --surface: var(--paper);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+    --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #151618; --paper: #24221b; --sheet: #1c1b17; --fg: #ecebe7; --muted: #a5a7aa; --rule: #34363a;
+  --accent: #f08a4a; --l1: #7cc0cc; --l2: #93a6ec; --l3: #c39be0; --l4: #d9b864; --ok: #7fcaa2; --chip: #35321f; --shadow: 0 1px 2px rgba(0, 0, 0, 0.5); color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+.kicker { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.02; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+header.top { display: grid; gap: 10px; border-bottom: 4px solid var(--fg); padding-bottom: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.lbl { font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lc, var(--muted)); }
+.lbl::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lc, var(--muted)); margin-right: 7px; border-radius: 2px; }
+.lv1 { --lc: var(--l1); } .lv2 { --lc: var(--l2); } .lv3 { --lc: var(--l3); } .lv4 { --lc: var(--l4); }
+ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.pts > li { position: relative; padding-left: 16px; max-width: 66ch; }
+ul.pts > li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; border-radius: 1px; background: var(--lc, var(--accent)); }
+ol.steps { margin: 0; padding-left: 1.5em; display: grid; gap: 8px; }
+ol.steps > li::marker { font-family: var(--font-mono); color: var(--lc, var(--accent)); }
+details { border-top: 1px dashed var(--rule); padding-top: 8px; }
+details > summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; }
+details > div { padding-top: 8px; display: grid; gap: 8px; }
+.note { font-size: 0.92rem; color: var(--muted); }
+.src { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.chip { font-family: var(--font-display); font-weight: 500; font-size: 0.78rem; background: var(--chip); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.insight { border-left: 3px solid var(--l3); background: color-mix(in srgb, var(--l3) 8%, transparent); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.insight .tagline { font-family: var(--font-mono); font-size: 0.78rem; color: var(--l3); }
+.quote { font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 60ch; }
+.btn { font: 700 0.95rem var(--font-display); color: var(--bg); background: var(--fg); border: 0; border-radius: 6px; padding: 10px 16px; cursor: pointer; justify-self: start; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.ghost { color: var(--fg); background: transparent; border: 1px solid var(--rule); }
+form.fb { display: grid; gap: 10px; }
+form.fb label { display: grid; gap: 4px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--muted); }
+form.fb input, form.fb select, form.fb textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 11px; width: 100%; box-sizing: border-box; min-width: 0; }
+form.fb textarea { min-height: 6.5em; resize: vertical; }
+.addr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.addr code { user-select: all; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 4px; padding: 3px 8px; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-display); font-size: 0.82rem; color: var(--ok); }
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; }
+</style>
+<style>
+section.resz { scroll-margin-top: 16px; }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 440px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.timeline li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .d { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2em; }
+sup.fn { font-size: 0.72em; color: var(--muted); }
+.urls a, .urls .u { overflow-wrap: anywhere; }
+.blk { display: grid; gap: 12px; }
+@media print {
+  section.resz, section#idovonal { break-before: page; }
+  .card { background: none; box-shadow: none; border-radius: 0; padding: 0; }
+  .tbl { overflow: visible; }
+  table { min-width: 0; font-size: 9pt; }
+  th, td { padding: 4pt 5pt; }
+  .timeline li { grid-template-columns: 5rem minmax(0, 1fr); }
+  .timeline .d, sup.fn, th { color: #000; }
+  /* print: block flow instead of grid (page breaks), list bullets via list-style so the unit checker markers can use ::before */
+  .card { display: block; }
+  .card > * + * { margin-top: 9pt; }
+  ul.pts { display: block; list-style: square; padding-left: 1.1em; }
+  ul.pts > li { padding-left: 0; margin-top: 4pt; }
+  ol.steps { display: block; }
+  ol.steps > li { margin-top: 4pt; }
+  .blk { display: block; break-inside: avoid; page-break-inside: avoid; }
+  .blk > * + * { margin-top: 9pt; }
+  .card ul.pts, .card ol.steps { break-inside: auto; page-break-inside: auto; }  /* the items (li) stay whole, the list may flow over pages */
+  .ct-leaves { white-space: normal; overflow: visible; text-overflow: clip; }
+  .timeline { display: block; }
+  .timeline li { margin-top: 5pt; }
+}
+</style>
+<main>
+  <header class="top">
+    <span class="kicker">Tudástár · Játékok</span>
+    <h1>A roguelike-műfaj sorozata</h1>
+    <p class="lede">Öt rövid rész arról, hogyan lett a Rogue nevű tömlöcjátékból egy egész műfaj, mit jelent a név, és merre tart ma.</p>
+  </header>
+  <!--CIKK-TERKEP-->
+<style>.ct { --ct-fg: var(--fg, #1d1f21); --ct-muted: var(--muted, #5f6368); --ct-rule: var(--rule, #d9d6cc);
+  --ct-accent: var(--accent, #c4561a); --ct-card: var(--surface, #faf6e8); --ct-bg: var(--bg, #f4f3ef);
+  /* full-bleed band: breaks out of the article column to the viewport edges */
+  margin: 0 calc(50% - 50vw); padding: 18px max(16px, env(safe-area-inset-right, 0px)) 18px max(16px, env(safe-area-inset-left, 0px));
+  background: var(--ct-card); border-block: 1px solid var(--ct-rule); }
+.ct-in { max-width: 1200px; margin: 0 auto; display: grid; gap: 12px; }
+.ct-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.ct-head { font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ct-accent); }
+.ct-root { background: var(--ct-fg); color: var(--ct-bg); border-radius: 6px; padding: 4px 12px; font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.9rem; }
+.ct-intro { margin: 0; flex: 1 1 22rem; font-size: 0.92rem; color: var(--ct-muted); }
+.ct-branches { list-style: none; margin: 0; padding: 12px 0 0; border-top: 2px solid var(--ct-accent);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: 10px; }
+.ct-branches > li { position: relative; background: var(--ct-bg); border-radius: 6px; padding: 9px 11px; display: grid; gap: 3px; align-content: start; min-width: 0; }
+.ct-branches > li::before { content: ""; position: absolute; left: 16px; top: -14px; height: 12px; border-left: 2px solid var(--ct-accent); }
+.ct-h { display: flex; align-items: baseline; gap: 7px; }
+.ct-n { font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.74rem; color: var(--ct-muted); }
+.ct-b { font-family: var(--font-display, system-ui, sans-serif); font-weight: 800; font-size: 0.92rem; line-height: 1.2; color: var(--ct-fg); }
+a.ct-b { text-decoration: underline; text-decoration-color: var(--ct-accent); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a.ct-b:hover { color: var(--ct-accent); }
+a.ct-b:focus-visible { outline: 2px solid var(--ct-accent); outline-offset: 2px; }
+.ct-desc { margin: 0; font-size: 0.84rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.ct-leaves { font-family: var(--font-display, system-ui, sans-serif); font-size: 0.72rem; color: var(--ct-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 520px) { .ct-branches { grid-template-columns: 1fr 1fr; } .ct-desc { -webkit-line-clamp: 4; } .ct-leaves { display: none; } }</style>
+<nav class="ct" aria-label="A cikk térképe"><div class="ct-in">
+<div class="ct-top">
+<span class="ct-head">Miről lesz szó</span>
+<span class="ct-root">A roguelike-műfaj sorozata</span>
+</div>
+<ol class="ct-branches">
+<li><div class="ct-h"><span class="ct-n">01</span><a class="ct-b" href="#resz1">Gyökerek</a></div><p class="ct-desc">A Rogue, a Hack, a NetHack, a Moria és az Angband, az elnevezés eredete és a két nagy családfa.</p><div class="ct-leaves">Rogue · Hack · NetHack · Moria · Angband</div></li>
+<li><div class="ct-h"><span class="ct-n">02</span><a class="ct-b" href="#resz2">Mitől roguelike?</a></div><p class="ct-desc">A Berlini értelmezés kilenc magas és hat alacsony értékű tényezője, és a vita a hagyományos roguelike és a roguelite között.</p><div class="ct-leaves">Berlini értelmezés · roguelite</div></li>
+<li><div class="ct-h"><span class="ct-n">03</span><a class="ct-b" href="#resz3">A klasszikusok kora</a></div><p class="ct-desc">ADOM, Dungeon Crawl Stone Soup, Brogue, Tales of Maj&#x27;Eyal és a műfaj szomszédja, a Dwarf Fortress.</p><div class="ct-leaves">ADOM · Brogue · Dwarf Fortress</div></li>
+<li><div class="ct-h"><span class="ct-n">04</span><a class="ct-b" href="#resz4">A roguelite-fordulat</a></div><p class="ct-desc">Spelunky, The Binding of Isaac, FTL és Rogue Legacy, amikor a műfaj elemei más játékokba költöztek.</p><div class="ct-leaves">Spelunky · Isaac · FTL · Rogue Legacy</div></li>
+<li><div class="ct-h"><span class="ct-n">05</span><a class="ct-b" href="#resz5">A mai roguelike-ok</a></div><p class="ct-desc">Slay the Spire és a pakliépítés, Hades, Vampire Survivors, Backpack Hero, és hogy merre tart a műfaj.</p><div class="ct-leaves">Slay the Spire · Hades · Vampire Survivors · Backpack Hero</div></li>
+</ol>
+</div></nav>
+<!--/CIKK-TERKEP-->
+  <section class="card" id="bevezeto">
+    <h2>Bevezető</h2>
+    <p>A sorozat a roguelike műfajt járja körül a Rogue (1980 körül) és első utódai felől a mai pakliépítő, automata fegyveres és hátizsák-rácsos játékokig. Minden rész néhány perc olvasás, átfutható: a fontos rész vastagon áll, a "Mit vihetünk át belőle egy tanulós játékba" szakasz ötleteket ad a saját játékokhoz, a végén térkép-táblázat (műfaj, játék, mechanika, évszám, forrás) és forráslista következik. A források a Wikipedia angol nyelvű kiadása, a RogueBasin és a Game Developer oldalai (elérés: 2026-10-25), a részeket a források gépi összefoglalójából írtuk, így a számok és évek a források állításai, nem független ellenőrzés eredményei. Ahol a források ellentmondtak, vagy valami bizonytalan volt, azt a szöveg jelzi, vagy kimaradt.</p>
+    <div class="blk">
+    <h3>A részek</h3>
+    <ol class="steps">
+      <li><a href="#resz1"><strong>01 Gyökerek: a Rogue és elődei</strong></a>: a Rogue, a Hack, a NetHack, a Moria és az Angband, az elnevezés eredete és a két nagy családfa.</li>
+      <li><a href="#resz2"><strong>02 Mitől roguelike? A műfaj meghatározása és a viták</strong></a>: a Berlini értelmezés kilenc magas és hat alacsony értékű tényezője, a vita a hagyományos roguelike és a roguelite között.</li>
+      <li><a href="#resz3"><strong>03 A klasszikusok kora</strong></a>: ADOM, Dungeon Crawl Stone Soup, Brogue, Tales of Maj'Eyal és a műfaj szomszédja, a Dwarf Fortress.</li>
+      <li><a href="#resz4"><strong>04 A roguelite-fordulat</strong></a>: Spelunky, The Binding of Isaac, FTL és Rogue Legacy, amikor a műfaj elemei más játékokba költöztek.</li>
+      <li><a href="#resz5"><strong>05 A mai roguelike-ok és újdonságaik</strong></a>: Slay the Spire és a pakliépítés, Hades, Vampire Survivors, Backpack Hero, és hogy merre tart a műfaj.</li>
+    </ol>
+    </div>
+    <div class="blk">
+    <h3>Hogyan használható</h3>
+    <ul class="pts"><li><strong>A forrás-hivatkozások részenként számozottak.</strong> A <code>[1]</code>, <code>[2]</code> jelzés mindig az adott rész forráslistájára utal.</li></ul>
+    </div>
+  </section>
+  <section class="card resz" id="resz1">
+    <span class="kicker">1. rész</span>
+    <h2>Gyökerek: a Rogue és elődei</h2>
+    <p class="lede">A roguelike-sorozat első része. Honnan jön a műfaj neve, és hogyan ágazott szét a Rogue két nagy családfává: a Hack-NetHack és a Moria-Angband vonalra.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A Rogue két egyetemista ötlete volt.</strong> Michael Toy és Glenn Wichman a Kaliforniai Egyetem santa cruzi karán (UCSC) kezdte el, Ken Arnold, a <em>curses</em> nevű képernyőkezelő könyvtár fejlesztője csatlakozott hozzájuk <sup class="fn">[1]</sup>. A Wikipedia szerint Unix-minigépekre készült 1980 körül, és 1980 novemberében már a 4. BSD kézikönyvében szerepelt <sup class="fn">[1]</sup>.</li>
+      <li><strong>A játék szerkezete máig a műfaj alapja.</strong> A játékos egy kalandort irányít körökre osztott, betűkből és jelekből álló (ASCII) rácson, az @ jel a játékos, a nagybetűk a szörnyek <sup class="fn">[1]</sup>. Minden szint egy laza 3x3-as szobarács, a pályák, szörnyek és kincsek minden játékban mások, a cél pedig a Yendor amulettjének megszerzése a legalsó szintről és a felszínre való visszatérés (a Yendor a Rodney név visszafelé írva) <sup class="fn">[1]</sup>.</li>
+      <li><strong>A halál végleges volt, és ezt a mentés törlésével védték.</strong> A Wikipedia szerint a mentés visszatöltéskor törlődött, hogy a játékos ne tölthessen vissza újra és újra <sup class="fn">[1]</sup>. A varázstárgyak eleinte színekkel leírva jelennek meg, a valódi nevük csak azonosítás után derül ki, és a mélyebb szörnyek erősebbek, részben azért, mert a VAX-11 memóriakorlátja nem engedett okosabb viselkedést <sup class="fn">[1]</sup>.</li>
+      <li><strong>A név a hatásból jött.</strong> A cikk szerint a Rogue nem volt az első tömlöcbejáró játék generált tartalommal és végleges halállal, de ez vezetett a roguelike műfaj elnevezéséhez, a műfaj játékait a Rogue hatásának elismeréseként nevezték így <sup class="fn">[1]</sup>. Elődjeként a Wikipedia a <em>Star Trek</em> (1971) és a <em>Colossal Cave Adventure</em> (1976) szöveges játékokat és a <em>Dungeons &amp; Dragons</em> fantasyvilágát említi <sup class="fn">[1]</sup>.</li>
+      <li><strong>A forráskód nélkül terjedő játékból kellett másolatot építeni.</strong> A Rogue 1983-ban, a 4.2 BSD-ben forráskód nélkül terjedt, a forráskód BSD-licenccel 1986-ban, a 4.3 BSD-vel került ki <sup class="fn">[1]</sup>. A Wikipedia szerint, mivel az alkotók a forráskódot nem adták ki, más programozóknak a semmiből kellett hasonló játékokat írniuk: ezek közül a legfontosabb a Hack és a Moria, és mindkettőből újabb változatok és klónok családja nőtt ki <sup class="fn">[1]</sup>. Egy gép is játszotta: a <em>Rog-O-Matic</em> (1981) automatikusan vezette a Rogue-t <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Hack egy gimnáziumi diákcsoport munkája.</strong> A Wikipedia szerint Jay Fenlason készítette Kenny Woodland, Mike Thome és Jonathan Payne segítségével a Lincoln-Sudbury Regional High Schoolban <sup class="fn">[2]</sup>. A cikk 1982-t és 1984-et is említ, az év tehát nem egyértelmű <sup class="fn">[1][2]</sup>. A NetHack-cikk szerint a diákok a Berkeley számítógépterméiben ismerkedtek meg a Rogue-val, és mivel Wichmantől és Toytól nem kapták meg a forráskódot, saját pályageneráló rutinokat írtak <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Hack tovább finomította a rendszert.</strong> Andries Brouwer 1984-ben egy erősen kibővített változatot adott ki Usenet-en, és 1985 júliusáig dolgozott rajta, az 1.0.3-as változat 1985. július 23-i <sup class="fn">[2]</sup>. Éhség-óra (az étel elfogy, étel nélkül a játékos meghal), súlykorlát (a tárgyak mennyisége korlátos), boltok és kripták tartoznak hozzá, a tárgyak tulajdonságait a játékos kísérletezéssel tanulja meg <sup class="fn">[2]</sup>.</li>
+      <li><strong>A NetHack a Hackből nőtt ki.</strong> Mike Stephenson az eredeti szerző, a NetHack Development Team (DevTeam) internetes együttműködés keretében fejleszti, az első kiadás 1987. július 28-i, a Hack elágazásaként <sup class="fn">[3]</sup>. A Wikipedia szerint a játékos kb. ötven fő szinten ereszkedik le az amulettért, a "bones" fájlokban más játékosok halálának maradványaival találkozik, és önkéntes kihívások ("conducts") közül választhat <sup class="fn">[3]</sup>. A tárgyak kezdetben azonosítatlanok (például "pink potion"), minden tárgyfajtának egy leírása van, és a leírások minden új játék elején újrakeverednek, az áldott, sima vagy átkozott állapot pedig a hatásukat is befolyásolja <sup class="fn">[3]</sup>. Fenlason a Hack forrását egy helyi USENIX-konferenciának adta, onnan került Usenet-re, és mivel a Hacknek nem volt hivatalos gondozója, sok elágazás született <sup class="fn">[3]</sup>.</li>
+      <li><strong>A NetHack szabadon másolható és módosítható.</strong> A NetHack General Public License-t (NGPL) Stephenson írta 1989-ben, a GNU bison licenc mintájára, a változtatásokat dokumentálni kell, a forráskódot elérhetővé kell tenni <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Moria egy diák hiányérzetéből született.</strong> Robert Alan Koeneke (1957-2022) az Oklahomai Egyetemen kezdte; mivel elvesztette a hozzáférést a Rogue-hoz, a Wikipedia szerint "elviselhetetlennek" találta a helyzetet, és saját játékot írt <sup class="fn">[4]</sup>. A neve és a célja J. R. R. Tolkien <em>A gyűrűk ura</em> Moria-bányáira épül: a játékos a mélyben a Balrogot győzi le <sup class="fn">[4]</sup>. A pontos év bizonytalan: a Wikipedia szerint egy VMS BASIC-ben írt béta kb. 1981-es, a Pascal nyelvű 1.0-ás 1983 nyarán készült, az infobox viszont 1983. március 25-ét adja <sup class="fn">[4]</sup>.</li>
+      <li><strong>A Moria hozta be a várost.</strong> Az állandó városszinten hat bolt van (általános bolt, fegyvertár, fegyverkovács, templom, alkimista és varázslóbolt), a föld alatti szintek minden látogatáskor újra generálódnak, nyolc faj és hat kaszt közül lehet választani, a mentés csak kilépéskor történik, így a halott karakter nem tölthető vissza <sup class="fn">[4]</sup>. Koeneke 1985-től megengedte a forráskód megosztását és módosítását, de kereskedelmi felhasználás nélkül, az UMoria nevű C nyelvű változatot James E. Wilson készítette 1987-ben, és 2008-ban a free-moria projekt GPL alá tette <sup class="fn">[4]</sup>.</li>
+      <li><strong>Az Angband a Moriából jött.</strong> Alex Cutler és Andy Astrand hozta létre a Warwicki Egyetemen 1990-ben az UMoria kibővítésére, nyilvánosan 1993. április 11-én jelent meg <sup class="fn">[5]</sup>. A játékos száz szintet járhat be Morgoth erődjében, a szintek generáltak, a játék városban kezdődik, ahol felszerelést vesz <sup class="fn">[5]</sup>. A Wikipedia szerint David Brevik "hatalmas hatásként" említette az Angband véletlen szintjeit és tárgyait a <em>Diablo</em> kapcsán <sup class="fn">[5]</sup>.</li>
+      <li><strong>A műfaj két családfája.</strong> A forrásokból a Rogue → Hack → NetHack és a Rogue → Moria → Angband vonal rajzolódik ki <sup class="fn">[1][3][4][5]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A tudást kísérletezés adja.</strong> A Hackben a játékos a tárgyak tulajdonságait próbálgatással tanulja meg <sup class="fn">[2]</sup>, a Rogue-ban a tárgyak valódi neve azonosítás után derül ki <sup class="fn">[1]</sup>. A tanulós játékban a felfedezés maga lehet a tanulás.</li>
+      <li><strong>A hub szerepe.</strong> A Moria és az Angband városa biztonságos hely a felkészülésre és a vásárlásra <sup class="fn">[4][5]</sup>. Egy tanulós játékban ugyanez lehet a "mit tanultam eddig" pont, ahol a játékos felszerelkezik a következő kalandra.</li>
+      <li><strong>A korábbi hibák tanítanak.</strong> A NetHack "bones" fájljai más játékosok halálának helyét őrzik <sup class="fn">[3]</sup>. A tanulós játékban a korábbi rossz válaszok is visszatérhetnek mint "emlék", amelyből tanulni lehet.</li>
+      <li><strong>A nyílt forrás hatása.</strong> A forráskód megosztása és a licencek az Angband, a NetHack és a Moria családjának növekedését tették lehetővé <sup class="fn">[3][4][5]</sup>.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Hagyományos roguelike (a névadó)</td><td>Rogue</td><td>körökre osztott ASCII-rács, 3x3-as szobarácsból generált szintek, végleges halál (a mentés törlődik), tárgyak azonosítása színek alapján, cél: Yendor amulettje</td><td>kb. 1980</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Hagyományos roguelike</td><td>Hack</td><td>éhség-óra, súlykorlát, boltok és kripták, tárgyak megismerése kísérletezéssel</td><td>1982 (a források 1984-et is említenek)</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>Hagyományos roguelike</td><td>NetHack</td><td>kb. 50 szint, "bones" fájlok (más játékosok halálának maradványai), önkéntes "conduct" kihívások, tárgyleírások újrakeverése játékonként</td><td>1987</td><td><sup class="fn">[3]</sup></td></tr>
+        <tr><td>Hagyományos roguelike</td><td>Moria (UMoria)</td><td>állandó városszint hat bolttal, 8 faj és 6 kaszt, minden látogatáskor új föld alatti szint, a végén a Balrog</td><td>1983 (a források 1981-et is említenek)</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Hagyományos roguelike</td><td>Angband</td><td>100 szintes erőd, Morgoth, városi bolt, generált szintek</td><td>1990 (nyilvános: 1993)</td><td><sup class="fn">[5]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Rogue (video game): <a href="https://en.wikipedia.org/wiki/Rogue_(video_game)">https://en.wikipedia.org/wiki/Rogue_(video_game)</a></li>
+      <li>Hack (video game): <a href="https://en.wikipedia.org/wiki/Hack_(video_game)">https://en.wikipedia.org/wiki/Hack_(video_game)</a></li>
+      <li>NetHack: <a href="https://en.wikipedia.org/wiki/NetHack">https://en.wikipedia.org/wiki/NetHack</a></li>
+      <li>Umoria (Moria): <a href="https://en.wikipedia.org/wiki/Umoria">https://en.wikipedia.org/wiki/Umoria</a></li>
+      <li>Angband (video game): <a href="https://en.wikipedia.org/wiki/Angband_(video_game)">https://en.wikipedia.org/wiki/Angband_(video_game)</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz2">
+    <span class="kicker">2. rész</span>
+    <h2>Mitől roguelike? A műfaj meghatározása és a viták</h2>
+    <p class="lede">A roguelike-sorozat második része. Mit jelent a szó, ki és mikor próbálta meghatározni, és miért nem ért egyet ma sem mindenki.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A szótári meghatározás rövid.</strong> A Wikipedia szerint a roguelike hagyományosan olyan szerepjátékstílus, amelyet tömlöcbejárás generált szinteken, körökre osztott játékmenet, rácsos mozgás és a karakter végleges halála jellemez <sup class="fn">[1]</sup>. A legtöbb magas fantasy, a <em>Dungeons &amp; Dragons</em> asztali játékok hatását tükrözve, a névadó a <em>Rogue</em> (1980), de az oldal megjegyzi, hogy a <em>Beneath Apple Manor</em> korábbi volt <sup class="fn">[1]</sup>.</li>
+      <li><strong>A szó a Usenetről jött.</strong> A Wikipedia szerint 1993 körül az egyes játékoknak szóló hírcsoportokat egy közös név alá vonták össze, és a rec.games.roguelike.* nevet "a legkisebb rossznak" választották <sup class="fn">[1]</sup>. A RogueBasin cikke szerint a kifejezés 1993-ban jelent meg a Usenetben hasonló játékok csoportosítására, de már akkor sem volt egyetértés a meghatározásban <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Berlini értelmezés 2008-ban született.</strong> A Wikipedia szerint roguelike-fejlesztők és játékosok az International Roguelike Development Conference 2008 rendezvényén Berlinben dolgozták ki <sup class="fn">[1]</sup>. A RogueBasin szerint a meghatározás az összes résztvevő beszélgetéséből jött létre, a névsorban Ido Yehieli, Radomir Dopieralski és Jeff Lait szerepel, kiindulópontja Slash "roguelikeness factors" listája volt a Temple of the Roguelike oldalról, Jeff Lait 2008. szeptember 16-án tette közzé a rec.games.roguelike.development hírcsoportban <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Berlini értelmezés egy kánonra épül.</strong> Öt játék alkotja: ADOM, Angband, Linley's Dungeon Crawl, NetHack és Rogue <sup class="fn">[1][2]</sup>. A cél nem a hatósági definíció, hanem hogy a roguelike-közösség jobban megértse, mit tanulmányoz, és hogy meg lehessen ítélni, mennyire "roguelike" egy játék <sup class="fn">[2]</sup>.</li>
+      <li><strong>Kilenc magas értékű tényező.</strong> A RogueBasin lista szerint: (1) véletlen környezet-generálás a játszhatóság ismétlése érdekében; (2) végleges halál, a halál után az első szintről indul a játék, a mentés a betöltéskor törlődik; (3) körökre osztott játék, minden parancs egy cselekvés; (4) rácsos világ, minden lény egy mezőt foglal el; (5) nem módusos (a mozgás, a harc és a többi cselekvés ugyanabban a módban történik); (6) összetettség, a tárgyak és szörnyek kölcsönhatásai többféle megoldást adnak; (7) erőforrás-gazdálkodás, például étel és gyógyital; (8) hack'n'slash, a szörnyek legyőzése a központ; (9) felfedezés és felderítés, a tárgyak azonosítása minden játékban újra <sup class="fn">[2]</sup>.</li>
+      <li><strong>Hat alacsony értékű tényező.</strong> A RogueBasin szerint: egyetlen játékos-karakter, a szörnyek a játékoshoz hasonló szabályokat követnek, a taktikai kihívás több végigjátszást kíván, ASCII-megjelenítés, szobákból és folyosókból álló tömlöc, a jellemzők számokkal látszanak <sup class="fn">[2]</sup>. A Wikipedia ötöt sorol fel (az ASCII-megjelenítést nem említi) <sup class="fn">[1]</sup>.</li>
+      <li><strong>A lista nem szigorú.</strong> A RogueBasin szerint egy tényező hiánya nem zárja ki a játékot, és néhány megléte nem tesz valamit roguelike-gá, a definíció nem akar korlátozni fejlesztőket vagy játékokat <sup class="fn">[2]</sup>. John Harris (Game Set Watch) a tényezők alapján pontozta a játékokat: a Linley's Dungeon Crawl és a NetHack kapta a legtöbbet (57,5 a 60-ból), a <em>ToeJam &amp; Earl</em> és a <em>Diablo</em> nagyjából a felét <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Berlini értelmezést bírálják.</strong> A RogueBasin szerint Darren Grey <em>Screw the Berlin Interpretation!</em> című írása pontatlannak és elavultnak tartja, és szerinte az ASCII és a tömlöc nem lényeges <sup class="fn">[2]</sup>. Ugyanez az oldal megjegyzi, hogy a szélesebb játékosközösség a "roguelike" szót mindenre használja, ami végleges halált és generált tartalmat ötvöz <sup class="fn">[2]</sup>.</li>
+      <li><strong>Egy szerző szerint a roguelike egy másik roguelike-ból következik.</strong> A RogueBasin másik cikke (Slashie, saját értelmezésként jelölve) szerint a roguelike lényegében egy korábbi roguelike által inspirált játék <sup class="fn">[3]</sup>. A "hagyományos" roguelike jellemzői ott: tartós következmények (a mentés betöltésével nem lehet a halált visszacsinálni), karakterközpontúság, generált tartalom, körökre osztott játék és "tiszta futamok", vagyis meta-progresszió nélkül, csak a játékos tudása marad meg futamról futamra <sup class="fn">[3]</sup>.</li>
+      <li><strong>A "roguelite" a vita eredménye.</strong> A Wikipedia szerint a <em>rogue-lite</em>, <em>roguelite</em> és <em>roguelike-like</em> szavak a Berlini tényezők egy részét viselő játékokra szolgálnak, a "procedural death labyrinth" olyanokra, amelyek megtartják a végleges halált és a véletlen pályákat, de a többi magas értékű tényezőt nem <sup class="fn">[1]</sup>. A hagyományos roguelike korlátlanul játszható, a roguelite rövidebb futamokat, győzelmi feltételt és gyakran meta-játékot kínál, amely tartós funkciókat nyit meg <sup class="fn">[1]</sup>. A Steam-hez hasonló piacterek azonban mindkettőre a "roguelike" címkét használják <sup class="fn">[1]</sup>.</li>
+      <li><strong>Josh Bycer szerint a különbség a győzelem útja.</strong> A 2019-es Game Developer-cikkében azt írja, hogy a roguelike generált terekkel, kemény nehézséggel és jelentős futamok közti eltéréssel dolgozik, a futamra magára fókuszál, és nincs átvitel a futamok között <sup class="fn">[4]</sup>. Szerinte a roguelite a végpont elérésére fókuszál, erős megőrzéssel (persistence) és átvitellel, és a korai futamokban jellemzően nem lehet nyerni <sup class="fn">[4]</sup>. Bycer kulcsmegkülönböztetése: a roguelike ügyességgel megnyerhető, a roguelite tartós rendszerei addig blokkolják a győzelmet, amíg a haladás utol nem éri a játékos tudását <sup class="fn">[4]</sup>. Példaként a <em>Rogue Legacy</em>-t és a <em>Hadest</em> említi <sup class="fn">[4]</sup>.</li>
+      <li><strong>Lena LeRay 2016-ban három fogalmat javasolt.</strong> Szerinte a <em>roguelike</em> (k-val) a Rogue-hoz közel álló, körökre osztott stratégiai játék (példa: NetHack, Tales of Maj'Eyal), a <em>roguelite</em> (t-vel) távolabbi, többnyire akciójáték (példa: The Binding of Isaac, Nuclear Throne, FTL), a <em>procedural death labyrinth</em> pedig a Rogue-hoz kötődő, de túl távoli játékok gyűjtőneve (példa: Hand of Fate, Sunless Sea) <sup class="fn">[5]</sup>. A cikk szerint a "procedural death labyrinth" kifejezést Lars Doucet javasolta, Tanya X. Short pedig azt vetette fel, hogy a fejlesztők hagyjanak fel a "roguelike" szóval <sup class="fn">[5]</sup>.</li>
+      <li><strong>A látvány nem döntő.</strong> A Wikipedia szerint a modern gépeken megjelentek grafikus csempék és izometrikus felületek, amelyek megtartották a csempealapú játékmenetet, és egyes játékok megőrizték az ASCII-t, például a <em>Cogmind</em> (2017) és a <em>Cataclysm: Dark Days Ahead</em> (2013) <sup class="fn">[1]</sup>. Sok roguelite eltávolodott a csempés mozgástól és a körökre osztott játéktól, akciójátékokkal vagy platformjátékokkal ötvözve a képletet, mint a <em>Spelunky</em> <sup class="fn">[1]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A tényezők tudatos megválasztása.</strong> A Berlini lista nem szabály, hanem kérdéssor. Egy tanulós játékban érdemes külön eldönteni, melyik tényező kell: a véletlen környezet (minden játék más), az erőforrás-gazdálkodás vagy a felfedezés és felderítés <sup class="fn">[2]</sup>.</li>
+      <li><strong>A tudás is lehet a meta-progresszió.</strong> A hagyományos roguelike „tiszta futamainál” csak a játékos tudása marad meg <sup class="fn">[3]</sup>. Egy tanulós játékban ez egybeesik a céllal: ami átvihető, az a megtanult anyag.</li>
+      <li><strong>Készség vagy felhalmozás?</strong> Bycer megkülönböztetése szerint a roguelike ügyességgel megnyerhető, a roguelite tartós rendszerei késleltetik a győzelmet <sup class="fn">[4]</sup>. A tanulós játéknál érdemes kimondani, a haladást a tudás vagy a szerzett eszközök adják-e.</li>
+      <li><strong>Közös nyelv.</strong> A "roguelike" és a "roguelite" vitája megmutatja, hogy a fogalmak tisztázása nélkül félreértés lesz. A saját játékainknál érdemes a mechanikákat névvel leírni (végleges halál, generált pálya, meta-progresszió), nem egy műfajcímkével.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Hagyományos roguelike (Berlini kánon)</td><td>Rogue</td><td>generált szintek, végleges halál, körökre osztott játék, rácsos mozgás</td><td>1980</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Hagyományos roguelike (Berlini kánon)</td><td>ADOM, Angband, Linley's Dungeon Crawl, NetHack</td><td>véletlen környezet, végleges halál, körökre osztott, rácsos, nem módusos, erőforrás-gazdálkodás, felfedezés</td><td>a Berlini értelmezés: 2008</td><td><sup class="fn">[1][2]</sup></td></tr>
+        <tr><td>Pontozási példa (Harris)</td><td>Linley's Dungeon Crawl, NetHack</td><td>a Berlini tényezők szerinti legmagasabb pontszám, 57,5 a 60-ból</td><td>nincs adat</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Pontozási példa (Harris)</td><td>ToeJam &amp; Earl, Diablo</td><td>a Berlini tényezők kb. fele</td><td>nincs adat</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>ASCII ma is</td><td>Cogmind, Cataclysm: Dark Days Ahead</td><td>megőrzött ASCII-megjelenítés</td><td>2017 (Cogmind), 2013 (Cataclysm)</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Roguelite (Bycer)</td><td>Rogue Legacy, Hades</td><td>erős megőrzés a futamok között, a győzelem a haladáson múlik</td><td>nincs adat</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Roguelite (LeRay)</td><td>The Binding of Isaac, Nuclear Throne, FTL</td><td>akció-orientált, távolabb a Rogue-tól</td><td>nincs adat</td><td><sup class="fn">[5]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Wikipedia: angol nyelvű kiadás, elérés: 2026-10-25. A RogueBasin és a Game Developer oldalai: ugyanaz a dátum. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Roguelike (Wikipedia): <a href="https://en.wikipedia.org/wiki/Roguelike">https://en.wikipedia.org/wiki/Roguelike</a></li>
+      <li>Berlin Interpretation (RogueBasin): <a href="https://www.roguebasin.com/index.php/Berlin_Interpretation">https://www.roguebasin.com/index.php/Berlin_Interpretation</a></li>
+      <li>What a roguelike is (RogueBasin, Slashie): <a href="https://www.roguebasin.com/index.php/Roguelike">https://www.roguebasin.com/index.php/Roguelike</a></li>
+      <li>Josh Bycer: The Roguelike Debate, Roguelikes vs Roguelites (Game Developer, 2019): <a href="https://www.gamedeveloper.com/design/the-roguelike-debate----roguelikes-vs-roguelites">https://www.gamedeveloper.com/design/the-roguelike-debate----roguelikes-vs-roguelites</a></li>
+      <li>Lena LeRay: Pondering RogueliKes, RogueliTes, and Procedural Death Labyrinths (Game Developer, 2016): <a href="https://www.gamedeveloper.com/business/pondering-roguelikes-roguelites-and-procedural-death-labyrinths">https://www.gamedeveloper.com/business/pondering-roguelikes-roguelites-and-procedural-death-labyrinths</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz3">
+    <span class="kicker">3. rész</span>
+    <h2>A klasszikusok kora</h2>
+    <p class="lede">A roguelike-sorozat harmadik része. Az ADOM, a Dungeon Crawl és társaik: mit adtak hozzá a műfajhoz a Rogue-utódok az 1990-es évektől a 2010-es évekig.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A műfaj "nagy" játékait egy névsor rögzíti.</strong> A Wikipedia szerint John Harris, a roguelike-ok kritikusa az ADOM-ot, a Dungeon Crawl Stone Soupot és az Angbandot is a "major roguelikes" közé sorolta <sup class="fn">[1][2]</sup>. Az Angband eredetéről és a Rogue-családról az előző rész szól, itt a többi főszereplő következik.</li>
+      <li><strong>Az ADOM egyetlen ember műve volt.</strong> Az <em>Ancient Domains of Mystery</em> tervezője és fejlesztője Thomas Biskup, 1994-ben jelent meg (Linuxra), Amigára 1995-ben, MS-DOS-ra és Windowsra 1996. január 28-án <sup class="fn">[1]</sup>. A fejlesztés 1994. július 12-től 2002. november 20-ig tartott, majd Biskup 2012-ben közösségi finanszírozással folytatta (a cél 48 000 dollár volt, a kampány 90 169 dollárral zárult) <sup class="fn">[1]</sup>. A játék forráskódja nem nyílt: Biskup a titokzatosság megőrzése és a jóvá nem hagyott változatok korlátozása miatt tartja zárva <sup class="fn">[1]</sup>.</li>
+      <li><strong>Az ADOM a történetet és a választást hozta be.</strong> A karakter tizenkét faj és huszonkét kaszt közül választható, hozzá tartozik egy jellemrajz (rendezett, semleges vagy kaotikus), amely befolyásolja az elérhető küldetéseket és azt, hogyan reagálnak a szereplők és az istenségek <sup class="fn">[1]</sup>. A Wikipedia szerint a küldetésközpontú, cselekményvezérelt szerkezet legalább annyit köszönhet a <em>Zork</em>-féle kalandjátékoknak, mint az <em>Angband</em> ütlegelő játékmenetének, és több befejezése van <sup class="fn">[1]</sup>. A káosz-korrupció mutálja a karaktert, a gyógynövények egy módosított Conway-féle Életjáték szerint nőnek, a végleges halál a mentés törlésével valósul meg <sup class="fn">[1]</sup>. A pályák többnyire generáltak, de létrehozásuk után változatlanok maradnak <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Dungeon Crawl közösségi örökséggé vált.</strong> A <em>Linley's Dungeon Crawl</em> programozója Linley Henzell volt (1995-ben írta, 1997. október 2-án adta ki) <sup class="fn">[2]</sup>. Amikor Henzell visszavonult, 2006-ban Darshan "greensnark" Shaligram és Erik Piper elindította a <em>Dungeon Crawl Stone Soup</em> (DCSS) projektet a Crawl újraélesztésére, az első kiadás 2006. szeptember 19-én jelent meg <sup class="fn">[2]</sup>. A játék szabad szoftver (GPL-2.0-or-later), a közösség fejleszti, és a csapat a korábbi közreműködők mindegyikét megkereste az újralicencelés miatt <sup class="fn">[2]</sup>.</li>
+      <li><strong>A DCSS lecsupaszított, hogy jobb legyen.</strong> A játékos fajt és hátteret választ, majd többnyire állandó, véletlen szintekre száll le az Orb of Zot megszerzéséért, a Zot birodalmába legalább három a tizenöt rúnából kell, és 26 isten közül választhat (a 0.33-as verzió szerint) <sup class="fn">[2]</sup>. A Wikipedia szerint a csapat a funkciók felduzzadásának elkerülésére eltávolított több fajt, hátteret, mágiaiskolát és az élelem-rendszert, és kerüli az értelmetlen ismétlést és a látszatválasztásokat <sup class="fn">[2]</sup>. Kézzel tervezett, Lua nyelven szkriptelt elrendezések és "vaultok" adnak változatosságot, a kényelmi funkciók között az automatikus felfedezés (a NetHackből átvett Dijkstra-algoritmussal) és az egérkezelés szerepel <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Brogue a letisztultságra épít.</strong> Brian Walker alkotta, a fejlesztés 2009-ben kezdődött, a játékos az @ jellel a Dungeons of Doom 26. szintjére száll le a Yendor amulettjéért, majd visszatér a felszínre <sup class="fn">[3]</sup>. Generált pályák és csapdák, ASCII grafika, a Rogue nyomán <sup class="fn">[3]</sup>. A Wikipedia szerint az interfészét, a tervezését és a megjelenését az egyszerűsége és szépsége miatt dicsérték, a PC Gamer szerzője a mélyebb roguelike-vizek belépőjének nevezte <sup class="fn">[3]</sup>. Később a fejlesztés GitHubon, AGPLv3 alatt a Brogue Community Edition néven folytatódott <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Tales of Maj'Eyal a roguelike-ot grafikussá tette.</strong> Nicolas Casalini ("DarkGod") fejlesztette, a Netcore Games gondozásában 2012-ben jelent meg, elődje a <em>Tales of Middle Earth</em>, amelynek gyökerei a PernAngband, a Zangband és az Angband <sup class="fn">[4]</sup>. A harc taktikai és körökre osztott, a kezelés a hagyományos billentyűparancsokat és az egeret ötvözi, színes grafikával, és szinte teljesen egérrel játszható <sup class="fn">[4]</sup>. A halál végleges, de a játékos achievementekkel és szintlépéssel extra életeket szerezhet, kilenc faj és huszonöt kaszt közül választ, a cselekmény nem lineáris <sup class="fn">[4]</sup>. A T-Engine nevű keretrendszerén, Lua-szkriptekkel más játékok is készültek, 2011-ben és 2012-ben a hét napos Seven Day Roguelike kihívás résztvevői használták <sup class="fn">[4]</sup>. Az ASCII Dreams "Roguelike of the Year" szavazását 2010-ben, 2011-ben és 2012-ben megnyerte <sup class="fn">[4]</sup>.</li>
+      <li><strong>A Dwarf Fortress a műfaj szomszédja.</strong> Tarn és Zach Adams (Bay 12 Games) 2002 októberében kezdte, az első nyilvános alfa 2006. augusztus 8-án jelent meg, a Wikipedia "építő-menedzselő szimulációként, roguelike-ként és túlélőjátékként" osztályozza <sup class="fn">[5]</sup>. Három módja van: a Fortress (nyílt végű telepjáték), az Adventurer (körökre osztott roguelike) és a Legends (a generált világ történetének böngészője), a világok civilizációkkal és háborúkkal együtt jönnek létre <sup class="fn">[5]</sup>. Nincs győzelmi feltétel, a közösség jelmondata: "Losing is Fun!" <sup class="fn">[5]</sup>. A Wikipedia szerint befolyásolta a <em>Minecraftot</em> és a <em>RimWorldöt</em>, 2012 márciusában a Museum of Modern Art (MoMA) kiállított belőle, a szoftver zárt forráskódú <sup class="fn">[5]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>Elhagyni is lehet fejlesztés.</strong> A DCSS csapata a forrás szerint az értelmetlen ismétlés és a látszatválasztás miatt vette ki az élelem-rendszert <sup class="fn">[2]</sup>. Egy tanulós játékban is érdemes minden mechanikánál megkérdezni, valódi döntést ad-e a játékosnak.</li>
+      <li><strong>A választás következménye adhat történetet.</strong> Az ADOM jellemrajza megváltoztatja, ki mit mond a játékosnak és milyen küldetést kínál <sup class="fn">[1]</sup>. Egy tanulós játékban a válaszadás stílusa vagy a korábbi döntés hasonlóan alakíthatja a további feladatokat.</li>
+      <li><strong>A végleges halál puhítható.</strong> A Tales of Maj'Eyal achievementekkel és szintlépéssel extra életeket ad <sup class="fn">[4]</sup>, a Dwarf Fortress közösségi jelmondata szerint a vesztés is lehet élmény <sup class="fn">[5]</sup>. A tanulós játékban a hiba a tanulás része, nem a játék vége.</li>
+      <li><strong>A kezelhetőség maga is tervezési érték.</strong> A Brogue dicsérete az interfész egyszerűségén múlik <sup class="fn">[3]</sup>, a DCSS kényelmi funkciói (automatikus felfedezés, egérkezelés) a belépési küszöböt csökkentik <sup class="fn">[2]</sup>.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Hagyományos roguelike, küldetésközpontú</td><td>ADOM</td><td>12 faj és 22 kaszt, jellemrajz (rendezett, semleges, kaotikus), káosz-korrupció, generált de állandósult pályák, végleges halál, több befejezés</td><td>1994</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Hagyományos roguelike, közösségi</td><td>Dungeon Crawl Stone Soup</td><td>faj és háttér, 26 isten, 15 rúna, kézzel tervezett vaultok, automatikus felfedezés, élelem-rendszer nélkül</td><td>2006 (elődje: 1997)</td><td><sup class="fn">[2]</sup></td></tr>
+        <tr><td>Minimalista roguelike</td><td>Brogue</td><td>26 szint, Yendor amulettje, generált pályák és csapdák, ASCII, egyszerű interfész</td><td>a fejlesztés 2009-ben kezdődött</td><td><sup class="fn">[3]</sup></td></tr>
+        <tr><td>Grafikus, taktikai roguelike</td><td>Tales of Maj'Eyal</td><td>taktikai körökre osztott harc, színes grafika és egér, extra életek, 9 faj és 25 kaszt</td><td>2012</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Építő szimuláció és roguelike</td><td>Dwarf Fortress</td><td>generált világ történelemmel, három mód, nincs győzelmi feltétel</td><td>2006 (alfa)</td><td><sup class="fn">[5]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Minden oldal a Wikipedia angol nyelvű kiadása, elérés: 2026-10-25. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Ancient Domains of Mystery: <a href="https://en.wikipedia.org/wiki/Ancient_Domains_of_Mystery">https://en.wikipedia.org/wiki/Ancient_Domains_of_Mystery</a></li>
+      <li>Dungeon Crawl Stone Soup: <a href="https://en.wikipedia.org/wiki/Dungeon_Crawl_Stone_Soup">https://en.wikipedia.org/wiki/Dungeon_Crawl_Stone_Soup</a></li>
+      <li>Brogue (video game): <a href="https://en.wikipedia.org/wiki/Brogue_(video_game)">https://en.wikipedia.org/wiki/Brogue_(video_game)</a></li>
+      <li>Tales of Maj'Eyal: <a href="https://en.wikipedia.org/wiki/Tales_of_Maj%27Eyal">https://en.wikipedia.org/wiki/Tales_of_Maj%27Eyal</a></li>
+      <li>Dwarf Fortress: <a href="https://en.wikipedia.org/wiki/Dwarf_Fortress">https://en.wikipedia.org/wiki/Dwarf_Fortress</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz4">
+    <span class="kicker">4. rész</span>
+    <h2>A roguelite-fordulat</h2>
+    <p class="lede">A roguelike-sorozat negyedik része. Amikor a Rogue elemei kikerültek a tömlöcbejáró szerepjátékból: platformjáték, lövöldözős, űrhajó-irányítás és kastélybejárás lett belőlük.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A fordulat négy játékon át követhető.</strong> A rész a <em>Spelunky</em> (2008), a <em>The Binding of Isaac</em> (2011), az <em>FTL: Faster Than Light</em> (2012) és a <em>Rogue Legacy</em> (2013) játékot mutatja be: mindegyik generált tartalmat és a halál utáni újrakezdést használja, de platformjátékba, lövöldözősbe, űrhajó-irányításba vagy kastélybejárásba ágyazva <sup class="fn">[1][2][4][5]</sup>. A műfajvitáról az előző rész szól.</li>
+      <li><strong>A Spelunky egy platformjáték, amely véletlen barlangokat használ.</strong> Derek Yu tervezte, 2008. december 21-én jelent meg ingyenes játékként Windowsra (a Wikipedia szerint a forráskódja hozzáférhető), a motor a GameMaker Studio, a programozó Andy Hull <sup class="fn">[1]</sup>. A játékos egy barlangkutatót irányít, aki kincset gyűjt, foglyokat ment, ellenségekkel harcol és csapdákat kerül, a barlangok generáltak, négy, egyre nehezebb területre oszlanak <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Spelunkyban nincsenek mentési pontok.</strong> A Wikipedia szerint ha a játékos elveszíti az összes szívét vagy halálos csapdába lép, a futam elölről kezdődik <sup class="fn">[1]</sup>. A cikk valós idejű, oldalnézetes platformjátéknak írja, és megjegyzi, hogy lényegében tömlöcbejárás, amely roguelike elemeket (véletlen szintek, mentési pontok hiánya) kapott <sup class="fn">[1]</sup>. A <em>Super Mario</em> Yu szerint az egyik legnagyobb inspiráció volt "az érzet és a fizika" miatt, a NetHack a világ interaktivitásáért, a körökre osztott tömlöcbejárást viszont nem szerette <sup class="fn">[1]</sup>. A cikk feloldható karaktereket is említ (például a Tunnel Mant), de tartós fejlődési rendszert nem ír le <sup class="fn">[1]</sup>. A későbbi, rá építő játékokat "roguelite"-nak nevezi <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Binding of Isaac egy hétvégi ötletből nőtt ki.</strong> Edmund McMillen szerint a játék Florian Himsl programozóval egyhetes game jamen indult, Flashben (ActionScript 2) készült, és mintegy három hónapnyi részmunkaidős munkával lett kész <sup class="fn">[3]</sup>. A Wikipedia szerint 2011. szeptember 28-án jelent meg Windowsra, McMillen a Steamre nagy felhajtás nélkül tette fel <sup class="fn">[2]</sup>.</li>
+      <li><strong>Az Isaac a Zelda tömlöceit tette véletlenszerűvé.</strong> McMillen szerint roguelike-ot akart a <em>The Legend of Zelda</em> tömlöcszerkezetével, és egy játékot a vallással való viszonyáról <sup class="fn">[3]</sup>. A Zelda szerkezete szerinte megkönnyítette, hogy a generált tömlöcöt és a végleges halált valós idejű játékká alakítsa <sup class="fn">[3]</sup>. A Wikipedia szerint a szintek egy 200 szobaelrendezésből álló könyvtárból véletlenszerűen összeválogatott szobákból épülnek, a harc valós idejű, a játékos könnyeket lő egy kétbotos lövöldözős stílusában, a tárgyak halmozódnak, hat további karakter oldható fel, és bizonyos karakterekkel vagy feltételekkel győzve új tárgyak nyílnak meg <sup class="fn">[2]</sup>.</li>
+      <li><strong>Az Isaac a nehézséget nem beállítással, hanem tartalommal növeli.</strong> McMillen szerint a játék nehézségi fokozatok helyett egyre nehezebb tartalmat ad a játékos haladtával, minden szinten van legalább egy tárgy, a főellenség legyőzése pedig jellemzőket növelő tárgyat ad <sup class="fn">[3]</sup>. A Wikipedia szerint 2012 novemberéig több mint egymillió, 2014 júliusáig több mint hárommillió példányt adtak el <sup class="fn">[2]</sup>.</li>
+      <li><strong>McMillen azt is leírta, mi ment félre.</strong> A 100 tárgy és az öt karakter, amelyeknek 70 százaléka halmozódik, nem volt teljesen tesztelhető, a Flash gyenge teljesítményt adott, a fejlesztői fájl 300 MB fölé nőtt és gyakran megsérült <sup class="fn">[3]</sup>. A kezdeti eladás napi 100-200 példány volt, és hét hónap alatt napi 1500 fölé emelkedett, ezt a YouTube-os játékvideóknak tulajdonítja <sup class="fn">[3]</sup>.</li>
+      <li><strong>Az FTL egy űrhajót irányít, nem egy hőst.</strong> A Subset Games kétfős stúdió (Ma és Davis) 2012. szeptember 14-én adta ki, a Wikipedia a bevezetőben roguelike-nak nevezi, később "roguelite"-nak, és szerepet tulajdonít neki a roguelite népszerűsítésében <sup class="fn">[4]</sup>. Generált szektorok, végleges halál (a hajó vagy a legénység elvesztésekor új hajóval indul a játékos), energia-elosztás, legénység-irányítás és javítás, valós idejű, de megállítható harc <sup class="fn">[4]</sup>. A hajók opcionális célok teljesítésével oldhatók fel <sup class="fn">[4]</sup>.</li>
+      <li><strong>Az FTL közösségi finanszírozással indult.</strong> A kampány 10 000 dolláros célt tűzött ki, és a Wikipedia szerint több mint 200 000 dollárt gyűjtött <sup class="fn">[4]</sup>. A játék 2013-ban az Independent Games Festival "Excellence in Design" és "Audience Award" díját nyerte <sup class="fn">[4]</sup>. A cikk szerint a tervet társasjátékok, például a <em>Battlestar Galactica: The Board Game</em> ihlette <sup class="fn">[4]</sup>.</li>
+      <li><strong>A Rogue Legacy a halált családtörténetté tette.</strong> A Cellar Door Games a torontói Kenny és Teddy Lee testvérpár stúdiója, a játék 2013. június 27-én jelent meg Windowsra <sup class="fn">[5]</sup>. A Wikipedia "platform, roguelike, metroidvania" műfajt ad meg: a játékos véletlenszerűen generált kastélyt jár be, négy környezetben négy-négy főellenséget győz le, majd a végső főellenséggel néz szembe <sup class="fn">[5]</sup>.</li>
+      <li><strong>A Rogue Legacy halála: az örökös.</strong> Amikor a karakter meghal, a játék három véletlenszerűen generált örökös közül ad egyet (fejlesztéssel hatra bővíthető), mindegyiknek van egy jellemvonása (például színvakság, ADHD vagy törpe termet) <sup class="fn">[5]</sup>. Az arany a birtok fejlesztését és osztályok feloldását vásárolja, a felszerelés és a fejlesztések az örökösökre szállnak, az el nem költött aranyat a kastély kapujában Charonnak kell kifizetni <sup class="fn">[5]</sup>.</li>
+      <li><strong>A fejlesztő célja a megbocsátó, mégis maradandó haladás volt.</strong> Teddy Lee a Wikipedia szerint a <em>Spelunky</em>-hoz és a <em>The Binding of Isaac</em>-hez hasonlítja a tervezést, és azt mondta, olyan megbocsátó, hozzáférhető játékot akart, amely mégis engedi a tartós fejlődést <sup class="fn">[5]</sup>. A fejlesztők saját pénzéből mintegy 15 000 dollárt költöttek rá, ami a cikk szerint az első órában megtérült, és az első héten több mint 100 000 példányt adtak el <sup class="fn">[5]</sup>.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A hibának lehet tartalma.</strong> A Rogue Legacy örököse véletlen jellemvonással indul, és a haladás megmarad <sup class="fn">[5]</sup>. Egy tanulós játékban a téves válasz után is lehet új "örökös": új helyzet, de megmaradt tudás.</li>
+      <li><strong>A nehézség növelhető tartalommal.</strong> Az Isaac nehézségi fokozat helyett egyre nehezebb tartalommal reagál a haladásra <sup class="fn">[3]</sup>. A tanulós játékban ez beállítás nélküli alkalmazkodás a játékos haladásához.</li>
+      <li><strong>A szabályok kombinációit tesztelni kell.</strong> McMillen szerint 100 tárgy és halmozódó hatások mellett nem volt lehetséges mindent kipróbálni <sup class="fn">[3]</sup>. Egy tanulós játékban is érdemes a kombinációk számát kordában tartani.</li>
+      <li><strong>A megállítható idő.</strong> Az FTL harca valós idejű, de megállítható <sup class="fn">[4]</sup>. Egy tanulós játékban a gondolkodási idő kímélhető úgy, hogy a nyomás megmarad.</li>
+      <li><strong>A feloldás motiválhat.</strong> A Spelunky karakterei és az FTL hajói feloldhatók <sup class="fn">[1][4]</sup>, ez rövid távú célt ad a hosszú haladás mellé.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Platform és roguelike</td><td>Spelunky</td><td>generált barlangok négy területen, a futam elölről kezdődik halálkor, nincs mentési pont, valós idejű platformjáték, feloldható karakterek</td><td>2008</td><td><sup class="fn">[1]</sup></td></tr>
+        <tr><td>Kétbotos lövöldözős roguelike</td><td>The Binding of Isaac</td><td>valós idejű lövés, 200 szobaelrendezésből épülő szintek, végleges halál, halmozódó tárgyak, feloldható karakterek és tárgyak</td><td>2011</td><td><sup class="fn">[2][3]</sup></td></tr>
+        <tr><td>Űrhajó-irányítás roguelike</td><td>FTL: Faster Than Light</td><td>generált szektorok, végleges halál, energia- és legénység-irányítás, megállítható valós idejű harc, feloldható hajók</td><td>2012</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Metroidvania roguelite</td><td>Rogue Legacy</td><td>generált kastély, örökösök véletlen jellemvonásokkal, arannyal vásárolt tartós birtok-fejlesztések, 4+1 főellenség</td><td>2013</td><td><sup class="fn">[5]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Wikipedia: angol nyelvű kiadás, elérés: 2026-10-25. A Game Developer-cikk: ugyanaz a dátum. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Spelunky (Wikipedia): <a href="https://en.wikipedia.org/wiki/Spelunky">https://en.wikipedia.org/wiki/Spelunky</a></li>
+      <li>The Binding of Isaac (Wikipedia): <a href="https://en.wikipedia.org/wiki/The_Binding_of_Isaac_(video_game)">https://en.wikipedia.org/wiki/The_Binding_of_Isaac_(video_game)</a></li>
+      <li>Edmund McMillen: Postmortem, McMillen and Himsl's The Binding of Isaac (Game Developer, 2012): <a href="https://www.gamedeveloper.com/business/postmortem-mcmillen-and-himsl-s-i-the-binding-of-isaac-i-">https://www.gamedeveloper.com/business/postmortem-mcmillen-and-himsl-s-i-the-binding-of-isaac-i-</a></li>
+      <li>FTL: Faster Than Light (Wikipedia): <a href="https://en.wikipedia.org/wiki/FTL:_Faster_Than_Light">https://en.wikipedia.org/wiki/FTL:_Faster_Than_Light</a></li>
+      <li>Rogue Legacy (Wikipedia): <a href="https://en.wikipedia.org/wiki/Rogue_Legacy">https://en.wikipedia.org/wiki/Rogue_Legacy</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card resz" id="resz5">
+    <span class="kicker">5. rész</span>
+    <h2>A mai roguelike-ok és újdonságaik</h2>
+    <p class="lede">A roguelike-sorozat ötödik része. Pakliépítés, istenajándékok, automata fegyverek és hátizsák-rács: mit adott hozzá a műfajhoz négy mai játék, és merre tart a roguelike.</p>
+    <h3>A lényeg röviden</h3>
+    <ul class="pts">
+      <li><strong>A Slay the Spire kártyákkal vezette be a roguelike-ot.</strong> A Mega Crit (Seattle) játéka, vezető fejlesztői Anthony Giovannetti és Casey Yano, a korai hozzáférés 2017 novemberében indult, a teljes kiadás 2019. január 23-án jelent meg <sup class="fn">[1]</sup>. A Wikipedia "roguelike pakliépítő játéknak" nevezi <sup class="fn">[1]</sup>.</li>
+      <li><strong>A kör kártyákból áll.</strong> A játékos négy karakter egyikét választja, mindegyiknek más a kezdő életereje, egy egyedi kezdő ereklyéje és kezdő paklija, majd egy generált torony szintjein halad <sup class="fn">[1]</sup>. Minden szinten elágazó útvonalak vannak (szörnyek, elit ellenfelek, tábortüzek, boltok, ládák és véletlen események), a szint végén főellenség áll <sup class="fn">[1]</sup>. A harc körökre osztott és kártyaalapú: körönként három energia van, az ellenségek előre jelzik a szándékolt lépésüket <sup class="fn">[1]</sup>.</li>
+      <li><strong>A jutalom választás.</strong> A győzelem után arany, három véletlenszerűen kiválasztott lap közül egy, ereklye és egyszer használatos bájital jár <sup class="fn">[1]</sup>. A meta-progresszió karaktereket, lapokat és ereklyéket old fel, legfeljebb 20 "Ascension" fokozat növeli a nehézséget, van napi kihívás rögzített véletlen maggal <sup class="fn">[1]</sup>. A Wikipedia egy forrás nélküli mondata szerint "ez az a játék, amely népszerűsítette a roguelike pakliépítő játékok irányzatát" <sup class="fn">[1]</sup>.</li>
+      <li><strong>A Slay the Spire fejlesztői adatokból finomhangoltak.</strong> Giovannetti és Yano 2018-ban a Game Developernek elmondta: a kártyajáték-hátterük nem volt elég a sok lap kiegyensúlyozásához, ezért már a prototípus-szakaszban metrikaszervert építettek, amely minden játékosdöntést rögzített <sup class="fn">[2]</sup>. A cikk szerint két mutató volt a legfontosabb: a kártya kiválasztási aránya (ha alacsony, a kártya "gyakorlatilag nincs a játékban") és a nyertes pakliban való megjelenése (ha magas, a kártya túl erős lehet) <sup class="fn">[2]</sup>. Yano szerint három grafikonnal kezdtek, és mára legalább 90 van, de fontos, hogy az olvasás előtt konkrét kérdés legyen <sup class="fn">[2]</sup>.</li>
+      <li><strong>Az adat nem mindent mutat meg.</strong> Giovannetti szerint az adatok nem mutatják meg, milyen érzés a játék, ezért a nyilvános Discord-csatornát is figyelik, és egy jól megindokolt hozzászólás hasznosabb lehet sok "nerfeld" kérésnél <sup class="fn">[2]</sup>. Az egyjátékos mód miatt a paklik nem kell, hogy egyenlők legyenek, a heti korai hozzáférési javítások gyors hibajavítást tettek lehetővé <sup class="fn">[2]</sup>.</li>
+      <li><strong>A Hades a halált a történet részévé tette.</strong> A Supergiant Games játéka (tervezők között Amir Rao, Greg Kasavin), a korai hozzáférés 2018 decemberében indult, a teljes kiadás 2020. szeptember 17-én jelent meg <sup class="fn">[3]</sup>. A Wikipedia "roguelike akció-szerepjáték, hack and slash" műfajt ad meg: izometrikus harc, elsődleges támadás, különleges támadás, kitérés, varázslat és idézés <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Hades szobái előre tervezettek, a sorrend véletlen.</strong> A szobák előre meghatározott elrendezésből jönnek, a sorrend és az ellenségek változnak, az olimposzi istenajándékok (boons) három tartós erősítés közül kínálnak választást egy futamra <sup class="fn">[3]</sup>. A halál után a szerzett obolusok és bizonyos fejlesztések elvesznek, más valuták tartós fejlesztést vásárolnak a Hádész házában a futamok között <sup class="fn">[3]</sup>. A párbeszédek elágaznak a próbálkozások során <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Hades története a futamok szerkezetéből jön.</strong> A Wikipedia szerint a Supergiant a <em>Pyre</em>-ban szerette volna kipróbálni a procedurális történetmesélést, de a játékmenet miatt a játékosok nem játszották újra, a Hades roguelike szerkezete viszont lehetővé tette, hogy elágazó történeteket meséljenek el több végigjátszáson át <sup class="fn">[3]</sup>. A GameSpot szerint a játék a korai hozzáférés alatt 700 000 példányban, a teljes kiadás után három napon belül több mint egymillió példányban fogyott <sup class="fn">[3]</sup>.</li>
+      <li><strong>A Vampire Survivors a vezérlést hagyta ki.</strong> Luca "poncle" Galante 2020-ban kezdte a Phaser keretrendszerrel, munkanélküliként, a korai hozzáférés 2021 decemberében indult, a teljes kiadás 2022. október 20-án jelent meg <sup class="fn">[4]</sup>. A Wikipedia "független roguelike shoot 'em up"-nak nevezi: a játékos karakterének fegyverei automatikusan tüzelnek, miközben szörnyhullámok közelednek, a legyőzött ellenség tapasztalati gyöngyöt ejt, és minden szintlépéskor fegyvereket vagy passzív erősítéseket kínál a játék <sup class="fn">[4]</sup>.</li>
+      <li><strong>A Vampire Survivors rövid, lezárt futamokat ad.</strong> A ládák véletlen tárgyakat tartalmaznak, a legtöbb fegyver erősebb formává fejleszthető, a futamnak lágy időkerete van (15, 20 vagy 30 perc), utána megjelenik a Halál nevű főellenség, és az arany karaktereket és tartós fejlesztéseket old fel a futamok között <sup class="fn">[4]</sup>. A cikk szerint a játékot "az első 'bullet heaven' játékok egyikének" tartják, ugyanakkor "nem az első a műfajában", és számos hasonló, automata harcú játékot inspirált, amelyeket "Survivor-like" néven emlegetnek <sup class="fn">[4]</sup>.</li>
+      <li><strong>A Backpack Hero a hátizsákot tette játékká.</strong> Jasper Cole (Jaspel) játéka Unityben készült, a korai hozzáférés 2022. augusztus 15-én indult, a teljes kiadás 2023. november 14-én jelent meg <sup class="fn">[5]</sup>. Az infobox "roguelite"-nak nevezi, a bevezető "roguelike"-nak és "készletkezelő roguelike"-nak: a hátizsák rácsos, a Wikipedia szerint a <em>Resident Evil 4</em> aktatáskájához hasonló, a készletkezelés a játékmenet középpontja <sup class="fn">[5]</sup>.</li>
+      <li><strong>A Backpack Hero haladása a falun át megy.</strong> A tömlöcökben gyűjtött erőforrásokat a játékos egy felszíni településen költi épületek fejlesztésére és új karakterek feloldására, öt játszható karakter van, az első Purse, egy patkány <sup class="fn">[5]</sup>. Cole elmondása szerint a játékot a <em>Slay the Spire</em>, az <em>Into the Breach</em> és az <em>XCOM</em> ihlette, a rácsos készletet pedig az eredeti <em>Deus Ex</em> <sup class="fn">[5]</sup>. A játék game jam projektként indult, Kickstarteren 223 893 dollárt gyűjtött 20 000 dolláros cél ellen <sup class="fn">[5]</sup>.</li>
+      <li><strong>A fogadtatás megoszlott.</strong> A Wikipedia szerint a Metacritic-pontszám 76/100, az OpenCritic szerint a kritikusok 64 százaléka ajánlja <sup class="fn">[5]</sup>. Egy kritikus a harcot "unalmasnak és ismétlődőnek" nevezte, a PC Gamer szerzője viszont a kombók építését dicsérte <sup class="fn">[5]</sup>.</li>
+      <li><strong>Merre tart a műfaj?</strong> A források szerint a roguelike elemei (generált pálya, futam-alapú újrakezdés, meta-progresszió) ma mindig valamilyen másik mechanikával párosulnak: kártyákkal <sup class="fn">[1]</sup>, automatikus támadással <sup class="fn">[4]</sup>, hátizsák-rácsos kirakóval <sup class="fn">[5]</sup>, történetmeséléssel <sup class="fn">[3]</sup>. A mai címkék (roguelike pakliépítő, Survivor-like, készletkezelő roguelike) a játékmenet szerint osztályozzák a játékokat, nem a Rogue-hoz való hasonlóság szerint.</li>
+    </ul>
+    <div class="blk">
+    <h3>Mit vihetünk át belőle egy tanulós játékba</h3>
+    <ul class="pts">
+      <li><strong>A hátizsák-rács mint tudásrendező felület.</strong> A Backpack Hero készletkezelése a játékmenet közepe <sup class="fn">[5]</sup>. Egy tanulós játékban a rács a fogalmak, tények vagy lépések elhelyezése lehet, ahol a tárgyak (válaszok, szabályok) elrendezése dönt.</li>
+      <li><strong>Három választható jutalom.</strong> A Slay the Spire minden győzelem után három lapot kínál <sup class="fn">[1]</sup>. Egy tanulós játékban a három közül választás a döntés minőségét is mérheti, nem csak a helyes válaszét.</li>
+      <li><strong>Az ellenség előre jelzi a szándékát.</strong> A Slay the Spire ellenségei megmutatják a következő lépésüket <sup class="fn">[1]</sup>. A tanulós játékban a visszajelzés is lehet előre látható, így a játékos számolhat, nem tippel.</li>
+      <li><strong>A játék mérje, mit választanak.</strong> A Mega Crit a kiválasztási arányt és a nyertes paklikban való megjelenést követte <sup class="fn">[2]</sup>. Egy tanulós játékban a kérdések és eszközök kiválasztási és helyes használati arányai ugyanígy megmutatják, mi nem érthető.</li>
+      <li><strong>Rövid, lezárt futamok.</strong> A Vampire Survivors futama 15-30 perces lágy időkerettel zárul <sup class="fn">[4]</sup>. Egy tanulós játékban a rövid, lezárt szakasz jól illik a tanulási alkalmakhoz.</li>
+      <li><strong>A halál adhat történetet.</strong> A Hadesben a párbeszédek a futamok során elágaznak <sup class="fn">[3]</sup>. Egy tanulós játékban a próbálkozások közti elágazó szöveg ellensúlyozhatja a hibázás miatti csalódást.</li>
+    </ul>
+    </div>
+    <div class="blk">
+    <h3>Térkép-sorok</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Műfaj</th><th>Játék</th><th>Mechanika</th><th>Évszám</th><th>Forrás</th></tr></thead>
+      <tbody>
+        <tr><td>Pakliépítő roguelike</td><td>Slay the Spire</td><td>körökre osztott kártyaharc, 3 energia körönként, az ellenség előre jelzi a lépését, 3 véletlen lap jutalomként, generált torony elágazó útvonallal, meta-progresszió feloldásokkal, Ascension fokozatok</td><td>2017 (korai hozzáférés), 2019 (teljes)</td><td><sup class="fn">[1][2]</sup></td></tr>
+        <tr><td>Akció-roguelike elágazó történettel</td><td>Hades</td><td>izometrikus hack and slash, előre tervezett szobák véletlen sorrendben, háromból választható istenajándékok, tartós fejlesztések a futamok között, elágazó párbeszéd</td><td>2018 (korai hozzáférés), 2020 (teljes)</td><td><sup class="fn">[3]</sup></td></tr>
+        <tr><td>Túlélő-roguelike (bullet heaven, Survivor-like)</td><td>Vampire Survivors</td><td>automatikusan tüzelő fegyverek, szörnyhullámok, szintlépéskor választás, fegyverfejlesztés, 15-30 perces futam a Halál főellenséggel, arany a tartós fejlesztésekre</td><td>2021 (korai hozzáférés), 2022 (teljes)</td><td><sup class="fn">[4]</sup></td></tr>
+        <tr><td>Készletkezelő roguelite</td><td>Backpack Hero</td><td>rácsos hátizsák, a tárgyak elrendezése a fő mechanika, falu fejlesztése erőforrásokból, öt karakter</td><td>2022 (korai hozzáférés), 2023 (teljes)</td><td><sup class="fn">[5]</sup></td></tr>
+      </tbody>
+    </table></div>
+    </div>
+    <div class="blk">
+    <h3>Források</h3>
+    <p class="note">Wikipedia: angol nyelvű kiadás, elérés: 2026-10-25. A Game Developer-cikk: ugyanaz a dátum. A részt a források gépi összefoglalójából írtuk.</p>
+    <ol class="steps urls">
+      <li>Slay the Spire (Wikipedia): <a href="https://en.wikipedia.org/wiki/Slay_the_Spire">https://en.wikipedia.org/wiki/Slay_the_Spire</a></li>
+      <li>How Slay the Spire's devs use data to balance their roguelike deck-builder (Game Developer, 2018): <a href="https://www.gamedeveloper.com/design/how-i-slay-the-spire-i-s-devs-use-data-to-balance-their-roguelike-deck-builder">https://www.gamedeveloper.com/design/how-i-slay-the-spire-i-s-devs-use-data-to-balance-their-roguelike-deck-builder</a></li>
+      <li>Hades (Wikipedia): <a href="https://en.wikipedia.org/wiki/Hades_(video_game)">https://en.wikipedia.org/wiki/Hades_(video_game)</a></li>
+      <li>Vampire Survivors (Wikipedia): <a href="https://en.wikipedia.org/wiki/Vampire_Survivors">https://en.wikipedia.org/wiki/Vampire_Survivors</a></li>
+      <li>Backpack Hero (Wikipedia): <a href="https://en.wikipedia.org/wiki/Backpack_Hero">https://en.wikipedia.org/wiki/Backpack_Hero</a></li>
+    </ol>
+    </div>
+  </section>
+  <section class="card" id="idovonal">
+    <h2>Idővonal 1980-tól</h2>
+    <p class="note">A részek térkép-soraiban szereplő évszámokból.</p>
+    <ul class="timeline">
+      <li><span class="d">kb. 1980</span><span><a href="#resz1"><strong>Rogue</strong></a> (hagyományos roguelike (a névadó), 1. rész)</span></li>
+      <li><span class="d">1982</span><span><a href="#resz1"><strong>Hack</strong></a> (hagyományos roguelike, 1. rész, a források 1984-et is említik)</span></li>
+      <li><span class="d">1983</span><span><a href="#resz1"><strong>Moria (UMoria)</strong></a> (hagyományos roguelike, 1. rész, a források 1981-et is említik)</span></li>
+      <li><span class="d">1987</span><span><a href="#resz1"><strong>NetHack</strong></a> (hagyományos roguelike, 1. rész)</span></li>
+      <li><span class="d">1990</span><span><a href="#resz1"><strong>Angband</strong></a> (hagyományos roguelike, 1. rész, nyilvános: 1993)</span></li>
+      <li><span class="d">1994</span><span><a href="#resz3"><strong>ADOM</strong></a> (hagyományos roguelike, küldetésközpontú, 3. rész)</span></li>
+      <li><span class="d">2006</span><span><a href="#resz3"><strong>Dungeon Crawl Stone Soup</strong></a> (hagyományos roguelike, közösségi, 3. rész, elődje: 1997); <a href="#resz3"><strong>Dwarf Fortress</strong></a> (építő szimuláció és roguelike, 3. rész, alfa)</span></li>
+      <li><span class="d">2008</span><span><a href="#resz4"><strong>Spelunky</strong></a> (platform és roguelike, 4. rész); <a href="#resz2"><strong>A Berlini értelmezés</strong></a> (hagyományos roguelike (berlini kánon), 2. rész, meghatározás)</span></li>
+      <li><span class="d">2009</span><span><a href="#resz3"><strong>Brogue</strong></a> (minimalista roguelike, 3. rész, a fejlesztés kezdete)</span></li>
+      <li><span class="d">2011</span><span><a href="#resz4"><strong>The Binding of Isaac</strong></a> (kétbotos lövöldözős roguelike, 4. rész)</span></li>
+      <li><span class="d">2012</span><span><a href="#resz4"><strong>FTL: Faster Than Light</strong></a> (űrhajó-irányítás roguelike, 4. rész); <a href="#resz3"><strong>Tales of Maj'Eyal</strong></a> (grafikus, taktikai roguelike, 3. rész)</span></li>
+      <li><span class="d">2013</span><span><a href="#resz4"><strong>Rogue Legacy</strong></a> (metroidvania roguelite, 4. rész); <a href="#resz2"><strong>Cataclysm: Dark Days Ahead</strong></a> (ascii ma is, 2. rész)</span></li>
+      <li><span class="d">2017</span><span><a href="#resz2"><strong>Cogmind</strong></a> (ascii ma is, 2. rész); <a href="#resz5"><strong>Slay the Spire</strong></a> (pakliépítő roguelike, 5. rész, korai hozzáférés)</span></li>
+      <li><span class="d">2018</span><span><a href="#resz5"><strong>Hades</strong></a> (akció-roguelike elágazó történettel, 5. rész, korai hozzáférés)</span></li>
+      <li><span class="d">2021</span><span><a href="#resz5"><strong>Vampire Survivors</strong></a> (túlélő-roguelike (bullet heaven, survivor-like), 5. rész, korai hozzáférés)</span></li>
+      <li><span class="d">2022</span><span><a href="#resz5"><strong>Backpack Hero</strong></a> (készletkezelő roguelite, 5. rész, korai hozzáférés)</span></li>
+    </ul>
+  </section>
+  <div class="card no-print" id="vissza">
+    <h3>Szólj hozzá</h3>
+    <p>Hibát találtál, vagy van egy jó forrásod? A gomb előre kitöltött levelet nyit.</p>
+    <form class="fb" data-subject="[Tudástár] A roguelike-műfaj sorozata">
+      <label for="fb-resz">Melyik rész?<select id="fb-resz" data-field="Rész" data-subject-part="1"><option>Bevezető</option><option>1. rész</option><option>2. rész</option><option>3. rész</option><option>4. rész</option><option>5. rész</option><option>Idővonal</option><option>Általános</option></select></label>
+      <label for="fb-nev">Neved (nem kötelező)<input id="fb-nev" data-field="Név" autocomplete="name"></label>
+      <label for="fb-uzenet">Üzenet<textarea id="fb-uzenet" data-field="Üzenet"></textarea></label>
+      <a class="btn send" href="#">Levél megnyitása</a>
+    </form>
+    <div class="addr">Vagy írj ide: <code>zariguinmail@gmail.com</code> <button type="button" class="btn ghost" data-copy="1">Másolás</button><span class="copied" hidden></span></div>
+    <p class="note">Ha beszélgetnél is a témáról, a <a href="../#h-join">Tudástár oldalán</a> kérhetsz meghívót.</p>
+  </div>
+  <footer class="no-print">
+    <p><a href="../">Vissza a Tudástárba</a></p>
+  </footer>
+</main>
+<script>
+// Shared bits for the Tudástár pages: feedback mail builder and copy buttons.
+(function () {
+  "use strict";
+  var ADDR = "zariguinmail@gmail.com";
+  function mailto(subject, body) { return "mailto:" + ADDR + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+  document.querySelectorAll("form.fb").forEach(function (f) {
+    var link = f.querySelector("a.send");
+    function build() {
+      var lines = [], subject = f.dataset.subject || "[Tudástár] Visszajelzés";
+      f.querySelectorAll("[data-field]").forEach(function (el) {
+        var v = (el.value || "").trim();
+        if (el.dataset.subjectPart && v) subject += " · " + v;
+        if (v) lines.push(el.dataset.field + ": " + v);
+      });
+      lines.push("", "Oldal: " + location.href);
+      link.href = mailto(subject, lines.join("\n"));
+    }
+    f.addEventListener("input", build);
+    f.addEventListener("change", build);
+    f.addEventListener("submit", function (e) { e.preventDefault(); build(); location.href = link.href; });
+    build();
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var out = b.parentElement.querySelector(".copied");
+      function ok(t) { if (out) { out.textContent = t; out.hidden = false; } }
+      try { navigator.clipboard.writeText(ADDR).then(function () { ok("Kimásolva"); }, function () { ok("Jelöld ki és másold"); }); } catch (e) { ok("Jelöld ki és másold"); }
+    });
+  });
+})();
+</script>
+
+</body></html>
