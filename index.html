@@ -264,30 +264,14 @@ footer p { margin: 0; max-width: 72ch; }
     <p class="hint">Vidd az egeret egy rajz fölé, vagy koppints rá: előbújnak a részletek. Második koppintásra nyílik az oldal.</p>
   </header>
   <div class="filters" role="group" aria-label="Szűrés kategória szerint">
-      <button type="button" data-filter="mind" aria-pressed="true"><span>Mind</span><span class="n" aria-hidden="true">9</span><span class="sr">, 9 oldal</span></button>
-      <button type="button" data-filter="jatek" aria-pressed="false" data-kind="jatek"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg><span>Játék</span><span class="n" aria-hidden="true">4</span><span class="sr">, 4 oldal</span></button>
-      <button type="button" data-filter="tananyag" aria-pressed="false" data-kind="tananyag"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg><span>Tananyag</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
-      <button type="button" data-filter="utmutato" aria-pressed="false" data-kind="utmutato"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg><span>Útmutató</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
+      <button type="button" data-filter="mind" aria-pressed="true"><span>Mind</span><span class="n" aria-hidden="true">5</span><span class="sr">, 5 oldal</span></button>
+      <button type="button" data-filter="jatek" aria-pressed="false" data-kind="jatek"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg><span>Játék</span><span class="n" aria-hidden="true">3</span><span class="sr">, 3 oldal</span></button>
       <button type="button" data-filter="kronika" aria-pressed="false" data-kind="kronika"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 2.5H13V11.5C13 12.6 12.1 13.5 11 13.5H4C2.9 13.5 2 12.6 2 11.5V10.5H10V11.5C10 12.6 10.9 13.5 12 13.5"/><path d="M5 2.5V10.5M7.2 5.3H10.8M7.2 7.8H10.8"/></svg><span>Krónika</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
-      <button type="button" data-filter="kreativ" aria-pressed="false" data-kind="kreativ"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.8L9.5 6.5L14.2 8L9.5 9.5L8 14.2L6.5 9.5L1.8 8L6.5 6.5Z"/></svg><span>Kreatív</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
       <button type="button" data-filter="kiserlet" aria-pressed="false" data-kind="kiserlet"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.8 2.5H10.2M6.8 2.5V6.4L3 12.4C2.6 13.1 3.1 14 3.9 14H12.1C12.9 14 13.4 13.1 13 12.4L9.2 6.4V2.5M4.6 10H11.4"/></svg><span>Kísérlet</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
   </div>
   <p class="sr" id="filter-status" aria-live="polite"></p>
   <ul class="grid">
-    <li data-kind="tananyag"><div class="card featured" data-slug="tudastar">
-      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg>Tananyag</span>
-      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln"><rect class="fr" x="20" y="92" width="120" height="14" rx="2"/><path d="M30 92V106"/><rect class="fp" x="127" y="95" width="10" height="8" rx="1"/><path d="M129 99H135"/><text class="lbl" x="37" y="102.5">1</text><rect class="ft" x="40" y="78" width="100" height="14" rx="2"/><path d="M50 78V92"/><rect class="fp" x="127" y="81" width="10" height="8" rx="1"/><path d="M129 85H135"/><text class="lbl" x="57" y="88.5">2</text><rect class="fl" x="60" y="64" width="80" height="14" rx="2"/><path d="M70 64V78"/><rect class="fp" x="127" y="67" width="10" height="8" rx="1"/><path d="M129 71H135"/><text class="lbl" x="77" y="74.5">3</text><rect class="fg" x="80" y="50" width="60" height="14" rx="2"/><path d="M90 50V64"/><rect class="fp" x="127" y="53" width="10" height="8" rx="1"/><path d="M129 57H135"/><text class="lbl" x="97" y="60.5">4</text>
-<rect class="fp" x="100" y="31" width="10" height="19" rx="1.5"/><path d="M105 31V27"/>
-<path class="fo flame" d="M105 27Q99 21 105 12Q111 21 105 27Z"/>
-<path class="tw" d="M30 40V48M26 44H34"/><path class="tw d2" d="M56 22V28M53 25H59"/></g></svg></div>
-      <div class="info">
-        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg>Tananyag</span><time datetime="2026-10-25">2026. október 25.</time></p>
-        <h2>Tudástár</h2>
-        <p class="desc">Témák négy fokozatban: egyperces ízelítő, ötperces kártya, mélyfúrás és műhely arról, hol tartunk. Az első téma: hogyan adj át tudást, hogy meg is maradjon.</p>
-        <a class="open" href="tudastar/" aria-label="Tudástár megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
-      </div>
-    </div></li>
-    <li data-kind="jatek"><div class="card" data-slug="mozgaster-v2">
+    <li data-kind="jatek"><div class="card featured" data-slug="mozgaster-v2">
       <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span>
       <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln thin"><path class="fp" d="M44 58L58.4 58L55.2 66.6L38.6 66.6Z"/><path class="fn" d="M58.4 58L72.8 58L71.7 66.6L55.2 66.6Z"/><path class="fp" d="M72.8 58L87.2 58L88.3 66.6L71.7 66.6Z"/><path class="fn" d="M87.2 58L101.6 58L104.8 66.6L88.3 66.6Z"/><path class="fp" d="M101.6 58L116 58L121.4 66.6L104.8 66.6Z"/><path class="fn" d="M38.6 66.6L55.2 66.6L51.2 77.2L32 77.2Z"/><path class="fp" d="M55.2 66.6L71.7 66.6L70.4 77.2L51.2 77.2Z"/><path class="fn" d="M71.7 66.6L88.3 66.6L89.6 77.2L70.4 77.2Z"/><path class="fp" d="M88.3 66.6L104.8 66.6L108.8 77.2L89.6 77.2Z"/><path class="fn" d="M104.8 66.6L121.4 66.6L128 77.2L108.8 77.2Z"/><path class="fp" d="M32 77.2L51.2 77.2L46.2 90.6L23.6 90.6Z"/><path class="fn" d="M51.2 77.2L70.4 77.2L68.7 90.6L46.2 90.6Z"/><path class="fp" d="M70.4 77.2L89.6 77.2L91.3 90.6L68.7 90.6Z"/><path class="fn" d="M89.6 77.2L108.8 77.2L113.8 90.6L91.3 90.6Z"/><path class="fp" d="M108.8 77.2L128 77.2L136.4 90.6L113.8 90.6Z"/><path class="fn" d="M23.6 90.6L46.2 90.6L40.4 106L14 106Z"/><path class="fp" d="M46.2 90.6L68.7 90.6L66.8 106L40.4 106Z"/><path class="fn" d="M68.7 90.6L91.3 90.6L93.2 106L66.8 106Z"/><path class="fp" d="M91.3 90.6L113.8 90.6L119.6 106L93.2 106Z"/><path class="fn" d="M113.8 90.6L136.4 90.6L146 106L119.6 106Z"/></g><g class="ln">
 <path class="route" d="M26 100C50 88 62 100 86 88"/>
@@ -299,9 +283,9 @@ footer p { margin: 0; max-width: 72ch; }
 <ellipse class="fw" cx="0" cy="-22" rx="7" ry="2.5"/><circle class="fw" cx="0" cy="-30" r="6.5"/></g></g></g></svg></div>
       <div class="info">
         <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span><time datetime="2026-10-23">2026. október 23.</time></p>
-        <h2>Mozgástér v2</h2>
+        <h2>Kádár-kor: Mozgástér</h2>
         <p class="desc">A Kádár-kor döntéses játékának bővített változata: tíz ügy 1963 és 1989 között, utána a hivatalos lap és a nyugati rádió ugyanarról, a háttérben a kitalált Kovács család. Fogalomkártyák vitrinben, ismétlő kvíz, kb. 30-40 perc.</p>
-        <a class="open" href="mozgaster-v2/" aria-label="Mozgástér v2 megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+        <a class="open" href="mozgaster-v2/" aria-label="Kádár-kor: Mozgástér megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
       </div>
     </div></li>
     <li data-kind="jatek"><div class="card" data-slug="sajat-part">
@@ -319,23 +303,6 @@ footer p { margin: 0; max-width: 72ch; }
         <h2>Saját párt</h2>
         <p class="desc">Pártot alapítasz Hódmezővásárhelyen vagy Szegeden, hét tanácsadó vitatkozik körülötted 12 helyzetben. A végén csillagtérkép mutatja, melyik eszmékhez kerültél közel. Kitalált történet Heywood Political Ideologies könyve alapján, kb. 25 perc.</p>
         <a class="open" href="sajat-part/" aria-label="Saját párt megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
-      </div>
-    </div></li>
-    <li data-kind="jatek"><div class="card" data-slug="mozgaster">
-      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span>
-      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln thin"><path class="fp" d="M44 58L58.4 58L55.2 66.6L38.6 66.6Z"/><path class="fn" d="M58.4 58L72.8 58L71.7 66.6L55.2 66.6Z"/><path class="fp" d="M72.8 58L87.2 58L88.3 66.6L71.7 66.6Z"/><path class="fn" d="M87.2 58L101.6 58L104.8 66.6L88.3 66.6Z"/><path class="fp" d="M101.6 58L116 58L121.4 66.6L104.8 66.6Z"/><path class="fn" d="M38.6 66.6L55.2 66.6L51.2 77.2L32 77.2Z"/><path class="fp" d="M55.2 66.6L71.7 66.6L70.4 77.2L51.2 77.2Z"/><path class="fn" d="M71.7 66.6L88.3 66.6L89.6 77.2L70.4 77.2Z"/><path class="fp" d="M88.3 66.6L104.8 66.6L108.8 77.2L89.6 77.2Z"/><path class="fn" d="M104.8 66.6L121.4 66.6L128 77.2L108.8 77.2Z"/><path class="fp" d="M32 77.2L51.2 77.2L46.2 90.6L23.6 90.6Z"/><path class="fn" d="M51.2 77.2L70.4 77.2L68.7 90.6L46.2 90.6Z"/><path class="fp" d="M70.4 77.2L89.6 77.2L91.3 90.6L68.7 90.6Z"/><path class="fn" d="M89.6 77.2L108.8 77.2L113.8 90.6L91.3 90.6Z"/><path class="fp" d="M108.8 77.2L128 77.2L136.4 90.6L113.8 90.6Z"/><path class="fn" d="M23.6 90.6L46.2 90.6L40.4 106L14 106Z"/><path class="fp" d="M46.2 90.6L68.7 90.6L66.8 106L40.4 106Z"/><path class="fn" d="M68.7 90.6L91.3 90.6L93.2 106L66.8 106Z"/><path class="fp" d="M91.3 90.6L113.8 90.6L119.6 106L93.2 106Z"/><path class="fn" d="M113.8 90.6L136.4 90.6L146 106L119.6 106Z"/></g><g class="ln">
-<path class="route" d="M26 100C50 88 62 100 86 88"/>
-<rect class="fp" x="10" y="12" width="36" height="30" rx="3"/><path class="fr" d="M10 21V15Q10 12 13 12H43Q46 12 46 15V21Z"/><path d="M20 9V16M36 9V16"/><text class="lbl big" x="28" y="35" text-anchor="middle">1963</text><rect class="fp" x="114" y="12" width="36" height="30" rx="3"/><path class="fr" d="M114 21V15Q114 12 117 12H147Q150 12 150 15V21Z"/><path d="M124 9V16M140 9V16"/><text class="lbl big" x="132" y="35" text-anchor="middle">1989</text>
-<path class="dots" d="M50 22Q80 2 110 22"/><path d="M103 15L110 22L101 23"/>
-<g transform="translate(98 90) rotate(-14)"><g class="wobble">
-<ellipse class="fn" cx="0" cy="0" rx="12" ry="3.5"/>
-<path class="fw" d="M-10 0H10Q9 -6 4 -9Q6 -18 3 -22H-3Q-6 -18 -4 -9Q-9 -6 -10 0Z"/>
-<ellipse class="fw" cx="0" cy="-22" rx="7" ry="2.5"/><circle class="fw" cx="0" cy="-30" r="6.5"/></g></g></g></svg></div>
-      <div class="info">
-        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg>Játék</span><time datetime="2026-10-22">2026. október 22.</time></p>
-        <h2>Mozgástér</h2>
-        <p class="desc">Döntéses történelmi játék 1963 és 1989 között: tanácsadóként javasolsz, aztán kiderül, mit lépett valójában a magyar vezetés, és miért. Kb. 20 perc.</p>
-        <a class="open" href="mozgaster/" aria-label="Mozgástér megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
       </div>
     </div></li>
     <li data-kind="jatek"><div class="card" data-slug="harsfalva">
@@ -360,26 +327,6 @@ footer p { margin: 0; max-width: 72ch; }
         <a class="open" href="harsfalva/" aria-label="Hársfalva krónikája megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
       </div>
     </div></li>
-    <li data-kind="kreativ"><div class="card" data-slug="faradt-robot">
-      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.8L9.5 6.5L14.2 8L9.5 9.5L8 14.2L6.5 9.5L1.8 8L6.5 6.5Z"/></svg>Kreatív</span>
-      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
-<path d="M58 88Q46 96 48 108M102 88Q114 96 112 108"/>
-<rect class="fl" x="58" y="82" width="44" height="24" rx="6"/><circle class="fg" cx="70" cy="93" r="2.5"/><circle class="fr" cx="79" cy="93" r="2.5"/><path d="M88 91H96M88 96H94"/>
-<rect class="fp" x="74" y="77" width="12" height="5"/>
-<g class="nod"><path d="M80 30V19"/><circle class="fr blink" cx="80" cy="15" r="4"/>
-<rect class="fl" x="42" y="46" width="6" height="16" rx="2"/><rect class="fl" x="112" y="46" width="6" height="16" rx="2"/>
-<rect class="fp" x="48" y="30" width="64" height="48" rx="10"/><rect class="fn" x="56" y="38" width="48" height="31" rx="6"/>
-<circle class="ft" cx="70" cy="53" r="6.5"/><circle class="ft" cx="90" cy="53" r="6.5"/>
-<path class="fn nostroke" d="M62.5 54A7.5 7.5 0 0 1 77.5 54ZM82.5 54A7.5 7.5 0 0 1 97.5 54Z"/>
-<path d="M62 54H78M82 54H98"/><path d="M72 63Q76 61.5 80 63T88 63"/></g>
-<text class="zz" x="118" y="34">z</text><text class="zz z2" x="128" y="23">z</text><text class="zz z3" x="139" y="11">z</text></g></svg></div>
-      <div class="info">
-        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.8L9.5 6.5L14.2 8L9.5 9.5L8 14.2L6.5 9.5L1.8 8L6.5 6.5Z"/></svg>Kreatív</span><time datetime="2026-10-20">2026. október 20.</time></p>
-        <h2>A fáradt robot estéje</h2>
-        <p class="desc">Egy fásult robot hét jelenetben próbál lenyűgözni. Közben kiderül, mire képes a CSS, az SVG és a JavaScript.</p>
-        <a class="open" href="faradt-robot/" aria-label="A fáradt robot estéje megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
-      </div>
-    </div></li>
     <li data-kind="kronika"><div class="card" data-slug="epitesi-hirfal">
       <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 2.5H13V11.5C13 12.6 12.1 13.5 11 13.5H4C2.9 13.5 2 12.6 2 11.5V10.5H10V11.5C10 12.6 10.9 13.5 12 13.5"/><path d="M5 2.5V10.5M7.2 5.3H10.8M7.2 7.8H10.8"/></svg>Krónika</span>
       <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
@@ -398,22 +345,7 @@ footer p { margin: 0; max-width: 72ch; }
         <a class="open" href="https://ti-zariguin.github.io/epitesi-hirfal/" aria-label="Építési hírfal megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
       </div>
     </div></li>
-    <li data-kind="utmutato"><div class="card" data-slug="meselesi-modszer">
-      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg>Útmutató</span>
-      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln">
-<path class="fr" d="M18 98Q56 92 80 104Q104 92 142 98V103Q104 97 80 109Q56 97 18 103Z"/>
-<path class="fp" d="M80 100Q56 90 22 96V70Q56 64 80 74Z"/><path class="fp" d="M80 100Q104 90 138 96V70Q104 64 80 74Z"/>
-<path d="M80 74V100"/><path class="thin" d="M30 78Q52 73 72 80M30 85Q52 80 72 87M88 80Q108 73 130 78M88 87Q108 80 130 85"/>
-<path class="arc" d="M16 66C58 62 76 -8 144 46"/>
-<circle class="fg tw" style="--i:0" cx="28" cy="63" r="2.6"/><circle class="fg tw" style="--i:1" cx="43.1" cy="54.3" r="2.6"/><circle class="fg tw" style="--i:2" cx="57.5" cy="43.3" r="2.6"/><circle class="fg tw" style="--i:3" cx="108.6" cy="27" r="2.6"/><circle class="fg tw" style="--i:4" cx="125" cy="33.3" r="2.6"/><circle class="fg tw" style="--i:5" cx="140" cy="42.9" r="2.6"/><path class="fg tw d2" d="M97.7 18.6L99.5 23.2L104.4 23.4L100.6 26.5L101.8 31.3L97.7 28.6L93.6 31.3L94.8 26.5L91 23.4L95.9 23.2Z"/></g></svg></div>
-      <div class="info">
-        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg>Útmutató</span><time datetime="2026-10-18">2026. október 18.</time></p>
-        <h2>Mesélési módszer</h2>
-        <p class="desc">Hat eszköz, amitől egy szakmai fejezetet végig is olvasnak: kíváncsiság-rés, konfliktus, fordulat, jelenet, tét, nyitott hurok.</p>
-        <a class="open" href="meselesi-modszer/" aria-label="Mesélési módszer megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
-      </div>
-    </div></li>
-    <li data-kind="kiserlet"><div class="card" data-slug="stilusmintazo">
+    <li data-kind="kiserlet"><div class="card" data-slug="mintak">
       <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.8 2.5H10.2M6.8 2.5V6.4L3 12.4C2.6 13.1 3.1 14 3.9 14H12.1C12.9 14 13.4 13.1 13 12.4L9.2 6.4V2.5M4.6 10H11.4"/></svg>Kísérlet</span>
       <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln"><path class="fl" d="M96 40H146V90L141 95L136 90L131 95L126 90L121 95L116 90L111 95L106 90L101 95L96 90L96 90Z"/><path class="stitch" d="M101 50H141"/><path class="stitch off" d="M101 60H141"/><path class="stitch" d="M101 70H141"/><path class="stitch off" d="M101 80H141"/>
 <path d="M132 18L152 36"/><ellipse class="fw" cx="133" cy="19" rx="3" ry="1.6" transform="rotate(42 133 19)"/>
@@ -421,16 +353,16 @@ footer p { margin: 0; max-width: 72ch; }
 <g class="sway"><g transform="rotate(-30 54 100)"><rect class="fr" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(-15 54 100)"><rect class="fo" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(0 54 100)"><rect class="fg" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(15 54 100)"><rect class="fe" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><g transform="rotate(30 54 100)"><rect class="ft" x="46" y="32" width="16" height="70" rx="3"/><rect class="fw" x="48.5" y="80" width="11" height="10" rx="1"/></g><circle class="fw" cx="54" cy="100" r="4"/></g></g></svg></div>
       <div class="info">
         <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.8 2.5H10.2M6.8 2.5V6.4L3 12.4C2.6 13.1 3.1 14 3.9 14H12.1C12.9 14 13.4 13.1 13 12.4L9.2 6.4V2.5M4.6 10H11.4"/></svg>Kísérlet</span><time datetime="2026-10-17">2026. október 17.</time></p>
-        <h2>Stílusmintázó</h2>
-        <p class="desc">Ugyanaz a 11 építési hír öt elrendezésben és hét anyagban: papír, folyóirat, tervlap, letisztult, éjszakai, játékos, hivatalos.</p>
-        <a class="open" href="stilusmintazo/" aria-label="Stílusmintázó megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+        <h2>Mintatár</h2>
+        <p class="desc">Megjelenési kísérletek egy helyen: a Stílusmintázó négy változata, a papírkártyás hírfal és a térkép két öltözete.</p>
+        <a class="open" href="mintak/" aria-label="Mintatár megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
       </div>
     </div></li>
   </ul>
   <footer>
     <p>A kártyákon a dátum az oldal indulását jelöli, nem az utolsó módosítást.</p>
     <p>Az oldalak tartalma bármikor, előzetes bejelentés nélkül változhat: javulhat, bővülhet, átalakulhat, vagy csendben eltűnhet. Ez nem hanyagság, hanem műhely. Amit ma itt látsz, az a mai állapot, és nem ígéret a holnapira.</p>
-    <p>9 oldal. Utolsó frissítés: 2026. október 25. Ne ess pánikba.</p>
+    <p>5 oldal. Utolsó frissítés: 2026. október 23. Ne ess pánikba.</p>
   </footer>
 </div>
 <script>
