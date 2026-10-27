@@ -1,5 +1,5 @@
 <!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}.mbar{--mb-bg:#22262B;--mb-fg:#F2F3F1;--mb-acc:#E8692C;position:relative;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--mb-bg);color:var(--mb-fg);font:600 13px/1.2 "Segoe UI",system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.mbar a{color:var(--mb-fg);text-decoration:none}.mbar a:hover{color:var(--mb-acc)}.mbar a:focus-visible{outline:2px solid var(--mb-acc);outline-offset:2px}.mbar span{opacity:.65;font-weight:400}</style></head><body><nav class="mbar"><a href="../">&larr; Vissza a műhelybe</a><span>Zariguin műhelye</span></nav>
-<title>Hársfalva krónikája</title>
+<title>Hársfalva krónikája v3</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,9 +15,11 @@
   color-scheme: dark;
 }
 html, body { overflow-x: clip; }
-body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.45; -webkit-tap-highlight-color: transparent;
-  padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 10px calc(86px + env(safe-area-inset-bottom, 0px)); }
-.app { max-width: 560px; margin: 0 auto; display: grid; gap: 12px; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.45; -webkit-tap-highlight-color: transparent;
+  padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); padding-block: 8px calc(96px + env(safe-area-inset-bottom, 0px)); }
+body.fight { padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
+.app { max-width: 560px; margin: 0 auto; display: grid; gap: 10px; }
+main.app { width: 100%; }
 .win { background: linear-gradient(180deg, var(--win), var(--win-2)); border: 3px solid var(--frame); border-radius: 8px;
   box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px #3a438f; padding: 12px 14px; display: grid; gap: 10px; min-width: 0; }
 svg.ic { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.25em; }
@@ -27,21 +29,82 @@ p { margin: 0; }
 .muted { color: var(--muted); }
 .small { font-size: 0.86rem; }
 
-/* Status bar */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; padding: 8px 12px; gap: 6px; }
+/* Status bar: one compact row (name, health, hero level, gold) */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; padding: 7px 10px; gap: 6px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.top .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-family: var(--font-display); }
-.top .nm { font-weight: 700; font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-.top .stat { display: flex; gap: 12px; flex: none; font-family: var(--font-mono); font-size: 0.85rem; }
+.top .row { display: grid; grid-template-columns: minmax(0, auto) minmax(70px, 1fr) auto; align-items: center; gap: 10px; font-family: var(--font-display); }
+.top .nm { font-weight: 700; font-size: 1.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; max-width: 9em; }
+.top .stat { display: flex; gap: 10px; flex: none; font-family: var(--font-mono); font-size: 0.85rem; }
 .top .stat b { color: var(--accent); }
 .bar { height: 10px; background: var(--shade); border: 1px solid rgba(233, 230, 214, 0.4); border-radius: 3px; overflow: hidden; }
 .bar > i { display: block; height: 100%; background: var(--hp); }
 .bar.xp > i { background: var(--xp); } .bar.work > i { background: var(--accent); transition: width 0.1s linear; }
-.hpline { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.hpline { display: grid; grid-template-columns: auto 1fr auto; gap: 6px; align-items: center; font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); min-width: 0; }
+.hpline .bar { height: 12px; }
+
+/* Tap targets on the scene */
+.scene .hot { cursor: pointer; }
+.scene .hot-box { fill: transparent; }
+.scene .hot:hover .hot-box, .scene .hot:focus-visible .hot-box { fill: rgba(255, 211, 77, 0.22); }
+.scene .hot:focus { outline: none; }
+.map .mp-place:focus { outline: none; } .map .mp-place:focus-visible .mp-hit { fill: rgba(255, 211, 77, 0.3); }
+.scene .hot-pill { fill: rgba(5, 7, 20, 0.62); }
+.scene .hot-t { font: 600 9px var(--font-display); fill: #fff6d8; }
+.tip { color: var(--accent); }
+
+/* Map: parchment SVG, the places are tap targets */
+.map { border: 2px solid #8a6a3a; border-radius: 6px; overflow: hidden; background: #ecdcb4; }
+.map-win { padding: 10px 8px; }
+.map-svg { display: block; width: 100%; height: auto; }
+@media (min-width: 900px) { body.tab-terkep .app { max-width: 1000px; } .map-svg { max-height: calc(100vh - 230px); margin: 0 auto; } }
+.map .mp-l { font: 700 17px var(--font-display); fill: #4a3420; paint-order: stroke; stroke: #ecdcb4; stroke-width: 3px; }
+.map .mp-l.dim { fill: #8a7650; font-weight: 500; }
+.map .mp-hit { fill: transparent; }
+.map .mp-place[data-go] { cursor: pointer; }
+.map .mp-place[data-go]:hover .mp-hit { fill: rgba(255, 211, 77, 0.25); }
+.map .mp-place.here .mp-hit { fill: rgba(200, 64, 47, 0.12); }
+.map .mp-place.locked { opacity: 0.55; }
+@media (prefers-reduced-motion: no-preference) { .map .mp-pin { animation: pin 1.4s ease-in-out infinite; } }
+@keyframes pin { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+/* Scene: decorative SVG above the place and the fight */
+.scene { position: relative; border: 3px solid var(--frame); border-radius: 8px; overflow: hidden; aspect-ratio: 12 / 5; max-height: 34vh; width: 100%; box-sizing: border-box;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px #3a438f; background: #0d0a14; }
+.scene[hidden] { display: none; }
+.scene-svg { display: block; width: 100%; height: 100%; }
+.scene .chip-t { position: absolute; right: 6px; top: 6px; font-family: var(--font-display); font-size: 0.75rem; color: var(--fg); background: rgba(5, 7, 20, 0.6); border-radius: 4px; padding: 1px 7px; }
+.scene .ttl { position: absolute; left: 8px; top: 6px; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: #fff; text-shadow: 0 1px 0 #000, 0 0 6px rgba(0, 0, 0, 0.7); }
+.scene .mob { cursor: pointer; }
+.scene .mob.dead { opacity: 0.3; }
+.scene .fx { font: 700 13px var(--font-display); paint-order: stroke; stroke: #05061a; stroke-width: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .scene .swing { animation: swing 0.9s ease-in infinite; }
+  .scene .chip { animation: chip 0.9s ease-out infinite; opacity: 0; }
+  .scene .smoke { animation: smoke 3.3s linear infinite; opacity: 0; }
+  .scene .flame { animation: flicker 0.6s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 100%; }
+  .scene .star { animation: twinkle 2.4s ease-in-out infinite alternate; }
+  .scene .flap { animation: flap 0.35s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 50%; }
+  .scene .glow { animation: twinkle 1.2s ease-in-out infinite alternate; }
+  .scene .hero:not(.hurt):not(.lunge) { animation: breathe 2.8s ease-in-out infinite; }
+  .scene .hurt { animation: shake 0.4s ease-in-out 0.2s; }
+  .scene .lunge { animation: lunge 0.45s ease-out; }
+  .scene .mob.dead { transition: opacity 0.6s; }
+  .scene .fx { animation: rise 1.4s ease-out both; }
+}
+@keyframes swing { 0% { transform: rotate(-75deg); } 55% { transform: rotate(-75deg); } 75% { transform: rotate(35deg); } 100% { transform: rotate(-75deg); } }
+@keyframes chip { 0%, 70% { opacity: 0; transform: translate(0, 0); } 75% { opacity: 1; } 100% { opacity: 0; transform: translate(10px, -12px); } }
+@keyframes smoke { 0% { opacity: 0; transform: translate(0, 0) scale(0.6); } 20% { opacity: 0.7; } 100% { opacity: 0; transform: translate(10px, -34px) scale(1.6); } }
+@keyframes flicker { from { transform: scale(1, 1); } to { transform: scale(0.8, 1.15); } }
+@keyframes twinkle { from { opacity: 1; } to { opacity: 0.45; } }
+@keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(-0.4); } }
+@keyframes breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.8px); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
+@keyframes lunge { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(16px); } }
+@keyframes rise { 0% { opacity: 0; transform: translateY(4px); } 15% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-16px); } }
 
 /* Buttons and lists */
 .btn { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 11px 12px; border: 2px solid var(--frame);
-  border-radius: 6px; background: var(--win-2); font-family: var(--font-display); font-size: 1rem; min-height: 46px; min-width: 0; }
+  border-radius: 6px; background: var(--win-2); font-family: var(--font-display); font-size: 1.02rem; min-height: 50px; min-width: 0; touch-action: manipulation; }
 .btn:hover { background: #1c2884; }
 .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .btn[disabled] { color: var(--locked); border-color: var(--locked); cursor: default; background: transparent; }
@@ -53,11 +116,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .lab { display: grid; gap: 2px; min-width: 0; }
 .lab .t { overflow-wrap: anywhere; }
 .lab .d { font-family: var(--font-body); font-size: 0.82rem; color: var(--muted); }
-.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+@media (min-width: 480px) { .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 .slot { all: unset; box-sizing: border-box; aspect-ratio: 1; max-width: 100%; border: 2px solid rgba(233, 230, 214, 0.45); border-radius: 6px; background: var(--shade);
   display: grid; place-items: center; position: relative; cursor: pointer; }
-.slot svg.ic { width: 55%; height: 55%; }
-.slot .n { position: absolute; right: 4px; bottom: 2px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); }
+.slot svg.ic { width: 46%; height: 46%; margin-bottom: 12%; }
+.slot .n { position: absolute; right: 5px; top: 3px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
+.slot .nm { position: absolute; left: 3px; right: 3px; bottom: 3px; font-size: 0.66rem; line-height: 1.1; text-align: center; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .slot.empty { cursor: default; border-style: dashed; opacity: 0.4; }
 .slot:focus-visible { outline: 3px solid var(--accent); }
 .slot.sel { border-color: var(--accent); background: #2a3699; }
@@ -70,24 +135,42 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .log { font-family: var(--font-mono); font-size: 0.84rem; display: grid; gap: 3px; background: var(--shade); border-radius: 5px; padding: 8px 10px; max-height: 13em; overflow-y: auto; }
 .log .new { color: var(--fg); } .log div { color: var(--muted); }
 .log .good { color: var(--ok); } .log .bad { color: var(--hp); } .log .gold { color: var(--accent); }
+details.logd { background: linear-gradient(180deg, var(--win), var(--win-2)); border: 3px solid var(--frame); border-radius: 8px; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px #3a438f; padding: 4px 12px; min-width: 0; }
+details.logd[open] { padding-bottom: 10px; }
+details.logd > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.84rem; min-height: 36px; }
+details.logd > summary::-webkit-details-marker { display: none; }
+details.logd > summary .last { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+details.logd > summary .tg { font-family: var(--font-display); color: var(--muted); font-size: 0.8rem; }
+details.logd[open] > summary .last { display: none; }
+details.logd[open] > summary { grid-template-columns: auto 1fr auto; }
+details.logd > summary:focus-visible { outline: 2px solid var(--accent); border-radius: 4px; }
 
 /* Combat */
-.foes { display: grid; gap: 6px; }
-.foe { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 10px; align-items: center; padding: 8px 10px; border: 2px solid rgba(233, 230, 214, 0.45); border-radius: 6px; cursor: pointer; }
-.foe .bar { grid-column: 1 / 4; }
+.foes { display: grid; gap: 6px; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+.foe { all: unset; box-sizing: border-box; display: grid; gap: 3px; align-content: start; padding: 6px 8px; border: 2px solid rgba(233, 230, 214, 0.45); border-radius: 6px; cursor: pointer; min-width: 0; touch-action: manipulation; }
+.foe .nm { font-family: var(--font-display); font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .foe.sel { border-color: var(--accent); background: #2a3699; }
 .foe.dead { opacity: 0.35; cursor: default; }
 .foe .lv { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
-.order { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.order { font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); }
+.fight-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .order b { color: var(--accent); font-weight: 600; }
 
 /* Tabs */
 nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: var(--win-2); border-top: 3px solid var(--frame);
   padding: 6px max(6px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(6px, env(safe-area-inset-left, 0px)); }
 nav.tabs .in { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; }
-nav.tabs button { all: unset; box-sizing: border-box; display: grid; justify-items: center; gap: 2px; padding: 6px 2px; border-radius: 6px; cursor: pointer;
-  font-family: var(--font-display); font-size: 0.72rem; color: var(--muted); min-width: 0; }
-nav.tabs button svg.ic { width: 22px; height: 22px; }
+nav.tabs button { all: unset; box-sizing: border-box; display: grid; justify-items: center; align-content: center; gap: 2px; padding: 6px 2px; border-radius: 6px; cursor: pointer;
+  font-family: var(--font-display); font-size: 0.76rem; color: var(--muted); min-width: 0; min-height: 56px; touch-action: manipulation; }
+nav.tabs button svg.ic { width: 24px; height: 24px; }
+/* In a fight the tab bar turns into the command bar, right under the thumb. */
+nav.tabs .in.cmds { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+nav.tabs .in.cmds button.btn { display: flex; justify-items: normal; align-content: normal; gap: 8px; padding: 8px 10px; min-height: 54px; border: 2px solid var(--frame);
+  background: var(--win); color: var(--fg); font-size: 1rem; text-align: left; }
+nav.tabs .in.cmds button.btn.prim { border-color: var(--accent); }
+nav.tabs .in.cmds button.btn[disabled] { color: var(--locked); border-color: var(--locked); background: transparent; opacity: 1; }
+nav.tabs .in.cmds button.btn svg.ic { width: 1.3em; height: 1.3em; }
+nav.tabs .in.cmds .btn .d { font-size: 0.76rem; }
 nav.tabs button[aria-pressed="true"] { color: var(--accent); background: rgba(255, 211, 77, 0.12); }
 nav.tabs button:focus-visible { outline: 2px solid var(--accent); }
 nav.tabs button[disabled] { opacity: 0.35; cursor: default; }
@@ -95,12 +178,65 @@ nav.tabs button[disabled] { opacity: 0.35; cursor: default; }
 /* Overlay and toast */
 .ov { position: fixed; inset: 0; z-index: 20; background: rgba(5, 7, 20, 0.7); display: grid; place-items: center; overflow-y: auto;
   padding: calc(16px + env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); }
+.ov[hidden], .toast[hidden] { display: none; }
 .ov .win { width: 100%; max-width: 480px; }
 .ov h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 7vw, 2.3rem); margin: 0; line-height: 1.05; }
 .ov input { font: 600 1.1rem var(--font-display); color: var(--fg); background: var(--shade); border: 2px solid var(--frame); border-radius: 6px; padding: 10px 12px; width: 100%; box-sizing: border-box; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); top: calc(84px + env(safe-area-inset-top, 0px)); z-index: 15; max-width: min(92vw, 480px);
   background: var(--win); border: 3px solid var(--accent); border-radius: 8px; padding: 10px 14px; font-family: var(--font-display); text-align: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); }
 @media (prefers-reduced-motion: no-preference) { .toast { animation: pop 0.25s ease-out; } }
+/* Grid combat: life grids made of cells */
+:root { --foe: #c98a4b; --dead: #0a0d22; --armor: #c9d2e8; --poison: #7bd66b; --bleed: #ff3b5c; --shield: #6fb8ff; }
+.gb { display: grid; gap: 3px; justify-content: center; touch-action: manipulation; }
+.gc { all: unset; box-sizing: border-box; width: var(--cs); height: var(--cs); border-radius: 4px; position: relative; cursor: pointer; }
+.gc:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.gc.off { cursor: default; }
+.gc.off.grow { border: 2px dashed var(--accent); background: rgba(255, 211, 77, 0.12); cursor: pointer; }
+.gb.hero .gc.alive { background: var(--hp); }
+.gb.foe .gc.alive { background: var(--foe); }
+.gc.dead { background: var(--dead); box-shadow: inset 0 0 0 1px rgba(185, 190, 223, 0.2); }
+.gc.dead::after { content: "×"; color: rgba(185, 190, 223, 0.35); font-size: 13px; position: absolute; inset: 0; display: grid; place-items: center; }
+.gc.armor { box-shadow: inset 0 0 0 3px var(--armor); }
+.gc.armor::before { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 11px; transform: translate(-50%, -50%);
+  background: var(--armor); clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%); opacity: 0.85; }
+.gc.poison::after { content: ""; position: absolute; right: 3px; top: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--poison); box-shadow: 0 0 6px var(--poison); }
+.gc.bleed::after { content: attr(data-arrow); position: absolute; inset: 0; display: grid; place-items: center; color: var(--bleed); font-size: 16px; text-shadow: 0 0 3px #000; }
+.gc.shield { box-shadow: inset 0 0 0 3px var(--shield), 0 0 8px var(--shield); }
+.gc.threat::before { content: attr(data-who); position: absolute; inset: -2px; border: 2px solid var(--fg); border-radius: 5px; font: 700 9px var(--font-mono); color: var(--fg);
+  display: grid; place-items: start end; padding: 0 2px; text-shadow: 0 0 2px #000; }
+@media (prefers-reduced-motion: no-preference) { .gc.threat { animation: threat 1.1s ease-in-out infinite; } }
+@keyframes threat { 50% { filter: brightness(1.45); } }
+.gc.pv { outline: 3px solid var(--accent); outline-offset: -3px; filter: brightness(1.3); }
+.gc.pv.bad { outline-color: #888; }
+.foesg { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.foeg { display: grid; gap: 4px; justify-items: center; padding: 6px; border: 2px solid transparent; border-radius: 6px; min-width: 0; }
+.foeg.dead { opacity: 0.35; }
+.foeg .nm { font: 700 0.9rem var(--font-display); } .foeg .lv { font: 0.72rem var(--font-mono); color: var(--muted); }
+.intent { font-size: 0.85rem; padding: 4px 6px; background: var(--shade); border-radius: 4px; border-left: 3px solid var(--hp); max-width: 15em; }
+.intent b { color: var(--accent); }
+.res { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; font-family: var(--font-display); font-size: 0.9rem; }
+.res i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent); display: inline-block; vertical-align: -2px; }
+.res i.full { background: var(--accent); }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.card { all: unset; box-sizing: border-box; background: var(--shade); border: 2px solid rgba(233, 230, 214, 0.35); border-radius: 6px; padding: 6px; display: grid; gap: 4px; cursor: pointer; min-width: 0; }
+.card:focus-visible { outline: 2px solid var(--accent); }
+.card.sel { border-color: var(--accent); background: rgba(255, 211, 77, 0.12); }
+.card[disabled] { opacity: 0.4; cursor: default; }
+.card .t { font: 700 0.82rem var(--font-display); line-height: 1.15; }
+.card .m { font: 0.68rem var(--font-mono); color: var(--muted); display: flex; justify-content: space-between; gap: 4px; }
+.mini { display: grid; gap: 2px; grid-auto-rows: 7px; grid-auto-columns: 7px; }
+.mini i { width: 7px; height: 7px; border-radius: 1px; background: var(--fg); }
+.mini.heal i { background: var(--poison); } .mini.def i { background: var(--shield); }
+.hint { font-size: 0.85rem; color: var(--accent); min-height: 1.2em; }
+/* Wide screens (monitor, landscape): in a fight the scene goes away, enemies | hero | cards side by side. */
+@media (min-width: 900px) {
+  body.fight .app { max-width: 1240px; }
+  body.fight #scene { display: none; }
+  body.fight main#view { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 320px; gap: 10px; align-items: start; }
+  body.fight nav.tabs .in { max-width: 1240px; }
+  body.fight nav.tabs .in.cmds { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.mains { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
 @keyframes pop { from { transform: translate(-50%, -8px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
 </style>
 
@@ -145,6 +281,7 @@ nav.tabs button[disabled] { opacity: 0.35; cursor: default; }
 
 <div class="app">
   <header class="win top" id="top"></header>
+  <div class="scene" id="scene" hidden></div>
   <main id="view" class="app"></main>
 </div>
 <nav class="tabs" id="tabs" aria-label="Fülek"><div class="in" id="tabs-in"></div></nav>
@@ -157,8 +294,10 @@ var SIM = (function () {
   "use strict";
 
   var SKILLS = [
-    { id: "kozelharc", name: "Közelharc", group: "Harc", icon: "i-sword" },
-    { id: "vedekezes", name: "Védekezés", group: "Harc", icon: "i-shield" },
+    { id: "tor", name: "Tőrvívás", group: "Harc", icon: "i-dagger", main: true },
+    { id: "kard", name: "Kardforgatás", group: "Harc", icon: "i-sword", main: true },
+    { id: "pajzs", name: "Pajzsvívás", group: "Harc", icon: "i-shield", main: true },
+    { id: "vedekezes", name: "Védekezés", group: "Harc", icon: "i-heart" },
     { id: "favagas", name: "Favágás", group: "Gyűjtés", icon: "i-axe" },
     { id: "banyaszat", name: "Bányászat", group: "Gyűjtés", icon: "i-pick" },
     { id: "kovacsolas", name: "Kovácsolás", group: "Barkácsolás", icon: "i-anvil" },
@@ -197,12 +336,12 @@ var SIM = (function () {
     bronz_csakany: { name: "Bronzcsákány", kind: "tool", tool: "csakany", speed: 0.8, icon: "i-pick", price: 10 },
     vas_fejsze: { name: "Vasfejsze", kind: "tool", tool: "fejsze", speed: 0.65, icon: "i-axe", price: 25 },
     vas_csakany: { name: "Vascsákány", kind: "tool", tool: "csakany", speed: 0.65, icon: "i-pick", price: 25 },
-    bronz_tor: { name: "Bronztőr", kind: "fegyver", pow: 3, acc: 10, icon: "i-dagger", price: 10 },
-    bronz_kard: { name: "Bronzkard", kind: "fegyver", pow: 5, acc: 5, icon: "i-sword", price: 18 },
-    vas_tor: { name: "Vastőr", kind: "fegyver", pow: 6, acc: 12, icon: "i-dagger", price: 25 },
-    vas_kard: { name: "Vaskard", kind: "fegyver", pow: 9, acc: 6, icon: "i-sword", price: 45 },
-    bronz_pajzs: { name: "Bronzpajzs", kind: "pajzs", block: 6, icon: "i-shield", price: 18 },
-    vas_pajzs: { name: "Vaspajzs", kind: "pajzs", block: 10, icon: "i-shield", price: 45 },
+    bronz_tor: { name: "Bronztőr", kind: "fegyver", wtype: "tor", tier: 1, icon: "i-dagger", price: 10 },
+    bronz_kard: { name: "Bronzkard", kind: "fegyver", wtype: "kard", tier: 1, icon: "i-sword", price: 18 },
+    vas_tor: { name: "Vastőr", kind: "fegyver", wtype: "tor", tier: 2, icon: "i-dagger", price: 25 },
+    vas_kard: { name: "Vaskard", kind: "fegyver", wtype: "kard", tier: 2, icon: "i-sword", price: 45 },
+    bronz_pajzs: { name: "Bronzpajzs", kind: "fegyver", wtype: "pajzs", tier: 1, icon: "i-shield", price: 18 },
+    vas_pajzs: { name: "Vaspajzs", kind: "fegyver", wtype: "pajzs", tier: 2, icon: "i-shield", price: 45 },
     bronz_sisak: { name: "Bronzsisak", kind: "sisak", armor: 1, icon: "i-helm", price: 10 },
     vas_sisak: { name: "Vassisak", kind: "sisak", armor: 2, icon: "i-helm", price: 25 },
     bronz_mellvert: { name: "Bronz mellvért", kind: "mellvert", armor: 2, icon: "i-armor", price: 28 },
@@ -212,7 +351,9 @@ var SIM = (function () {
   };
   var STACK = { mat: 1, food: 1 };
   var SLOTS = 20;
-  var EQ_KINDS = ["fegyver", "pajzs", "sisak", "mellvert"];
+  // Weapons and shields work like tools: owning one (bag or chest) is enough. Only armor is worn.
+  var EQ_KINDS = ["sisak", "mellvert"];
+  var BELT = 4; // belt pouch: food stacks usable in a fight
 
   var NODES = {
     nyirfa: { name: "Nyírfa", skill: "favagas", tool: "fejsze", req: 1, sec: 3, xp: 10, item: "nyirfa", verb: "Fát vágsz" },
@@ -222,18 +363,30 @@ var SIM = (function () {
     vas: { name: "Vasér", skill: "banyaszat", tool: "csakany", req: 10, sec: 5, xp: 30, item: "vaserc", verb: "Vasat bányászol" }
   };
 
-  // lvl, hp, atk (accuracy), def (dodge), pow (damage), spd, xp (kill bonus), gold [min,max], drops [[id, chance]]
+  // lvl, spd, xp (kill bonus), gold [min,max], drops [[id, chance]]; grid [w,h], armor (armored cells), moves (see grid.js).
+  // Move: shape (cells relative to the first), power (2 pierces armor), poison, howl (next attack +1), regrow (heals own cells), split (two hits).
   var ENEMIES = {
-    patkany: { name: "Patkány", lvl: 1, hp: 8, atk: 1, def: 0, pow: 2, spd: 6, xp: 8, gold: [0, 1], drops: [["patkanyhus", 0.7]] },
-    farkas: { name: "Farkas", lvl: 3, hp: 16, atk: 3, def: 1, pow: 3, spd: 7, xp: 16, gold: [0, 0], drops: [["farkashus", 0.75], ["bor", 0.4]] },
-    vaddiszno: { name: "Vaddisznó", lvl: 5, hp: 26, atk: 4, def: 3, pow: 4, spd: 4, xp: 26, gold: [0, 0], drops: [["vadhus", 0.85], ["bor", 0.3]] },
-    goblin: { name: "Goblin felderítő", lvl: 7, hp: 30, atk: 6, def: 4, pow: 5, spd: 6, xp: 36, gold: [4, 12], drops: [["bronz_tor", 0.05], ["liszt", 0.2]] },
-    goblinvezer: { name: "Goblin vezér", lvl: 10, hp: 75, atk: 9, def: 6, pow: 8, spd: 5, xp: 150, gold: [40, 40], drops: [["banyakulcs", 1]], boss: true },
-    denever: { name: "Denevér", lvl: 8, hp: 22, atk: 8, def: 6, pow: 4, spd: 9, xp: 30, gold: [0, 0], drops: [] },
-    kobold: { name: "Kobold", lvl: 10, hp: 40, atk: 9, def: 7, pow: 6, spd: 5, xp: 50, gold: [6, 16], drops: [["vaserc", 0.3]] },
-    pok: { name: "Barlangi pók", lvl: 12, hp: 48, atk: 11, def: 8, pow: 7, spd: 7, xp: 64, gold: [0, 0], drops: [["vadhus", 0.3]] },
-    csontvaz: { name: "Csontváz bányász", lvl: 14, hp: 60, atk: 12, def: 10, pow: 8, spd: 4, xp: 80, gold: [8, 20], drops: [["vaserc", 0.6], ["vasrud", 0.08]] },
-    koboldkiraly: { name: "Kobold király", lvl: 17, hp: 150, atk: 15, def: 12, pow: 12, spd: 5, xp: 400, gold: [150, 150], drops: [["kincs", 1]], boss: true }
+    patkany: { name: "Patkány", lvl: 1, spd: 6, xp: 8, gold: [0, 1], drops: [["patkanyhus", 0.7]], grid: [1, 2], armor: 0,
+      moves: [{ name: "Rágás", shape: [[0, 0]], power: 1 }, { name: "Karmolás", shape: [[0, 0], [1, 0]], power: 1 }] },
+    farkas: { name: "Farkas", lvl: 3, spd: 7, xp: 16, gold: [0, 0], drops: [["farkashus", 0.75], ["bor", 0.4]], grid: [2, 3], armor: 0,
+      moves: [{ name: "Harapás", shape: [[0, 0], [0, 1], [1, 1]], power: 1 }, { name: "Vonyítás", howl: true }, { name: "Harapás", shape: [[0, 0], [0, 1], [1, 1]], power: 1 }] },
+    vaddiszno: { name: "Vaddisznó", lvl: 5, spd: 4, xp: 26, gold: [0, 0], drops: [["vadhus", 0.85], ["bor", 0.3]], grid: [3, 3], armor: 3,
+      moves: [{ name: "Agyarazás", shape: [[0, 0], [1, 0], [1, 1]], power: 2 }, { name: "Roham", shape: [[0, 0], [1, 0], [2, 0], [3, 0]], power: 1 }, { name: "Dagonyázás", regrow: 2 }] },
+    goblin: { name: "Goblin felderítő", lvl: 7, spd: 6, xp: 36, gold: [4, 12], drops: [["bronz_tor", 0.05], ["liszt", 0.2]], grid: [3, 3], armor: 1,
+      moves: [{ name: "Késszúrás", shape: [[0, 0], [1, 1]], power: 2 }, { name: "Vágás", shape: [[0, 0], [1, 0], [2, 0]], power: 1 }] },
+    goblinvezer: { name: "Goblin vezér", lvl: 10, spd: 5, xp: 150, gold: [40, 40], drops: [["banyakulcs", 1]], boss: true, grid: [6, 5], armor: 8,
+      moves: [{ name: "Buzogány", shape: [[0, 0], [1, 0], [0, 1], [1, 1], [2, 1]], power: 2 }, { name: "Söprés", shape: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]], power: 1 }, { name: "Csatakiáltás", howl: true }, { name: "Buzogány", shape: [[0, 0], [1, 0], [0, 1], [1, 1], [2, 1]], power: 2 }] },
+    denever: { name: "Denevér", lvl: 8, spd: 9, xp: 30, gold: [0, 0], drops: [], grid: [1, 3], armor: 0,
+      moves: [{ name: "Csapkodás", shape: [[0, 0], [1, 0]], power: 1, split: true }] },
+    kobold: { name: "Kobold", lvl: 10, spd: 5, xp: 50, gold: [6, 16], drops: [["vaserc", 0.3]], grid: [3, 3], armor: 2,
+      moves: [{ name: "Csákányütés", shape: [[0, 0], [0, 1]], power: 2 }, { name: "Kődobás", shape: [[0, 0], [2, 0], [1, 1]], power: 1 }] },
+    pok: { name: "Barlangi pók", lvl: 12, spd: 7, xp: 64, gold: [0, 0], drops: [["vadhus", 0.3]], grid: [3, 4], armor: 0,
+      moves: [{ name: "Méregmarás", shape: [[0, 0], [1, 0]], poison: true }, { name: "Csípés", shape: [[0, 0], [1, 1], [2, 0]], power: 1 }] },
+    csontvaz: { name: "Csontváz bányász", lvl: 14, spd: 4, xp: 80, gold: [8, 20], drops: [["vaserc", 0.6], ["vasrud", 0.08]], grid: [4, 3], armor: 4, nobleed: true,
+      moves: [{ name: "Csontkéz", shape: [[0, 0], [1, 0], [0, 1]], power: 1 }, { name: "Csákánycsapás", shape: [[0, 0], [1, 0], [0, 1], [1, 1]], power: 2 }] },
+    koboldkiraly: { name: "Kobold király", lvl: 17, spd: 5, xp: 400, gold: [150, 150], drops: [["kincs", 1]], boss: true, grid: [7, 6], armor: 12,
+      moves: [{ name: "Koronás kalapács", shape: [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [2, 1]], power: 2 }, { name: "Méregpor", shape: [[0, 0], [1, 0], [2, 0], [1, 1]], poison: true },
+        { name: "Söprés", shape: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]], power: 1 }, { name: "Királyi parancs", howl: true }, { name: "Koronás kalapács", shape: [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [2, 1]], power: 2 }] }
   };
 
   var AREAS = {
@@ -274,9 +427,44 @@ var SIM = (function () {
   function newState(name) {
     var xp = {};
     SKILLS.forEach(function (s) { xp[s.id] = 0; });
-    var S = { v: 1, name: name || "Vándor", gold: 10, loc: "falu", xp: xp, inv: [], bank: {}, eq: { fegyver: null, pajzs: null, sisak: null, mellvert: null },
+    var S = { v: 2, name: name || "Vándor", gold: 10, loc: "falu", xp: xp, inv: [], belt: [], bank: {}, eq: { sisak: null, mellvert: null },
+      main: ["tor", "kard"], grid: startGrid(), dead: [], grow: 0,
       quest: 0, questTaken: false, flags: { banya: false, done: false }, played: 0, deaths: 0, kills: {}, log: [] };
     S.hp = maxHp(S);
+    return S;
+  }
+  // The hero's life grid lives on a GW x GH board; only the "on" cells count. It starts as a 5x4 block in the middle.
+  var GW = 10, GH = 9;
+  function startGrid() { var on = []; for (var y = 2; y <= 5; y++) for (var x = 2; x <= 6; x++) on.push(y * GW + x); return on; }
+  function canGrow(S, i) {
+    if (i < 0 || i >= GW * GH || S.grid.indexOf(i) >= 0) return false;
+    var x = i % GW, y = Math.floor(i / GW);
+    return [[1, 0], [-1, 0], [0, 1], [0, -1]].some(function (d) {
+      var nx = x + d[0], ny = y + d[1];
+      return nx >= 0 && ny >= 0 && nx < GW && ny < GH && S.grid.indexOf(ny * GW + nx) >= 0;
+    });
+  }
+  function grow(S, i) { if (!(S.grow > 0) || !canGrow(S, i)) return false; S.grid.push(i); S.grow--; S.hp = maxHp(S) - S.dead.length; return true; }
+  // Auto-place: the free neighbor closest to the board's middle.
+  function autoGrow(S) {
+    while (S.grow > 0) {
+      var best = -1, bd = 1e9;
+      for (var i = 0; i < GW * GH; i++) if (canGrow(S, i)) { var d = Math.abs(i % GW - 4.5) + Math.abs(Math.floor(i / GW) - 4) * 1.15; if (d < bd) { bd = d; best = i; } }
+      if (best < 0) { S.grow = 0; break; }
+      grow(S, best);
+    }
+  }
+  function healAll(S) { S.dead = []; S.hp = maxHp(S); }
+  function healCells(S, n) { for (var k = 0; k < n && S.dead.length; k++) S.dead.shift(); S.hp = maxHp(S) - S.dead.length; }
+  // Old saves (v1: Közelharc, HP number) become v2 (three weapon skills, life grid).
+  function migrate(S) {
+    if (!S || S.v === 2) return S;
+    var k = S.xp.kozelharc || 0;
+    S.xp.tor = k; S.xp.kard = k; S.xp.pajzs = Math.floor((S.xp.vedekezes || 0) / 2); delete S.xp.kozelharc;
+    S.main = ["tor", "kard"]; S.grid = startGrid(); S.dead = []; S.belt = [];
+    S.grow = 2 * (level(S.xp.vedekezes || 0) - 1); autoGrow(S);
+    ["fegyver", "pajzs"].forEach(function (k2) { if (S.eq[k2]) S.inv.push({ id: S.eq[k2], n: 1 }); delete S.eq[k2]; });
+    S.v = 2; healAll(S);
     return S;
   }
 
@@ -288,22 +476,33 @@ var SIM = (function () {
     return { level: l, have: xp - XPT[l], need: XPT[l + 1] - XPT[l], frac: (xp - XPT[l]) / (XPT[l + 1] - XPT[l]) };
   }
   function heroLevel(S) { return SKILLS.reduce(function (a, s) { return a + lv(S, s.id); }, 0); }
-  function maxHp(S) { return 25 + 3 * (lv(S, "vedekezes") - 1) + 2 * (lv(S, "kozelharc") - 1); }
+  function maxHp(S) { return S.grid ? S.grid.length : 20; }
 
   function addXp(S, id, n) {
     var before = lv(S, id);
+    if (!(n > 0)) return [];
     S.xp[id] = Math.min(XPT[CAP], S.xp[id] + Math.round(n));
     var after = lv(S, id);
+    if (id === "vedekezes" && after > before) S.grow = (S.grow || 0) + 2 * (after - before);
     return after > before ? [{ skill: id, level: after }] : [];
   }
 
   // Inventory: array of {id, n}; stackable kinds share one slot.
-  function count(S, id) { return S.inv.reduce(function (a, s) { return a + (s.id === id ? s.n : 0); }, 0); }
+  function count(S, id) { return S.inv.reduce(function (a, s) { return a + (s.id === id ? s.n : 0); }, 0) + beltCount(S, id); }
   function stackable(id) { return !!STACK[ITEMS[id].kind]; }
   function freeSlots(S) { return SLOTS - S.inv.length; }
-  function canAdd(S, id) { return (stackable(id) && S.inv.some(function (s) { return s.id === id; })) || freeSlots(S) > 0; }
+  function canAdd(S, id) {
+    if (ITEMS[id].kind === "food" && S.belt && (S.belt.length < BELT || S.belt.some(function (s) { return s.id === id; }))) return true;
+    return (stackable(id) && S.inv.some(function (s) { return s.id === id; })) || freeSlots(S) > 0;
+  }
+  function beltCount(S, id) { return (S.belt || []).reduce(function (a, s) { return a + (s.id === id ? s.n : 0); }, 0); }
   function add(S, id, n) {
     n = n || 1;
+    if (ITEMS[id].kind === "food" && S.belt) {
+      var b = S.belt.find(function (x) { return x.id === id; });
+      if (b) { b.n += n; return n; }
+      if (S.belt.length < BELT) { S.belt.push({ id: id, n: n }); return n; }
+    }
     if (stackable(id)) {
       var s = S.inv.find(function (x) { return x.id === id; });
       if (s) { s.n += n; return n; }
@@ -316,6 +515,13 @@ var SIM = (function () {
   }
   function remove(S, id, n) {
     n = n || 1;
+    for (var j = (S.belt || []).length - 1; j >= 0 && n > 0; j--) {
+      var bs = S.belt[j];
+      if (bs.id !== id) continue;
+      var tb = Math.min(n, bs.n);
+      bs.n -= tb; n -= tb;
+      if (bs.n <= 0) S.belt.splice(j, 1);
+    }
     for (var i = S.inv.length - 1; i >= 0 && n > 0; i--) {
       var s = S.inv[i];
       if (s.id !== id) continue;
@@ -332,6 +538,15 @@ var SIM = (function () {
     S.inv.concat(Object.keys(S.bank).filter(function (k) { return S.bank[k] > 0; }).map(function (k) { return { id: k }; })).forEach(function (s) {
       var it = ITEMS[s.id];
       if (it.kind === "tool" && it.tool === tool && (!best || it.speed < best.speed)) best = it;
+    });
+    return best;
+  }
+
+  function bestWeapon(S, wtype) {
+    var best = null;
+    S.inv.concat(Object.keys(S.bank).filter(function (k) { return S.bank[k] > 0; }).map(function (k) { return { id: k }; })).forEach(function (s) {
+      var it = ITEMS[s.id];
+      if (it.kind === "fegyver" && it.wtype === wtype && (!best || it.tier > best.tier)) best = it;
     });
     return best;
   }
@@ -371,8 +586,6 @@ var SIM = (function () {
 
   function eqItem(S, kind) { return S.eq[kind] ? ITEMS[S.eq[kind]] : null; }
   function armor(S) { return ["sisak", "mellvert"].reduce(function (a, k) { var it = eqItem(S, k); return a + (it ? it.armor : 0); }, 0); }
-  function block(S) { var it = eqItem(S, "pajzs"); return it ? it.block : 0; }
-  function weapon(S) { return eqItem(S, "fegyver") || { name: "ököl", pow: 1, acc: 0 }; }
   function equip(S, idx) {
     var s = S.inv[idx], it = s && ITEMS[s.id];
     if (!it || EQ_KINDS.indexOf(it.kind) < 0) return false;
@@ -394,11 +607,11 @@ var SIM = (function () {
     for (var i = 0; i < weighted.length; i++) { r -= weighted[i][1]; if (r < 0) return weighted[i][0]; }
     return weighted[weighted.length - 1][0];
   }
-  function spawn(id) { var e = ENEMIES[id]; return { id: id, name: e.name, hp: e.hp, max: e.hp }; }
+  function spawn(id) { var e = ENEMIES[id], n = e.grid[0] * e.grid[1]; return { id: id, name: e.name, hp: n, max: n }; }
   function encounter(areaId, rnd, S) {
     // The group's total level stays near the hero's fighting levels, so a fresh hero meets rats, not goblin packs.
     var a = AREAS[areaId], n = rnd() < 0.6 ? 1 : rnd() < 0.75 ? 2 : 3, out = [];
-    var cap = S ? Math.max(4, lv(S, "kozelharc") + lv(S, "vedekezes")) : 16;
+    var cap = S ? Math.max(4, Math.round((lv(S, S.main[0]) + lv(S, S.main[1])) / 2) + lv(S, "vedekezes")) : 16;
     var pool = a.foes.filter(function (f) { return ENEMIES[f[0]].lvl <= cap; });
     if (!pool.length) pool = [a.foes[0]];
     var first = pick(rnd, pool);
@@ -410,37 +623,6 @@ var SIM = (function () {
     return out;
   }
 
-  function heroHitChance(S, foe, strong) {
-    var e = ENEMIES[foe.id], w = weapon(S);
-    return clamp(55 + 3 * lv(S, "kozelharc") + w.acc - 4 * e.def - (strong ? 10 : 0), 10, 95);
-  }
-  function heroAttack(S, foe, strong, rnd) {
-    var w = weapon(S), hit = rnd() * 100 < heroHitChance(S, foe, strong), dmg = 0, ups = [];
-    if (hit) {
-      dmg = w.pow + Math.floor(lv(S, "kozelharc") / 3) + rint(rnd, 0, 2);
-      if (strong) dmg = Math.round(dmg * 1.8);
-      dmg = Math.min(dmg, foe.hp);
-      foe.hp -= dmg;
-      ups = addXp(S, "kozelharc", dmg * 1.5);
-    }
-    return { hit: hit, dmg: dmg, ups: ups, killed: foe.hp <= 0 };
-  }
-  function foeHitChance(S, foe, guard, weak) {
-    var e = ENEMIES[foe.id];
-    return clamp(50 + 4 * e.atk - 3 * lv(S, "vedekezes") - block(S) - (guard ? 15 : 0) + (weak ? 15 : 0), 5, 92);
-  }
-  function foeAttack(S, foe, guard, weak, rnd) {
-    var e = ENEMIES[foe.id], hit = rnd() * 100 < foeHitChance(S, foe, guard, weak), dmg = 0, ups;
-    if (hit) {
-      dmg = Math.max(1, e.pow + rint(rnd, 0, Math.ceil(e.pow / 2)) - armor(S));
-      if (guard) dmg = Math.round(dmg * 0.3);
-      S.hp = Math.max(0, S.hp - dmg);
-      ups = addXp(S, "vedekezes", 1);
-    } else {
-      ups = addXp(S, "vedekezes", 4 + e.lvl / 2);
-    }
-    return { hit: hit, dmg: dmg, ups: ups };
-  }
   function loot(S, foe, rnd) {
     var e = ENEMIES[foe.id], got = [], gold = rint(rnd, e.gold[0], e.gold[1]);
     S.gold += gold;
@@ -451,32 +633,636 @@ var SIM = (function () {
       }
     });
     S.kills[foe.id] = (S.kills[foe.id] || 0) + 1;
-    var ups = addXp(S, "kozelharc", e.xp * 0.5);
+    var ups = addXp(S, S.main[0], e.xp * 0.3).concat(addXp(S, S.main[1], e.xp * 0.3), addXp(S, "vedekezes", e.xp * 0.15));
     return { gold: gold, items: got, ups: ups };
   }
   function fleeChance(S, foes) {
     var top = Math.max.apply(null, foes.map(function (f) { return ENEMIES[f.id].spd; }));
     return clamp(70 - 5 * top + 2 * lv(S, "vedekezes"), 20, 90);
   }
+  // Quick fight: the foes are far below the hero; no grid, a cell or two lost at most.
+  function quickOk(S, foes) {
+    var avg = (lv(S, S.main[0]) + lv(S, S.main[1])) / 2;
+    return foes.every(function (f) { var e = ENEMIES[f.id]; return !e.boss && e.lvl * 2 + 3 <= avg; });
+  }
 
   function skillName(id) { return SKILLS.find(function (s) { return s.id === id; }).name; }
 
-  return { SKILLS: SKILLS, CAP: CAP, XPT: XPT, ITEMS: ITEMS, SLOTS: SLOTS, EQ_KINDS: EQ_KINDS, NODES: NODES, ENEMIES: ENEMIES, AREAS: AREAS,
+  return { SKILLS: SKILLS, CAP: CAP, XPT: XPT, ITEMS: ITEMS, SLOTS: SLOTS, BELT: BELT, EQ_KINDS: EQ_KINDS, NODES: NODES, ENEMIES: ENEMIES, AREAS: AREAS, GW: GW, GH: GH,
+    migrate: migrate, canGrow: canGrow, grow: grow, autoGrow: autoGrow, healAll: healAll, healCells: healCells, bestWeapon: bestWeapon, beltCount: beltCount, quickOk: quickOk, clamp: clamp,
     RECIPES: RECIPES, SHOP: SHOP, QUESTS: QUESTS, newState: newState, level: level, lv: lv, progress: progress, heroLevel: heroLevel, maxHp: maxHp,
     addXp: addXp, count: count, canAdd: canAdd, add: add, remove: remove, has: has, freeSlots: freeSlots, bestTool: bestTool,
     gatherCheck: gatherCheck, gatherTime: gatherTime, gatherDone: gatherDone, recipeCheck: recipeCheck, burnChance: burnChance, craft: craft,
-    armor: armor, block: block, weapon: weapon, equip: equip, unequip: unequip, encounter: encounter, spawn: spawn,
-    heroHitChance: heroHitChance, heroAttack: heroAttack, foeHitChance: foeHitChance, foeAttack: foeAttack, loot: loot, fleeChance: fleeChance,
+    armor: armor, equip: equip, unequip: unequip, encounter: encounter, spawn: spawn, loot: loot, fleeChance: fleeChance,
     skillName: skillName, rint: rint };
+})();
+
+// Hársfalva krónikája: grid combat (pure logic, no DOM). Needs SIM. Shared by the page and the node balance/smoke tests.
+var GRID = (function () {
+  "use strict";
+  var I = SIM.ITEMS, E = SIM.ENEMIES;
+  var DIRS = [[1, 0, "→"], [1, 1, "↘"], [0, 1, "↓"], [-1, 1, "↙"], [-1, 0, "←"], [-1, -1, "↖"], [0, -1, "↑"], [1, -1, "↗"]];
+  var LINE = function (n) { var s = []; for (var i = 0; i < n; i++) s.push([i, 0]); return s; };
+  // Food heals the hero's grid in a shape.
+  var FOOD_SHAPE = {
+    sult_patkany: [[0, 0]],
+    sult_farkas: [[0, 0], [1, 0]],
+    sult_vad: [[0, 0], [1, 0], [0, 1]],
+    pogacsa: [[0, 0], [1, 0], [0, 1], [1, 1]],
+    porkolt: [[1, 0], [0, 1], [1, 1], [2, 1], [1, 2]]
+  };
+
+  function rotate(shape, times) {
+    var s = shape;
+    for (var t = 0; t < ((times || 0) % 4); t++) {
+      s = s.map(function (p) { return [-p[1], p[0]]; });
+      var mx = Math.min.apply(null, s.map(function (p) { return p[0]; })), my = Math.min.apply(null, s.map(function (p) { return p[1]; }));
+      s = s.map(function (p) { return [p[0] - mx, p[1] - my]; });
+    }
+    return s;
+  }
+  // Cells covered when the shape's first point sits on (x, y); null if any point leaves the active grid.
+  function cover(b, shape, x, y) {
+    var out = [];
+    for (var i = 0; i < shape.length; i++) {
+      var cx = x + shape[i][0], cy = y + shape[i][1];
+      if (cx < 0 || cy < 0 || cx >= b.w || cy >= b.h || !b.cells[cy * b.w + cx].on) return null;
+      out.push(cy * b.w + cx);
+    }
+    return out;
+  }
+  function alive(b) { var n = 0; b.cells.forEach(function (c) { if (c.on && c.alive) n++; }); return n; }
+  function size(b) { var n = 0; b.cells.forEach(function (c) { if (c.on) n++; }); return n; }
+  function cell() { return { on: false, alive: false, armor: 0, poison: false, fresh: false, bleed: null, shield: false }; }
+
+  // Armored cells: the ones nearest the middle of the shape.
+  function armorUp(b, n) {
+    var on = [];
+    b.cells.forEach(function (c, i) { if (c.on && c.alive) on.push(i); });
+    var cx = 0, cy = 0;
+    on.forEach(function (i) { cx += i % b.w; cy += Math.floor(i / b.w); });
+    cx /= on.length || 1; cy /= on.length || 1;
+    on.sort(function (a, c) {
+      var da = Math.abs(a % b.w - cx) + Math.abs(Math.floor(a / b.w) - cy), dc = Math.abs(c % b.w - cx) + Math.abs(Math.floor(c / b.w) - cy);
+      return da - dc || a - c;
+    });
+    on.slice(0, n).forEach(function (i) { b.cells[i].armor = 1; });
+  }
+  // The hero's board, cropped to the grid's bounding box.
+  function heroBoard(S) {
+    var xs = S.grid.map(function (i) { return i % SIM.GW; }), ys = S.grid.map(function (i) { return Math.floor(i / SIM.GW); });
+    var x0 = Math.min.apply(null, xs), y0 = Math.min.apply(null, ys), w = Math.max.apply(null, xs) - x0 + 1, h = Math.max.apply(null, ys) - y0 + 1;
+    var b = { w: w, h: h, x0: x0, y0: y0, cells: [] };
+    for (var k = 0; k < w * h; k++) b.cells.push(cell());
+    S.grid.forEach(function (g) {
+      var c = b.cells[(Math.floor(g / SIM.GW) - y0) * w + (g % SIM.GW - x0)];
+      c.on = true; c.alive = S.dead.indexOf(g) < 0; c.g = g;
+    });
+    armorUp(b, SIM.armor(S));
+    return b;
+  }
+  function foeBoard(id) {
+    var e = E[id], b = { w: e.grid[0], h: e.grid[1], cells: [] };
+    for (var k = 0; k < b.w * b.h; k++) { var c = cell(); c.on = true; c.alive = true; b.cells.push(c); }
+    armorUp(b, e.armor);
+    return b;
+  }
+
+  function hit(c, power) {
+    if (!c.on || !c.alive) return "miss";
+    if (c.armor > 0 && power < 2) { c.armor = 0; return "armor"; }
+    c.alive = false; c.armor = 0; c.poison = false; c.fresh = false; c.bleed = null; return "kill";
+  }
+
+  // ---------- What the hero can do ----------
+  function freeDaggers(S) { return S.main.indexOf("tor") >= 0 && SIM.bestWeapon(S, "tor") ? 3 + (SIM.lv(S, "tor") >= 10 ? 1 : 0) + (SIM.lv(S, "tor") >= 20 ? 1 : 0) : 0; }
+  function apMax(S) { return 3 + (S.main.indexOf("kard") >= 0 ? 1 : 0); }
+  function wallSize(S) { var p = SIM.bestWeapon(S, "pajzs"); return p ? 1 + p.tier + (SIM.lv(S, "pajzs") >= 10 ? 1 : 0) + (SIM.lv(S, "pajzs") >= 20 ? 1 : 0) : 0; }
+
+  // Cards for this fight; skill = which skill gets the XP.
+  function actions(S) {
+    var A = [], has = function (k) { return S.main.indexOf(k) >= 0; };
+    var tor = SIM.bestWeapon(S, "tor"), kard = SIM.bestWeapon(S, "kard"), pajzs = SIM.bestWeapon(S, "pajzs");
+    if (has("tor") && tor) {
+      A.push({ id: "tordobas", name: "Tőr", desc: "erő 1", ap: 0, free: "tor", shape: [[0, 0]], power: 1, on: "foe", skill: "tor" });
+      A.push({ id: "szuras", name: "Szúrás", desc: "vérzés " + (tor.tier + 1), ap: 1, shape: [[0, 0]], power: 2, bleed: tor.tier + 1, on: "foe", skill: "tor" });
+    }
+    if (has("kard") && kard) {
+      A.push({ id: "vagas", name: "Vágás", desc: "erő 1", ap: 2, shape: LINE(2 + kard.tier), power: 1, on: "foe", skill: "kard" });
+      if (SIM.lv(S, "kard") >= 5) A.push({ id: "eros", name: "Erős csapás", desc: "átüt", ap: 3, shape: [[0, 0], [1, 0], [0, 1], [1, 1]], power: 2, on: "foe", skill: "kard" });
+    }
+    if (has("pajzs") && pajzs) {
+      A.push({ id: "fal", name: "Pajzsfal", desc: "ingyen, 1x", ap: 0, once: true, shape: LINE(wallSize(S)), shield: true, on: "hero", skill: "pajzs" });
+      if (SIM.lv(S, "pajzs") >= 3) A.push({ id: "pajzsutes", name: "Pajzsütés", desc: "megtántorít", ap: 1, shape: [[0, 0]], power: 1, stagger: true, on: "foe", skill: "pajzs" });
+    }
+    A.push({ id: "okol", name: "Ököl", desc: "erő 1", ap: 1, shape: [[0, 0]], power: 1, on: "foe", skill: S.main[0] });
+    (S.belt || []).forEach(function (b) {
+      if (FOOD_SHAPE[b.id]) A.push({ id: "eat:" + b.id, food: b.id, name: I[b.id].name, desc: b.n + " db", ap: 1, shape: FOOD_SHAPE[b.id], heal: true, on: "hero", skill: null });
+    });
+    return A;
+  }
+
+  // ---------- Fight state ----------
+  function start(S, foes, boss) {
+    var F = { hero: heroBoard(S), foes: [], round: 1, ap: apMax(S), free: freeDaggers(S), used: {}, boss: !!boss, over: null, xp: {}, lost: 0 };
+    foes.forEach(function (f, i) {
+      F.foes.push({ id: f.id, name: f.name, tag: f.tag || "", b: foeBoard(f.id), step: Math.floor(i / 2), howl: 0, intent: null, staggered: false, hp: f.max, max: f.max });
+    });
+    syncHp(F);
+    return F;
+  }
+  function syncHp(F) { F.foes.forEach(function (f) { f.hp = alive(f.b); f.max = size(f.b); }); }
+  function living(F) { return F.foes.filter(function (f) { return f.hp > 0; }); }
+
+  // Every living foe announces its next move on the hero grid. Later foes prefer cells nobody aims at yet.
+  function plan(F, rnd) {
+    var taken = {};
+    living(F).forEach(function (f) {
+      var e = E[f.id], mv = e.moves[f.step % e.moves.length];
+      var it = { move: mv, cells: [], power: (mv.power || 0) + (mv.shape && !mv.poison ? f.howl : 0) };
+      if (mv.shape) {
+        var best = -1, cands = [];
+        for (var r = 0; r < 4; r++) {
+          var sh = rotate(mv.shape, r);
+          for (var y = 0; y < F.hero.h; y++) for (var x = 0; x < F.hero.w; x++) {
+            var cv = cover(F.hero, sh, x, y);
+            if (!cv) continue;
+            var sc = cv.reduce(function (a, i) {
+              var c = F.hero.cells[i];
+              if (!c.alive || (mv.poison && c.poison)) return a;
+              return a + (c.armor && it.power < 2 && !mv.poison ? 0.4 : 1) - (taken[i] ? 0.6 : 0);
+            }, 0);
+            if (sc > best + 1e-9) { best = sc; cands = [cv]; } else if (Math.abs(sc - best) < 1e-9) cands.push(cv);
+          }
+        }
+        it.cells = cands.length ? cands[Math.floor(rnd() * cands.length)] : [];
+        if (mv.split && it.cells.length > 1) {
+          // a second, separate hit elsewhere
+          var other = F.hero.cells.map(function (c, i) { return i; }).filter(function (i) { return F.hero.cells[i].alive && it.cells.indexOf(i) < 0; });
+          if (other.length) it.cells = [it.cells[0], other[Math.floor(rnd() * other.length)]];
+        }
+        it.cells.forEach(function (i) { taken[i] = 1; });
+      }
+      f.intent = it;
+    });
+  }
+
+  function canUse(F, a) {
+    if (F.over) return false;
+    if (a.free) return F.free > 0;
+    if (a.once && F.used[a.id]) return false;
+    return F.ap >= a.ap;
+  }
+  function addXp(F, skill, n) { if (skill) F.xp[skill] = (F.xp[skill] || 0) + n; }
+
+  // Place action a on target ("hero" or foe index) with the shape's first point at (x, y).
+  function act(F, S, a, target, x, y, rot, dir) {
+    if (!canUse(F, a)) return null;
+    var foe = a.on === "foe" ? F.foes[target] : null;
+    if (a.on === "foe" && (!foe || foe.hp <= 0)) return null;
+    var b = foe ? foe.b : F.hero, cv = cover(b, rotate(a.shape, rot), x, y);
+    if (!cv) return null;
+    if (a.free) F.free--; else F.ap -= a.ap;
+    if (a.once) F.used[a.id] = true;
+    var res = { kill: 0, armor: 0, heal: 0, cure: 0, shield: 0, cells: cv };
+    cv.forEach(function (i) {
+      var c = b.cells[i];
+      if (a.shield) { if (c.alive && !c.shield) { c.shield = true; res.shield++; } }
+      else if (a.heal) { if (c.poison) { c.poison = false; c.fresh = false; res.cure++; } if (!c.alive) { c.alive = true; res.heal++; } }
+      else { var r = hit(c, a.power); if (r === "kill") res.kill++; if (r === "armor") res.armor++; }
+    });
+    if (a.bleed && foe && !E[foe.id].nobleed) b.cells[cv[0]].bleed = { dir: dir || 0, left: a.bleed };
+    if (a.stagger && foe && foe.intent && foe.intent.cells.length > 1) { foe.intent.cells = foe.intent.cells.slice(0, Math.ceil(foe.intent.cells.length / 2)); res.stagger = true; }
+    if (a.food) SIM.remove(S, a.food, 1);
+    addXp(F, a.skill, 2.5 * res.kill + 1 * res.armor);
+    syncHp(F);
+    if (!living(F).length) F.over = "win";
+    return res;
+  }
+
+  // End of the round: bleeding moves, every foe's announced move lands (fastest first), poison works, then the next intents.
+  function endRound(F, S, rnd) {
+    var rep = { bleed: 0, lines: [] };
+    F.foes.forEach(function (f) {
+      if (f.hp <= 0) return;
+      var b = f.b, fronts = [];
+      b.cells.forEach(function (c, i) { if (c.bleed) { fronts.push([i, c.bleed]); c.bleed = null; } });
+      fronts.forEach(function (fr) {
+        var d = DIRS[fr[1].dir], x = fr[0] % b.w + d[0], y = Math.floor(fr[0] / b.w) + d[1];
+        if (x < 0 || y < 0 || x >= b.w || y >= b.h) return;
+        var c = b.cells[y * b.w + x];
+        if (c.armor) return;
+        if (c.alive) { c.alive = false; rep.bleed++; }
+        if (fr[1].left > 1) c.bleed = { dir: fr[1].dir, left: fr[1].left - 1 };
+      });
+    });
+    addXp(F, "tor", 2 * rep.bleed);
+    syncHp(F);
+    if (!living(F).length) { F.over = "win"; return rep; }
+
+    living(F).sort(function (a, b) { return E[b.id].spd - E[a.id].spd; }).forEach(function (f) {
+      var it = f.intent, mv = it.move, line = { who: f.name + f.tag, move: mv.name, hit: 0, armor: 0, blocked: 0, poisoned: 0, regrow: 0, howl: false };
+      if (mv.howl) { f.howl = 1; line.howl = true; }
+      else if (mv.regrow) {
+        var dead = f.b.cells.filter(function (c) { return c.on && !c.alive; });
+        for (var k = 0; k < mv.regrow && dead.length; k++) { dead.splice(Math.floor(rnd() * dead.length), 1)[0].alive = true; line.regrow++; }
+      } else {
+        it.cells.forEach(function (i) {
+          var c = F.hero.cells[i];
+          if (!c.alive) return;
+          if (c.shield) { line.blocked++; return; }
+          if (mv.poison) { if (!c.poison) { c.poison = true; c.fresh = true; line.poisoned++; } return; }
+          var r = hit(c, it.power);
+          if (r === "kill") line.hit++;
+          else if (r === "armor") line.armor++;
+        });
+        if (!mv.poison) f.howl = 0;
+      }
+      addXp(F, "pajzs", 4 * line.blocked); addXp(F, "vedekezes", 3 * line.armor + 2 * line.blocked + 1 * line.hit);
+      F.lost += line.hit;
+      rep.lines.push(line);
+    });
+    F.hero.cells.forEach(function (c) { c.shield = false; });
+
+    // Poison: a poisoned cell dies at the end of the next round, and may pass the poison to one living neighbor.
+    var hb = F.hero, pois = [], pk = 0;
+    hb.cells.forEach(function (c, i) { if (c.poison && c.alive && !c.fresh) pois.push(i); c.fresh = false; });
+    pois.forEach(function (i) {
+      var c = hb.cells[i];
+      if (!c.poison || !c.alive) return;
+      c.alive = false; c.poison = false; pk++;
+      var x = i % hb.w, y = Math.floor(i / hb.w), nb = [];
+      [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (d) {
+        var nx = x + d[0], ny = y + d[1];
+        if (nx < 0 || ny < 0 || nx >= hb.w || ny >= hb.h) return;
+        var n = hb.cells[ny * hb.w + nx];
+        if (n.on && n.alive && !n.poison) nb.push(n);
+      });
+      if (nb.length && rnd() < 0.7) { var t = nb[Math.floor(rnd() * nb.length)]; t.poison = true; t.fresh = true; }
+    });
+    rep.poison = pk; F.lost += pk;
+
+    if (alive(hb) === 0) { F.over = "lose"; return rep; }
+    F.foes.forEach(function (f) { f.step++; });
+    F.round++; F.ap = apMax(S); F.free = freeDaggers(S); F.used = {};
+    return rep;
+  }
+  function next(F, S, rnd) {
+    var rep = endRound(F, S, rnd);
+    if (!F.over) plan(F, rnd);
+    return rep;
+  }
+
+  // Write the fight back into the save: dead cells stay dead (they regrow in the village), XP is paid out.
+  function finish(F, S) {
+    var dead = [];
+    F.hero.cells.forEach(function (c) { if (c.on && !c.alive) dead.push(c.g); });
+    S.dead = dead; S.hp = SIM.maxHp(S) - dead.length;
+    var ups = [];
+    Object.keys(F.xp).forEach(function (k) { ups = ups.concat(SIM.addXp(S, k, F.xp[k])); });
+    return ups;
+  }
+
+  // A one-tap fight against much weaker foes: each foe costs 0-1 cells.
+  function quick(S, foes, rnd) {
+    var lost = 0;
+    foes.forEach(function () { if (rnd() < 0.5) lost++; });
+    var aliveCells = S.grid.filter(function (g) { return S.dead.indexOf(g) < 0; });
+    for (var k = 0; k < lost && aliveCells.length > 1; k++) S.dead.push(aliveCells.splice(Math.floor(rnd() * aliveCells.length), 1)[0]);
+    S.hp = SIM.maxHp(S) - S.dead.length;
+    var ups = [];
+    foes.forEach(function (f) { ups = ups.concat(SIM.addXp(S, S.main[0], 2 * f.max), SIM.addXp(S, S.main[1], 1 * f.max)); });
+    return { lost: lost, ups: ups };
+  }
+
+  return { DIRS: DIRS, FOOD_SHAPE: FOOD_SHAPE, rotate: rotate, cover: cover, alive: alive, size: size, heroBoard: heroBoard, foeBoard: foeBoard,
+    actions: actions, apMax: apMax, freeDaggers: freeDaggers, wallSize: wallSize, start: start, plan: plan, canUse: canUse, act: act, next: next,
+    finish: finish, quick: quick, living: living };
+})();
+
+// Hársfalva krónikája: decorative vector scenes. Pure string builders (no DOM), so the node tests can render them too.
+var SCENE = (function () {
+  "use strict";
+
+  var W = 360, H = 150, GROUND = 128;
+  // One in-game day lasts DAY seconds of play time; a new game starts in the morning.
+  var DAY = 600;
+  var PHASES = [
+    { id: "hajnal", name: "Hajnal", to: 0.08, sky: ["#f6b07e", "#7482c8"], tint: ["#ff9a6a", 0.12], body: "sun", at: [52, 78] },
+    { id: "nappal", name: "Nappal", to: 0.58, sky: ["#cfe8f3", "#6aa6da"], tint: null, body: "sun", at: [250, 30] },
+    { id: "alkonyat", name: "Alkonyat", to: 0.7, sky: ["#f2895b", "#5b4f9b"], tint: ["#ff6a3a", 0.16], body: "sun", at: [318, 80] },
+    { id: "ejjel", name: "Éjszaka", to: 1, sky: ["#232a63", "#080b24"], tint: ["#070c38", 0.42], body: "moon", at: [282, 32] }
+  ];
+  function phase(played) {
+    var t = (((played || 0) + 90) % DAY) / DAY;
+    for (var i = 0; i < PHASES.length; i++) if (t < PHASES[i].to) return PHASES[i];
+    return PHASES[PHASES.length - 1];
+  }
+
+  function n(x) { return Math.round(x * 10) / 10; }
+
+  // Tap target on a scene: a transparent box with a small label pill under it.
+  function hot(x, y, w, h, data, label, ly) {
+    var lw = label.length * 6.2 + 10, ty = ly == null ? y + h + 9 : ly;
+    return '<g class="hot" role="button" tabindex="0" aria-label="' + label + '" ' + data + '><rect class="hot-box" x="' + n(x) + '" y="' + n(y) + '" width="' + n(w) + '" height="' + n(h) + '" rx="4"/>' +
+      '<rect class="hot-pill" x="' + n(x + w / 2 - lw / 2) + '" y="' + n(ty - 9.5) + '" width="' + n(lw) + '" height="13" rx="6.5"/><text class="hot-t" x="' + n(x + w / 2) + '" y="' + n(ty) + '" text-anchor="middle">' + label + "</text></g>";
+  }
+  function signpost(x) {
+    return '<g transform="translate(' + x + "," + GROUND + ')"><path d="M0 4 V-22" stroke="#5a3e24" stroke-width="2.4"/><path d="M-12 -22 H10 L14 -18 L10 -14 H-12Z" fill="#a07a48" stroke="#5a3e24"/></g>';
+  }
+
+  // ---------- Sky and lighting ----------
+  function sky(p) {
+    var s = '<defs><linearGradient id="sc-sky" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="' + p.sky[0] + '"/><stop offset="1" stop-color="' + p.sky[1] + '"/></linearGradient></defs>' +
+      '<rect width="' + W + '" height="' + H + '" fill="url(#sc-sky)"/>';
+    if (p.body === "moon") {
+      [[30, 18], [70, 40], [118, 14], [160, 34], [205, 20], [240, 48], [330, 16], [345, 52], [95, 60], [190, 58]].forEach(function (st, i) {
+        s += '<circle class="star" style="animation-delay:' + (i * 0.37).toFixed(2) + 's" cx="' + st[0] + '" cy="' + st[1] + '" r="' + (i % 3 ? 0.9 : 1.4) + '" fill="#fff6d8"/>';
+      });
+      s += '<circle cx="' + p.at[0] + '" cy="' + p.at[1] + '" r="16" fill="#f3efd8" opacity="0.12"/><circle cx="' + p.at[0] + '" cy="' + p.at[1] + '" r="10" fill="#f3efd8"/>' +
+        '<circle cx="' + (p.at[0] - 3) + '" cy="' + (p.at[1] - 2) + '" r="2.4" fill="#d9d3b8"/><circle cx="' + (p.at[0] + 4) + '" cy="' + (p.at[1] + 3) + '" r="1.6" fill="#d9d3b8"/>';
+    } else {
+      s += '<circle cx="' + p.at[0] + '" cy="' + p.at[1] + '" r="17" fill="#fff3b0" opacity="0.35"/><circle cx="' + p.at[0] + '" cy="' + p.at[1] + '" r="11" fill="#ffe27a"/>';
+    }
+    return s;
+  }
+  function tint(p) { return p.tint ? '<rect width="' + W + '" height="' + H + '" fill="' + p.tint[0] + '" opacity="' + p.tint[1] + '"/>' : ""; }
+  function hills(c1, c2) {
+    return '<path d="M0 96 Q40 70 90 88 T190 80 T290 84 T360 76 V150 H0Z" fill="' + c1 + '"/>' +
+      '<path d="M0 108 Q60 92 120 104 T240 100 T360 98 V150 H0Z" fill="' + c2 + '"/>';
+  }
+
+  // ---------- Props ----------
+  function linden(x, y, s, c) {
+    return '<g transform="translate(' + x + "," + y + ") scale(" + s + ')"><rect x="-2" y="-16" width="4" height="16" fill="#4a3424"/><circle cx="-6" cy="-20" r="9" fill="' + c + '"/>' +
+      '<circle cx="6" cy="-21" r="9" fill="' + c + '"/><circle cx="0" cy="-29" r="10" fill="' + c + '"/></g>';
+  }
+  function birch(x, y, s) {
+    return '<g transform="translate(' + x + "," + y + ") scale(" + s + ')"><rect x="-2.5" y="-46" width="5" height="46" fill="#ebe7d8"/>' +
+      '<path d="M-2.5 -38h3M0 -28h2.5M-2.5 -19h2M0 -10h2.5" stroke="#2a2430" stroke-width="1.6"/>' +
+      '<ellipse cx="0" cy="-50" rx="11" ry="15" fill="#c9c35a"/><ellipse cx="-5" cy="-44" rx="7" ry="9" fill="#b5ad43"/></g>';
+  }
+  function oak(x, y, s) {
+    return '<g transform="translate(' + x + "," + y + ") scale(" + s + ')"><path d="M-4 0 L-3 -26 L3 -26 L4 0Z" fill="#4a3424"/>' +
+      '<circle cx="-11" cy="-30" r="12" fill="#3f5c2b"/><circle cx="11" cy="-31" r="12" fill="#3f5c2b"/><circle cx="0" cy="-42" r="14" fill="#4b6a31"/><circle cx="-4" cy="-36" r="8" fill="#56783a"/></g>';
+  }
+  function rock(x, y, s, ore) {
+    var specks = ore ? '<circle cx="-6" cy="-9" r="1.8" fill="' + ore + '"/><circle cx="4" cy="-14" r="1.5" fill="' + ore + '"/><circle cx="7" cy="-6" r="1.8" fill="' + ore + '"/>' : "";
+    return '<g transform="translate(' + x + "," + y + ") scale(" + s + ')"><path d="M-14 0 L-11 -12 L-3 -19 L7 -17 L14 -8 L13 0Z" fill="#8b8a98"/><path d="M-3 -19 L7 -17 L14 -8 L4 -10Z" fill="#a5a4b2"/>' + specks + "</g>";
+  }
+  function house(x, w, h, roof, wall, lit, door, glow) {
+    var y = GROUND - h, win = "#3a3550", s = "";
+    s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="' + wall + '"/>';
+    s += '<path d="M' + (x - 5) + " " + y + " L" + (x + w / 2) + " " + (y - h * 0.7) + " L" + (x + w + 5) + " " + y + 'Z" fill="' + roof + '"/>';
+    s += '<rect x="' + (x + w * 0.18) + '" y="' + (y + h * 0.25) + '" width="' + w * 0.18 + '" height="' + h * 0.22 + '" fill="' + win + '"/>';
+    s += '<rect x="' + (x + w * 0.64) + '" y="' + (y + h * 0.25) + '" width="' + w * 0.18 + '" height="' + h * 0.22 + '" fill="' + win + '"/>';
+    if (lit) [0.18, 0.64].forEach(function (k) { glow.push('<rect x="' + (x + w * k) + '" y="' + (y + h * 0.25) + '" width="' + w * 0.18 + '" height="' + h * 0.22 + '" fill="#ffd34d"/>'); });
+    if (door) s += '<rect x="' + (x + w * 0.42) + '" y="' + (y + h * 0.5) + '" width="' + w * 0.16 + '" height="' + h * 0.5 + '" fill="#4a3424"/>';
+    return s;
+  }
+
+  // ---------- Places ----------
+  function village(p, o) {
+    var night = p.id === "ejjel", glow = [], s = sky(p) + hills("#5b6f9a", "#6f8f55");
+    s += '<rect x="22" y="58" width="12" height="44" fill="#9a8f80"/><path d="M20 58 L28 40 L36 58Z" fill="#6a3a2e"/><path d="M28 34 V40 M25.5 36.5 H30.5" stroke="#3a2a20" stroke-width="1.4"/>';
+    s += linden(56, 112, 1.2, "#d9a43a") + linden(176, 104, 1, "#c9952f") + linden(352, 110, 1.1, "#d9a43a");
+    s += '<path d="M0 ' + GROUND + ' H360 V150 H0Z" fill="#6a8a3c"/><path d="M120 150 Q170 136 210 ' + GROUND + ' H250 Q230 138 240 150Z" fill="#b29563"/>';
+    s += house(86, 46, 30, "#7a3a2c", "#d7c39a", night, true, glow);
+    s += house(196, 84, 40, "#8a3b2a", "#e2cfa4", night, true, glow);
+    s += '<path d="M236 ' + (GROUND - 18) + ' h20" stroke="#4a3424" stroke-width="2"/><rect x="241" y="' + (GROUND - 18) + '" width="11" height="8" fill="#c9952f"/>';
+    s += house(292, 52, 32, "#5a4a46", "#b9b0a0", o.forge && night, false, glow);
+    s += '<rect x="330" y="' + (GROUND - 62) + '" width="8" height="18" fill="#6a605a"/><rect x="304" y="' + (GROUND - 12) + '" width="14" height="12" fill="#2a2430"/>';
+    s += tint(p) + glow.join("");
+    if (o.forge) {
+      s += '<rect x="304" y="' + (GROUND - 12) + '" width="14" height="12" fill="#ff8a3a" class="glow"/>';
+      [0, 1, 2].forEach(function (i) { s += '<circle class="smoke" style="animation-delay:' + i * 1.1 + 's" cx="334" cy="' + (GROUND - 66) + '" r="' + (4 + i) + '" fill="#d8d4cc"/>'; });
+    }
+    s += '<g transform="translate(64,' + (GROUND + 6) + ')"><rect x="-9" y="-9" width="18" height="11" rx="2" fill="#7a5632" stroke="#3a2a1a"/><path d="M-9 -5 H9" stroke="#c9952f" stroke-width="1.4"/><rect x="-1.5" y="-6.5" width="3" height="4" fill="#ffd34d"/></g>';
+    s += signpost(150);
+    if (o.done) {
+      s += '<path d="M96 ' + (GROUND - 40) + ' Q170 ' + (GROUND - 22) + " 238 " + (GROUND - 68) + '" fill="none" stroke="#3a2a20" stroke-width="0.8"/>';
+      for (var i = 0; i < 9; i++) { var t = i / 8, bx = 96 + 142 * t, by = (1 - t) * (1 - t) * (GROUND - 40) + 2 * (1 - t) * t * (GROUND - 22) + t * t * (GROUND - 68);
+        s += '<path d="M' + n(bx - 3) + " " + n(by) + " h6 l-3 6Z\" fill=\"" + ["#e8564f", "#ffd34d", "#6fb8ff"][i % 3] + '"/>'; }
+    }
+    return s;
+  }
+  function villageHot() {
+    return hot(80, GROUND - 52, 58, 52, 'data-place="bolt"', "Bolt", GROUND - 56) + hot(190, GROUND - 70, 96, 70, 'data-place="fogado"', "Fogadó", GROUND - 74) +
+      hot(288, GROUND - 64, 58, 64, 'data-place="kovacs"', "Kovács", GROUND - 68) + hot(48, GROUND - 6, 32, 18, 'data-place="lada"', "Láda", GROUND + 19) +
+      hot(136, GROUND - 26, 30, 30, 'data-tab="terkep"', "Térkép", GROUND - 30);
+  }
+  function forest(p) {
+    var s = sky(p);
+    s += '<path d="M0 98 L10 80 L18 92 L28 72 L38 92 L50 76 L62 94 L74 70 L86 92 L98 78 L110 95 L124 74 L136 92 L150 80 L162 96 L176 72 L190 94 L202 78 L216 96 L230 74 L242 92 L256 80 L270 96 L284 72 L296 92 L310 78 L322 96 L336 74 L348 92 L360 82 V150 H0Z" fill="#33503a"/>';
+    s += oak(26, 122, 1.1) + birch(84, 124, 1) + birch(104, 126, 0.85) + oak(232, 120, 0.9);
+    s += '<path d="M0 ' + GROUND + ' Q120 ' + (GROUND - 6) + " 240 " + GROUND + ' T360 ' + (GROUND - 2) + ' V150 H0Z" fill="#5e7f35"/>';
+    s += rock(300, GROUND + 2, 1.3, "#c87533") + rock(334, GROUND + 4, 1, "#c9d0d8") + rock(270, GROUND + 4, 0.7, null);
+    s += '<ellipse cx="128" cy="' + (GROUND + 2) + '" rx="16" ry="8" fill="#46682b"/><ellipse cx="138" cy="' + (GROUND - 2) + '" rx="10" ry="6" fill="#56783a"/><ellipse cx="210" cy="' + (GROUND + 4) + '" rx="12" ry="6" fill="#46682b"/>';
+    s += signpost(24);
+    return s + tint(p);
+  }
+  function forestHot(o) {
+    var s = hot(72, GROUND - 76, 44, 78, 'data-gather="nyirfa"', "Nyírfa", GROUND - 80) + hot(208, GROUND - 70, 50, 70, 'data-gather="tolgyfa"', "Tölgy", GROUND - 74) +
+      hot(282, GROUND - 26, 36, 30, 'data-gather="rez"', "Réz", GROUND + 14) + hot(320, GROUND - 22, 30, 26, 'data-gather="on"', "Ón", GROUND + 14) +
+      hot(108, GROUND - 14, 44, 22, 'data-look="1"', "Bokor", GROUND + 19) + hot(10, GROUND - 26, 30, 30, 'data-tab="terkep"', "Térkép", GROUND - 30);
+    if (o.boss) s += '<g transform="translate(250,' + (GROUND - 4) + ')"><path d="M0 0 V-30" stroke="#5a3e24" stroke-width="2"/><path d="M0 -30 L16 -26 L0 -20Z" fill="#7a2e2a"/></g>' + hot(240, GROUND - 36, 30, 38, 'data-boss="1"', "Goblintábor", GROUND - 40);
+    return s;
+  }
+  function mineHot(o) {
+    var s = hot(126, GROUND - 76, 108, 64, 'data-look="1"', "Járat", GROUND - 80) + hot(18, GROUND - 22, 34, 26, 'data-gather="rez"', "Réz", GROUND + 14) +
+      hot(56, GROUND - 22, 34, 26, 'data-gather="on"', "Ón", GROUND + 14) + hot(312, GROUND - 26, 40, 30, 'data-gather="vas"', "Vas", GROUND + 14) +
+      hot(250, GROUND - 26, 30, 30, 'data-tab="terkep"', "Térkép", GROUND - 30);
+    if (o.boss) s += '<path d="M174 ' + (GROUND - 40) + ' l-6 -10 l4 3 l2 -7 l2 7 l4 -3 l-6 10Z" fill="#ffd34d"/>' + hot(160, GROUND - 56, 40, 40, 'data-boss="1"', "Trónterem", GROUND - 8);
+    return s;
+  }
+  function mine() {
+    var s = '<defs><radialGradient id="sc-cave" cx="0.5" cy="0.55" r="0.7"><stop offset="0" stop-color="#4a3f52"/><stop offset="1" stop-color="#15111d"/></radialGradient></defs>' +
+      '<rect width="' + W + '" height="' + H + '" fill="url(#sc-cave)"/>';
+    s += '<path d="M120 ' + GROUND + ' Q120 50 180 46 Q240 50 240 ' + GROUND + 'Z" fill="#0d0a14"/>';
+    s += '<path d="M0 0 H360 V22 Q300 34 250 20 Q190 34 130 22 Q70 36 0 24Z" fill="#221b2c"/>';
+    [[60, 1], [300, 1]].forEach(function (b) {
+      s += '<rect x="' + (b[0] - 24) + '" y="40" width="7" height="' + (GROUND - 40) + '" fill="#6b4a2a"/><rect x="' + (b[0] + 17) + '" y="40" width="7" height="' + (GROUND - 40) + '" fill="#6b4a2a"/><rect x="' + (b[0] - 28) + '" y="34" width="56" height="8" fill="#7a5632"/>';
+    });
+    [[96, 70], [262, 64], [30, 92], [338, 96]].forEach(function (c, i) {
+      s += '<rect x="' + (c[0] - 2) + '" y="' + c[1] + '" width="4" height="7" fill="#e9e1c8"/><ellipse class="flame" style="animation-delay:' + i * 0.23 + 's" cx="' + c[0] + '" cy="' + (c[1] - 3) + '" rx="2.2" ry="3.6" fill="#ffc94d"/>' +
+        '<circle cx="' + c[0] + '" cy="' + (c[1] - 3) + '" r="12" fill="#ffc94d" opacity="0.08"/>';
+    });
+    [[150, 60, "#b8603c"], [210, 70, "#c87533"], [20, 60, "#b8603c"], [342, 54, "#c9d0d8"], [110, 30, "#b8603c"]].forEach(function (v) {
+      s += '<circle cx="' + v[0] + '" cy="' + v[1] + '" r="1.6" fill="' + v[2] + '"/><circle cx="' + (v[0] + 4) + '" cy="' + (v[1] + 2) + '" r="1.1" fill="' + v[2] + '"/><circle cx="' + (v[0] + 1) + '" cy="' + (v[1] + 4) + '" r="0.9" fill="' + v[2] + '"/>';
+    });
+    s += '<path d="M0 ' + GROUND + ' H360 V150 H0Z" fill="#2a2230"/><path d="M0 ' + (GROUND + 8) + ' H360 M0 ' + (GROUND + 15) + ' H360" stroke="#7a6a5a" stroke-width="2"/>';
+    for (var x = 6; x < 360; x += 18) s += '<rect x="' + x + '" y="' + (GROUND + 5) + '" width="8" height="13" fill="#4a3424" opacity="0.8"/>';
+    s += '<path d="M0 ' + (GROUND + 8) + ' H360 M0 ' + (GROUND + 15) + ' H360" stroke="#9a8a7a" stroke-width="1.6"/>';
+    s += rock(34, GROUND + 2, 1.1, "#c87533") + rock(72, GROUND + 2, 1.1, "#c9d0d8") + rock(332, GROUND + 2, 1.3, "#b8603c") + signpost(265);
+    return s;
+  }
+
+  // ---------- Characters ----------
+  // Hero, facing right, feet at the origin. The arm holds a tool or a weapon.
+  function hero(x, y, o) {
+    o = o || {};
+    var held = "";
+    if (o.tool === "fejsze") held = '<path d="M10 5 V-15" stroke="#7a5632" stroke-width="2.2"/><path d="M10 -15 L18 -18 L19 -8 L10 -10Z" fill="#c9d0d8"/>';
+    else if (o.tool === "csakany") held = '<path d="M10 5 V-15" stroke="#7a5632" stroke-width="2.2"/><path d="M1 -12 Q10 -20 19 -11" fill="none" stroke="#c9d0d8" stroke-width="2.6"/>';
+    else if (o.weapon) {
+      var long = o.weapon.indexOf("kard") >= 0, col = o.weapon.indexOf("vas") === 0 ? "#dfe4ec" : "#d9a650";
+      held = '<path d="M10 2 V' + (long ? -21 : -12) + '" stroke="' + col + '" stroke-width="2.6"/><path d="M6 1 H14" stroke="#7a5632" stroke-width="2.4"/>';
+    }
+    var arm = '<g transform="translate(3,-27)"><g class="' + (o.swing ? "arm swing" : "arm") + '"' + (o.swing ? "" : ' transform="rotate(' + (o.raise ? -40 : -12) + ')"') + ">" +
+      held + '<path d="M0 0 L10 2" stroke="#3c5a8a" stroke-width="4.4" stroke-linecap="round"/><circle cx="10.5" cy="2" r="2.4" fill="#e8c09a"/></g></g>';
+    var shield = o.shield ? '<ellipse cx="-8" cy="-19" rx="4.5" ry="8" fill="' + (o.shield.indexOf("vas") === 0 ? "#8e96a6" : "#a0763a") + '" stroke="#e9e6d6" stroke-width="1"/>' : "";
+    var helm = o.helm ? '<path d="M-5.5 -40 Q1 -50 7.5 -40Z" fill="#8e96a6"/>' : '<path d="M-6 -40 Q1 -48 8 -40 L7 -38 Q1 -43 -5 -38Z" fill="#4a2e1a"/>';
+    var body = '<path d="M-7 0 L-5 -14 L-1 -14 L-2 0Z M2 0 L1 -14 L5 -14 L7 0Z" fill="#2b2238"/>' +
+      '<path d="M-9 -30 Q-17 -17 -14 -6 L-6 -12Z" fill="#8a2f2f"/>' +
+      '<path d="M-9 -12 Q-10 -30 0 -32 Q10 -30 9 -12Z" fill="' + (o.armor ? "#8e96a6" : "#3c5a8a") + '"/><rect x="-9" y="-16" width="18" height="3" fill="#5a3a1e"/>' +
+      '<circle cx="1" cy="-38" r="6.5" fill="#e8c09a"/>' + helm + '<circle cx="4.5" cy="-38.5" r="1" fill="#1a1420"/>';
+    return '<g transform="translate(' + n(x) + "," + n(y) + ')"><g class="hero ' + (o.cls || "") + '">' + shield + body + arm + "</g></g>";
+  }
+
+  // Creatures face left, feet at the origin. h = height for the health bar.
+  var MOBS = {
+    patkany: { h: 13, d: '<path d="M10 -4 Q22 -2 28 -8" fill="none" stroke="#5a4a50" stroke-width="1.6"/><ellipse cx="2" cy="-6" rx="11" ry="6" fill="#5a4e58"/><path d="M-6 -9 L-16 -4 L-6 -2Z" fill="#5a4e58"/><circle cx="-5" cy="-11" r="3" fill="#6a5e66"/><circle cx="-10" cy="-6" r="1.2" fill="#ff5a4a"/>' },
+    farkas: { h: 28, d: '<path d="M-22 -20 L-16 -27 L-14 -21 L-10 -26 L-8 -19 Q4 -22 14 -19 Q20 -18 24 -12 L32 -17 L27 -8 L20 -10 L19 0 L15 0 L14 -9 L-2 -9 L-3 0 L-7 0 L-8 -10 Q-12 -12 -14 -15 L-25 -14Z" fill="#566074"/><circle cx="-15" cy="-19.5" r="1.4" fill="#ffd34d"/>' },
+    vaddiszno: { h: 28, d: '<path d="M-23 -11 Q-22 -23 -10 -27 Q8 -31 20 -21 Q25 -14 22 -8 L20 0 L16 0 L15 -6 L-4 -6 L-6 0 L-10 0 L-11 -7 Q-18 -6 -25 -8Z" fill="#6a4a30"/><path d="M-10 -27 l3 -5 l2 4 l3 -5 l2 4 l3 -5 l2 4 l3 -4 l2 4" fill="none" stroke="#2a1d14" stroke-width="1.6"/><path d="M-22 -10 q-3 -4 0 -7" fill="none" stroke="#efe8d4" stroke-width="1.8"/><circle cx="-15" cy="-18" r="1.4" fill="#ff5a4a"/>' },
+    goblin: { h: 36, d: '<path d="M-6 0 L-4 -12 L-1 -12 L-2 0Z M2 0 L1 -12 L4 -12 L6 0Z" fill="#26331f"/><path d="M-8 -10 Q-9 -24 0 -25 Q9 -24 8 -10Z" fill="#5a4a2e"/><circle cx="0" cy="-30" r="7" fill="#4f7a3a"/><path d="M-5 -32 L-16 -37 L-6 -27Z M5 -32 L15 -37 L6 -27Z" fill="#4f7a3a"/><path d="M-5 -20 L-13 -16" stroke="#4f7a3a" stroke-width="3.6" stroke-linecap="round"/><path d="M-13 -16 L-22 -21" stroke="#b8a890" stroke-width="2"/><circle cx="-3.5" cy="-31" r="1.2" fill="#ffd34d"/><circle cx="1.5" cy="-31" r="1.2" fill="#ffd34d"/>' },
+    goblinvezer: { h: 50, d: '<g transform="scale(1.4)"><path d="M-6 0 L-4 -12 L-1 -12 L-2 0Z M2 0 L1 -12 L4 -12 L6 0Z" fill="#26331f"/><path d="M-9 -10 Q-10 -25 0 -26 Q10 -25 9 -10Z" fill="#6a2e2a"/><circle cx="0" cy="-30" r="7" fill="#3f6a2e"/><path d="M-5 -32 L-16 -37 L-6 -27Z M5 -32 L15 -37 L6 -27Z" fill="#3f6a2e"/><path d="M-7 -34 Q0 -42 7 -34Z" fill="#8e96a6"/><path d="M-6 -36 L-10 -42 M6 -36 L10 -42" stroke="#e9e6d6" stroke-width="1.4"/><path d="M-6 -20 L-12 -14" stroke="#3f6a2e" stroke-width="3.6" stroke-linecap="round"/><path d="M-12 -14 L-16 -28" stroke="#6b4a2a" stroke-width="2"/><circle cx="-16" cy="-29" r="4" fill="#5a5a66"/><circle cx="-3.5" cy="-31" r="1.2" fill="#ff5a4a"/><circle cx="1.5" cy="-31" r="1.2" fill="#ff5a4a"/></g>' },
+    denever: { h: 54, d: '<g transform="translate(0,-40)"><g class="flap"><path d="M0 0 Q-10 -12 -24 -6 Q-18 -3 -16 2 Q-10 -2 0 2 Q10 -2 16 2 Q18 -3 24 -6 Q10 -12 0 0Z" fill="#2a2236"/></g><ellipse cx="0" cy="1" rx="4" ry="5.5" fill="#2a2236"/><path d="M-3 -4 L-2 -8 L0 -4 L2 -8 L3 -4" fill="#2a2236"/><circle cx="-1.5" cy="-1" r="0.9" fill="#ff5a4a"/><circle cx="1.5" cy="-1" r="0.9" fill="#ff5a4a"/></g>' },
+    kobold: { h: 32, d: '<path d="M-5 0 L-4 -10 L-1 -10 L-2 0Z M2 0 L1 -10 L4 -10 L5 0Z" fill="#2a2018"/><path d="M-8 -9 Q-9 -21 0 -22 Q9 -21 8 -9Z" fill="#6a4a2e"/><circle cx="0" cy="-26" r="6" fill="#b06a4a"/><path d="M-7 -28 Q0 -38 7 -28Z" fill="#8a7a3a"/><rect x="-1.5" y="-37" width="3" height="5" fill="#efe8d4"/><ellipse class="flame" cx="0" cy="-39" rx="1.5" ry="2.4" fill="#ffc94d"/><path d="M-5 -16 L-11 -12" stroke="#b06a4a" stroke-width="3" stroke-linecap="round"/><path d="M-11 -12 L-12 -26" stroke="#6b4a2a" stroke-width="1.8"/><path d="M-19 -24 Q-12 -30 -5 -25" fill="none" stroke="#c9d0d8" stroke-width="2"/><circle cx="-2.5" cy="-26" r="1" fill="#ffd34d"/>' },
+    pok: { h: 22, d: '<path d="M-8 -9 L-18 -18 L-24 0 M-6 -9 L-12 -20 L-16 0 M4 -9 L12 -20 L16 0 M6 -9 L18 -18 L24 0" fill="none" stroke="#1e1824" stroke-width="2"/><ellipse cx="5" cy="-10" rx="11" ry="8.5" fill="#2a2030"/><path d="M5 -16 l2 4 l-4 0Z" fill="#a03a3a"/><circle cx="-8" cy="-9" r="5.5" fill="#2a2030"/><circle cx="-11" cy="-10" r="1" fill="#ff5a4a"/><circle cx="-9" cy="-12" r="1" fill="#ff5a4a"/><circle cx="-12.5" cy="-7.5" r="0.8" fill="#ff5a4a"/>' },
+    csontvaz: { h: 40, d: '<g fill="none" stroke="#e6e0cc" stroke-width="2" stroke-linecap="round"><path d="M-4 0 L-3 -13 M4 0 L3 -13 M-3 -13 H3 M0 -13 V-28"/><path d="M-6 -16 Q0 -18 6 -16 M-6 -20 Q0 -22 6 -20 M-6 -24 Q0 -26 6 -24"/><path d="M-1 -27 L-10 -20 L-14 -30"/></g><path d="M-14 -30 L-15 -42" stroke="#6b4a2a" stroke-width="1.8"/><path d="M-22 -40 Q-15 -46 -8 -41" fill="none" stroke="#9aa0aa" stroke-width="2"/><circle cx="0" cy="-33" r="6" fill="#e6e0cc"/><circle cx="-2.5" cy="-33.5" r="1.4" fill="#1a1420"/><circle cx="2" cy="-33.5" r="1.4" fill="#1a1420"/><path d="M-2 -29 h4" stroke="#1a1420" stroke-width="0.8"/>' },
+    koboldkiraly: { h: 60, d: '<g transform="scale(1.7)"><path d="M10 -2 Q4 -22 0 -24 Q-6 -20 -10 -2Z" fill="#7a1f2a"/><path d="M-5 0 L-4 -10 L-1 -10 L-2 0Z M2 0 L1 -10 L4 -10 L5 0Z" fill="#2a2018"/><path d="M-8 -9 Q-9 -21 0 -22 Q9 -21 8 -9Z" fill="#6a4a2e"/><circle cx="0" cy="-26" r="6" fill="#b06a4a"/><path d="M-6 -30 L-6 -36 L-3 -32 L0 -37 L3 -32 L6 -36 L6 -30Z" fill="#ffd34d"/><path d="M-5 -16 L-11 -12" stroke="#b06a4a" stroke-width="3" stroke-linecap="round"/><path d="M-11 -12 L-12 -27" stroke="#6b4a2a" stroke-width="1.8"/><rect x="-17" y="-31" width="10" height="6" rx="1" fill="#9aa0aa"/><circle cx="-2.5" cy="-26" r="1" fill="#ff5a4a"/></g>' }
+  };
+
+  function foePositions(k) { return k === 1 ? [262] : k === 2 ? [222, 290] : [192, 246, 300]; }
+
+  // ---------- Public renderers ----------
+  // o: { loc, played, forge, done, eq, gather: {tool, node} | null }
+  function place(o) {
+    var p = phase(o.played), s = o.loc === "falu" ? village(p, o) : o.loc === "erdo" ? forest(p) : mine();
+    var eq = o.eq || {}, look = { weapon: eq.fegyver, shield: eq.pajzs, helm: eq.sisak, armor: eq.mellvert };
+    if (o.gather) {
+      var node = o.gather.node, tree = node === "nyirfa" || node === "tolgyfa";
+      s += tree ? (node === "nyirfa" ? birch(196, GROUND + 2, 1.2) : oak(200, GROUND + 2, 1.15)) : rock(194, GROUND + 3, 1.5, { rez: "#c87533", on: "#c9d0d8", vas: "#b8603c" }[node]);
+      s += hero(160, GROUND + 2, { tool: o.gather.tool, swing: true, helm: look.helm, armor: look.armor });
+      [0, 1, 2].forEach(function (i) { s += '<rect class="chip" style="animation-delay:' + (0.45 + i * 0.12).toFixed(2) + 's" x="' + (184 + i * 3) + '" y="' + (GROUND - 22 + i * 4) + '" width="3" height="3" fill="' + (tree ? "#d9c08a" : "#ffe27a") + '"/>'; });
+    } else if (o.loc !== "falu") {
+      s += hero(o.loc === "banya" ? 112 : 178, GROUND + 2, look);
+    } else {
+      // The hero walks to the building that was tapped.
+      s += hero({ bolt: 116, fogado: 186, kovacs: 280, lada: 84 }[o.at] || 170, GROUND + 4, look);
+    }
+    s += o.loc === "falu" ? villageHot() : o.loc === "erdo" ? forestHot(o) : mineHot(o);
+    return wrap(s, o.loc === "banya" ? "A bánya mélyén" : p.name, true);
+  }
+
+  // c: { loc, played, eq, foes: [{id, hp, max}], target, fx: [{to: 'hero'|index, kind: 'hit'|'miss'|'heal'|'block', n}] }
+  function combat(c) {
+    var p = phase(c.played), s = c.loc === "erdo" ? forest(p) : c.loc === "banya" ? mine() : village(p, c);
+    s += '<rect width="' + W + '" height="' + H + '" fill="#05061a" opacity="0.15"/>';
+    // Characters are drawn 1.25x larger around the middle of the ground line, so they read well on a phone.
+    s += '<g transform="translate(180,' + (GROUND + 2) + ') scale(1.25) translate(-180,' + -(GROUND + 2) + ')">';
+    var eq = c.eq || {}, fx = c.fx || [];
+    var heroHit = fx.some(function (f) { return f.to === "hero" && f.kind === "hit"; }), heroAtk = fx.some(function (f) { return f.to !== "hero" && (f.kind === "hit" || f.kind === "miss"); });
+    s += hero(92, GROUND + 2, { weapon: eq.fegyver, shield: eq.pajzs, helm: eq.sisak, armor: eq.mellvert, raise: true, cls: heroHit ? "hurt" : heroAtk ? "lunge" : "" });
+    var xs = foePositions(c.foes.length), tops = [];
+    c.foes.forEach(function (f, i) {
+      var m = MOBS[f.id], dead = f.hp <= 0, hurt = fx.some(function (e) { return e.to === i && e.kind === "hit"; }), x = xs[i];
+      s += '<g transform="translate(' + x + "," + (GROUND + 2) + ')"><g class="mob' + (dead ? " dead" : "") + (hurt ? " hurt" : "") + '" data-target="' + i + '">' +
+        '<rect x="-26" y="' + (-m.h - 4) + '" width="52" height="' + (m.h + 6) + '" fill="transparent"/>' + m.d + "</g></g>";
+      var top = GROUND + 2 - m.h - 10;
+      tops.push(top);
+      if (!dead) {
+        var fr = Math.max(0, f.hp) / f.max;
+        s += '<rect x="' + (x - 14) + '" y="' + top + '" width="28" height="4" fill="#05061a" opacity="0.7"/><rect x="' + (x - 14) + '" y="' + top + '" width="' + n(28 * fr) + '" height="4" fill="#e8564f"/>';
+        if (c.target === i) s += '<path d="M' + (x - 4) + " " + (top - 8) + " h8 l-4 5Z\" fill=\"#ffd34d\"/>";
+      }
+    });
+    var heroDelay = 0;
+    fx.forEach(function (f) {
+      var hx = f.to === "hero" ? 96 : xs[f.to], hy = f.to === "hero" ? GROUND - 54 : tops[f.to] - 4, d = 0;
+      if (f.to === "hero") { d = heroDelay; heroDelay += 0.35; }
+      var txt = f.kind === "hit" ? "-" + f.n : f.kind === "heal" ? "+" + f.n : f.kind === "block" ? "kivéd" : "mellé";
+      var col = f.kind === "hit" ? (f.to === "hero" ? "#ff7a70" : "#ffe27a") : f.kind === "heal" ? "#6fdc8c" : "#d9dcf0";
+      s += '<text class="fx" style="animation-delay:' + d.toFixed(2) + 's" x="' + hx + '" y="' + hy + '" fill="' + col + '" text-anchor="middle">' + txt + "</text>";
+    });
+    return wrap(s + "</g>", "");
+  }
+
+  // Parchment map of the region, portrait so it fills a phone screen. Known places carry data-go, so a tap travels;
+  // the swamp and the peaks are still fog. o: { loc, open: { banya: bool } }
+  function map(o) {
+    // Two layouts: portrait for phones, landscape (o.wide) for monitors. Same places, same geography (north is up).
+    var L = o.wide ? { MW: 680, MH: 390, P: { erdo: [190, 220], falu: [360, 290], banya: [520, 150] },
+        peaks: [[200, 62], [250, 46], [300, 64], [350, 44], [400, 60], [450, 46], [500, 62], [550, 50]], fog: [160, 26, 420, 64], hills: [370, 22],
+        river: "M352 96 Q330 140 356 176 T344 250 Q336 300 400 330 T480 390", swamp: [86, 330], sfog: [24, 296, 132, 70], stext: [90, 380],
+        r1: "300 290", r2: "380 170", bridge: "M338 185 l26 -10", compass: [630, 340] }
+      : { MW: 360, MH: 500, P: { erdo: [100, 280], falu: [206, 396], banya: [272, 182] },
+        peaks: [[96, 84], [134, 66], [172, 86], [206, 62], [244, 80], [282, 70]], fog: [62, 44, 252, 66], hills: [188, 36],
+        river: "M196 112 Q176 160 204 204 T196 300 Q186 350 236 378 T300 492", swamp: [72, 440], sfog: [14, 404, 118, 74], stext: [72, 490],
+        r1: "150 350", r2: "190 230", bridge: "M180 226 l26 -10", compass: [318, 452] };
+    var MW = L.MW, MH = L.MH, locked = !(o.open && o.open.banya);
+    var P = L.P;
+    var s = '<defs><radialGradient id="mp-p" cx="0.5" cy="0.5" r="0.75"><stop offset="0.6" stop-color="#ecdcb4"/><stop offset="1" stop-color="#c9ad7a"/></radialGradient>' +
+      '<pattern id="mp-fog" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 10 L10 0" stroke="#8a7650" stroke-width="1" opacity="0.5"/></pattern></defs>' +
+      '<rect width="' + MW + '" height="' + MH + '" fill="url(#mp-p)"/><rect x="7" y="7" width="' + (MW - 14) + '" height="' + (MH - 14) + '" fill="none" stroke="#8a6a3a" stroke-width="2.5" stroke-dasharray="12 4 3 4"/>';
+    // Mountains (north, unexplored).
+    s += '<g fill="#bfa77a" stroke="#6b5434" stroke-width="1.4">' + L.peaks.map(function (m) {
+      return '<path d="M' + (m[0] - 26) + " " + (m[1] + 34) + " L" + m[0] + " " + m[1] + " L" + (m[0] + 26) + " " + (m[1] + 34) + 'Z"/><path d="M' + m[0] + " " + m[1] + " l-7 11 h14Z\" fill=\"#f6f1e2\"/>";
+    }).join("") + "</g>";
+    s += '<rect x="' + L.fog[0] + '" y="' + L.fog[1] + '" width="' + L.fog[2] + '" height="' + L.fog[3] + '" fill="url(#mp-fog)"/><text x="' + L.hills[0] + '" y="' + L.hills[1] + '" class="mp-l dim" text-anchor="middle">? Hegyek</text>';
+    // River.
+    var river = L.river;
+    s += '<path d="' + river + '" fill="none" stroke="#6f97b8" stroke-width="8" stroke-linecap="round"/><path d="' + river + '" fill="none" stroke="#a9c7dc" stroke-width="2.4"/>';
+    // Swamp (south-west, unexplored).
+    s += '<g transform="translate(' + L.swamp[0] + "," + L.swamp[1] + ')"><ellipse rx="54" ry="30" fill="#9aa26a"/><ellipse cx="-14" cy="-4" rx="16" ry="7" fill="#6f97b8"/><ellipse cx="18" cy="8" rx="12" ry="5" fill="#6f97b8"/>' +
+      '<path d="M-30 14 v-10 M-25 16 v-13 M30 -6 v-10 M35 -4 v-12" stroke="#4f5a2a" stroke-width="1.8"/></g>';
+    s += '<rect x="' + L.sfog[0] + '" y="' + L.sfog[1] + '" width="' + L.sfog[2] + '" height="' + L.sfog[3] + '" fill="url(#mp-fog)"/><text x="' + L.stext[0] + '" y="' + L.stext[1] + '" class="mp-l dim" text-anchor="middle">? Mocsár</text>';
+    // Roads, with a bridge where the mine road crosses the river.
+    s += '<path d="M' + P.falu[0] + " " + (P.falu[1] - 10) + " Q" + L.r1 + " " + (P.erdo[0] + 14) + " " + (P.erdo[1] + 20) + '" fill="none" stroke="#7a5a32" stroke-width="3" stroke-dasharray="7 5"/>';
+    s += '<path d="M' + (P.erdo[0] + 30) + " " + (P.erdo[1] - 10) + " Q" + L.r2 + " " + (P.banya[0] - 20) + " " + (P.banya[1] + 18) + '" fill="none" stroke="#7a5a32" stroke-width="3" stroke-dasharray="7 5"' + (locked ? ' opacity="0.45"' : "") + "/>";
+    s += '<path d="' + L.bridge + '" stroke="#7a5a32" stroke-width="5"/><path d="' + L.bridge + '" stroke="#a07a48" stroke-width="2.5"/>';
+    // Place art, drawn around (0,0) and scaled up.
+    var trees = "";
+    [[-28, -6], [-12, -18], [8, -10], [-20, 8], [2, 10], [22, 2], [-36, 14], [-6, 24], [26, 18], [14, -22]].forEach(function (p, i) {
+      trees += i % 3 === 1 ? '<path d="M' + p[0] + " " + (p[1] - 14) + " l7 14 h-14Z\" fill=\"#5e7f35\" stroke=\"#3f5a24\"/>" : '<circle cx="' + p[0] + '" cy="' + (p[1] - 7) + '" r="8" fill="#6f8f3c" stroke="#3f5a24"/>';
+      trees += '<path d="M' + p[0] + " " + p[1] + ' v4" stroke="#5a3e24" stroke-width="1.6"/>';
+    });
+    var vil = '<circle cx="-30" cy="-14" r="7" fill="#d9a43a" stroke="#8a6a20"/><circle cx="28" cy="-12" r="6" fill="#d9a43a" stroke="#8a6a20"/>';
+    [[-20, -2, 14], [0, -8, 18], [18, 2, 13], [-6, 12, 12]].forEach(function (h) {
+      vil += '<rect x="' + (h[0] - h[2] / 2) + '" y="' + (h[1] - h[2] * 0.6) + '" width="' + h[2] + '" height="' + h[2] * 0.6 + '" fill="#e2cfa4" stroke="#6b4a2a"/><path d="M' + (h[0] - h[2] / 2 - 2) + " " + (h[1] - h[2] * 0.6) + " L" + h[0] + " " + (h[1] - h[2] * 1.15) + " L" + (h[0] + h[2] / 2 + 2) + " " + (h[1] - h[2] * 0.6) + 'Z" fill="#a0442e" stroke="#6b4a2a"/>';
+    });
+    var mine = '<path d="M-28 16 L-2 -26 L26 16Z" fill="#a89878" stroke="#6b5434" stroke-width="1.2"/><path d="M-10 16 Q-1 -6 8 16Z" fill="#2a2230"/><path d="M-12 2 h22" stroke="#6b4a2a" stroke-width="2"/>';
+    if (locked) mine += '<g transform="translate(0,26)"><rect x="-7" y="-3" width="14" height="10" rx="1.5" fill="#6b5434"/><path d="M-4 -3 v-3.5 a4 4 0 0 1 8 0 v3.5" fill="none" stroke="#6b5434" stroke-width="2.2"/></g>';
+    function placeG(id, art, label, can) {
+      var c = P[id], here = o.loc === id;
+      return '<g class="mp-place' + (can ? "" : " locked") + (here ? " here" : "") + '"' + (can && !here ? ' data-go="' + id + '" role="button" tabindex="0" aria-label="' + label + '"' : "") + ">" +
+        '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="62" class="mp-hit"/><g transform="translate(' + c[0] + "," + c[1] + ') scale(1.55)">' + art + "</g>" +
+        '<text x="' + c[0] + '" y="' + (c[1] + 66) + '" class="mp-l" text-anchor="middle">' + label + "</text></g>";
+    }
+    s += placeG("erdo", trees, "Erdőszél", true) + placeG("falu", vil, "Hársfalva", true) + placeG("banya", mine, "Régi bánya", !locked);
+    // You are here.
+    var at = P[o.loc] || P.falu;
+    s += '<g transform="translate(' + at[0] + "," + (at[1] - 44) + ') scale(1.4)"><g class="mp-pin"><path d="M0 0 C-8 -10 -8 -20 0 -22 C8 -20 8 -10 0 0Z" fill="#c8402f" stroke="#5a1a12"/><circle cx="0" cy="-14" r="3.5" fill="#f6f1e2"/></g></g>';
+    // Compass.
+    s += '<g transform="translate(' + L.compass[0] + "," + L.compass[1] + ')" fill="#6b5434"><path d="M0 -20 L5 0 L0 20 L-5 0Z"/><path d="M-20 0 L0 -4 L20 0 L0 4Z" opacity="0.6"/><text x="0" y="-25" class="mp-l" text-anchor="middle" style="font-size:12px">É</text></g>';
+    return '<svg class="map-svg" viewBox="0 0 ' + MW + " " + MH + '" role="img" aria-label="A vidék térképe">' + s + "</svg>";
+  }
+
+  function wrap(inner, chip, live) {
+    return '<svg class="scene-svg" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="xMidYMid slice"' + (live ? ' role="group" aria-label="Helyszín"' : ' aria-hidden="true" focusable="false"') + ">" + inner + "</svg>" +
+      (chip ? '<span class="chip-t">' + chip + "</span>" : "");
+  }
+
+  return { DAY: DAY, PHASES: PHASES, phase: phase, place: place, combat: combat, map: map, MOBS: MOBS };
 })();
 
 (function () {
   "use strict";
   var KEY = "harsfalva-kronika-v1";
   var I = SIM.ITEMS, rnd = Math.random;
-  var S = null, tab = "hely", place = null, G = null, C = null, invSel = -1, logLines = [], toastT = 0;
+  var S = null, tab = "hely", place = null, G = null, C = null, invSel = -1, toastT = 0, sceneKey = "", logOpen = false;
 
-  function load() { try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); if (s && s.v === 1) return s; } } catch (e) {} return null; }
+  function load() { try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); if (s && (s.v === 1 || s.v === 2)) return SIM.migrate(s); } } catch (e) {} return null; }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
   function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function ic(id) { return '<svg class="ic" aria-hidden="true"><use href="#' + id + '"/></svg>'; }
@@ -488,8 +1274,11 @@ var SIM = (function () {
     var out = [];
     Object.keys(SIM.NODES).forEach(function (k) { var n = SIM.NODES[k]; if (n.skill === skill && n.req === level) out.push(n.name); });
     SIM.RECIPES.forEach(function (r) { if (r.skill === skill && r.req === level) out.push(I[r.out].name); });
-    if (skill === "kozelharc" && level === 5) out.push("Erős csapás");
-    if (skill === "vedekezes" && level === 5) out.push("Pajzsfal");
+    if (skill === "kard" && level === 5) out.push("Erős csapás");
+    if (skill === "pajzs" && level === 3) out.push("Pajzsütés");
+    if (skill === "tor" && (level === 10 || level === 20)) out.push("+1 ingyen tőr körönként");
+    if (skill === "pajzs" && (level === 10 || level === 20)) out.push("nagyobb Pajzsfal");
+    if (skill === "vedekezes") out.push("2 új mező a rácsodra");
     return out;
   }
   function levelUps(ups) {
@@ -497,27 +1286,58 @@ var SIM = (function () {
       var un = unlocks(u.skill, u.level);
       note(SIM.skillName(u.skill) + " " + u.level + ". szint!" + (un.length ? " Új: " + un.join(", ") + "." : ""), "good");
       toast(ic("i-star") + " " + SIM.skillName(u.skill) + " " + u.level + ". szint" + (un.length ? '<div class="small muted">Új: ' + esc(un.join(", ")) + "</div>" : ""));
-      if (u.skill === "vedekezes" || u.skill === "kozelharc") S.hp = Math.min(SIM.maxHp(S), S.hp + 3);
     });
   }
 
   // ---------- Status bar and tabs ----------
   function drawTop() {
     var mx = SIM.maxHp(S);
-    $("top").innerHTML = '<div class="row"><span class="nm">' + esc(S.name) + '</span><span class="stat"><span>Hősszint <b>' + SIM.heroLevel(S) +
-      '</b></span><span>' + ic("i-coin") + " <b>" + S.gold + '</b></span></span></div><div class="hpline">' + ic("i-heart") +
-      '<div class="bar"><i style="width:' + (100 * S.hp / mx).toFixed(1) + '%"></i></div><span>' + S.hp + "/" + mx + "</span></div>";
+    $("top").innerHTML = '<div class="row"><span class="nm">' + esc(S.name) + '</span><span class="hpline" title="Élő mezők a rácson">' + ic("i-heart") +
+      '<span class="bar"><i style="width:' + (100 * S.hp / mx).toFixed(1) + '%"></i></span><span>' + S.hp + "/" + mx + '</span></span><span class="stat"><span title="Hősszint">' + ic("i-star") + " <b>" + SIM.heroLevel(S) +
+      '</b></span><span title="Arany">' + ic("i-coin") + " <b>" + S.gold + "</b></span></span></div>";
   }
   var TABS = [["hely", "Helyszín", "i-house"], ["terkep", "Térkép", "i-map"], ["taska", "Hátizsák", "i-bag"], ["tudas", "Tudások", "i-star"], ["barkacs", "Barkács", "i-anvil"], ["naplo", "Napló", "i-book"]];
   function drawTabs() {
-    $("tabs-in").innerHTML = TABS.map(function (t) {
+    var box = $("tabs-in");
+    if (C && tab === "hely") { box.className = "in cmds"; box.innerHTML = combatMenu(); return; }
+    box.className = "in";
+    box.innerHTML = TABS.map(function (t) {
       var dis = C && t[0] !== "hely" && t[0] !== "taska";
       return '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (dis ? " disabled" : "") + ">" + ic(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("");
   }
 
+  // What the hero looks like: armor worn, plus the best owned weapon of the two main skills and the best shield.
+  function weaponId(wtype) { var best = null; Object.keys(I).forEach(function (k) { var it = I[k]; if (it.wtype === wtype && SIM.bestWeapon(S, wtype) === it) best = k; }); return best; }
+  function lookEq() {
+    var w = S.main.indexOf("kard") >= 0 && weaponId("kard") ? weaponId("kard") : weaponId("tor");
+    return { fegyver: w, pajzs: S.main.indexOf("pajzs") >= 0 ? weaponId("pajzs") : null, sisak: S.eq.sisak, mellvert: S.eq.mellvert };
+  }
+
+  // ---------- Scene ----------
+  function drawScene() {
+    var el = $("scene");
+    if (!S || tab !== "hely") { el.hidden = true; sceneKey = ""; return; }
+    el.hidden = false;
+    var key, html;
+    if (C) {
+      key = "c|" + C.F.round + "|" + C.foes.map(function (f) { return f.hp; }).join(",") + "|" + GRID.alive(C.F.hero);
+      if (key === sceneKey) return;
+      html = SCENE.combat({ loc: S.loc, played: S.played, eq: lookEq(), foes: C.foes, target: C.target, fx: C.fx, forge: S.quest >= 2, done: S.flags.done });
+    } else {
+      var tool = G ? SIM.NODES[G.node].tool : null;
+      var boss = bossHere();
+      key = "p|" + S.loc + "|" + SCENE.phase(S.played).id + "|" + (S.quest >= 2) + "|" + S.flags.done + "|" + (G ? G.node : "") + "|" + JSON.stringify(lookEq()) + "|" + place + "|" + boss;
+      if (key === sceneKey) return;
+      html = SCENE.place({ loc: S.loc, played: S.played, forge: S.quest >= 2, done: S.flags.done, eq: lookEq(), gather: G ? { node: G.node, tool: tool } : null, at: place, boss: boss }) +
+        '<span class="ttl">' + esc(SIM.AREAS[S.loc].name) + "</span>";
+    }
+    sceneKey = key; el.innerHTML = html;
+  }
+
   function draw() {
-    drawTop(); drawTabs();
+    drawTop(); drawTabs(); drawScene();
+    if (document.body) { document.body.classList.toggle("fight", !!C && tab === "hely"); document.body.classList.toggle("tab-terkep", tab === "terkep"); }
     var v = $("view");
     if (C && tab === "hely") v.innerHTML = viewCombat();
     else v.innerHTML = { hely: viewPlace, terkep: viewMap, taska: viewBag, tudas: viewSkills, barkacs: viewCraft, naplo: viewLog }[tab]();
@@ -532,9 +1352,15 @@ var SIM = (function () {
   function logBox(n) {
     return '<div class="log" aria-live="polite">' + (S.log.slice(0, n || 5).map(function (l, i) { return '<div class="' + (i === 0 ? "new " : "") + l.c + '">' + esc(l.t) + "</div>"; }).join("") || '<div>Csend van.</div>') + "</div>";
   }
+  // Collapsible log: closed it shows only the latest line, so the buttons stay on screen.
+  function logFold(n) {
+    var last = S.log[0];
+    return '<details class="logd" id="logd"' + (logOpen ? " open" : "") + '><summary>' + ic("i-book") + '<span class="last ' + (last ? last.c : "") + '">' + (last ? esc(last.t) : "Csend van.") +
+      '</span><span class="tg">' + (logOpen ? "kevesebb" : "napló") + "</span></summary>" + logBox(n) + "</details>";
+  }
   function viewPlace() {
     var a = SIM.AREAS[S.loc];
-    var h = '<section class="win"><h2>' + ic(S.loc === "falu" ? "i-house" : S.loc === "erdo" ? "i-tree" : "i-cave") + esc(a.name) + "</h2><p>" + esc(a.desc) + "</p>";
+    var h = '<section class="win"><p class="small muted">' + esc(a.desc) + ' <span class="tip">' + (S.loc === "falu" ? "Koppints egy házra." : bossHere() ? "Koppints a képre. A főellenség is ott vár." : "Koppints a fára, a kőre vagy a rejtekhelyre.") + "</span></p>";
     if (G) {
       var nd = SIM.NODES[G.node];
       h += '<div class="btns"><div class="lab"><span class="t">' + esc(nd.verb) + "…</span><span class=\"d\">" + I[nd.item].name + ": " + SIM.count(S, nd.item) + ' db a hátizsákban</span></div><div class="bar work"><i id="workbar" style="width:0%"></i></div>' +
@@ -542,26 +1368,11 @@ var SIM = (function () {
     }
     h += "</section>";
     if (S.loc === "falu") h += villageView();
-    else if (!G) {
-      h += '<section class="win"><h3>Gyűjtés</h3><div class="btns">';
-      a.nodes.forEach(function (k) {
-        var nd = SIM.NODES[k], why = SIM.gatherCheck(S, k);
-        h += btn('data-gather="' + k + '"', SIM.NODES[k].tool === "fejsze" ? "i-axe" : "i-pick", nd.verb, why || ("Magától ismétlődik. " + SIM.skillName(nd.skill) + " " + nd.req + "+"), SIM.gatherTime(S, k).toFixed(1) + " mp", { dis: !!why && why.indexOf("Tele") < 0 && why.indexOf("szint") >= 0 });
-      });
-      h += '</div><h3>Harc</h3><div class="btns">' + btn('data-look="1"', "i-eye", "Körülnézel", "Ellenfelet keresel. Itt élnek: " + a.foes.map(function (f) { return SIM.ENEMIES[f[0]].name.toLowerCase(); }).join(", ") + ".", "");
-      var boss = (S.loc === "erdo" && S.quest === 2 && S.questTaken) || (S.loc === "banya" && S.quest === 4 && S.questTaken);
-      if (boss) { var b = SIM.ENEMIES[a.boss]; h += btn('data-boss="1"', "i-skull", b.name, "Főellenség, " + b.lvl + ". szint. Előle nem lehet menekülni.", "", { prim: true }); }
-      h += "</div></section>";
-    }
-    h += '<section class="win"><h3>Történt</h3>' + logBox(5) + "</section>";
-    return h;
+    return logFold(8) + h;
   }
+  function bossHere() { return (S.loc === "erdo" && S.quest === 2 && S.questTaken) || (S.loc === "banya" && S.quest === 4 && S.questTaken); }
   function villageView() {
-    var h = '<section class="win"><div class="btns two">';
-    [["fogado", "i-bed", "Fogadó"], ["bolt", "i-coin", "Bolt"], ["kovacs", "i-anvil", "Kovácsműhely"], ["tuzhely", "i-pot", "Tűzhely"], ["lada", "i-chestbox", "Láda"]].forEach(function (p) {
-      h += btn('data-place="' + p[0] + '"', p[1], p[2], "", "", { sel: place === p[0] });
-    });
-    h += "</div></section>";
+    var h = "";
     if (place === "fogado") h += viewInn();
     if (place === "bolt") h += viewShop();
     if (place === "lada") h += viewChest();
@@ -584,7 +1395,8 @@ var SIM = (function () {
       else if (questReady()) h += '<div class="btns">' + btn('data-quest="done"', "i-star", "Átadod", q.reward ? "Jutalom: " + q.reward + " arany" : "", "", { prim: true }) + "</div>";
       else h += '<p class="muted small">Folyamatban.</p>';
     }
-    h += '<div class="btns">' + btn('data-rest="1"', "i-bed", "Leülsz pihenni", "Teljes gyógyulás, ingyen.", S.hp + "/" + SIM.maxHp(S)) + "</div></section>";
+    h += '<div class="btns">' + btn('data-rest="1"', "i-bed", "Leülsz pihenni", "Minden meződ visszanő, ingyen.", S.hp + "/" + SIM.maxHp(S)) +
+      btn('data-place="tuzhely"', "i-pot", "A tűzhelyhez mész", "Itt főzöl.", "") + "</div></section>";
     return h;
   }
   function viewShop() {
@@ -607,13 +1419,8 @@ var SIM = (function () {
 
   // ---------- Map ----------
   function viewMap() {
-    var h = '<section class="win"><h2>' + ic("i-map") + 'Térkép</h2><div class="btns">';
-    ["falu", "erdo", "banya"].forEach(function (k) {
-      var a = SIM.AREAS[k], locked = a.lock && !S.flags[a.lock];
-      h += btn('data-go="' + k + '"', k === "falu" ? "i-house" : k === "erdo" ? "i-tree" : "i-cave", a.name + (S.loc === k ? " (itt vagy)" : ""),
-        locked ? "Zárva. A goblin vezérnél lévő kulcs nyitja." : esc(a.desc), "", { dis: locked || S.loc === k });
-    });
-    return h + "</div></section>";
+    var h = '<section class="win map-win"><h2>' + ic("i-map") + 'Térkép</h2><div class="map">' + SCENE.map({ loc: S.loc, open: S.flags, wide: (window.innerWidth || 390) >= 900 }) + '</div><p class="small muted">Koppints egy helyre, és odamész.</p></section>';
+    return h;
   }
 
   // ---------- Bag ----------
@@ -621,7 +1428,7 @@ var SIM = (function () {
     var h = '<section class="win"><h2>' + ic("i-bag") + 'Hátizsák <span class="muted small">' + S.inv.length + "/" + SIM.SLOTS + '</span></h2><div class="grid">';
     for (var i = 0; i < SIM.SLOTS; i++) {
       var s = S.inv[i];
-      h += s ? '<button type="button" class="slot' + (invSel === i ? " sel" : "") + '" data-inv="' + i + '" aria-label="' + esc(I[s.id].name) + '">' + ic(I[s.id].icon) + (s.n > 1 ? '<span class="n">' + s.n + "</span>" : "") + "</button>"
+      h += s ? '<button type="button" class="slot' + (invSel === i ? " sel" : "") + '" data-inv="' + i + '" aria-label="' + esc(I[s.id].name) + '">' + ic(I[s.id].icon) + (s.n > 1 ? '<span class="n">' + s.n + "</span>" : "") + '<span class="nm" aria-hidden="true">' + esc(I[s.id].name) + "</span></button>"
         : '<span class="slot empty"></span>';
     }
     h += "</div>";
@@ -629,35 +1436,51 @@ var SIM = (function () {
     if (sel) {
       var it = I[sel.id], acts = [];
       if (SIM.EQ_KINDS.indexOf(it.kind) >= 0) acts.push(btn('data-use="equip"', it.icon, "Felveszed", "", ""));
-      if (it.kind === "food") acts.push(btn('data-use="eat"', "i-food", "Megeszed", "+" + it.heal + " életerő", ""));
+      if (it.kind === "food") acts.push(btn('data-use="eat"', "i-food", "Megeszed", "+" + healN(sel.id) + " mező", ""));
+      if (it.kind === "food" && !C) acts.push(btn('data-use="belt"', "i-bag", "Övtáskába", S.belt.length < SIM.BELT || SIM.beltCount(S, sel.id) ? "Harcban innen eszel." : "Tele az övtáska.", "", { dis: S.belt.length >= SIM.BELT && !SIM.beltCount(S, sel.id) }));
       if (S.loc === "falu" && !C) acts.push(btn('data-use="stash"', "i-chestbox", "Ládába teszed", "", ""));
       if (it.kind !== "quest" && !C) acts.push(btn('data-use="drop"', "i-run", "Eldobod", "", ""));
       h += '<div class="lab"><span class="t"><strong>' + esc(it.name) + (sel.n > 1 ? " ×" + sel.n : "") + '</strong></span><span class="d">' + esc(describe(it)) + "</span></div>" + (acts.length ? '<div class="btns two">' + acts.join("") + "</div>" : "");
     } else h += '<p class="muted small">Koppints egy tárgyra.</p>';
-    h += '</section><section class="win"><h3>Rajtad</h3><dl class="kv">';
-    [["fegyver", "Fegyver"], ["pajzs", "Pajzs"], ["sisak", "Sisak"], ["mellvert", "Mellvért"]].forEach(function (k) {
+    h += "</section>" + beltView() + '<section class="win"><h3>Rajtad</h3><dl class="kv">';
+    [["sisak", "Sisak"], ["mellvert", "Mellvért"]].forEach(function (k) {
       var id = S.eq[k[0]];
       h += "<dt>" + k[1] + "</dt><dd>" + (id ? esc(I[id].name) + ' <button type="button" class="btn" style="display:inline-flex;min-height:0;padding:2px 8px;font-size:.8rem" data-unequip="' + k[0] + '">le</button>' : '<span class="muted">nincs</span>') + "</dd>";
     });
-    var w = SIM.weapon(S);
-    h += "</dl><p class=\"small muted\">Sebzés: " + w.pow + "+, páncél: " + SIM.armor(S) + ", pajzs: " + SIM.block(S) + "</p>";
+    h += "</dl><p class=\"small muted\">Páncélos mezők a rácsodon: " + SIM.armor(S) + ". Fegyverek (elég, ha nálad vagy a ládában vannak): " +
+      (["tor", "kard", "pajzs"].map(function (t) { var b = SIM.bestWeapon(S, t); return b ? b.name : null; }).filter(Boolean).join(", ") || "nincs") + ".</p>";
     var tools = ["fejsze", "csakany"].map(function (t) { var b = SIM.bestTool(S, t); return b ? b.name : null; }).filter(Boolean);
     h += '<p class="small muted">Szerszámok: ' + (tools.length ? esc(tools.join(", ")) : "nincs") + "</p></section>";
     return h;
   }
+  function healN(id) { return (GRID.FOOD_SHAPE[id] || [0]).length; }
   function describe(it) {
-    if (it.kind === "food") return "Étel. " + it.heal + " életerőt ad vissza.";
-    if (it.kind === "fegyver") return "Fegyver. Sebzés " + it.pow + ", pontosság +" + it.acc + ".";
-    if (it.kind === "pajzs") return "Pajzs. Ennyivel ritkábban találnak el: " + it.block + ".";
-    if (it.kind === "sisak" || it.kind === "mellvert") return "Páncél. Ennyivel kisebb a sebzés: " + it.armor + ".";
+    var id = Object.keys(I).find(function (k) { return I[k] === it; });
+    if (it.kind === "food") return "Étel. Harcban " + healN(id) + " mezőt növeszt vissza a rácsodon, és a mérget is kitisztítja.";
+    if (it.wtype === "tor") return "Tőr (Tőrvívás). Szúrás: 1 mező, átüti a páncélt, vérzés " + (it.tier + 1) + ". Ingyen tőrök körönként.";
+    if (it.wtype === "kard") return "Kard (Kardforgatás). Vágás: " + (2 + it.tier) + " mező egy sorban.";
+    if (it.wtype === "pajzs") return "Pajzs (Pajzsvívás). Pajzsfal: " + (1 + it.tier) + " mező, körönként egyszer ingyen.";
+    if (it.kind === "sisak" || it.kind === "mellvert") return "Páncél. Ennyi meződ páncélos a harcban: " + it.armor + ".";
     if (it.kind === "tool") return "Szerszám. Elég, ha nálad van vagy a ládában.";
     if (it.kind === "quest") return "Küldetéstárgy.";
     return "Alapanyag. Eladási ár: " + it.price + " arany.";
   }
 
+  function beltView() {
+    var h = '<section class="win"><h3>' + ic("i-bag") + " Övtáska " + '<span class="muted small">' + S.belt.length + "/" + SIM.BELT + '</span></h3><p class="small muted">Harcban csak az övtáskából eszel. A főzött étel magától ide kerül, amíg van hely.</p><div class="btns two">';
+    h += S.belt.length ? S.belt.map(function (b, k) { return btn('data-unbelt="' + k + '"', I[b.id].icon, I[b.id].name + " ×" + b.n, "Koppintás: vissza a hátizsákba.", healN(b.id) + " mező", { dis: !!C }); }).join("") : '<p class="muted small">Üres.</p>';
+    return h + "</div></section>";
+  }
+
   // ---------- Skills ----------
   function viewSkills() {
-    var h = '<section class="win"><h2>' + ic("i-star") + 'Tudások</h2><p class="muted small">Hősszint: ' + SIM.heroLevel(S) + " (a tudások összege). Életerő: " + SIM.maxHp(S) + ".</p>";
+    var h = '<section class="win"><h2>' + ic("i-star") + 'Tudások</h2><p class="muted small">Hősszint: ' + SIM.heroLevel(S) + " (a tudások összege). Rács: " + SIM.maxHp(S) + " mező.</p>";
+    h += "<h3>Harci irány: kettőt viszel</h3>" + '<div class="mains">' + ["tor", "kard", "pajzs"].map(function (k) {
+      var on = S.main.indexOf(k) >= 0, sk = SIM.SKILLS.find(function (x) { return x.id === k; });
+      var d = { tor: "Ingyen tőrök körönként", kard: "+1 cselekvéspont", pajzs: "Ingyen Pajzsfal körönként" }[k];
+      return btn('data-main="' + k + '"', sk.icon, sk.name, d, on ? "viszed" : "", { sel: on, dis: S.loc !== "falu" || !!C });
+    }).join("") + "</div>" + (S.loc !== "falu" ? '<p class="small muted">Csak a faluban válthatsz.</p>' : '<p class="small muted">Koppints arra, amelyiket hozod; a régebbi választás kiesik.</p>');
+    if (S.grow > 0) h += growView();
     var grp = "";
     SIM.SKILLS.forEach(function (sk) {
       if (sk.group !== grp) { grp = sk.group; h += "<h3>" + grp + "</h3>"; }
@@ -666,6 +1489,18 @@ var SIM = (function () {
         '<span class="xpn" style="grid-column:2/4">' + (p.level >= SIM.CAP ? "csúcs" : p.have + " / " + p.need + " tp") + "</span></div>";
     });
     return h + "</section>";
+  }
+
+  // Level-up: new cells go next to the grid, wherever the player taps.
+  function growView() {
+    var GW = SIM.GW, h = "<h3>" + S.grow + ' új mező: koppints a sárga helyekre</h3><div class="gb hero" style="--cs:' + Math.min(30, Math.floor(((window.innerWidth || 390) - 70) / GW) - 3) + "px;grid-template-columns:repeat(" + GW + ',var(--cs))">';
+    for (var i = 0; i < GW * SIM.GH; i++) {
+      var on = S.grid.indexOf(i) >= 0;
+      if (on) h += '<span class="gc ' + (S.dead.indexOf(i) >= 0 ? "dead" : "alive") + '"></span>';
+      else if (SIM.canGrow(S, i)) h += '<button type="button" class="gc off grow" data-grow="' + i + '" aria-label="Új mező ide"></button>';
+      else h += '<span class="gc off"></span>';
+    }
+    return h + '</div><div class="btns">' + btn('data-grow="auto"', "i-star", "Rakd le helyettem", "A rács közepéhez legközelebb.", "") + "</div>";
   }
 
   // ---------- Crafting ----------
@@ -694,104 +1529,179 @@ var SIM = (function () {
     return h;
   }
 
-  // ---------- Combat ----------
+  // ---------- Combat (grid) ----------
+  // C: { F (GRID fight), boss, sel (card id), rot, dir, pv {side, i}, lines, fx }
   function startCombat(foes, boss) {
     stopGather();
-    C = { foes: foes, round: 1, cd: { eros: 0, fal: 0 }, menu: "main", target: 0, boss: !!boss, lines: [] };
-    C.lines.unshift((foes.length > 1 ? foes.length + " ellenfél" : foes[0].name) + " támad!");
+    var F = GRID.start(S, foes, boss);
+    GRID.plan(F, rnd);
+    C = { F: F, foes: F.foes, boss: !!boss, sel: null, rot: 0, dir: 1, pv: null, lines: [], fx: [], target: 0, round: 1, quick: !boss && SIM.quickOk(S, foes) };
+    cline((foes.length > 1 ? foes.length + " ellenfél" : foes[0].name) + " támad!");
     tab = "hely"; draw();
   }
   function cline(t, cls) { C.lines.unshift({ t: t, c: cls || "" }); if (C.lines.length > 30) C.lines.length = 30; }
-  function alive() { return C.foes.filter(function (f) { return f.hp > 0; }); }
-  function order() {
-    var list = alive().map(function (f) { return { who: f, spd: SIM.ENEMIES[f.id].spd }; });
-    list.push({ who: "hero", spd: 6.5 });
-    return list.sort(function (a, b) { return b.spd - a.spd; });
+  function cardList() { return GRID.actions(S); }
+  function cardById(id) { return cardList().find(function (a) { return a.id === id; }); }
+  // Cell size: on a wide screen each grid gets a column and the window height; on a phone the page width.
+  function cs(w, cols, rows) {
+    var W = window.innerWidth || 390, H = window.innerHeight || 800;
+    if (W >= 900) return Math.max(18, Math.min(52, Math.floor((Math.min(W, 1240) - 400) / 2 / cols) - 3, Math.floor((H - 300) / (rows || 6)) - 3));
+    return Math.max(18, Math.min(40, Math.floor((Math.min(W, 560) - w) / cols) - 3));
+  }
+  function boardHtml(b, side, foeIdx, size) {
+    var F = C.F, threat = {};
+    if (side === "hero") F.foes.forEach(function (f, k) { if (f.hp > 0 && f.intent) f.intent.cells.forEach(function (i) { threat[i] = (threat[i] || "") + (F.foes.length > 1 ? "ABC"[k] : ""); }); });
+    var pvCells = null;
+    if (C.pv && C.pv.side === (side === "hero" ? "hero" : "f" + foeIdx)) {
+      var a = cardById(C.sel);
+      pvCells = a ? GRID.cover(b, GRID.rotate(a.shape, C.rot), C.pv.i % b.w, Math.floor(C.pv.i / b.w)) : null;
+    }
+    var h = '<div class="gb ' + (side === "hero" ? "hero" : "foe") + '" style="--cs:' + size + "px;grid-template-columns:repeat(" + b.w + ',var(--cs))">';
+    b.cells.forEach(function (c, i) {
+      if (!c.on) { h += '<span class="gc off"></span>'; return; }
+      var k = "gc " + (c.alive ? "alive" : "dead");
+      if (c.alive && c.armor) k += " armor";
+      if (c.poison) k += " poison";
+      if (c.bleed) k += " bleed";
+      if (c.shield) k += " shield";
+      if (threat[i] !== undefined && c.alive) k += " threat";
+      if (pvCells && pvCells.indexOf(i) >= 0) k += " pv";
+      if (C.pv && !pvCells && C.pv.side === (side === "hero" ? "hero" : "f" + foeIdx) && C.pv.i === i) k += " pv bad";
+      var lab = (c.alive ? "élő" : "elhalt") + (c.armor ? ", páncélos" : "") + (c.poison ? ", mérgezett" : "");
+      h += '<button type="button" class="' + k + '" data-cell="' + (side === "hero" ? "hero" : foeIdx) + ":" + i + '"' + (threat[i] ? ' data-who="' + threat[i] + '"' : "") +
+        (c.bleed ? ' data-arrow="' + GRID.DIRS[c.bleed.dir][2] + '"' : "") + ' aria-label="' + lab + '"></button>';
+    });
+    return h + "</div>";
+  }
+  function intentText(f) {
+    var it = f.intent, mv = it.move;
+    if (mv.howl) return "<b>" + mv.name + "</b>: a következő ütése átüti a páncélt.";
+    if (mv.regrow) return "<b>" + mv.name + "</b>: " + mv.regrow + " sebe begyógyul.";
+    if (mv.poison) return "<b>" + mv.name + "</b>: " + it.cells.length + " meződet megmérgezi.";
+    return "<b>" + mv.name + "</b>: " + it.cells.length + " mező" + (it.power >= 2 ? ", átüti a páncélt" : "") + ".";
+  }
+  function shapeMini(a, r) {
+    var sh = GRID.rotate(a.shape, r), k = a.heal ? "heal" : a.shield ? "def" : "";
+    return '<span class="mini ' + k + '">' + sh.map(function (p) { return '<i style="grid-column:' + (p[0] + 1) + ";grid-row:" + (p[1] + 1) + '"></i>'; }).join("") + "</span>";
   }
   function viewCombat() {
-    var h = '<section class="win"><h2>' + ic("i-skull") + "Harc · " + C.round + ". kör</h2><div class=\"foes\">";
-    C.foes.forEach(function (f, i) {
-      var e = SIM.ENEMIES[f.id];
-      h += '<button type="button" class="foe' + (f.hp <= 0 ? " dead" : "") + (C.target === i && f.hp > 0 ? " sel" : "") + '" data-target="' + i + '"' + (f.hp <= 0 ? " disabled" : "") + ">" + ic(e.boss ? "i-skull" : "i-eye") +
-        "<span>" + esc(f.name + f.tag) + '</span><span class="lv">' + e.lvl + ". szint · " + Math.max(0, f.hp) + "/" + f.max + '</span><div class="bar"><i style="width:' + (100 * Math.max(0, f.hp) / f.max).toFixed(1) + '%"></i></div></button>';
+    var F = C.F, many = F.foes.length;
+    var h = '<section class="win"><div class="fight-h"><h2>' + ic("i-skull") + "Harc · " + F.round + '. kör</h2></div><div class="foesg">';
+    F.foes.forEach(function (f, k) {
+      var e = SIM.ENEMIES[f.id], size = cs(many > 1 ? 40 * many : 60, many > 1 ? Math.max(3, f.b.w) * many : Math.max(5, f.b.w), many > 1 ? f.b.h + 3 : f.b.h + 2);
+      h += '<div class="foeg' + (f.hp <= 0 ? " dead" : "") + '"><span class="nm">' + esc(f.name + f.tag) + '</span><span class="lv">' + e.lvl + ". sz. · " + f.hp + "/" + f.max + " mező</span>" +
+        boardHtml(f.b, "foe", k, size) + (f.hp > 0 && f.intent ? '<span class="intent">' + intentText(f) + "</span>" : "") + "</div>";
     });
-    h += '</div><p class="order">Sorrend: ' + order().map(function (o) { return o.who === "hero" ? "<b>Te</b>" : esc(o.who.name + o.who.tag); }).join(" · ") + "</p>";
-    var tf = C.foes[C.target];
-    if (tf && tf.hp > 0) h += '<p class="small muted">Találati esélyed: ' + Math.round(SIM.heroHitChance(S, tf, false)) + "%</p>";
-    h += '<div class="btns two">';
-    if (C.menu === "main") {
-      h += btn('data-cmd="attack"', "i-sword", "Támadás", "", "", { prim: true }) + btn('data-cmd="skill"', "i-bolt", "Képesség", "", "") +
-        btn('data-cmd="item"', "i-food", "Tárgy", "", "") + btn('data-cmd="flee"', "i-run", "Menekülés", C.boss ? "Nem lehet." : SIM.fleeChance(S, alive()) + "%", "", { dis: C.boss });
-    } else if (C.menu === "skill") {
-      var k = SIM.lv(S, "kozelharc"), v = SIM.lv(S, "vedekezes");
-      h += btn('data-ab="eros"', "i-bolt", "Erős csapás", k < 5 ? "Közelharc 5 kell." : C.cd.eros ? "Még " + C.cd.eros + " kör." : "Nagy ütés, utána védtelenebb vagy.", "", { dis: k < 5 || C.cd.eros > 0 }) +
-        btn('data-ab="fal"', "i-shield", "Pajzsfal", v < 5 ? "Védekezés 5 kell." : C.cd.fal ? "Még " + C.cd.fal + " kör." : "Egy körig alig sebeznek.", "", { dis: v < 5 || C.cd.fal > 0 }) +
-        btn('data-cmd="back"', "i-run", "Vissza", "", "");
-    } else {
-      var foods = S.inv.filter(function (s) { return I[s.id].kind === "food"; });
-      foods.forEach(function (s) { h += btn('data-eat="' + s.id + '"', "i-food", I[s.id].name + " ×" + s.n, "+" + I[s.id].heal + " életerő", ""); });
-      if (!foods.length) h += '<p class="muted small">Nincs nálad étel.</p>';
-      h += btn('data-cmd="back"', "i-run", "Vissza", "", "");
+    h += "</div></section>";
+    var hb = F.hero;
+    h += '<section class="win"><div class="fight-h"><h2>' + ic("i-heart") + esc(S.name) + '</h2><span class="order">' + GRID.alive(hb) + "/" + GRID.size(hb) + " mező</span></div>" +
+      boardHtml(hb, "hero", -1, cs(60, Math.max(6, hb.w), hb.h + 1)) + "</section>";
+    var res = '<div class="res"><span>Cselekvéspont</span> ' + Array.apply(null, Array(GRID.apMax(S))).map(function (x, k) { return "<i class='" + (k < F.ap ? "full" : "") + "'></i>"; }).join("") +
+      (GRID.freeDaggers(S) ? "<span>· Tőr: " + F.free + "</span>" : "") + "</div>";
+    var cards = cardList().map(function (a) {
+      var dis = !GRID.canUse(F, a), right = a.free ? "ingyen" : a.ap + " CsP";
+      return '<button type="button" class="card' + (C.sel === a.id ? " sel" : "") + '" data-card="' + a.id + '"' + (dis ? " disabled" : "") + '><span class="t">' + esc(a.name) + "</span>" +
+        shapeMini(a, C.sel === a.id ? C.rot : 0) + '<span class="m"><span>' + right + "</span><span>" + esc(a.desc) + "</span></span></button>";
+    }).join("");
+    var hint = "";
+    if (!C.sel) hint = "Válassz lapot, aztán koppints a rácsra.";
+    else {
+      var a = cardById(C.sel);
+      hint = C.pv ? "Koppints ugyanoda még egyszer a lerakáshoz." : a && a.on === "foe" ? "Koppints egy ellenfél rácsára." : "Koppints a saját rácsodra.";
+      if (a && a.bleed) hint += " Vérzés iránya: " + GRID.DIRS[C.dir][2];
     }
-    h += '</div><div class="log" aria-live="polite">' + C.lines.slice(0, 8).map(function (l, i) { var o = typeof l === "string" ? { t: l, c: "" } : l; return '<div class="' + (i === 0 ? "new " : "") + o.c + '">' + esc(o.t) + "</div>"; }).join("") + "</div></section>";
+    h += '<section class="win">' + res + '<div class="hint">' + hint + '</div><div class="cards">' + cards + "</div>" +
+      '<div class="log" aria-live="polite">' + C.lines.slice(0, 5).map(function (l, i) { return '<div class="' + (i === 0 ? "new " : "") + l.c + '">' + esc(l.t) + "</div>"; }).join("") + "</div></section>";
     return h;
   }
-  function heroAct(act) {
-    if (act.type === "attack" || act.type === "eros") {
-      var tf = C.foes[C.target];
-      if (!tf || tf.hp <= 0) { var a = alive(); tf = a[0]; C.target = C.foes.indexOf(tf); }
-      var strong = act.type === "eros", r = SIM.heroAttack(S, tf, strong, rnd);
-      if (r.hit) cline((strong ? "Erős csapás! " : "Eltalálod: ") + tf.name + tf.tag + ". " + r.dmg + " sebzés.", "good");
-      else cline("Mellé ütsz.");
-      levelUps(r.ups);
-      if (r.killed) {
-        var l = SIM.loot(S, tf, rnd);
-        cline(tf.name + tf.tag + " legyőzve." + (l.gold ? " +" + l.gold + " arany." : "") + (l.items.length ? " Zsákmány: " + l.items.map(function (x) { var id = x.split("@")[0]; return I[id].name + (x.indexOf("@") > 0 ? " (ládába, tele a zsák)" : ""); }).join(", ") + "." : ""), "gold");
-        levelUps(l.ups);
+  // The bottom bar in a fight: rotate, end the round, flee or quick fight.
+  function combatMenu() {
+    var a = C.sel ? cardById(C.sel) : null;
+    return btn('data-cmd="end"', "i-star", "Kör vége", "Az ellenfelek lépnek.", "", { prim: true }) +
+      btn('data-cmd="rot"', "i-bolt", a && a.bleed ? "Irány " + GRID.DIRS[C.dir][2] : "Forgat", "", "", { dis: !a || (a.shape.length < 2 && !a.bleed) }) +
+      (C.quick && C.F.round === 1 ? btn('data-cmd="quick"', "i-sword", "Gyors harc", "Jóval gyengébb ellenfél.", "") :
+        btn('data-cmd="flee"', "i-run", "Menekülés", C.boss ? "Nem lehet." : SIM.fleeChance(S, GRID.living(C.F)) + "%", "", { dis: C.boss }));
+  }
+  function tapCell(key) {
+    var parts = key.split(":"), side = parts[0] === "hero" ? "hero" : "f" + parts[0], i = +parts[1];
+    var a = C.sel ? cardById(C.sel) : null;
+    if (!a) return;
+    var F = C.F, foeIdx = side === "hero" ? -1 : +parts[0];
+    if ((a.on === "foe") !== (side !== "hero")) { cline(a.on === "foe" ? "Ez az ellenfél rácsára megy." : "Ez a saját rácsodra megy."); draw(); return; }
+    var b = side === "hero" ? F.hero : F.foes[foeIdx].b;
+    if (C.pv && C.pv.side === side && C.pv.i === i) {
+      var res = GRID.act(F, S, a, foeIdx, i % b.w, Math.floor(i / b.w), C.rot, C.dir);
+      if (res) {
+        var s;
+        if (a.shield) s = a.name + ": " + res.shield + " mező védve ebben a körben.";
+        else if (a.heal) s = a.name + ": " + res.heal + " mező visszanőtt" + (res.cure ? ", " + res.cure + " méreg kitisztult" : "") + ".";
+        else {
+          var f = F.foes[foeIdx];
+          s = a.name + " → " + f.name + f.tag + ": " + res.kill + " mező" + (res.armor ? ", " + res.armor + " páncél leverve" : "") + (a.bleed && res.kill && !SIM.ENEMIES[f.id].nobleed ? ", vérzik " + GRID.DIRS[C.dir][2] : "") + (res.stagger ? ", megtántorodik" : "") + ".";
+          C.fx.push({ to: foeIdx, kind: res.kill ? "hit" : "miss", n: res.kill });
+        }
+        cline(s, "good");
+        if (!GRID.canUse(F, a) || (a.food && !SIM.beltCount(S, a.food))) C.sel = null;
       }
-    } else if (act.type === "fal") cline("Pajzsfal! Magad elé emeled a pajzsot.", "good");
-    else if (act.type === "eat") {
-      var it = I[act.id], mx = SIM.maxHp(S), before = S.hp;
-      S.hp = Math.min(mx, S.hp + it.heal); SIM.remove(S, act.id, 1);
-      cline("Megeszed: " + it.name + ". +" + (S.hp - before) + " életerő.", "good");
-    } else if (act.type === "flee") {
-      if (rnd() * 100 < SIM.fleeChance(S, alive())) { cline("Elmenekülsz."); return "fled"; }
-      cline("Nem sikerül elmenekülni.", "bad");
+      C.pv = null;
+      if (F.over) return endCombat("won");
+      save(); draw(); return;
     }
-    return null;
+    C.pv = { side: side, i: i };
+    draw();
   }
   var FOE_TEXT = { patkany: "a bokádba harap", farkas: "a lábadba mar", vaddiszno: "nekedront", goblin: "rozsdás késsel vág", goblinvezer: "lesújt a buzogányával",
     denever: "az arcodba csap", kobold: "csákánnyal üt", pok: "beléd marja a fogát", csontvaz: "csontkezével lecsap", koboldkiraly: "lesújt a koronás kalapácsával" };
-  function round(act) {
-    var guard = act.type === "fal", weak = act.type === "eros", acted = false, outcome = null;
-    if (guard) C.cd.fal = 3;
-    if (weak) C.cd.eros = 2;
-    var seq = order();
-    for (var i = 0; i < seq.length; i++) {
-      var o = seq[i];
-      if (o.who === "hero") { outcome = heroAct(act); acted = true; if (outcome) break; continue; }
-      if (o.who.hp <= 0) continue;
-      var r = SIM.foeAttack(S, o.who, guard, weak && acted, rnd);
-      if (r.hit) cline(o.who.name + o.who.tag + " " + FOE_TEXT[o.who.id] + ". " + r.dmg + " sebzés.", "bad");
-      else cline(o.who.name + o.who.tag + " támad, de kivéded.");
-      levelUps(r.ups);
-      if (S.hp <= 0) { outcome = "dead"; break; }
-    }
-    C.cd.eros = Math.max(0, C.cd.eros - 1); C.cd.fal = Math.max(0, C.cd.fal - (guard ? 0 : 1));
-    if (guard) C.cd.fal = 2;
-    C.round++; C.menu = "main";
-    if (outcome === "dead") return endCombat("dead");
-    if (outcome === "fled") return endCombat("fled");
-    if (!alive().length) return endCombat("won");
-    if (C.foes[C.target].hp <= 0) C.target = C.foes.indexOf(alive()[0]);
+  function endRound() {
+    var F = C.F;
+    C.fx = [];
+    var rep = GRID.next(F, S, rnd);
+    if (rep.bleed) cline("A vérzés " + rep.bleed + " mezőt vitt el.", "good");
+    rep.lines.forEach(function (l) {
+      var f = F.foes.find(function (x) { return x.name + x.tag === l.who; });
+      var s = l.who + " – " + l.move + ": ";
+      if (l.howl) s += "a következő ütése erősebb.";
+      else if (l.regrow) s += l.regrow + " sebe begyógyult.";
+      else if (l.poisoned) s += l.poisoned + " meződ mérgezett" + (l.blocked ? ", " + l.blocked + " a pajzson akadt el" : "") + ".";
+      else s = l.who + " " + (f ? FOE_TEXT[f.id] : "támad") + ": " + l.hit + " meződ odaveszett" + (l.blocked ? ", " + l.blocked + " a pajzson akadt el" : "") + (l.armor ? ", " + l.armor + " páncél leverve" : "") + ".";
+      cline(s, l.hit ? "bad" : "");
+      if (l.hit || l.armor) C.fx.push({ to: "hero", kind: l.hit ? "hit" : "block", n: l.hit });
+    });
+    if (rep.poison) cline("A méreg " + rep.poison + " mezőt vitt el.", "bad");
+    C.sel = null; C.pv = null; C.round = F.round;
+    if (F.over === "win") return endCombat("won");
+    if (F.over === "lose") return endCombat("dead");
     save(); draw();
   }
+  function flee() {
+    if (rnd() * 100 < SIM.fleeChance(S, GRID.living(C.F))) { cline("Elmenekülsz."); return endCombat("fled"); }
+    cline("Nem sikerül elmenekülni.", "bad");
+    endRound();
+  }
+  function quickFight() {
+    var foes = C.F.foes.map(function (f) { return { id: f.id, name: f.name, tag: f.tag, max: f.max }; });
+    var q = GRID.quick(S, foes, rnd);
+    cline("Gyors harc: " + foes.map(function (f) { return f.name + f.tag; }).join(", ") + " legyőzve" + (q.lost ? ", " + q.lost + " meződ odaveszett" : "") + ".", "good");
+    levelUps(q.ups);
+    C.quickDone = true;
+    endCombat("won");
+  }
+  function lootAll() {
+    C.F.foes.forEach(function (f) {
+      var l = SIM.loot(S, f, rnd);
+      cline(f.name + f.tag + " legyőzve." + (l.gold ? " +" + l.gold + " arany." : "") + (l.items.length ? " Zsákmány: " + l.items.map(function (x) { var id = x.split("@")[0]; return I[id].name + (x.indexOf("@") > 0 ? " (ládába, tele a zsák)" : ""); }).join(", ") + "." : ""), "gold");
+      levelUps(l.ups);
+    });
+  }
   function endCombat(how) {
-    var wasBoss = C.boss, names = C.foes.map(function (f) { return f.name; });
-    C.lines.slice(0, 4).reverse().forEach(function (l) { note(typeof l === "string" ? l : l.t, typeof l === "string" ? "" : l.c); });
+    var wasBoss = C.boss, names = C.F.foes.map(function (f) { return f.name; });
+    if (!C.quickDone) levelUps(GRID.finish(C.F, S));
+    if (how === "won") lootAll();
+    C.lines.slice(0, 4).reverse().forEach(function (l) { note(l.t, l.c); });
     C = null;
+    if (S.grow > 0) toast(ic("i-heart") + " " + S.grow + ' új mező vár<div class="small muted">Tudások fül: rakd le a rácsodra.</div>');
     if (how === "dead") {
-      S.deaths++; S.hp = SIM.maxHp(S); S.loc = "falu"; place = "fogado";
+      S.deaths++; SIM.healAll(S); S.loc = "falu"; place = "fogado";
       note("Elestél. A fogadóban ébredsz, Bende teát hoz.", "bad");
       overlay('<h2>' + ic("i-skull") + 'Elestél</h2><p>Sötétség, aztán kamillaszag. A fogadóban ébredsz, Bende egy bögre teát tesz melléd.</p><p class="muted small">Semmit nem veszítettél. Pihenj, egyél, és próbáld újra.</p><div class="btns">' + btn('data-ov="close"', "i-bed", "Felkelsz", "", "", { prim: true }) + "</div>");
     } else if (how === "fled") note("Elmenekültél.");
@@ -866,7 +1776,7 @@ var SIM = (function () {
 
   // ---------- Events ----------
   document.addEventListener("click", function (ev) {
-    var el = ev.target.closest("[data-tab],[data-place],[data-go],[data-gather],[data-stop],[data-look],[data-boss],[data-quest],[data-rest],[data-buy],[data-sell],[data-stash],[data-take],[data-inv],[data-use],[data-unequip],[data-craft],[data-cmd],[data-ab],[data-eat],[data-target],[data-ov],[data-reset]");
+    var el = ev.target.closest("[data-tab],[data-place],[data-go],[data-gather],[data-stop],[data-look],[data-boss],[data-quest],[data-rest],[data-buy],[data-sell],[data-stash],[data-take],[data-inv],[data-use],[data-unequip],[data-craft],[data-cmd],[data-card],[data-cell],[data-main],[data-grow],[data-unbelt],[data-ov],[data-reset]");
     if (!el || el.disabled) return;
     var d = el.dataset;
     if (d.ov) {
@@ -877,7 +1787,7 @@ var SIM = (function () {
     }
     if (!S) return;
     if (d.tab) { tab = d.tab; invSel = -1; draw(); window.scrollTo(0, 0); return; }
-    if (d.place) { place = place === d.place ? null : d.place; if (d.place === "kovacs" || d.place === "tuzhely") { tab = "barkacs"; place = null; } draw(); return; }
+    if (d.place) { place = place === d.place && !ev.target.closest(".scene") ? null : d.place; if (d.place === "kovacs" || d.place === "tuzhely") { tab = "barkacs"; place = null; } draw(); return; }
     if (d.go) {
       stopGather(); S.loc = d.go; tab = "hely"; place = null;
       note("Megérkezel: " + SIM.AREAS[d.go].name + ".");
@@ -889,7 +1799,10 @@ var SIM = (function () {
     if (d.look) { stopGather(); return startCombat(SIM.encounter(S.loc, rnd, S)); }
     if (d.boss) { var b = SIM.AREAS[S.loc].boss, f = SIM.spawn(b); f.tag = ""; return startCombat([f], true); }
     if (d.quest) { if (d.quest === "take") questTake(); else questDone(); save(); draw(); return; }
-    if (d.rest) { S.hp = SIM.maxHp(S); note("Kipihented magad.", "good"); save(); draw(); return; }
+    if (d.rest) { SIM.healAll(S); note("Kipihented magad. Minden meződ visszanőtt.", "good"); save(); draw(); return; }
+    if (d.main) { if (S.loc !== "falu" || C) return; if (S.main.indexOf(d.main) < 0) { S.main = [S.main[1], d.main]; note("Harci irány: " + S.main.map(SIM.skillName).join(" és ") + "."); } save(); draw(); return; }
+    if (d.grow) { if (d.grow === "auto") SIM.autoGrow(S); else SIM.grow(S, +d.grow); save(); draw(); return; }
+    if (d.unbelt) { var bs = S.belt[+d.unbelt]; if (bs && !C) { var moved2 = 0; while (bs.n > 0 && (S.inv.some(function (x) { return x.id === bs.id; }) || SIM.freeSlots(S) > 0)) { var ex = S.inv.find(function (x) { return x.id === bs.id; }); if (ex) ex.n++; else S.inv.push({ id: bs.id, n: 1 }); bs.n--; moved2++; } if (bs.n <= 0) S.belt.splice(+d.unbelt, 1); note(moved2 ? "Visszatetted a hátizsákba." : "Tele a hátizsák.", moved2 ? "" : "bad"); } save(); draw(); return; }
     if (d.buy) { var it = I[d.buy]; if (S.gold >= it.buy && SIM.canAdd(S, d.buy)) { S.gold -= it.buy; SIM.add(S, d.buy, 1); note("Megvetted: " + it.name + "."); } else note(S.gold < it.buy ? "Nincs elég aranyad." : "Tele a hátizsák.", "bad"); save(); draw(); return; }
     if (d.sell) { var s = S.inv[+d.sell]; if (s) { var gain = I[s.id].price * s.n; S.gold += gain; note("Eladtad: " + I[s.id].name + (s.n > 1 ? " ×" + s.n : "") + ". +" + gain + " arany.", "gold"); S.inv.splice(+d.sell, 1); } save(); draw(); return; }
     if (d.stash) { var moved = 0; S.inv = S.inv.filter(function (x) { if (I[x.id].kind === "mat") { S.bank[x.id] = (S.bank[x.id] || 0) + x.n; moved += x.n; return false; } return true; }); note(moved ? moved + " alapanyag a ládában." : "Nincs mit betenni."); save(); draw(); return; }
@@ -898,7 +1811,8 @@ var SIM = (function () {
     if (d.use) {
       var sl = S.inv[invSel]; if (!sl) return;
       if (d.use === "equip") { SIM.equip(S, invSel); note("Felveszed: " + I[sl.id].name + "."); }
-      if (d.use === "eat") { if (C) { invSel = -1; tab = "hely"; return round({ type: "eat", id: sl.id }); } var mx = SIM.maxHp(S), b0 = S.hp; S.hp = Math.min(mx, S.hp + I[sl.id].heal); SIM.remove(S, sl.id, 1); note("Megeszed: " + I[sl.id].name + ". +" + (S.hp - b0) + " életerő.", "good"); }
+      if (d.use === "eat") { if (C) { invSel = -1; tab = "hely"; draw(); return; } var b0 = S.hp; SIM.healCells(S, healN(sl.id)); S.inv[invSel].n--; if (S.inv[invSel].n <= 0) S.inv.splice(invSel, 1); note("Megeszed: " + I[sl.id].name + ". +" + (S.hp - b0) + " mező.", "good"); }
+      if (d.use === "belt") { var bb = S.belt.find(function (x) { return x.id === sl.id; }); if (!bb && S.belt.length < SIM.BELT) { bb = { id: sl.id, n: 0 }; S.belt.push(bb); } if (bb) { bb.n += sl.n; S.inv.splice(invSel, 1); note("Övtáskába tetted: " + I[sl.id].name + "."); } }
       if (d.use === "stash") { S.bank[sl.id] = (S.bank[sl.id] || 0) + sl.n; S.inv.splice(invSel, 1); note("Ládába tetted: " + I[sl.id].name + "."); }
       if (d.use === "drop") { S.inv.splice(invSel, 1); note("Eldobtad: " + I[sl.id].name + "."); }
       invSel = -1; save(); draw(); return;
@@ -912,30 +1826,42 @@ var SIM = (function () {
       levelUps(res.ups); save(); draw(); return;
     }
     if (C) {
-      if (d.target) { C.target = +d.target; draw(); return; }
-      if (d.cmd === "attack") return round({ type: "attack" });
-      if (d.cmd === "flee") return round({ type: "flee" });
-      if (d.cmd === "skill" || d.cmd === "item" || d.cmd === "back") { C.menu = d.cmd === "back" ? "main" : d.cmd; draw(); return; }
-      if (d.ab) return round({ type: d.ab });
-      if (d.eat) return round({ type: "eat", id: d.eat });
+      if (d.card) { C.sel = C.sel === d.card ? null : d.card; C.rot = 0; C.pv = null; draw(); return; }
+      if (d.cell) return tapCell(d.cell);
+      if (d.cmd === "end") return endRound();
+      if (d.cmd === "flee") return flee();
+      if (d.cmd === "quick") return quickFight();
+      if (d.cmd === "rot") { var ca = C.sel && cardById(C.sel); if (ca && ca.bleed) C.dir = (C.dir + 1) % 8; else C.rot = (C.rot + 1) % 4; draw(); return; }
     }
     if (d.reset) { overlay('<h2>Új játék?</h2><p>Minden elvész: tudások, holmi, arany. Biztos?</p><div class="btns two">' + btn('data-ov="reset"', "i-skull", "Igen, előről", "", "") + btn('data-ov="close"', "i-run", "Mégse", "", "", { prim: true }) + "</div>"); return; }
   });
 
+  document.addEventListener("keydown", function (ev) {
+    var t = ev.target;
+    if ((ev.key === "Enter" || ev.key === " ") && t && t.getAttribute && t.getAttribute("role") === "button" && t.tagName.toLowerCase() === "g") { ev.preventDefault(); t.dispatchEvent(new MouseEvent("click", { bubbles: true })); }
+  });
+  document.addEventListener("toggle", function (ev) {
+    if (ev.target && ev.target.id === "logd") { logOpen = ev.target.open; var tg = ev.target.querySelector(".tg"); if (tg) tg.textContent = logOpen ? "kevesebb" : "napló"; }
+  }, true);
+
+  var resizeT = 0;
+  window.addEventListener("resize", function () { clearTimeout(resizeT); resizeT = setTimeout(function () { if (S && (C || tab === "terkep")) draw(); }, 150); });
+
   // ---------- Loop ----------
-  var last = performance.now(), regenAcc = 0;
+  var last = performance.now(), regenAcc = 0, sceneAcc = 0;
   function tick(now) {
     var dt = Math.min(1, (now - last) / 1000); last = now;
     if (S && !document.hidden) {
       S.played += dt;
       gatherTick(now);
-      if (!C && S.hp < SIM.maxHp(S)) { regenAcc += dt; if (regenAcc >= 4) { regenAcc = 0; S.hp++; drawTop(); } }
+      if (!C && S.dead.length) { regenAcc += dt; if (regenAcc >= 4) { regenAcc = 0; SIM.healCells(S, 1); drawTop(); } }
+      sceneAcc += dt; if (sceneAcc >= 1) { sceneAcc = 0; if (!C) drawScene(); }
     }
     requestAnimationFrame(tick);
   }
 
   S = load();
-  if (S) { S.hp = Math.min(S.hp, SIM.maxHp(S)); draw(); } else { S = null; drawTabs(); intro(0); }
+  if (S) { S.hp = SIM.maxHp(S) - S.dead.length; draw(); } else { S = null; drawTabs(); intro(0); }
   setInterval(function () { if (S) save(); }, 10000);
   requestAnimationFrame(tick);
 })();
