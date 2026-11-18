@@ -272,17 +272,28 @@ footer p { margin: 0; max-width: 72ch; }
     <p class="hint">Vidd az egeret egy rajz fölé, vagy koppints rá: előbújnak a részletek. Második koppintásra nyílik az oldal.</p>
   </header>
   <div class="filters" role="group" aria-label="Szűrés kategória szerint">
-      <button type="button" data-filter="mind" aria-pressed="true"><span>Mind</span><span class="n" aria-hidden="true">10</span><span class="sr">, 10 oldal</span></button>
+      <button type="button" data-filter="mind" aria-pressed="true"><span>Mind</span><span class="n" aria-hidden="true">11</span><span class="sr">, 11 oldal</span></button>
       <button type="button" data-filter="jatek" aria-pressed="false" data-kind="jatek"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path class="m-dot" d="M5.6 4.7a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM8 7.1a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8ZM10.4 9.5a.9.9 0 1 0 0 1.8a.9.9 0 1 0 0-1.8Z"/></svg><span>Játék</span><span class="n" aria-hidden="true">4</span><span class="sr">, 4 oldal</span></button>
       <button type="button" data-filter="tananyag" aria-pressed="false" data-kind="tananyag"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg><span>Tananyag</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
-      <button type="button" data-filter="utmutato" aria-pressed="false" data-kind="utmutato"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg><span>Útmutató</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
+      <button type="button" data-filter="utmutato" aria-pressed="false" data-kind="utmutato"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg><span>Útmutató</span><span class="n" aria-hidden="true">2</span><span class="sr">, 2 oldal</span></button>
       <button type="button" data-filter="kronika" aria-pressed="false" data-kind="kronika"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 2.5H13V11.5C13 12.6 12.1 13.5 11 13.5H4C2.9 13.5 2 12.6 2 11.5V10.5H10V11.5C10 12.6 10.9 13.5 12 13.5"/><path d="M5 2.5V10.5M7.2 5.3H10.8M7.2 7.8H10.8"/></svg><span>Krónika</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
       <button type="button" data-filter="kreativ" aria-pressed="false" data-kind="kreativ"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.8L9.5 6.5L14.2 8L9.5 9.5L8 14.2L6.5 9.5L1.8 8L6.5 6.5Z"/></svg><span>Kreatív</span><span class="n" aria-hidden="true">1</span><span class="sr">, 1 oldal</span></button>
       <button type="button" data-filter="kiserlet" aria-pressed="false" data-kind="kiserlet"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.8 2.5H10.2M6.8 2.5V6.4L3 12.4C2.6 13.1 3.1 14 3.9 14H12.1C12.9 14 13.4 13.1 13 12.4L9.2 6.4V2.5M4.6 10H11.4"/></svg><span>Kísérlet</span><span class="n" aria-hidden="true">2</span><span class="sr">, 2 oldal</span></button>
   </div>
   <p class="sr" id="filter-status" aria-live="polite"></p>
   <ul class="grid">
-    <li data-kind="tananyag"><div class="card featured" data-slug="tudastar">
+    <li data-kind="utmutato"><div class="card featured" data-slug="ekr">
+      <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg>Útmutató</span>
+      <p class="cap" aria-hidden="true"><b>EKR</b><span>Építési közbeszerzések szűrve</span></p>
+      <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln"><rect class="fp" x="46" y="18" width="68" height="86" rx="3"/><path class="thin" d="M56 72H104M56 82H104M56 92H90"/><path class="fg tw" d="M80 30L83.5 39.1L93.3 39.7L85.7 45.9L88.2 55.3L80 50L71.8 55.3L74.3 45.9L66.7 39.7L76.5 39.1Z"/></g></svg></div>
+      <div class="info">
+        <p class="meta"><span class="kind"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.8"/><path d="M10.6 5.4L9.1 9.1L5.4 10.6L6.9 6.9Z"/></svg>Útmutató</span></p>
+        <h2>EKR</h2>
+        <p class="desc">Építési közbeszerzések az EKR-ből: megyénként, típusonként és határidő szerint szűrhető lista, naptár, térkép és a kész elemzések.</p>
+        <a class="open" href="../ekr/" aria-label="EKR megnyitása">Megnyitás <span aria-hidden="true">→</span></a>
+      </div>
+    </div></li>
+    <li data-kind="tananyag"><div class="card" data-slug="tudastar">
       <span class="chip" aria-hidden="true"><svg class="mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 4.6C6.5 3.4 4.3 3.1 2 3.4V12.6C4.3 12.3 6.5 12.6 8 13.8C9.5 12.6 11.7 12.3 14 12.6V3.4C11.7 3.1 9.5 3.4 8 4.6ZM8 4.6V13.8"/></svg>Tananyag</span>
       <p class="cap" aria-hidden="true"><b>Tudástár</b><span>Tananyagok négy mélységben</span></p>
       <div class="art" aria-hidden="true"><svg class="art-v" viewBox="0 0 160 120"><g class="ln"><rect class="fr" x="20" y="92" width="120" height="14" rx="2"/><path d="M30 92V106"/><rect class="fp" x="127" y="95" width="10" height="8" rx="1"/><path d="M129 99H135"/><text class="lbl" x="37" y="102.5">1</text><rect class="ft" x="40" y="78" width="100" height="14" rx="2"/><path d="M50 78V92"/><rect class="fp" x="127" y="81" width="10" height="8" rx="1"/><path d="M129 85H135"/><text class="lbl" x="57" y="88.5">2</text><rect class="fl" x="60" y="64" width="80" height="14" rx="2"/><path d="M70 64V78"/><rect class="fp" x="127" y="67" width="10" height="8" rx="1"/><path d="M129 71H135"/><text class="lbl" x="77" y="74.5">3</text><rect class="fg" x="80" y="50" width="60" height="14" rx="2"/><path d="M90 50V64"/><rect class="fp" x="127" y="53" width="10" height="8" rx="1"/><path d="M129 57H135"/><text class="lbl" x="97" y="60.5">4</text>
@@ -461,7 +472,7 @@ footer p { margin: 0; max-width: 72ch; }
   <footer>
     <p>Ez a teljes lista: minden lap, ami valaha kikerült a műhelybe, a régebbiek és a félretettek is. A válogatás a <a href="../">főoldalon</a> van.</p>
     <p>Az oldalak tartalma bármikor, előzetes bejelentés nélkül változhat: javulhat, bővülhet, átalakulhat, vagy csendben eltűnhet. Ez nem hanyagság, hanem műhely. Amit ma itt látsz, az a mai állapot, és nem ígéret a holnapira.</p>
-    <p>10 oldal. Utolsó frissítés: 2026. október 27. Ne ess pánikba.</p>
+    <p>11 oldal. Utolsó frissítés: 2026. november 18. Ne ess pánikba.</p>
   </footer>
 </div>
 <script>
