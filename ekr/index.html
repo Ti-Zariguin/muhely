@@ -39,6 +39,10 @@ header p { margin: 0; color: var(--muted); font-size: .9rem; }
 .search { display: flex; gap: 8px; }
 .search input, .excl input { flex: 1; min-width: 0; font: 15px var(--f-body); padding: 7px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
 .search input:focus-visible, .excl input:focus-visible, .excl summary:focus-visible, .star:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.drow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: .85rem; color: var(--muted); }
+.drow input { font: 14px var(--f-body); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+.drow input:focus-visible, .drow button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.drow button { font: 500 .8rem var(--f-body); background: none; border: 1px solid var(--line); border-radius: 4px; padding: 3px 8px; color: var(--muted); cursor: pointer; }
 .excl { border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; background: var(--card); }
 .excl summary { cursor: pointer; font-size: .88rem; font-weight: 600; color: var(--muted); padding: 2px 0; }
 .excl[open] summary { margin-bottom: 8px; }
@@ -357,8 +361,13 @@ const FILTERS = [
 function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
 const clean = o => { for (const f of FILTERS) o[f.key] = (Array.isArray(o[f.key]) ? o[f.key] : []).filter(k => f.opts.some(x => x[0] === k)); return o; };
 const SEL = clean(load("ekr-szurok")), EXC = clean(load("ekr-kizar"));
+// Date ranges (ISO yyyy-mm-dd, "" = open end): p = published, d = submission deadline.
+const DRS = load("ekr-datum"); const DR = {}; for (const k of ["pa", "pb", "da", "db"]) DR[k] = /^\d{4}-\d{2}-\d{2}$/.test(DRS[k] || "") ? DRS[k] : "";
+const inRange = (v, a, b) => (!a && !b) || (!!v && (!a || v >= a) && (!b || v <= b));
+const dateOK = r => inRange(r.publishedIso, DR.pa, DR.pb) && inRange(r.deadline ? `${r.deadline[0]}-${String(r.deadline[1]).padStart(2, "0")}-${String(r.deadline[2]).padStart(2, "0")}` : null, DR.da, DR.db);
+const anyDate = () => !!(DR.pa || DR.pb || DR.da || DR.db);
 const TXT = load("ekr-szoveg"); let Q = typeof TXT.q === "string" ? TXT.q : "", NQ = typeof TXT.nq === "string" ? TXT.nq : "";
-function save() { try { localStorage.setItem("ekr-naptar", JSON.stringify({ mode: CAL.mode, open: cal && cal.open })); localStorage.setItem("ekr-terkep", JSON.stringify({ view: MAP.view, open: mp && mp.open }));  localStorage.setItem("ekr-szurok", JSON.stringify(SEL)); localStorage.setItem("ekr-kizar", JSON.stringify(EXC)); localStorage.setItem("ekr-szoveg", JSON.stringify({ q: Q, nq: NQ })); } catch (e) {} }
+function save() { try { localStorage.setItem("ekr-naptar", JSON.stringify({ mode: CAL.mode, open: cal && cal.open })); localStorage.setItem("ekr-terkep", JSON.stringify({ view: MAP.view, open: mp && mp.open }));  localStorage.setItem("ekr-szurok", JSON.stringify(SEL)); localStorage.setItem("ekr-kizar", JSON.stringify(EXC)); localStorage.setItem("ekr-szoveg", JSON.stringify({ q: Q, nq: NQ })); localStorage.setItem("ekr-datum", JSON.stringify(DR)); } catch (e) {} }
 const norm = x => String(x).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 const flat = v => Array.isArray(v) ? v.map(flat).join(" ") : String(v);
 const HAY = new Map(R.map(r => [r.id, norm([r.id, r.what, r.who, r.county, r.type, r.towns.join(" "), r.flags.join(" "), r.status, flat(r.details.map(d => d[1]))].join(" "))]));
@@ -372,9 +381,9 @@ const CALS = load("ekr-naptar"); const now = new Date();
 const CAL = { mode: CALS.mode === "A" ? "A" : "B", y: now.getFullYear(), m: now.getMonth() + 1, day: null };
 // Closed (deadline passed, evaluation stage, withdrawn) stay hidden unless a filter asks for them.
 const isClosed = r => { const d = daysLeft(r); return /Visszavon|Bírálat|Eredmény|Lezár|Szerződés/.test(r.status) || (r.deadline && new Date(r.deadline[0], r.deadline[1] - 1, r.deadline[2], r.deadline[3] || 0, r.deadline[4] || 0) < new Date()); };
-const wantClosed = () => SEL.hatarido.includes("lezarult") || SEL.allapot.includes("vissza");
+const wantClosed = () => SEL.hatarido.includes("lezarult") || SEL.allapot.includes("vissza") || (!!DR.db && DR.db < iso(now.getFullYear(), now.getMonth() + 1, now.getDate()));
 let forceClosed = false;  // set while counting the chips that reveal closed procedures
-const passCore = (r, skip) => (!isClosed(r) || forceClosed || wantClosed()) && !excluded(r) && passText(r) && FILTERS.every(f => passRow(r, f, skip));
+const passCore = (r, skip) => (!isClosed(r) || forceClosed || wantClosed()) && !excluded(r) && passText(r) && dateOK(r) && FILTERS.every(f => passRow(r, f, skip));
 const MAPS = load("ekr-terkep"); const MAP = { view: MAPS.view === "orszag" ? "orszag" : "4megye", town: null };
 const dayOK = r => !CAL.day || dateOf(r, CAL.mode) === CAL.day;
 const townOK = r => !MAP.town || (r.pts || []).some(p => p[3] === MAP.town);
@@ -384,7 +393,7 @@ const sw = el("div", "search"), si = el("input"); si.type = "search"; si.placeho
 let tmr; si.addEventListener("input", () => { clearTimeout(tmr); tmr = setTimeout(() => { Q = si.value; save(); render(); }, 200); });
 sw.append(si); bar.append(sw);
 const fstat = el("div", "fstat"), fcount = el("span"), fclear = el("button", null, "Szűrők törlése"); fclear.type = "button";
-fclear.addEventListener("click", () => { for (const f of FILTERS) { SEL[f.key] = []; EXC[f.key] = []; } Q = NQ = ""; CAL.day = null; MAP.town = null; si.value = ni.value = ""; save(); render(); });
+fclear.addEventListener("click", () => { for (const f of FILTERS) { SEL[f.key] = []; EXC[f.key] = []; } Q = NQ = ""; for (const k in DR) DR[k] = ""; for (const x of dateInputs) x.value = ""; CAL.day = null; MAP.town = null; si.value = ni.value = ""; save(); render(); });
 fstat.append(fcount, fclear);
 for (const f of FILTERS) {
   const row = el("div", "frow"), lab = el("span", null, f.label), g = el("div", "bar");
@@ -395,6 +404,15 @@ for (const f of FILTERS) {
     chips.push({ b, f, k, n, t }); g.append(b);
   }
   row.append(lab, g); bar.append(row);
+}
+const dateInputs = [];
+for (const [lab, a, b] of [["Meghirdetés", "pa", "pb"], ["Beadás", "da", "db"]]) {
+  const row = el("div", "frow"), g = el("div", "drow"); g.setAttribute("role", "group"); g.setAttribute("aria-label", lab + " dátuma");
+  const mk = (k, txt) => { const i = el("input"); i.type = "date"; i.value = DR[k]; i.setAttribute("aria-label", `${lab} ${txt}`);
+    i.addEventListener("change", () => { DR[k] = /^\d{4}-\d{2}-\d{2}$/.test(i.value) ? i.value : ""; save(); render(); }); dateInputs.push(i); return i; };
+  const ia = mk(a, "-tól"), ib = mk(b, "-ig"), x = el("button", null, "×"); x.type = "button"; x.title = "Dátum törlése"; x.setAttribute("aria-label", lab + " dátumának törlése");
+  x.addEventListener("click", () => { DR[a] = DR[b] = ""; ia.value = ib.value = ""; save(); render(); });
+  g.append(ia, "-tól", ib, "-ig", x); row.append(el("span", null, lab), g); bar.append(row);
 }
 const ex = el("details", "excl"), exs = el("summary"), exi = el("div", "inner"); ex.append(exs, exi);
 try { ex.open = localStorage.getItem("ekr-kizar-nyitva") === "1"; } catch (e) {}
@@ -522,7 +540,7 @@ function render() {
   const rows = R.filter(r => pass(r));
   list.replaceChildren(); starButtons.clear();
   rows.forEach(r => list.append(ribbon(r)));
-  const any = CAL.day || MAP.town || Q.trim() || NQ.trim() || FILTERS.some(f => SEL[f.key].length || EXC[f.key].length);
+  const any = anyDate() || CAL.day || MAP.town || Q.trim() || NQ.trim() || FILTERS.some(f => SEL[f.key].length || EXC[f.key].length);
   if (!rows.length) list.append(el("p", "empty", "Ezekkel a szűrőkkel és kereséssel most nincs eljárás a kivonatban."));
   const nClosed = wantClosed() ? 0 : R.filter(isClosed).length;
   fcount.textContent = (any ? `${rows.length} / ${R.length} eljárás látszik.` : `${rows.length} eljárás látszik. Több szűrő is kijelölhető.`)
