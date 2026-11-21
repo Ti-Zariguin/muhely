@@ -491,7 +491,7 @@ function ribbon(r) {
   }
   // Third button (koma TG 5617): "Alkalmassági kivonat", 1-2 page A4 PDF from Konrad on his bot.
   {
-    const a3 = el("a", "req kifreq", "Kivonat"); colorize(a3, r.group); a3.href = KONRAD_BOT; a3.target = "_blank"; a3.rel = "noopener";
+    const a3 = el("a", "req kifreq", "Alkalmassági kivonat"); colorize(a3, r.group); a3.href = KONRAD_BOT; a3.target = "_blank"; a3.rel = "noopener";
     const cmd3 = "Kivonat: " + r.id;
     a3.title = `Alkalmassági és beadási kivonat (PDF) Konradtól; küldd el neki: „${cmd3}”.`;
     a3.addEventListener("click", async ev => { ev.stopPropagation();
