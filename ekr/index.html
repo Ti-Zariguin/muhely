@@ -489,6 +489,16 @@ function ribbon(r) {
       try { await navigator.clipboard.writeText(cmd2); bar.textContent = `Vágólapra téve: „${cmd2}”. Illeszd be Konradnak, és küldd el. Ha kész, Konrad szól.`; } catch (e) {} });
     act.append(a2);
   }
+  // Third button (koma TG 5617): "Alkalmassági kivonat", 1-2 page A4 PDF from Konrad on his bot.
+  {
+    const a3 = el("a", "req kifreq", "Kivonat"); colorize(a3, r.group); a3.href = KONRAD_BOT; a3.target = "_blank"; a3.rel = "noopener";
+    const cmd3 = "Kivonat: " + r.id;
+    a3.title = `Alkalmassági és beadási kivonat (PDF) Konradtól; küldd el neki: „${cmd3}”.`;
+    a3.addEventListener("click", async ev => { ev.stopPropagation();
+      const bar = document.getElementById("reqbar"); bar.textContent = `Konrad botja nyílik meg; küldd el neki: „${cmd3}”.`;
+      try { await navigator.clipboard.writeText(cmd3); bar.textContent = `Vágólapra téve: „${cmd3}”. Illeszd be Konradnak, és küldd el. A PDF-et a botján küldi.`; } catch (e) {} });
+    if (KONRAD_BOT) act.append(a3);
+  }
   rb.append(sb, blk, head, act, body);
   const wrap = el("div", "item"); wrap.append(rb); if (box) wrap.append(box); if (tan) wrap.append(tan);
   ITEM_OF.set(r.id, wrap);
