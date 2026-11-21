@@ -470,8 +470,27 @@ function ribbon(r) {
       try { await navigator.clipboard.writeText(cmd); bar.textContent = `Vágólapra téve: „${cmd}”. Illeszd be Konradnak, és küldd el. Ha kész, Konrad szól.`; } catch (e) {} });
     act.append(a);
   }
+  // Second button (koma TG 5595): "Műszaki elemzés" from the public technical documents and plans.
+  // Done: opens the analysis box; not yet: opens Konrad's bot with "Elemezd a terveket: <EKR-id>".
+  const tan = r.techAnalysis && r.techAnalysis.length ? analysisEl(r, true) : null;
+  if (tan) {
+    const tb = el("button", "req"); tb.type = "button"; colorize(tb, r.group); tb.dataset.state = "done";
+    tb.textContent = "Műszaki elemzés ▾"; tb.setAttribute("aria-expanded", "false");
+    tb.addEventListener("click", () => { tan.hidden = !tan.hidden; tb.setAttribute("aria-expanded", tan.hidden ? "false" : "true"); if (!tan.hidden) tan.scrollIntoView({ block: "nearest", behavior: "smooth" }); });
+    tan._close.addEventListener("click", () => tb.setAttribute("aria-expanded", "false"));
+    act.append(tb);
+  }
+  if (false) {
+    const a2 = el("a", "req kifreq", "Műszaki elemzés"); colorize(a2, r.group); a2.href = KONRAD_BOT; a2.target = "_blank"; a2.rel = "noopener";
+    const cmd2 = "Elemezd a terveket: " + r.id;
+    a2.title = `Konrad botja nyílik meg; küldd el neki: „${cmd2}”.`;
+    a2.addEventListener("click", async ev => { ev.stopPropagation();
+      const bar = document.getElementById("reqbar"); bar.textContent = `Konrad botja nyílik meg; küldd el neki: „${cmd2}”.`;
+      try { await navigator.clipboard.writeText(cmd2); bar.textContent = `Vágólapra téve: „${cmd2}”. Illeszd be Konradnak, és küldd el. Ha kész, Konrad szól.`; } catch (e) {} });
+    act.append(a2);
+  }
   rb.append(sb, blk, head, act, body);
-  const wrap = el("div", "item"); wrap.append(rb); if (box) wrap.append(box);
+  const wrap = el("div", "item"); wrap.append(rb); if (box) wrap.append(box); if (tan) wrap.append(tan);
   ITEM_OF.set(r.id, wrap);
   let level = 0, byHover = false;
   const set = n => { level = n; L[1].hidden = n < 1; L[2].hidden = n < 2; L[3].hidden = n < 3; head.setAttribute("aria-expanded", n > 0 ? "true" : "false"); };
@@ -694,4 +713,3 @@ function render() {
 }
 render();
 </script>
-
