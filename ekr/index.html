@@ -295,6 +295,13 @@ function kifEl(r) {
     box.append(sec);
   });
   box.append(el("p", null, "A zárójeles sorszámok a felhívás sorai."));
+  // Print only the Kifejtés with Simon (koma TG 5459), same pattern as "PDF Simontól" on level 1.
+  const row = el("div", "prnrow");
+  const sa = el("a", "prn", "Kifejtés PDF Simontól"); sa.href = "https://t.me/smn73_bot"; sa.target = "_blank"; sa.rel = "noopener";
+  const msg = el("span", "prnmsg"); const cmd = "Nyomtasd a kifejtést: " + r.id;
+  sa.addEventListener("click", async ev => { ev.stopPropagation(); msg.textContent = `Simon botja nyílik meg; küldd el neki: „${cmd}”.`;
+    try { await navigator.clipboard.writeText(cmd); msg.textContent = `Vágólapra téve: „${cmd}”. Illeszd be Simonnak, és küldd el.`; } catch (e) {} });
+  row.append(sa, msg); box.append(row);
   x.addEventListener("click", () => { box.hidden = true; });
   return box;
 }
@@ -405,15 +412,16 @@ ${pa.outerHTML}<${""}script>addEventListener("load", () => setTimeout(() => prin
   try { await DL.save({ filename: name, data: html }); if (btn) { btn.textContent = "Letöltve: nyisd meg, és kinyomtatja"; setTimeout(() => { btn.textContent = old; }, 6000); } }
   catch (e) { if (btn && e && e.code !== "declined") { btn.textContent = "A letöltés itt nem működik"; setTimeout(() => { btn.textContent = old; }, 6000); } }
 }
-function printOne(r, btn) {
+function printOne(r, btn, onlyKif) {
   const src = ITEM_OF.get(r.id); if (!src) return;
   let pa = document.getElementById("printarea"); if (!pa) { pa = el("div"); pa.id = "printarea"; document.body.append(pa); }
   pa.replaceChildren();
   pa.append(el("h1", null, r.what), el("p", "ph", [r.who, r.towns.join(", "), r.id].filter(Boolean).join(" · ")));
   const tags = [...src.querySelectorAll(".rb-head .tag")].map(x => x.textContent);
   pa.append(el("p", "ph", [r.published, r.county, r.type, ...tags].filter(Boolean).join(" · ")));
-  const c = el("div"); src.querySelectorAll(".lvl, .anal").forEach(x => c.append(x.cloneNode(true)));
-  c.querySelectorAll(".lvl, .anal").forEach(x => { x.hidden = false; });
+  const sel = onlyKif ? ".kif" : ".lvl, .anal";  // onlyKif: just the 5-part Kifejtés (Simon "Nyomtasd a kifejtést", TG 5459)
+  const c = el("div"); src.querySelectorAll(sel).forEach(x => c.append(x.cloneNode(true)));
+  c.querySelectorAll(sel).forEach(x => { x.hidden = false; });
   c.querySelectorAll("details").forEach(x => { x.open = true; });
   c.querySelectorAll(".lvl dt").forEach(x => { if (x.textContent === "Dokumentumok") { const dd = x.nextElementSibling; if (dd && dd.tagName === "DD") dd.remove(); x.remove(); } });
   pa.append(c);
