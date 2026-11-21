@@ -444,7 +444,7 @@ function ribbon(r) {
   // One button on the ribbon (koma TG 5450): "Kifejtés". If the procedure is already worked out, it opens it;
   // otherwise it opens Konrad's bot with "Fejtsd ki: <EKR-id>" on the clipboard (like Simon's print button).
   const kif = r.kifejtes && r.kifejtes.length ? kifEl(r) : null;
-  const tan = null, old = !kif && an ? an : null;
+  const old = null; // the old "Elemzés" box is not offered any more (koma TG 5456)
   const box = kif || old;
   if (box) {
     const b = el("button", "req"); b.type = "button"; colorize(b, r.group); b.dataset.state = "done";
@@ -686,4 +686,3 @@ function render() {
 }
 render();
 </script>
-
