@@ -504,6 +504,11 @@ function ribbon(r) {
     if (KONRAD_BOT) { const ka = el("a", "eb" + (r.recepttar ? "" : " simon"), r.recepttar ? "Konrad: újra" : "Konradtól kérem"); ka.href = KONRAD_BOT; ka.target = "_blank"; ka.rel = "noopener";
       ka.addEventListener("click", say(KONRAD_BOT, "Konrad", "Recepttárba: " + r.id, "Ha kész, Konrad szól, és a csomópontok a Recepttárban lesznek.")); row.append(ka); }
     smenu.append(row); }
+  // Live (koma TG 5828): plan-document analysis by Konrad, compared with what the Recepttár already holds.
+  { const row = el("div", "erow"); row.append(el("span", "elab", "Tervdokumentáció-elemzés (összevetés a Recepttárral)"));
+    if (KONRAD_BOT) { const ka = el("a", "eb", "Konradtól kérem"); ka.href = KONRAD_BOT; ka.target = "_blank"; ka.rel = "noopener";
+      ka.addEventListener("click", say(KONRAD_BOT, "Konrad", "Tervdok-elemzés: " + r.id, "Konrad átnézi a tervet, és megírja, mi egyezik, mi tér el és mi új a Recepttárhoz képest.")); row.append(ka); }
+    smenu.append(row); }
   ["Tervellenőrzés és kiegészítő tájékoztatás-kérés", "Kalkuláció (összevetés a recepttárral)", "Mennyiségkigyűjtés helyszínrajzból", "Művezetői kigyűjtés"].forEach(t => {
     const row = el("div", "erow plan"); row.append(el("span", "elab", t), el("span", "eplan", "tervben")); smenu.append(row); });
   sm.addEventListener("click", ev => { ev.stopPropagation(); smenu.hidden = !smenu.hidden; sm.setAttribute("aria-expanded", smenu.hidden ? "false" : "true"); if (!smenu.hidden) { menu.hidden = true; mb.setAttribute("aria-expanded", "false"); } });
